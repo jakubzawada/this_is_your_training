@@ -8,7 +8,7 @@
 PRODUCT_NAME = this_is_your_training
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.thisIsYourTraining
+PRODUCT_BUNDLE_IDENTIFIER = com.jakubzawada.thisIsYourTraining
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2022 com.jakubzawada. All rights reserved.
