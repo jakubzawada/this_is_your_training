@@ -110,8 +110,8 @@ class TrainingPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Dwa'),
+    return Center(
+      child: Container(child: Text('Dwa')),
     );
   }
 }
@@ -135,10 +135,41 @@ class MakroPageContent extends StatelessWidget {
             right: 0,
             child: ClipRRect(
               borderRadius: const BorderRadius.vertical(
-                bottom: const Radius.circular(40),
+                bottom: Radius.circular(40),
               ),
               child: Container(
                 color: Colors.white,
+                padding: const EdgeInsets.only(
+                    top: 40, left: 32, right: 16, bottom: 10),
+                child: Column(
+                  children: [
+                    const ListTile(
+                      title: Text(
+                        "Date, Year",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                        ),
+                      ),
+                      subtitle: Text(
+                        "Hello David",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 16,
+                            color: Colors.black),
+                      ),
+                      trailing: ClipOval(
+                        child: Image(
+                          image: AssetImage('images/Profile.jpg'),
+                        ),
+                      ),
+                    ),
+                    _RadialProgress(
+                      width: height * 0.19,
+                      height: height * 0.19,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -180,6 +211,21 @@ class MakroPageContent extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _RadialProgress extends StatelessWidget {
+  final double height, width;
+
+  const _RadialProgress({super.key, required this.height, required this.width});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      width: width,
+      color: Colors.grey,
     );
   }
 }
