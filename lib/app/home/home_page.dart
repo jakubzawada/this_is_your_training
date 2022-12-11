@@ -191,6 +191,30 @@ class MakroPageContent extends StatelessWidget {
                           height: height * 0.18,
                           progress: 0.7,
                         ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.max,
+                          children: const [
+                            _IngredientProgress(
+                              ingredient: "Protein",
+                              progress: 0.3,
+                              progressColor: Colors.green,
+                              leftAmount: 72,
+                            ),
+                            _IngredientProgress(
+                              ingredient: "Carbs",
+                              progress: 0.2,
+                              progressColor: Colors.red,
+                              leftAmount: 252,
+                            ),
+                            _IngredientProgress(
+                              ingredient: "Fat",
+                              progress: 0.1,
+                              progressColor: Colors.yellow,
+                              leftAmount: 61,
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ],
@@ -236,6 +260,47 @@ class MakroPageContent extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _IngredientProgress extends StatelessWidget {
+  final String ingredient;
+  final double leftAmount;
+  final double progress;
+  final Color progressColor;
+
+  const _IngredientProgress(
+      {required this.ingredient,
+      required this.leftAmount,
+      required this.progress,
+      required this.progressColor});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          ingredient.toUpperCase(),
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        Row(
+          children: [
+            Container(
+              height: 10,
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(5),
+                  ),
+                  color: Colors.grey),
+            ),
+            Text("${leftAmount}g left"),
+          ],
+        )
+      ],
     );
   }
 }
