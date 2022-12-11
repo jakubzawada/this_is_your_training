@@ -1,13 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vector_math/vector_math_64.dart' as math;
 
 class HomePage extends StatefulWidget {
-  const HomePage({
+  HomePage({
     Key? key,
     required this.user,
   }) : super(key: key);
 
   final User user;
+  final today = DateTime.now();
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -110,8 +112,24 @@ class TrainingPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(child: Text('Dwa')),
+    return Scaffold(
+      backgroundColor: const Color(0xFFE9E9E9),
+      body: ListView(
+        children: [
+          Container(
+            color: Colors.white,
+            padding: const EdgeInsets.all(20),
+            margin: const EdgeInsets.all(10),
+            child: const Text('text'),
+          ),
+          Container(
+            color: Colors.white,
+            padding: const EdgeInsets.all(20),
+            margin: const EdgeInsets.all(10),
+            child: const Text('text'),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -142,20 +160,21 @@ class MakroPageContent extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     top: 40, left: 32, right: 16, bottom: 10),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const ListTile(
                       title: Text(
                         "Date, Year",
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 14,
+                          fontSize: 16,
                         ),
                       ),
                       subtitle: Text(
                         "Hello David",
                         style: TextStyle(
                             fontWeight: FontWeight.w800,
-                            fontSize: 16,
+                            fontSize: 22,
                             color: Colors.black),
                       ),
                       trailing: ClipOval(
@@ -164,9 +183,15 @@ class MakroPageContent extends StatelessWidget {
                         ),
                       ),
                     ),
-                    _RadialProgress(
-                      width: height * 0.19,
-                      height: height * 0.19,
+                    const SizedBox(height: 6),
+                    Row(
+                      children: [
+                        _RadialProgress(
+                          width: height * 0.18,
+                          height: height * 0.18,
+                          progress: 0.7,
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -178,7 +203,7 @@ class MakroPageContent extends StatelessWidget {
             left: 0,
             right: 0,
             child: Container(
-              color: Colors.grey,
+              color: Colors.white,
               height: height * 0.09,
             ),
           ),
@@ -187,7 +212,7 @@ class MakroPageContent extends StatelessWidget {
             left: 0,
             right: 0,
             child: Container(
-              color: Colors.grey,
+              color: Colors.white,
               height: height * 0.09,
             ),
           ),
@@ -196,7 +221,7 @@ class MakroPageContent extends StatelessWidget {
             left: 0,
             right: 0,
             child: Container(
-              color: Colors.grey,
+              color: Colors.white,
               height: height * 0.09,
             ),
           ),
@@ -205,7 +230,7 @@ class MakroPageContent extends StatelessWidget {
             left: 0,
             right: 0,
             child: Container(
-              color: Colors.grey,
+              color: Colors.white,
               height: height * 0.09,
             ),
           ),
@@ -216,16 +241,77 @@ class MakroPageContent extends StatelessWidget {
 }
 
 class _RadialProgress extends StatelessWidget {
-  final double height, width;
+  final double height, width, progress;
 
-  const _RadialProgress({super.key, required this.height, required this.width});
+  const _RadialProgress(
+      {required this.height, required this.width, required this.progress});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      width: width,
-      color: Colors.grey,
+    return CustomPaint(
+      painter: _RadialPainter(
+        progress: 0.7,
+      ),
+      child: SizedBox(
+        height: height,
+        width: width,
+        child: Center(
+          child: RichText(
+            textAlign: TextAlign.center,
+            text: const TextSpan(children: [
+              TextSpan(
+                text: "1731",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF200087),
+                ),
+              ),
+              TextSpan(text: "\n"),
+              TextSpan(
+                text: "kcal left",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF200087),
+                ),
+              ),
+            ]),
+          ),
+        ),
+      ),
     );
+  }
+}
+
+class _RadialPainter extends CustomPainter {
+  final double progress;
+
+  _RadialPainter({required this.progress});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+      ..strokeWidth = 8
+      ..color = const Color(0xFF200087)
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
+
+    Offset center = Offset(size.width / 2, size.height / 2);
+    double relativeProgress = 360 * progress;
+    canvas.drawArc(
+        Rect.fromCircle(
+          center: center,
+          radius: size.width / 2,
+        ),
+        math.radians(-90),
+        math.radians(-relativeProgress),
+        false,
+        paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }
