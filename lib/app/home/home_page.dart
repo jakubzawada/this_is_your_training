@@ -29,51 +29,53 @@ class _HomePageState extends State<HomePage> {
           return const MakroPageContent();
         }
         if (currentIndex == 1) {
-          return const TrainingPageContent();
+          return TrainingPageContent();
         }
         return MyAccountPageContent(email: widget.user.email);
       }),
-      backgroundColor: const Color(0xFFE9E9E9),
+      extendBody: true,
       bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(40)),
-        child: BottomNavigationBar(
-          iconSize: 30,
-          selectedIconTheme: const IconThemeData(
-            color: Color(0xFF200087),
-          ),
-          unselectedIconTheme: const IconThemeData(
-            color: Colors.black12,
-          ),
-          currentIndex: currentIndex,
-          onTap: (newIndex) {
-            setState(() {
-              currentIndex = newIndex;
-            });
-          },
-          items: const [
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: EdgeInsets.only(top: 8.0),
-                child: Icon(Icons.local_dining),
-              ),
-              label: 'Jadłospis',
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: EdgeInsets.only(top: 8.0),
-                child: Icon(Icons.fitness_center),
-              ),
-              label: 'Trening',
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: EdgeInsets.only(top: 8.0),
-                child: Icon(Icons.person),
-              ),
-              label: 'Moje konto',
-            ),
-          ],
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(30),
         ),
+        child: BottomNavigationBar(
+            iconSize: 30,
+            selectedIconTheme: const IconThemeData(
+              color: Color(0xFF200087),
+            ),
+            unselectedIconTheme: const IconThemeData(
+              color: Colors.black12,
+            ),
+            currentIndex: currentIndex,
+            onTap: (newIndex) {
+              setState(() {
+                currentIndex = newIndex;
+              });
+            },
+            items: const [
+              BottomNavigationBarItem(
+                icon: Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Icon(Icons.local_dining),
+                ),
+                label: 'Jadłospis',
+              ),
+              BottomNavigationBarItem(
+                icon: Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Icon(Icons.fitness_center),
+                ),
+                label: 'Trening',
+              ),
+              BottomNavigationBarItem(
+                icon: Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Icon(Icons.person),
+                ),
+                label: 'Moje konto',
+              ),
+            ],
+            fixedColor: Colors.black),
       ),
     );
   }
