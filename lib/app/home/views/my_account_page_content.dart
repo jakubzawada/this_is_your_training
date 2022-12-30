@@ -23,10 +23,14 @@ class MyAccountPageContent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-                color: Colors.white,
-                padding: const EdgeInsets.all(20),
-                margin: const EdgeInsets.all(10),
-                child: Text('Jesteś zalogowany jako $email')),
+              padding: const EdgeInsets.all(20),
+              margin: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: const Color(0xFF232441),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text('Jesteś zalogowany jako $email'),
+            ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {

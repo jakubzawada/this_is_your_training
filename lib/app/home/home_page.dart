@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
           return const MakroPageContent();
         }
         if (currentIndex == 1) {
-          return TrainingPageContent();
+          return  const TrainingPageContent();
         }
         return MyAccountPageContent(email: widget.user.email);
       }),
