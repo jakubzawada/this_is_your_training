@@ -39,6 +39,7 @@ dependencies:
   intl: ^0.17.0
   google_fonts: ^3.0.1
   curved_navigation_bar: ^1.0.3
+  snippet_coder_utils: ^1.0.12
 
 dev_dependencies:
   flutter_test:
