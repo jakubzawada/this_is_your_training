@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'add exercises/add_monday_exercise_page_content.dart';
+
 class MondayPageContent extends StatelessWidget {
   const MondayPageContent({Key? key}) : super(key: key);
 
@@ -141,7 +143,13 @@ class MondayPageContent extends StatelessWidget {
                   ),
                 ),
               ),
-              onTap: () {},
+               onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => const AddMondayExercise(),
+                                ),
+                              );
+                            },
             ),
           ],
         ),
