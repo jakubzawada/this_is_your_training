@@ -40,6 +40,7 @@ dependencies:
   google_fonts: ^3.0.1
   curved_navigation_bar: ^1.0.3
   snippet_coder_utils: ^1.0.12
+  cloud_firestore: ^4.3.1
 
 dev_dependencies:
   flutter_test:

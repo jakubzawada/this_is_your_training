@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -76,11 +77,48 @@ class MondayPageContent extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8.0, right: 8),
               child: Row(
                 children: [
-                  Container(
-                    height: 500,
-                    width: 375,
-                    color: const Color(0xFF232441),
-                  ),
+                  StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                      stream: FirebaseFirestore.instance
+                          .collection('trainings')
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return const Center(
+                              child: Text('Something went wrong'));
+                        }
+
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(child: Text("Loading"));
+                        }
+
+                        final documents = snapshot.data!.docs;
+
+                        return Container(
+                          height: 500,
+                          width: 375,
+                          color: const Color(0xFF232441),
+                          child: Column(
+                            children: [
+                              for (final document in documents) ...[
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 10, left: 10, right: 30),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(document['name']),
+                                      Text(document['series'].toString()),
+                                      Text(document['series'].toString()),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ],
+                          ),
+                        );
+                      }),
                 ],
               ),
             ),
