@@ -112,7 +112,7 @@ class MondayPageContent extends StatelessWidget {
                                     children: [
                                       Text(document['name']),
                                       Text(document['series'].toString()),
-                                      Text(document['series'].toString()),
+                                      Text(document['repeat'].toString()),
                                     ],
                                   ),
                                 ),
@@ -143,13 +143,13 @@ class MondayPageContent extends StatelessWidget {
                   ),
                 ),
               ),
-               onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (_) => const AddMondayExercise(),
-                                ),
-                              );
-                            },
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const AddMondayExercise(),
+                  ),
+                );
+              },
             ),
           ],
         ),
