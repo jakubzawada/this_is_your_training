@@ -97,7 +97,7 @@ class MondayPageContent extends StatelessWidget {
                         final documents = snapshot.data!.docs;
 
                         return Container(
-                          height: 500,
+                          height: 520,
                           width: 375,
                           color: const Color(0xFF232441),
                           child: Column(
@@ -110,9 +110,30 @@ class MondayPageContent extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(document['name']),
-                                      Text(document['series'].toString()),
-                                      Text(document['repeat'].toString()),
+                                      Text(
+                                        document['name'],
+                                        style: GoogleFonts.inter(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white54,
+                                        ),
+                                      ),
+                                      Text(
+                                        document['series'].toString(),
+                                        style: GoogleFonts.inter(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white54,
+                                        ),
+                                      ),
+                                      Text(
+                                        document['repeat'].toString(),
+                                        style: GoogleFonts.inter(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white54,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),

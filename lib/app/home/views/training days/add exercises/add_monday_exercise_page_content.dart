@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AddMondayExercise extends StatefulWidget {
   const AddMondayExercise({Key? key}) : super(key: key);
@@ -52,16 +54,37 @@ class _AddMondayExerciseState extends State<AddMondayExercise> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFE9E9E9),
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.black),
+        title: const Text(
+          'Dodaj Ćwiczenie',
+          style: TextStyle(color: Colors.black),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 120),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextField(
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(42),
+                ],
+                style: GoogleFonts.inter(
+                  fontSize: 22,
+                ),
                 textAlign: TextAlign.center,
-                decoration:
-                    const InputDecoration(hintText: 'Podaj nazwę ćwiczenia'),
+                decoration: InputDecoration(
+                  hintText: 'Podaj nazwę ćwiczenia',
+                  hintStyle: GoogleFonts.inter(
+                    fontSize: 22,
+                    letterSpacing: 1.8,
+                  ),
+                ),
                 onChanged: (newValue) {
                   setState(() {
                     exerciseName = newValue;
@@ -69,6 +92,7 @@ class _AddMondayExerciseState extends State<AddMondayExercise> {
                 },
               ),
             ),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -76,59 +100,144 @@ class _AddMondayExerciseState extends State<AddMondayExercise> {
                 children: [
                   Container(
                     height: 70,
-                    width: 110,
-                    color: Colors.blue,
-                    child: const Center(child: Text('Serie')),
+                    width: 170,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFF232441),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Serie',
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 22,
+                          color: Colors.white54,
+                          letterSpacing: 1.8,
+                        ),
+                      ),
+                    ),
                   ),
                   Container(
                     height: 70,
-                    width: 110,
-                    color: Colors.white,
-                    child: const Center(child: Text('Powtórzenia')),
+                    width: 170,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFF232441),
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Powtórzenia',
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 22,
+                          color: Colors.white54,
+                          letterSpacing: 1.8,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  DropdownButton<int>(
-                      hint: const Text("Pcik"),
-                      value: series,
-                      items:
-                          <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((int value) {
-                        return DropdownMenuItem<int>(
-                          value: value,
-                          child: Text(value.toString()),
-                        );
-                      }).toList(),
-                      onChanged: (newVal) {
-                        setState(() {
-                          series = newVal!;
-                        });
-                      }),
+                  Center(
+                    child: SizedBox(
+                      width: 90,
+                      child: DropdownButtonFormField<int>(
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                width: 3,
+                                color: Color(0xFF232441),
+                              ),
+                            ),
+                          ),
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                          value: series,
+                          dropdownColor: const Color(0xFF40D876),
+                          items: <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                              .map((int value) {
+                            return DropdownMenuItem<int>(
+                              value: value,
+                              child: Text(value.toString()),
+                            );
+                          }).toList(),
+                          onChanged: (newVal) {
+                            setState(() {
+                              series = newVal!;
+                            });
+                          }),
+                    ),
+                  ),
                   const SizedBox(width: 40),
-                  DropdownButton<int>(
-                      hint: const Text("Pcik"),
-                      value: repeat,
-                      items:
-                          <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((int value) {
-                        return DropdownMenuItem<int>(
-                          value: value,
-                          child: Text(value.toString()),
-                        );
-                      }).toList(),
-                      onChanged: (newVal) {
-                        setState(() {
-                          repeat = newVal!;
-                        });
-                      }),
+                  Center(
+                    child: SizedBox(
+                      width: 90,
+                      child: DropdownButtonFormField<int>(
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                width: 3,
+                                color: Color(0xFF232441),
+                              ),
+                            ),
+                          ),
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                          value: repeat,
+                          dropdownColor: const Color(0xFF40D876),
+                          items: <int>[
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            7,
+                            8,
+                            9,
+                            10,
+                            11,
+                            12,
+                            13,
+                            14,
+                            15,
+                            16,
+                            17,
+                            18,
+                            19,
+                            20
+                          ].map((int value) {
+                            return DropdownMenuItem<int>(
+                              value: value,
+                              child: Text(value.toString()),
+                            );
+                          }).toList(),
+                          onChanged: (newVal) {
+                            setState(() {
+                              repeat = newVal!;
+                            });
+                          }),
+                    ),
+                  ),
                 ],
               ),
             ),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 FirebaseFirestore.instance.collection('trainings').add({
@@ -137,7 +246,19 @@ class _AddMondayExerciseState extends State<AddMondayExercise> {
                   'repeat': repeat,
                 });
               },
-              child: const Text('Dodaj'),
+              style: ElevatedButton.styleFrom(
+                primary: const Color(0xFF232441),
+                textStyle: GoogleFonts.bebasNeue(),
+              ),
+              child: const Text(
+                'Dodaj',
+                style: TextStyle(
+                  fontSize: 19,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white54,
+                  letterSpacing: 1.8,
+                ),
+              ),
             )
           ],
         ),
