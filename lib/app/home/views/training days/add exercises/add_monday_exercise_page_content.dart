@@ -10,6 +10,9 @@ class AddMondayExercise extends StatefulWidget {
 
 class _AddMondayExerciseState extends State<AddMondayExercise> {
   var exerciseName = '';
+  var series = 3;
+  var repeat = 10;
+
   List<String> items = [
     '1',
     '2',
@@ -56,6 +59,7 @@ class _AddMondayExerciseState extends State<AddMondayExercise> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextField(
+                textAlign: TextAlign.center,
                 decoration:
                     const InputDecoration(hintText: 'Podaj nazwę ćwiczenia'),
                 onChanged: (newValue) {
@@ -86,72 +90,55 @@ class _AddMondayExerciseState extends State<AddMondayExercise> {
               ),
             ),
             const SizedBox(height: 10),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 100,
-                        child: DropdownButtonFormField<String>(
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                  width: 3, color: Colors.blue),
-                            ),
-                          ),
-                          value: selectedItem,
-                          items: items
-                              .map((item) => DropdownMenuItem<String>(
-                                    value: item,
-                                    child: Text(item,
-                                        style: const TextStyle(fontSize: 24)),
-                                  ))
-                              .toList(),
-                          onChanged: (item) =>
-                              setState(() => selectedItem = item),
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      SizedBox(
-                        width: 100,
-                        child: DropdownButtonFormField<String>(
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                  width: 3, color: Colors.blue),
-                            ),
-                          ),
-                          value: selectedItem2,
-                          items: items2
-                              .map((item) => DropdownMenuItem<String>(
-                                    value: item,
-                                    child: Text(item,
-                                        style: const TextStyle(fontSize: 24)),
-                                  ))
-                              .toList(),
-                          onChanged: (item) =>
-                              setState(() => selectedItem2 = item),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  DropdownButton<int>(
+                      hint: const Text("Pcik"),
+                      value: series,
+                      items:
+                          <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((int value) {
+                        return DropdownMenuItem<int>(
+                          value: value,
+                          child: Text(value.toString()),
+                        );
+                      }).toList(),
+                      onChanged: (newVal) {
+                        setState(() {
+                          series = newVal!;
+                        });
+                      }),
+                  const SizedBox(width: 40),
+                  DropdownButton<int>(
+                      hint: const Text("Pcik"),
+                      value: repeat,
+                      items:
+                          <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((int value) {
+                        return DropdownMenuItem<int>(
+                          value: value,
+                          child: Text(value.toString()),
+                        );
+                      }).toList(),
+                      onChanged: (newVal) {
+                        setState(() {
+                          repeat = newVal!;
+                        });
+                      }),
+                ],
               ),
             ),
             ElevatedButton(
-                onPressed: () {
-                  FirebaseFirestore.instance.collection('trainings').add({
-                    'name': exerciseName,
-                    'series': 3,
-                    'repeat': 10,
-                  });
-                },
-                child: const Text('Dodaj'))
+              onPressed: () {
+                FirebaseFirestore.instance.collection('trainings').add({
+                  'name': exerciseName,
+                  'series': series,
+                  'repeat': repeat,
+                });
+              },
+              child: const Text('Dodaj'),
+            )
           ],
         ),
       ),
