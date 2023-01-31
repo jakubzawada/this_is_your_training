@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:this_is_your_training/app/home/views/makro_page_content.dart';
@@ -29,53 +30,34 @@ class _HomePageState extends State<HomePage> {
           return const MakroPageContent();
         }
         if (currentIndex == 1) {
-          return  const TrainingPageContent();
+          return const TrainingPageContent();
         }
         return MyAccountPageContent(email: widget.user.email);
       }),
-      extendBody: true,
-      bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(30),
-        ),
-        child: BottomNavigationBar(
-            iconSize: 30,
-            selectedIconTheme: const IconThemeData(
-              color: Color(0xFF200087),
-            ),
-            unselectedIconTheme: const IconThemeData(
-              color: Colors.black12,
-            ),
-            currentIndex: currentIndex,
-            onTap: (newIndex) {
-              setState(() {
-                currentIndex = newIndex;
-              });
-            },
-            items: const [
-              BottomNavigationBarItem(
-                icon: Padding(
-                  padding: EdgeInsets.only(top: 8.0),
-                  child: Icon(Icons.local_dining),
-                ),
-                label: 'Jadłospis',
-              ),
-              BottomNavigationBarItem(
-                icon: Padding(
-                  padding: EdgeInsets.only(top: 8.0),
-                  child: Icon(Icons.fitness_center),
-                ),
-                label: 'Trening',
-              ),
-              BottomNavigationBarItem(
-                icon: Padding(
-                  padding: EdgeInsets.only(top: 8.0),
-                  child: Icon(Icons.person),
-                ),
-                label: 'Moje konto',
-              ),
-            ],
-            fixedColor: Colors.black),
+      backgroundColor: Colors.deepPurple,
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.deepPurple,
+        color: Colors.deepPurple.shade200,
+        animationDuration: const Duration(milliseconds: 300),
+        onTap: (newindex) {
+          setState(() {
+            currentIndex = newindex;
+          });
+        },
+        items: const [
+          Icon(
+            Icons.home,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.fitness_center,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.settings,
+            color: Colors.white,
+          ),
+        ],
       ),
     );
   }

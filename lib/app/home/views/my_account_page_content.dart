@@ -12,14 +12,9 @@ class MyAccountPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('images/tapeta1.webp'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Center(
+    return Scaffold(
+      backgroundColor: Colors.deepPurple,
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -28,9 +23,8 @@ class MyAccountPageContent extends StatelessWidget {
               margin: const EdgeInsets.all(10),
               decoration: const BoxDecoration(
                 color: Color(0xFF232441),
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20),
-                  topLeft: Radius.circular(20),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
                 ),
               ),
               child: Text(
@@ -56,7 +50,7 @@ class MyAccountPageContent extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 19,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white54,
+                  color: Color(0xFF40D876),
                   letterSpacing: 1.8,
                 ),
               ),

@@ -11,7 +11,7 @@ class MakroPageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: const Color(0xFFE9E9E9),
+      backgroundColor: Colors.deepPurple,
       body: Stack(
         children: [
           Positioned(

@@ -10,7 +10,7 @@ class MondayPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE9E9E9),
+      backgroundColor: Colors.deepPurple,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
@@ -48,7 +48,7 @@ class MondayPageContent extends StatelessWidget {
                             'Ćwiczenia',
                             style: GoogleFonts.bebasNeue(
                               fontSize: 20,
-                              color: Colors.white54,
+                              color: Colors.white,
                               letterSpacing: 1.8,
                             ),
                           ),
@@ -56,7 +56,7 @@ class MondayPageContent extends StatelessWidget {
                             'Serie',
                             style: GoogleFonts.bebasNeue(
                               fontSize: 20,
-                              color: Colors.white54,
+                              color: Colors.white,
                               letterSpacing: 1.8,
                             ),
                           ),
@@ -64,7 +64,7 @@ class MondayPageContent extends StatelessWidget {
                             'Powtórzenia',
                             style: GoogleFonts.bebasNeue(
                               fontSize: 20,
-                              color: Colors.white54,
+                              color: Colors.white,
                               letterSpacing: 1.8,
                             ),
                           ),
@@ -115,7 +115,7 @@ class MondayPageContent extends StatelessWidget {
                                         style: GoogleFonts.inter(
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white54,
+                                          color: Colors.white70,
                                         ),
                                       ),
                                       Text(
@@ -123,7 +123,7 @@ class MondayPageContent extends StatelessWidget {
                                         style: GoogleFonts.inter(
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white54,
+                                          color: Colors.white70,
                                         ),
                                       ),
                                       Text(
@@ -131,7 +131,7 @@ class MondayPageContent extends StatelessWidget {
                                         style: GoogleFonts.inter(
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white54,
+                                          color: Colors.white70,
                                         ),
                                       ),
                                     ],
@@ -157,7 +157,7 @@ class MondayPageContent extends StatelessWidget {
                       'Dodaj Ćwiczenie',
                       style: GoogleFonts.bebasNeue(
                         fontSize: 20,
-                        color: Colors.white54,
+                        color: Colors.white,
                         letterSpacing: 1.8,
                       ),
                     ),

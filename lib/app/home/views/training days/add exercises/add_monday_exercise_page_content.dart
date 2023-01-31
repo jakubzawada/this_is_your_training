@@ -53,7 +53,7 @@ class _AddMondayExerciseState extends State<AddMondayExercise> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE9E9E9),
+      backgroundColor: Colors.deepPurple,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
         title: const Text(
@@ -112,7 +112,7 @@ class _AddMondayExerciseState extends State<AddMondayExercise> {
                         'Serie',
                         style: GoogleFonts.bebasNeue(
                           fontSize: 22,
-                          color: Colors.white54,
+                          color: Colors.white,
                           letterSpacing: 1.8,
                         ),
                       ),
@@ -132,7 +132,7 @@ class _AddMondayExerciseState extends State<AddMondayExercise> {
                         'Powtórzenia',
                         style: GoogleFonts.bebasNeue(
                           fontSize: 22,
-                          color: Colors.white54,
+                          color: Colors.white,
                           letterSpacing: 1.8,
                         ),
                       ),
@@ -165,7 +165,7 @@ class _AddMondayExerciseState extends State<AddMondayExercise> {
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                           value: series,
-                          dropdownColor: const Color(0xFF40D876),
+                          dropdownColor: Colors.deepPurple.shade200,
                           items: <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                               .map((int value) {
                             return DropdownMenuItem<int>(
@@ -199,7 +199,7 @@ class _AddMondayExerciseState extends State<AddMondayExercise> {
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                           value: repeat,
-                          dropdownColor: const Color(0xFF40D876),
+                          dropdownColor: Colors.deepPurple.shade200,
                           items: <int>[
                             1,
                             2,
@@ -255,7 +255,7 @@ class _AddMondayExerciseState extends State<AddMondayExercise> {
                 style: TextStyle(
                   fontSize: 19,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white54,
+                  color: Colors.white,
                   letterSpacing: 1.8,
                 ),
               ),
