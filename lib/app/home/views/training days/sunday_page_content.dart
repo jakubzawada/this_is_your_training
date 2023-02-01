@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'add exercises/add_sunday_exercise_page_content.dart';
 
 class SundayPageContent extends StatelessWidget {
   const SundayPageContent({Key? key}) : super(key: key);
@@ -7,7 +10,7 @@ class SundayPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE9E9E9),
+      backgroundColor: Colors.deepPurple,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
@@ -45,7 +48,7 @@ class SundayPageContent extends StatelessWidget {
                             'Ćwiczenia',
                             style: GoogleFonts.bebasNeue(
                               fontSize: 20,
-                              color: Colors.white54,
+                              color: Colors.white,
                               letterSpacing: 1.8,
                             ),
                           ),
@@ -53,7 +56,7 @@ class SundayPageContent extends StatelessWidget {
                             'Serie',
                             style: GoogleFonts.bebasNeue(
                               fontSize: 20,
-                              color: Colors.white54,
+                              color: Colors.white,
                               letterSpacing: 1.8,
                             ),
                           ),
@@ -61,7 +64,7 @@ class SundayPageContent extends StatelessWidget {
                             'Powtórzenia',
                             style: GoogleFonts.bebasNeue(
                               fontSize: 20,
-                              color: Colors.white54,
+                              color: Colors.white,
                               letterSpacing: 1.8,
                             ),
                           ),
@@ -76,11 +79,68 @@ class SundayPageContent extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8.0, right: 8),
               child: Row(
                 children: [
-                  Container(
-                    height: 500,
-                    width: 375,
-                    color: const Color(0xFF232441),
-                  ),
+                  StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                      stream: FirebaseFirestore.instance
+                          .collection('trainings6')
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return const Center(
+                              child: Text('Something went wrong'));
+                        }
+
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(child: Text("Loading"));
+                        }
+
+                        final documents = snapshot.data!.docs;
+
+                        return Container(
+                          height: 520,
+                          width: 375,
+                          color: const Color(0xFF232441),
+                          child: Column(
+                            children: [
+                              for (final document in documents) ...[
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 10, left: 10, right: 30),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        document['name6'],
+                                        style: GoogleFonts.inter(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.tealAccent,
+                                        ),
+                                      ),
+                                      Text(
+                                        document['series6'].toString(),
+                                        style: GoogleFonts.inter(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.lightGreenAccent),
+                                      ),
+                                      Text(
+                                        document['repeat6'].toString(),
+                                        style: GoogleFonts.inter(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.lightBlue,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ],
+                          ),
+                        );
+                      }),
                 ],
               ),
             ),
@@ -96,14 +156,20 @@ class SundayPageContent extends StatelessWidget {
                       'Dodaj Ćwiczenie',
                       style: GoogleFonts.bebasNeue(
                         fontSize: 20,
-                        color: Colors.white54,
+                        color: Colors.white,
                         letterSpacing: 1.8,
                       ),
                     ),
                   ),
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const AddSundayExercise(),
+                  ),
+                );
+              },
             ),
           ],
         ),

@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "793360882126",
-    "project_id": "training-app-2008",
-    "storage_bucket": "training-app-2008.appspot.com"
+    "project_number": "424937633394",
+    "project_id": "this-is-your-training",
+    "storage_bucket": "this-is-your-training.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:793360882126:android:14d0bcbbef4cb17694339f",
+        "mobilesdk_app_id": "1:424937633394:android:4e84d81b47d88a198df4eb",
         "android_client_info": {
           "package_name": "com.jakubzawada.this_is_your_training"
         }
       },
       "oauth_client": [
         {
-          "client_id": "793360882126-guthepvc1btqu4se67vpgkojjvi98d9i.apps.googleusercontent.com",
+          "client_id": "424937633394-8mi0utr41f46cr9c7jdqshs21moqtmk7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBft0ZuU4-lBj_iV9ouaXDrzrq2TSDDeus"
+          "current_key": "AIzaSyBqHH_2BzTHi2hpjq-d-DG8xg0lRr09VqA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "793360882126-guthepvc1btqu4se67vpgkojjvi98d9i.apps.googleusercontent.com",
+              "client_id": "424937633394-8mi0utr41f46cr9c7jdqshs21moqtmk7.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "424937633394-12854p8ib79frvcruv7nbjjh1rlk3u40.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jakubzawada.thisIsYourTraining"
+              }
             }
           ]
         }

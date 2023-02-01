@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBft0ZuU4-lBj_iV9ouaXDrzrq2TSDDeus',
-    appId: '1:793360882126:android:14d0bcbbef4cb17694339f',
-    messagingSenderId: '793360882126',
-    projectId: 'training-app-2008',
-    storageBucket: 'training-app-2008.appspot.com',
+    apiKey: 'AIzaSyBqHH_2BzTHi2hpjq-d-DG8xg0lRr09VqA',
+    appId: '1:424937633394:android:4e84d81b47d88a198df4eb',
+    messagingSenderId: '424937633394',
+    projectId: 'this-is-your-training',
+    storageBucket: 'this-is-your-training.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCZ0ycgUjWnmRi0LetC1I2_rxFhi8xwtcA',
-    appId: '1:793360882126:ios:c8b264d7243f10d394339f',
-    messagingSenderId: '793360882126',
-    projectId: 'training-app-2008',
-    storageBucket: 'training-app-2008.appspot.com',
-    iosClientId: '793360882126-00nj6it6qr9ppvngeva58pjhvthi6i77.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBvtj-l6EPBpXTPCNo2cimeqBWeq0lIUdw',
+    appId: '1:424937633394:ios:f010658043c925258df4eb',
+    messagingSenderId: '424937633394',
+    projectId: 'this-is-your-training',
+    storageBucket: 'this-is-your-training.appspot.com',
+    iosClientId: '424937633394-12854p8ib79frvcruv7nbjjh1rlk3u40.apps.googleusercontent.com',
     iosBundleId: 'com.jakubzawada.thisIsYourTraining',
   );
 }

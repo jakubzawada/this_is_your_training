@@ -115,23 +115,22 @@ class MondayPageContent extends StatelessWidget {
                                         style: GoogleFonts.inter(
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white70,
+                                          color: Colors.tealAccent,
                                         ),
                                       ),
                                       Text(
                                         document['series'].toString(),
                                         style: GoogleFonts.inter(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white70,
-                                        ),
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.lightGreenAccent),
                                       ),
                                       Text(
                                         document['repeat'].toString(),
                                         style: GoogleFonts.inter(
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white70,
+                                          color: Colors.lightBlue,
                                         ),
                                       ),
                                     ],
