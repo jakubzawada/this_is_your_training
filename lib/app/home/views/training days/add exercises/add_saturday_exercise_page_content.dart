@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../saturday_page_content.dart';
+
 class AddSaturdayExercise extends StatefulWidget {
   const AddSaturdayExercise({Key? key}) : super(key: key);
 
@@ -245,6 +247,11 @@ class _AddSaturdayExerciseState extends State<AddSaturdayExercise> {
                   onPressed: exerciseName5.isEmpty
                       ? null
                       : () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => const SaturdayPageContent(),
+                            ),
+                          );
                           FirebaseFirestore.instance
                               .collection('trainings5')
                               .add({
