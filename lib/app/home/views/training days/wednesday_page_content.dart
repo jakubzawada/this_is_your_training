@@ -105,35 +105,55 @@ class WednesdayPageContent extends StatelessWidget {
                               for (final document in documents) ...[
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      top: 10, left: 10, right: 30),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        document['name2'],
-                                        style: GoogleFonts.inter(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.tealAccent,
+                                      top: 10, left: 10, right: 10),
+                                  child: Dismissible(
+                                    background: Container(
+                                      color: Colors.red,
+                                      child: const Icon(Icons.delete),
+                                    ),
+                                    key: ValueKey(document.id),
+                                    onDismissed: (_) {
+                                      FirebaseFirestore.instance
+                                          .collection('trainings2')
+                                          .doc(document.id)
+                                          .delete();
+                                    },
+                                    child: Container(
+                                      color: Colors.deepPurple,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(6.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              document['name2'],
+                                              style: GoogleFonts.inter(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.tealAccent,
+                                              ),
+                                            ),
+                                            Text(
+                                              document['series2'].toString(),
+                                              style: GoogleFonts.inter(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold,
+                                                  color:
+                                                      Colors.lightGreenAccent),
+                                            ),
+                                            Text(
+                                              document['repeat2'].toString(),
+                                              style: GoogleFonts.inter(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.lightBlue,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      Text(
-                                        document['series2'].toString(),
-                                        style: GoogleFonts.inter(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.lightGreenAccent),
-                                      ),
-                                      Text(
-                                        document['repeat2'].toString(),
-                                        style: GoogleFonts.inter(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.lightBlue,
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ],

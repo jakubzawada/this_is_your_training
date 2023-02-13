@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
       }),
       backgroundColor: Colors.deepPurple,
       bottomNavigationBar: CurvedNavigationBar(
+        height: 65,
         backgroundColor: Colors.deepPurple,
         color: Colors.deepPurple.shade200,
         animationDuration: const Duration(milliseconds: 300),
