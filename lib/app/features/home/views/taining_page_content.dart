@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:this_is_your_training/app/home/views/training%20days/friday_page_content.dart';
-import 'package:this_is_your_training/app/home/views/training%20days/monday_page_content.dart';
-import 'package:this_is_your_training/app/home/views/training%20days/saturday_page_content.dart';
-import 'package:this_is_your_training/app/home/views/training%20days/sunday_page_content.dart';
-import 'package:this_is_your_training/app/home/views/training%20days/thursday_page_content.dart';
-import 'package:this_is_your_training/app/home/views/training%20days/tuesday_page_content.dart';
-import 'package:this_is_your_training/app/home/views/training%20days/wednesday_page_content.dart';
+import 'package:this_is_your_training/app/features/home/views/training%20days/friday_page_content.dart';
+import 'package:this_is_your_training/app/features/home/views/training%20days/monday_page_content.dart';
+import 'package:this_is_your_training/app/features/home/views/training%20days/saturday_page_content.dart';
+import 'package:this_is_your_training/app/features/home/views/training%20days/sunday_page_content.dart';
+import 'package:this_is_your_training/app/features/home/views/training%20days/thursday_page_content.dart';
+import 'package:this_is_your_training/app/features/home/views/training%20days/tuesday_page_content.dart';
+import 'package:this_is_your_training/app/features/home/views/training%20days/wednesday_page_content.dart';
 
 class TrainingPageContent extends StatelessWidget {
   const TrainingPageContent({

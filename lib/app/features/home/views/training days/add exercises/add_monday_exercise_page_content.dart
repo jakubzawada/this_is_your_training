@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:this_is_your_training/app/home/views/training%20days/monday_page_content.dart';
+import 'package:this_is_your_training/app/features/home/views/training%20days/monday_page_content.dart';
 
 class AddMondayExercise extends StatefulWidget {
   const AddMondayExercise({Key? key}) : super(key: key);

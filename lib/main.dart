@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:this_is_your_training/app/home/home_page.dart';
-import 'package:this_is_your_training/app/login/login_page.dart';
+import 'package:this_is_your_training/app/features/home/home_page.dart';
+import 'package:this_is_your_training/app/features/login/login_page.dart';
 import 'firebase_options.dart';
 
 void main() async {
