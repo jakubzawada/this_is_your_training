@@ -8,6 +8,7 @@ import 'package:this_is_your_training/app/features/home/views/training%20days/th
 import 'package:this_is_your_training/app/features/home/views/training%20days/tuesday_page_content.dart';
 import 'package:this_is_your_training/app/features/home/views/training%20days/wednesday_page_content.dart';
 
+
 class TrainingPageContent extends StatelessWidget {
   const TrainingPageContent({
     Key? key,

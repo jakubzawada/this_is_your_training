@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:this_is_your_training/app/cubit/root_cubit.dart';
 
 class MyAccountPageContent extends StatelessWidget {
   const MyAccountPageContent({
@@ -52,7 +52,7 @@ class MyAccountPageContent extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                FirebaseAuth.instance.signOut();
+                context.read<RootCubit>().signOut();
               },
               style: ElevatedButton.styleFrom(primary: Colors.blueAccent),
               child: const Text(
@@ -66,21 +66,7 @@ class MyAccountPageContent extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             InkWell(
-              onTap: () async {
-                await FirebaseFirestore.instance
-                    .collection('users')
-                    .doc(FirebaseAuth.instance.currentUser!.uid)
-                    .delete();
-
-                try {
-                  await FirebaseAuth.instance.currentUser!.delete();
-                } on FirebaseAuthException catch (e) {
-                  if (e.code == 'requires-recent-login') {
-                    const Text(
-                        'The user must reauthenticate before this operation can be executed.');
-                  }
-                }
-              },
+              onTap: () {},
               child: Container(
                 height: 50,
                 width: 300,
