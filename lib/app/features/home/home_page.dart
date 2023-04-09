@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
             color: Colors.white,
           ),
           Icon(
-            Icons.settings,
+            Icons.person,
             color: Colors.white,
           ),
         ],

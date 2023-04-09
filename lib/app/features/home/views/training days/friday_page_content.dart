@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/app/features/home/views/training%20days/cubit/friday_cubit.dart';
-
 import 'add exercises/add_friday_exercise_page_content.dart';
 
 class FridayPageContent extends StatelessWidget {
