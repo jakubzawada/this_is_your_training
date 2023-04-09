@@ -2,8 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:this_is_your_training/app/features/home/views/training%20days/cubit/training_days_cubit.dart';
-
+import 'package:this_is_your_training/app/features/home/views/training%20days/cubit/monday_cubit.dart';
 import 'add exercises/add_monday_exercise_page_content.dart';
 
 class MondayPageContent extends StatelessWidget {
@@ -83,8 +82,8 @@ class MondayPageContent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   BlocProvider(
-                    create: (context) => TrainingDaysCubit()..satrt(),
-                    child: BlocBuilder<TrainingDaysCubit, TrainingDaysState>(
+                    create: (context) => TrainingPageCubit()..satrt(),
+                    child: BlocBuilder<TrainingPageCubit, TrainingPageState>(
                       builder: (context, state) {
                         if (state.errorMessage.isNotEmpty) {
                           return Center(

@@ -1,16 +1,13 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
+part 'monday_state.dart';
 
-
-part 'training_days_state.dart';
-
-class TrainingDaysCubit extends Cubit<TrainingDaysState> {
-  TrainingDaysCubit()
+class TrainingPageCubit extends Cubit<TrainingPageState> {
+  TrainingPageCubit()
       : super(
-          const TrainingDaysState(
+          const TrainingPageState(
             documents: [],
             errorMessage: '',
             isLoading: false,
@@ -21,7 +18,7 @@ class TrainingDaysCubit extends Cubit<TrainingDaysState> {
 
   Future<void> satrt() async {
     emit(
-      const TrainingDaysState(
+      const TrainingPageState(
         documents: [],
         errorMessage: '',
         isLoading: true,
@@ -33,7 +30,7 @@ class TrainingDaysCubit extends Cubit<TrainingDaysState> {
         .snapshots()
         .listen((data) {
       emit(
-        TrainingDaysState(
+        TrainingPageState(
           documents: data.docs,
           isLoading: false,
           errorMessage: '',
@@ -42,7 +39,7 @@ class TrainingDaysCubit extends Cubit<TrainingDaysState> {
     })
       ..onError((error) {
         emit(
-          TrainingDaysState(
+          TrainingPageState(
             documents: const [],
             isLoading: false,
             errorMessage: error.toString(),

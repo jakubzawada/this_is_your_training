@@ -1,12 +1,12 @@
-part of 'training_days_cubit.dart';
+part of 'monday_cubit.dart';
 
 @immutable
-class TrainingDaysState {
+class TrainingPageState {
   final List<QueryDocumentSnapshot<Map<String, dynamic>>> documents;
   final bool isLoading;
   final String errorMessage;
 
-  const TrainingDaysState({
+  const TrainingPageState({
     required this.documents,
     required this.isLoading,
     required this.errorMessage,

@@ -8,7 +8,6 @@ import 'package:this_is_your_training/app/features/home/views/training%20days/th
 import 'package:this_is_your_training/app/features/home/views/training%20days/tuesday_page_content.dart';
 import 'package:this_is_your_training/app/features/home/views/training%20days/wednesday_page_content.dart';
 
-
 class TrainingPageContent extends StatelessWidget {
   const TrainingPageContent({
     Key? key,
@@ -99,7 +98,7 @@ class TrainingPageContent extends StatelessWidget {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 22,
-                                  color: Color(0xFF40D876),
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -156,7 +155,7 @@ class TrainingPageContent extends StatelessWidget {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 22,
-                                  color: Color(0xFF40D876),
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -213,7 +212,7 @@ class TrainingPageContent extends StatelessWidget {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 22,
-                                  color: Color(0xFF40D876),
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
