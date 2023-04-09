@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:this_is_your_training/app/features/home/views/training%20days/cubit/sunday_cubit.dart';
 
 import 'add exercises/add_sunday_exercise_page_content.dart';
 
@@ -79,22 +81,24 @@ class SundayPageContent extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8.0, right: 8),
               child: Row(
                 children: [
-                  StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                      stream: FirebaseFirestore.instance
-                          .collection('trainings6')
-                          .snapshots(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
+                  BlocProvider(
+                    create: (context) => SundayCubit()..start(),
+                    child: BlocBuilder<SundayCubit, SundayState>(
+                      builder: (context, state) {
+                        if (state.errorMessage.isNotEmpty) {
+                          return Center(
+                            child: Text(
+                              'Something went wrong:${state.errorMessage}',
+                            ),
+                          );
+                        }
+
+                        if (state.isLoading) {
                           return const Center(
-                              child: Text('Something went wrong'));
+                              child: CircularProgressIndicator());
                         }
 
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Center(child: Text("Loading"));
-                        }
-
-                        final documents = snapshot.data!.docs;
+                        final documents = state.documents;
 
                         return Container(
                           height: 520,
@@ -160,7 +164,9 @@ class SundayPageContent extends StatelessWidget {
                             ],
                           ),
                         );
-                      }),
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -1,24 +1,26 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
-part 'monday_state.dart';
 
-class MondayCubit extends Cubit<MondayState> {
-  MondayCubit()
+part 'tuesday_state.dart';
+
+class TuesdayCubit extends Cubit<TuesdayState> {
+  TuesdayCubit()
       : super(
-          const MondayState(
+          const TuesdayState(
             documents: [],
             errorMessage: '',
             isLoading: false,
           ),
         );
-
+        
   StreamSubscription? _streamSubscription;
 
   Future<void> start() async {
     emit(
-      const MondayState(
+      const TuesdayState(
         documents: [],
         errorMessage: '',
         isLoading: true,
@@ -26,11 +28,11 @@ class MondayCubit extends Cubit<MondayState> {
     );
 
     _streamSubscription = FirebaseFirestore.instance
-        .collection('trainings')
+        .collection('trainings1')
         .snapshots()
         .listen((data) {
       emit(
-        MondayState(
+        TuesdayState(
           documents: data.docs,
           isLoading: false,
           errorMessage: '',
@@ -39,7 +41,7 @@ class MondayCubit extends Cubit<MondayState> {
     })
       ..onError((error) {
         emit(
-          MondayState(
+          TuesdayState(
             documents: const [],
             isLoading: false,
             errorMessage: error.toString(),

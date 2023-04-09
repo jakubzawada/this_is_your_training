@@ -1,12 +1,12 @@
-part of 'monday_cubit.dart';
+part of 'saturday_cubit.dart';
 
 @immutable
-class MondayState {
+class SaturdayState {
   final List<QueryDocumentSnapshot<Map<String, dynamic>>> documents;
   final bool isLoading;
   final String errorMessage;
 
-  const MondayState({
+  const SaturdayState({
     required this.documents,
     required this.isLoading,
     required this.errorMessage,

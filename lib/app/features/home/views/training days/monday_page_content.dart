@@ -82,8 +82,8 @@ class MondayPageContent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   BlocProvider(
-                    create: (context) => TrainingPageCubit()..satrt(),
-                    child: BlocBuilder<TrainingPageCubit, TrainingPageState>(
+                    create: (context) => MondayCubit()..start(),
+                    child: BlocBuilder<MondayCubit, MondayState>(
                       builder: (context, state) {
                         if (state.errorMessage.isNotEmpty) {
                           return Center(
