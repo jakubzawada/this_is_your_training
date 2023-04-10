@@ -9,13 +9,22 @@ part 'thursday_state.dart';
 class ThursdayCubit extends Cubit<ThursdayState> {
   ThursdayCubit()
       : super(
-         const ThursdayState(
-            documents:  [],
-             errorMessage: '',
+          const ThursdayState(
+            documents: [],
+            errorMessage: '',
             isLoading: false,
           ),
         );
-        
+
+  Future<void> dissmisible({
+    required String documentid,
+  }) async {
+    FirebaseFirestore.instance
+        .collection('trainings3')
+        .doc(documentid)
+        .delete();
+  }
+
   StreamSubscription? _streamSubscription;
 
   Future<void> start() async {

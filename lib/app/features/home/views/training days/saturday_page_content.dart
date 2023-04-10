@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -117,10 +116,9 @@ class SaturdayPageContent extends StatelessWidget {
                                     ),
                                     key: ValueKey(document.id),
                                     onDismissed: (_) {
-                                      FirebaseFirestore.instance
-                                          .collection('trainings5')
-                                          .doc(document.id)
-                                          .delete();
+                                      context
+                                          .read<SaturdayCubit>()
+                                          .dissmisible(documentid: document.id);
                                     },
                                     child: Container(
                                       color: Colors.deepPurple,

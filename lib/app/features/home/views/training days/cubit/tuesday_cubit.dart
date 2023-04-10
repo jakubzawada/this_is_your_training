@@ -15,7 +15,16 @@ class TuesdayCubit extends Cubit<TuesdayState> {
             isLoading: false,
           ),
         );
-        
+
+  Future<void> dissmisible({
+    required String documentid,
+  }) async {
+    FirebaseFirestore.instance
+        .collection('trainings1')
+        .doc(documentid)
+        .delete();
+  }
+
   StreamSubscription? _streamSubscription;
 
   Future<void> start() async {
