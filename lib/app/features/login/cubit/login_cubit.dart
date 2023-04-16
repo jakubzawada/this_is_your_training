@@ -7,41 +7,48 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit()
       : super(
           const LoginState(
-            errorMessage: '',
             isCreatingAccount: false,
+            errorMessage: '',
           ),
         );
 
   Future<void> createaccount({
     required String email,
     required String password,
+    required String errorMessage,
   }) async {
-    FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-
-    emit(
-      const LoginState(
-        errorMessage: '',
-        isCreatingAccount: true,
-      ),
-    );
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } catch (error) {
+      emit(
+        LoginState(
+          isCreatingAccount: false,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
   }
 
   Future<void> loginAccount({
     required String email,
     required String password,
+    required String errorMessage,
   }) async {
-    FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    emit(
-      const LoginState(
-        errorMessage: '',
-        isCreatingAccount: false,
-      ),
-    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } catch (error) {
+      emit(
+        LoginState(
+          isCreatingAccount: false,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
   }
 }

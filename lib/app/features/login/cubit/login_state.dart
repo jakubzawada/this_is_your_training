@@ -2,11 +2,11 @@ part of 'login_cubit.dart';
 
 @immutable
 class LoginState {
-  final String errorMessage;
   final bool isCreatingAccount;
+  final String errorMessage;
 
   const LoginState({
-    required this.errorMessage,
     required this.isCreatingAccount,
+    required this.errorMessage,
   });
 }

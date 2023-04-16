@@ -50,7 +50,9 @@ class _LoginPageState extends State<LoginPage> {
                       TextField(
                         controller: widget.emailController,
                         decoration: InputDecoration(
-                          hintText: 'E-mail',
+                          border: const OutlineInputBorder(),
+                          hintText: 'Wpisz E-mail',
+                          label: const Text('E-mail'),
                           hintStyle: GoogleFonts.inter(
                             fontSize: 20,
                             letterSpacing: 1.8,
@@ -58,10 +60,13 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 20),
                       TextField(
                         controller: widget.passwordController,
                         decoration: InputDecoration(
-                          hintText: 'Hasło',
+                          border: const OutlineInputBorder(),
+                          hintText: 'Wpisz Hasło',
+                          label: const Text('Hasło'),
                           hintStyle: GoogleFonts.inter(
                             fontSize: 20,
                             letterSpacing: 1.8,
@@ -71,32 +76,24 @@ class _LoginPageState extends State<LoginPage> {
                         obscureText: true,
                       ),
                       const SizedBox(height: 20),
-                      Text(errorMessage),
+                      Text(state.errorMessage),
                       const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () async {
                           if (isCreatingAccount == true) {
                             // rejestracja
-                            try {
-                              context.read<LoginCubit>().createaccount(
+                            context.read<LoginCubit>().createaccount(
                                   email: widget.emailController.text,
-                                  password: widget.passwordController.text);
-                            } catch (error) {
-                              setState(() {
-                                errorMessage = error.toString();
-                              });
-                            }
+                                  password: widget.passwordController.text,
+                                  errorMessage: errorMessage,
+                                );
                           } else {
                             // logowanie
-                            try {
-                              context.read<LoginCubit>().loginAccount(
+                            context.read<LoginCubit>().loginAccount(
                                   email: widget.emailController.text,
-                                  password: widget.passwordController.text);
-                            } catch (error) {
-                              setState(() {
-                                errorMessage = error.toString();
-                              });
-                            }
+                                  password: widget.passwordController.text,
+                                  errorMessage: errorMessage,
+                                );
                           }
                         },
                         style: ElevatedButton.styleFrom(
