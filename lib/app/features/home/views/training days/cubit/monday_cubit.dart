@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
+import 'package:this_is_your_training/models/document_model.dart';
 part 'monday_state.dart';
 
 class MondayCubit extends Cubit<MondayState> {
@@ -35,9 +36,17 @@ class MondayCubit extends Cubit<MondayState> {
         .collection('trainings')
         .snapshots()
         .listen((data) {
+      final documentModels = data.docs.map((doc) {
+        return DocumentModel(
+          id: doc.id,
+          name: doc['name'],
+          series: doc['series'],
+          repeat: doc['repeat'],
+        );
+      }).toList();
       emit(
         MondayState(
-          documents: data.docs,
+          documents: documentModels,
           isLoading: false,
           errorMessage: '',
         ),

@@ -45,6 +45,7 @@ dependencies:
   flutter_gen: ^5.2.0
   bloc: ^8.1.1
   meta: ^1.7.0
+  flutterfire_ui: ^0.4.3+20
   
   
 
