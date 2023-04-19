@@ -2,12 +2,12 @@ part of 'thursday_cubit.dart';
 
 @immutable
 class ThursdayState {
-  final List<QueryDocumentSnapshot<Map<String, dynamic>>> documents;
+  final List<DocumentModel> documents;
   final bool isLoading;
   final String errorMessage;
 
   const ThursdayState({
-    required this.documents,
+     this.documents = const [],
     required this.isLoading,
     required this.errorMessage,
   });

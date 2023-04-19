@@ -96,7 +96,7 @@ class FridayPageContent extends StatelessWidget {
                               child: CircularProgressIndicator());
                         }
 
-                        final documents = state.documents;
+                        final documentModels = state.documents;
 
                         return Container(
                           height: 520,
@@ -104,7 +104,7 @@ class FridayPageContent extends StatelessWidget {
                           color: const Color(0xFF232441),
                           child: Column(
                             children: [
-                              for (final document in documents) ...[
+                              for (final documentModel in documentModels) ...[
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       top: 10, left: 10, right: 10),
@@ -113,11 +113,10 @@ class FridayPageContent extends StatelessWidget {
                                       color: Colors.red,
                                       child: const Icon(Icons.delete),
                                     ),
-                                    key: ValueKey(document.id),
+                                    key: ValueKey(documentModel),
                                     onDismissed: (_) {
-                                      context
-                                          .read<FridayCubit>()
-                                          .dissmisible(documentid: document.id);
+                                      context.read<FridayCubit>().dissmisible(
+                                          documentid: documentModel.id);
                                     },
                                     child: Container(
                                       color: Colors.deepPurple,
@@ -128,7 +127,7 @@ class FridayPageContent extends StatelessWidget {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              document['name4'],
+                                              documentModel.name,
                                               style: GoogleFonts.inter(
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.bold,
@@ -136,7 +135,7 @@ class FridayPageContent extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              document['series4'].toString(),
+                                              documentModel.series.toString(),
                                               style: GoogleFonts.inter(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.bold,
@@ -144,7 +143,7 @@ class FridayPageContent extends StatelessWidget {
                                                       Colors.lightGreenAccent),
                                             ),
                                             Text(
-                                              document['repeat4'].toString(),
+                                              documentModel.repeat.toString(),
                                               style: GoogleFonts.inter(
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.bold,

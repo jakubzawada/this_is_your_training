@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
+import 'package:this_is_your_training/models/document_model.dart';
 
 part 'tuesday_state.dart';
 
@@ -25,6 +26,7 @@ class TuesdayCubit extends Cubit<TuesdayState> {
         .delete();
   }
 
+ 
   StreamSubscription? _streamSubscription;
 
   Future<void> start() async {
@@ -40,9 +42,17 @@ class TuesdayCubit extends Cubit<TuesdayState> {
         .collection('trainings1')
         .snapshots()
         .listen((data) {
+      final documentModels = data.docs.map((doc) {
+        return DocumentModel(
+          id: doc.id,
+          name: doc['name1'],
+          series: doc['series1'],
+          repeat: doc['repeat1'],
+        );
+      }).toList();
       emit(
         TuesdayState(
-          documents: data.docs,
+          documents: documentModels,
           isLoading: false,
           errorMessage: '',
         ),

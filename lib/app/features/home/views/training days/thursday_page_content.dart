@@ -97,7 +97,7 @@ class ThursdayPageContent extends StatelessWidget {
                               child: CircularProgressIndicator());
                         }
 
-                        final documents = state.documents;
+                        final documentModels = state.documents;
 
                         return Container(
                           height: 520,
@@ -105,7 +105,7 @@ class ThursdayPageContent extends StatelessWidget {
                           color: const Color(0xFF232441),
                           child: Column(
                             children: [
-                              for (final document in documents) ...[
+                              for (final documentModel in documentModels) ...[
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       top: 10, left: 10, right: 10),
@@ -114,11 +114,10 @@ class ThursdayPageContent extends StatelessWidget {
                                       color: Colors.red,
                                       child: const Icon(Icons.delete),
                                     ),
-                                    key: ValueKey(document.id),
+                                    key: ValueKey(documentModel),
                                     onDismissed: (_) {
-                                      context
-                                          .read<ThursdayCubit>()
-                                          .dissmisible(documentid: document.id);
+                                      context.read<ThursdayCubit>().dissmisible(
+                                          documentid: documentModel.id);
                                     },
                                     child: Container(
                                       color: Colors.deepPurple,
@@ -129,7 +128,7 @@ class ThursdayPageContent extends StatelessWidget {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              document['name3'],
+                                              documentModel.name,
                                               style: GoogleFonts.inter(
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.bold,
@@ -137,7 +136,7 @@ class ThursdayPageContent extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              document['series3'].toString(),
+                                              documentModel.series.toString(),
                                               style: GoogleFonts.inter(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.bold,
@@ -145,7 +144,7 @@ class ThursdayPageContent extends StatelessWidget {
                                                       Colors.lightGreenAccent),
                                             ),
                                             Text(
-                                              document['repeat3'].toString(),
+                                              documentModel.repeat.toString(),
                                               style: GoogleFonts.inter(
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.bold,
