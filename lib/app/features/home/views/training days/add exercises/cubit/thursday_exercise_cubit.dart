@@ -7,7 +7,7 @@ part 'thursday_exercise_state.dart';
 class ThursdayExerciseCubit extends Cubit<ThursdayExerciseState> {
   ThursdayExerciseCubit()
       : super(
-          ThursdayExerciseState(),
+          const ThursdayExerciseState(),
         );
 
   Future<void> addexercise({
@@ -15,10 +15,17 @@ class ThursdayExerciseCubit extends Cubit<ThursdayExerciseState> {
     required int series,
     required int repeat,
   }) async {
-    FirebaseFirestore.instance.collection('trainings3').add({
-      'name3': exerciseName,
-      'series3': series,
-      'repeat3': repeat,
-    });
+    try {
+      await FirebaseFirestore.instance.collection('trainings3').add(
+        {
+          'name3': exerciseName,
+          'series3': series,
+          'repeat3': repeat,
+        },
+      );
+      emit(const ThursdayExerciseState(saved: true));
+    } catch (error) {
+      emit(ThursdayExerciseState(errorMessage: error.toString()));
+    }
   }
 }
