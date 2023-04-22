@@ -1,14 +1,12 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 import 'package:this_is_your_training/models/document_model.dart';
-
+import 'package:this_is_your_training/repositories/documents_repository.dart';
 part 'thursday_state.dart';
 
 class ThursdayCubit extends Cubit<ThursdayState> {
-  ThursdayCubit()
+  ThursdayCubit(this._documentsRepository)
       : super(
           const ThursdayState(
             documents: [],
@@ -17,16 +15,14 @@ class ThursdayCubit extends Cubit<ThursdayState> {
           ),
         );
 
+  final DocumentsRepository _documentsRepository;
+
   Future<void> dissmisible({
     required String documentid,
   }) async {
-    FirebaseFirestore.instance
-        .collection('trainings3')
-        .doc(documentid)
-        .delete();
+    await _documentsRepository.delete3(id: documentid);
   }
 
-  
   StreamSubscription? _streamSubscription;
 
   Future<void> start() async {
@@ -38,35 +34,25 @@ class ThursdayCubit extends Cubit<ThursdayState> {
       ),
     );
 
-    _streamSubscription = FirebaseFirestore.instance
-        .collection('trainings3')
-        .snapshots()
-        .listen((data) {
-      final documentModels = data.docs.map((doc) {
-        return DocumentModel(
-          id: doc.id,
-          name: doc['name3'],
-          series: doc['series3'],
-          repeat: doc['repeat3'],
-        );
-      }).toList();
+    _streamSubscription =
+        _documentsRepository.getDocumentsStream3().listen((data) {
       emit(
         ThursdayState(
-          documents: documentModels,
+          documents: data,
           isLoading: false,
           errorMessage: '',
         ),
       );
     })
-      ..onError((error) {
-        emit(
-          ThursdayState(
-            documents: const [],
-            isLoading: false,
-            errorMessage: error.toString(),
-          ),
-        );
-      });
+          ..onError((error) {
+            emit(
+              ThursdayState(
+                documents: const [],
+                isLoading: false,
+                errorMessage: error.toString(),
+              ),
+            );
+          });
   }
 
   @override

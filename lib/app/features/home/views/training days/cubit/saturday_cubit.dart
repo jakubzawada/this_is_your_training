@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 import 'package:this_is_your_training/models/document_model.dart';
+import 'package:this_is_your_training/repositories/documents_repository.dart';
 part 'saturday_state.dart';
 
 class SaturdayCubit extends Cubit<SaturdayState> {
-  SaturdayCubit()
+  SaturdayCubit(this._documentsRepository)
       : super(
           const SaturdayState(
             documents: [],
@@ -15,13 +15,12 @@ class SaturdayCubit extends Cubit<SaturdayState> {
           ),
         );
 
+  final DocumentsRepository _documentsRepository;
+
   Future<void> dissmisible({
     required String documentid,
   }) async {
-    FirebaseFirestore.instance
-        .collection('trainings5')
-        .doc(documentid)
-        .delete();
+    await _documentsRepository.delete5(id: documentid);
   }
 
    StreamSubscription? _streamSubscription;
@@ -35,35 +34,25 @@ class SaturdayCubit extends Cubit<SaturdayState> {
       ),
     );
 
-    _streamSubscription = FirebaseFirestore.instance
-        .collection('trainings5')
-        .snapshots()
-        .listen((data) {
-      final documentModels = data.docs.map((doc) {
-        return DocumentModel(
-          id: doc.id,
-          name: doc['name5'],
-          series: doc['series5'],
-          repeat: doc['repeat5'],
-        );
-      }).toList();
+    _streamSubscription =
+        _documentsRepository.getDocumentsStream5().listen((data) {
       emit(
         SaturdayState(
-          documents: documentModels,
+          documents: data,
           isLoading: false,
           errorMessage: '',
         ),
       );
     })
-      ..onError((error) {
-        emit(
-          SaturdayState(
-            documents: const [],
-            isLoading: false,
-            errorMessage: error.toString(),
-          ),
-        );
-      });
+          ..onError((error) {
+            emit(
+              SaturdayState(
+                documents: const [],
+                isLoading: false,
+                errorMessage: error.toString(),
+              ),
+            );
+          });
   }
 
   @override

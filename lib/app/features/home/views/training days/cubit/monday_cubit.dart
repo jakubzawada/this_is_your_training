@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 import 'package:this_is_your_training/models/document_model.dart';
+import 'package:this_is_your_training/repositories/documents_repository.dart';
 part 'monday_state.dart';
 
 class MondayCubit extends Cubit<MondayState> {
-  MondayCubit()
+  MondayCubit(this._documentsRepository)
       : super(
           const MondayState(
             documents: [],
@@ -15,10 +15,12 @@ class MondayCubit extends Cubit<MondayState> {
           ),
         );
 
+  final DocumentsRepository _documentsRepository;
+
   Future<void> dissmisible({
     required String documentid,
   }) async {
-    FirebaseFirestore.instance.collection('trainings').doc(documentid).delete();
+    await _documentsRepository.delete(id: documentid);
   }
 
   StreamSubscription? _streamSubscription;
@@ -32,35 +34,25 @@ class MondayCubit extends Cubit<MondayState> {
       ),
     );
 
-    _streamSubscription = FirebaseFirestore.instance
-        .collection('trainings')
-        .snapshots()
-        .listen((data) {
-      final documentModels = data.docs.map((doc) {
-        return DocumentModel(
-          id: doc.id,
-          name: doc['name'],
-          series: doc['series'],
-          repeat: doc['repeat'],
-        );
-      }).toList();
+    _streamSubscription =
+        _documentsRepository.getDocumentsStream().listen((data) {
       emit(
         MondayState(
-          documents: documentModels,
+          documents: data,
           isLoading: false,
           errorMessage: '',
         ),
       );
     })
-      ..onError((error) {
-        emit(
-          MondayState(
-            documents: const [],
-            isLoading: false,
-            errorMessage: error.toString(),
-          ),
-        );
-      });
+          ..onError((error) {
+            emit(
+              MondayState(
+                documents: const [],
+                isLoading: false,
+                errorMessage: error.toString(),
+              ),
+            );
+          });
   }
 
   @override

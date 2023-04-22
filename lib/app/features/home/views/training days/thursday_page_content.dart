@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/app/features/home/views/training%20days/cubit/thursday_cubit.dart';
+import 'package:this_is_your_training/repositories/documents_repository.dart';
 
 import 'add exercises/add_thursday_exercise_page_content.dart';
 
@@ -81,7 +82,7 @@ class ThursdayPageContent extends StatelessWidget {
               child: Row(
                 children: [
                   BlocProvider(
-                    create: (context) => ThursdayCubit()..start(),
+                    create: (context) => ThursdayCubit(DocumentsRepository())..start(),
                     child: BlocBuilder<ThursdayCubit, ThursdayState>(
                       builder: (context, state) {
                         if (state.errorMessage.isNotEmpty) {

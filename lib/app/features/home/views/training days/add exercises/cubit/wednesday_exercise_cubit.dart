@@ -1,14 +1,16 @@
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
+import 'package:this_is_your_training/repositories/documents_repository.dart';
 
 part 'wednesday_exercise_state.dart';
 
 class WednesdayExerciseCubit extends Cubit<WednesdayExerciseState> {
-  WednesdayExerciseCubit()
+  WednesdayExerciseCubit(this._documentsRepository)
       : super(
           const WednesdayExerciseState(),
         );
+
+  final DocumentsRepository _documentsRepository;
 
   Future<void> addexercise({
     required String exerciseName,
@@ -16,13 +18,7 @@ class WednesdayExerciseCubit extends Cubit<WednesdayExerciseState> {
     required int repeat,
   }) async {
     try {
-      await FirebaseFirestore.instance.collection('trainings2').add(
-        {
-          'name2': exerciseName,
-          'series2': series,
-          'repeat2': repeat,
-        },
-      );
+      await _documentsRepository.addexercise2(exerciseName, series, repeat);
       emit(const WednesdayExerciseState(saved: true));
     } catch (error) {
       emit(WednesdayExerciseState(errorMessage: error.toString()));

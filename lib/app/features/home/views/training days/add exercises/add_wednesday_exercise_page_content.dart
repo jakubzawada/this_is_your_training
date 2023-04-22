@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:this_is_your_training/repositories/documents_repository.dart';
 import 'cubit/wednesday_exercise_cubit.dart';
 
 class AddWednesdayExercise extends StatefulWidget {
@@ -54,7 +55,7 @@ class _AddWednesdayExerciseState extends State<AddWednesdayExercise> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => WednesdayExerciseCubit(),
+      create: (context) => WednesdayExerciseCubit(DocumentsRepository()),
       child: BlocListener<WednesdayExerciseCubit, WednesdayExerciseState>(
         listener: (context, state) {
           if (state.saved) {

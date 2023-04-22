@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 import 'package:this_is_your_training/models/document_model.dart';
+import 'package:this_is_your_training/repositories/documents_repository.dart';
 part 'friday_state.dart';
 
 class FridayCubit extends Cubit<FridayState> {
-  FridayCubit()
+  FridayCubit(this._documentsRepository)
       : super(
           const FridayState(
             documents: [],
@@ -15,14 +15,14 @@ class FridayCubit extends Cubit<FridayState> {
           ),
         );
 
+  final DocumentsRepository _documentsRepository;
+
   Future<void> dissmisible({
     required String documentid,
   }) async {
-    FirebaseFirestore.instance
-        .collection('trainings4')
-        .doc(documentid)
-        .delete();
+    await _documentsRepository.delete4(id: documentid);
   }
+
 
   StreamSubscription? _streamSubscription;
 
@@ -35,35 +35,25 @@ class FridayCubit extends Cubit<FridayState> {
       ),
     );
 
-    _streamSubscription = FirebaseFirestore.instance
-        .collection('trainings4')
-        .snapshots()
-        .listen((data) {
-      final documentModels = data.docs.map((doc) {
-        return DocumentModel(
-          id: doc.id,
-          name: doc['name4'],
-          series: doc['series4'],
-          repeat: doc['repeat4'],
-        );
-      }).toList();
+    _streamSubscription =
+        _documentsRepository.getDocumentsStream4().listen((data) {
       emit(
         FridayState(
-          documents: documentModels,
+          documents: data,
           isLoading: false,
           errorMessage: '',
         ),
       );
     })
-      ..onError((error) {
-        emit(
-          FridayState(
-            documents: const [],
-            isLoading: false,
-            errorMessage: error.toString(),
-          ),
-        );
-      });
+          ..onError((error) {
+            emit(
+              FridayState(
+                documents: const [],
+                isLoading: false,
+                errorMessage: error.toString(),
+              ),
+            );
+          });
   }
 
   @override

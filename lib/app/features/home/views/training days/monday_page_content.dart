@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/app/features/home/views/training%20days/cubit/monday_cubit.dart';
+import 'package:this_is_your_training/repositories/documents_repository.dart';
 import 'add exercises/add_monday_exercise_page_content.dart';
 
 class MondayPageContent extends StatelessWidget {
@@ -81,7 +82,7 @@ class MondayPageContent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   BlocProvider(
-                    create: (context) => MondayCubit()..start(),
+                    create: (context) => MondayCubit(DocumentsRepository())..start(),
                     child: BlocBuilder<MondayCubit, MondayState>(
                       builder: (context, state) {
                         if (state.errorMessage.isNotEmpty) {
