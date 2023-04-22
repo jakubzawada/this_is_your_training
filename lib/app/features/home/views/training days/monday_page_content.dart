@@ -1,9 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:this_is_your_training/app/features/home/views/training%20days/cubit/training_days_cubit.dart';
-
+import 'package:this_is_your_training/app/features/home/views/training%20days/cubit/monday_cubit.dart';
+import 'package:this_is_your_training/repositories/documents_repository.dart';
 import 'add exercises/add_monday_exercise_page_content.dart';
 
 class MondayPageContent extends StatelessWidget {
@@ -83,8 +82,8 @@ class MondayPageContent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   BlocProvider(
-                    create: (context) => TrainingDaysCubit()..satrt(),
-                    child: BlocBuilder<TrainingDaysCubit, TrainingDaysState>(
+                    create: (context) => MondayCubit(DocumentsRepository())..start(),
+                    child: BlocBuilder<MondayCubit, MondayState>(
                       builder: (context, state) {
                         if (state.errorMessage.isNotEmpty) {
                           return Center(
@@ -99,7 +98,7 @@ class MondayPageContent extends StatelessWidget {
                               child: CircularProgressIndicator());
                         }
 
-                        final documents = state.documents;
+                        final documentModels = state.documents;
 
                         return Container(
                           height: 520,
@@ -107,7 +106,7 @@ class MondayPageContent extends StatelessWidget {
                           color: const Color(0xFF232441),
                           child: Column(
                             children: [
-                              for (final document in documents) ...[
+                              for (final documentModel in documentModels) ...[
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       top: 10, left: 10, right: 10),
@@ -116,12 +115,10 @@ class MondayPageContent extends StatelessWidget {
                                       color: Colors.red,
                                       child: const Icon(Icons.delete),
                                     ),
-                                    key: ValueKey(document.id),
+                                    key: ValueKey(documentModel),
                                     onDismissed: (_) {
-                                      FirebaseFirestore.instance
-                                          .collection('trainings')
-                                          .doc(document.id)
-                                          .delete();
+                                      context.read<MondayCubit>().dissmisible(
+                                          documentid: documentModel.id);
                                     },
                                     child: Container(
                                       color: Colors.deepPurple,
@@ -132,7 +129,7 @@ class MondayPageContent extends StatelessWidget {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              document['name'],
+                                              documentModel.name,
                                               style: GoogleFonts.inter(
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.bold,
@@ -140,7 +137,7 @@ class MondayPageContent extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              document['series'].toString(),
+                                              documentModel.series.toString(),
                                               style: GoogleFonts.inter(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.bold,
@@ -148,7 +145,7 @@ class MondayPageContent extends StatelessWidget {
                                                       Colors.lightGreenAccent),
                                             ),
                                             Text(
-                                              document['repeat'].toString(),
+                                              documentModel.repeat.toString(),
                                               style: GoogleFonts.inter(
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.bold,

@@ -1,0 +1,27 @@
+import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
+import 'package:this_is_your_training/repositories/documents_repository.dart';
+
+part 'wednesday_exercise_state.dart';
+
+class WednesdayExerciseCubit extends Cubit<WednesdayExerciseState> {
+  WednesdayExerciseCubit(this._documentsRepository)
+      : super(
+          const WednesdayExerciseState(),
+        );
+
+  final DocumentsRepository _documentsRepository;
+
+  Future<void> addexercise({
+    required String exerciseName,
+    required int series,
+    required int repeat,
+  }) async {
+    try {
+      await _documentsRepository.addexercise2(exerciseName, series, repeat);
+      emit(const WednesdayExerciseState(saved: true));
+    } catch (error) {
+      emit(WednesdayExerciseState(errorMessage: error.toString()));
+    }
+  }
+}

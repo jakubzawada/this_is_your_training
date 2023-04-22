@@ -43,6 +43,9 @@ dependencies:
   cloud_firestore: ^4.3.1
   flutter_bloc: ^8.1.2
   flutter_gen: ^5.2.0
+  bloc: ^8.1.1
+  meta: ^1.7.0
+  flutterfire_ui: ^0.4.3+20
   
   
 
@@ -56,6 +59,12 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.11.0 
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon2.jpg"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

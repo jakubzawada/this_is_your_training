@@ -1,6 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:this_is_your_training/app/features/home/views/training%20days/cubit/wednesday_cubit.dart';
+import 'package:this_is_your_training/repositories/documents_repository.dart';
 
 import 'add exercises/add_wednesday_exercise_page_content.dart';
 
@@ -79,22 +81,25 @@ class WednesdayPageContent extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8.0, right: 8),
               child: Row(
                 children: [
-                  StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                      stream: FirebaseFirestore.instance
-                          .collection('trainings2')
-                          .snapshots(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
+                  BlocProvider(
+                    create: (context) =>
+                        WednesdayCubit(DocumentsRepository())..start(),
+                    child: BlocBuilder<WednesdayCubit, WednesdayState>(
+                      builder: (context, state) {
+                        if (state.errorMessage.isNotEmpty) {
+                          return Center(
+                            child: Text(
+                              'Something went wrong:${state.errorMessage}',
+                            ),
+                          );
+                        }
+
+                        if (state.isLoading) {
                           return const Center(
-                              child: Text('Something went wrong'));
+                              child: CircularProgressIndicator());
                         }
 
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Center(child: Text("Loading"));
-                        }
-
-                        final documents = snapshot.data!.docs;
+                        final documentModels = state.documents;
 
                         return Container(
                           height: 520,
@@ -102,7 +107,7 @@ class WednesdayPageContent extends StatelessWidget {
                           color: const Color(0xFF232441),
                           child: Column(
                             children: [
-                              for (final document in documents) ...[
+                              for (final documentModel in documentModels) ...[
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       top: 10, left: 10, right: 10),
@@ -111,12 +116,12 @@ class WednesdayPageContent extends StatelessWidget {
                                       color: Colors.red,
                                       child: const Icon(Icons.delete),
                                     ),
-                                    key: ValueKey(document.id),
+                                    key: ValueKey(documentModel),
                                     onDismissed: (_) {
-                                      FirebaseFirestore.instance
-                                          .collection('trainings2')
-                                          .doc(document.id)
-                                          .delete();
+                                      context
+                                          .read<WednesdayCubit>()
+                                          .dissmisible(
+                                              documentid: documentModel.id);
                                     },
                                     child: Container(
                                       color: Colors.deepPurple,
@@ -127,7 +132,7 @@ class WednesdayPageContent extends StatelessWidget {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              document['name2'],
+                                              documentModel.name,
                                               style: GoogleFonts.inter(
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.bold,
@@ -135,7 +140,7 @@ class WednesdayPageContent extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              document['series2'].toString(),
+                                              documentModel.series.toString(),
                                               style: GoogleFonts.inter(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.bold,
@@ -143,7 +148,7 @@ class WednesdayPageContent extends StatelessWidget {
                                                       Colors.lightGreenAccent),
                                             ),
                                             Text(
-                                              document['repeat2'].toString(),
+                                              documentModel.repeat.toString(),
                                               style: GoogleFonts.inter(
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.bold,
@@ -160,7 +165,9 @@ class WednesdayPageContent extends StatelessWidget {
                             ],
                           ),
                         );
-                      }),
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
