@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/app/cubit/root_cubit.dart';
 import 'package:this_is_your_training/app/features/login/cubit/login_cubit.dart';
+import 'package:this_is_your_training/app/features/login/forgot_pw_page.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({
@@ -50,33 +51,64 @@ class _LoginPageState extends State<LoginPage> {
                       TextField(
                         controller: widget.emailController,
                         decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          hintText: 'Wpisz E-mail',
-                          label: const Text('E-mail'),
-                          hintStyle: GoogleFonts.inter(
-                            fontSize: 20,
-                            letterSpacing: 1.8,
-                            color: Colors.white,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.circular(12),
                           ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.deepPurple),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          hintText: 'Email',
+                          fillColor: Colors.grey[200],
+                          filled: true,
                         ),
                       ),
                       const SizedBox(height: 20),
                       TextField(
                         controller: widget.passwordController,
                         decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          hintText: 'Wpisz Hasło',
-                          label: const Text('Hasło'),
-                          hintStyle: GoogleFonts.inter(
-                            fontSize: 20,
-                            letterSpacing: 1.8,
-                            color: Colors.white,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.white),
+                            borderRadius: BorderRadius.circular(12),
                           ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.deepPurple),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          hintText: 'Password',
+                          fillColor: Colors.grey[200],
+                          filled: true,
                         ),
                         obscureText: true,
                       ),
-                      const SizedBox(height: 20),
-                      Text(state.errorMessage),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return const ForgotPasswordPage();
+                                  },
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              'Forgot Passowrd?',
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                       const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () async {
@@ -120,12 +152,11 @@ class _LoginPageState extends State<LoginPage> {
                               isCreatingAccount = true;
                             });
                           },
-                          child: Text(
+                          child: const Text(
                             'Utwórz konto',
-                            style: GoogleFonts.inter(
-                              fontSize: 16,
-                              letterSpacing: 1.8,
-                              color: Colors.white,
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -137,16 +168,16 @@ class _LoginPageState extends State<LoginPage> {
                               isCreatingAccount = false;
                             });
                           },
-                          child: Text(
+                          child: const Text(
                             'Masz już konto',
-                            style: GoogleFonts.inter(
-                              fontSize: 16,
-                              letterSpacing: 1.8,
-                              color: Colors.white,
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
                       ],
+                      Text(state.errorMessage),
                     ],
                   ),
                 ),
