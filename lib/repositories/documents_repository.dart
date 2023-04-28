@@ -1,9 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:this_is_your_training/models/document_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DocumentsRepository {
   Stream<List<DocumentModel>> getDocumentsStream() {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
     return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
         .collection('trainings')
         .snapshots()
         .map((querySnapshot) {
@@ -21,7 +28,16 @@ class DocumentsRepository {
   }
 
   Future<void> delete({required String id}) {
-    return FirebaseFirestore.instance.collection('trainings').doc(id).delete();
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('trainings')
+        .doc(id)
+        .delete();
   }
 
   Future<void> addexercise(
@@ -29,7 +45,15 @@ class DocumentsRepository {
     int series,
     int repeat,
   ) async {
-    await FirebaseFirestore.instance.collection('trainings').add(
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('trainings')
+        .add(
       {
         'name': exerciseName,
         'series': series,
@@ -39,7 +63,13 @@ class DocumentsRepository {
   }
 
   Stream<List<DocumentModel>> getDocumentsStream1() {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
     return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
         .collection('trainings1')
         .snapshots()
         .map((querySnapshot) {
@@ -57,7 +87,16 @@ class DocumentsRepository {
   }
 
   Future<void> delete1({required String id}) {
-    return FirebaseFirestore.instance.collection('trainings1').doc(id).delete();
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('trainings1')
+        .doc(id)
+        .delete();
   }
 
   Future<void> addexercise1(
@@ -65,7 +104,15 @@ class DocumentsRepository {
     int series,
     int repeat,
   ) async {
-    await FirebaseFirestore.instance.collection('trainings1').add(
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('trainings1')
+        .add(
       {
         'name1': exerciseName,
         'series1': series,
@@ -75,7 +122,13 @@ class DocumentsRepository {
   }
 
   Stream<List<DocumentModel>> getDocumentsStream2() {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
     return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
         .collection('trainings2')
         .snapshots()
         .map((querySnapshot) {
@@ -93,7 +146,16 @@ class DocumentsRepository {
   }
 
   Future<void> delete2({required String id}) {
-    return FirebaseFirestore.instance.collection('trainings2').doc(id).delete();
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('trainings2')
+        .doc(id)
+        .delete();
   }
 
   Future<void> addexercise2(
@@ -101,7 +163,15 @@ class DocumentsRepository {
     int series,
     int repeat,
   ) async {
-    await FirebaseFirestore.instance.collection('trainings2').add(
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('trainings2')
+        .add(
       {
         'name2': exerciseName,
         'series2': series,
@@ -111,7 +181,13 @@ class DocumentsRepository {
   }
 
   Stream<List<DocumentModel>> getDocumentsStream3() {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
     return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
         .collection('trainings3')
         .snapshots()
         .map((querySnapshot) {
@@ -129,7 +205,16 @@ class DocumentsRepository {
   }
 
   Future<void> delete3({required String id}) {
-    return FirebaseFirestore.instance.collection('trainings3').doc(id).delete();
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('trainings3')
+        .doc(id)
+        .delete();
   }
 
   Future<void> addexercise3(
@@ -137,7 +222,15 @@ class DocumentsRepository {
     int series,
     int repeat,
   ) async {
-    await FirebaseFirestore.instance.collection('trainings3').add(
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('trainings3')
+        .add(
       {
         'name3': exerciseName,
         'series3': series,
@@ -147,7 +240,13 @@ class DocumentsRepository {
   }
 
   Stream<List<DocumentModel>> getDocumentsStream4() {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
     return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
         .collection('trainings4')
         .snapshots()
         .map((querySnapshot) {
@@ -165,7 +264,16 @@ class DocumentsRepository {
   }
 
   Future<void> delete4({required String id}) {
-    return FirebaseFirestore.instance.collection('trainings4').doc(id).delete();
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('trainings4')
+        .doc(id)
+        .delete();
   }
 
   Future<void> addexercise4(
@@ -173,7 +281,15 @@ class DocumentsRepository {
     int series,
     int repeat,
   ) async {
-    await FirebaseFirestore.instance.collection('trainings4').add(
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('trainings4')
+        .add(
       {
         'name4': exerciseName,
         'series4': series,
@@ -183,7 +299,13 @@ class DocumentsRepository {
   }
 
   Stream<List<DocumentModel>> getDocumentsStream5() {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
     return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
         .collection('trainings5')
         .snapshots()
         .map((querySnapshot) {
@@ -201,7 +323,16 @@ class DocumentsRepository {
   }
 
   Future<void> delete5({required String id}) {
-    return FirebaseFirestore.instance.collection('trainings5').doc(id).delete();
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('trainings5')
+        .doc(id)
+        .delete();
   }
 
   Future<void> addexercise5(
@@ -209,7 +340,15 @@ class DocumentsRepository {
     int series,
     int repeat,
   ) async {
-    await FirebaseFirestore.instance.collection('trainings5').add(
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('trainings5')
+        .add(
       {
         'name5': exerciseName,
         'series5': series,
@@ -219,7 +358,13 @@ class DocumentsRepository {
   }
 
   Stream<List<DocumentModel>> getDocumentsStream6() {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
     return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
         .collection('trainings6')
         .snapshots()
         .map((querySnapshot) {
@@ -237,7 +382,16 @@ class DocumentsRepository {
   }
 
   Future<void> delete6({required String id}) {
-    return FirebaseFirestore.instance.collection('trainings6').doc(id).delete();
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('trainings6')
+        .doc(id)
+        .delete();
   }
 
   Future<void> addexercise6(
@@ -245,7 +399,15 @@ class DocumentsRepository {
     int series,
     int repeat,
   ) async {
-    await FirebaseFirestore.instance.collection('trainings6').add(
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('trainings6')
+        .add(
       {
         'name6': exerciseName,
         'series6': series,
