@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/app/cubit/root_cubit.dart';
-import 'package:this_is_your_training/app/features/login/cubit/login_cubit.dart';
+import 'package:this_is_your_training/app/features/login/cubit/register_cubit.dart';
 import 'package:this_is_your_training/app/features/login/forgot_pw_page.dart';
-import 'package:this_is_your_training/app/features/login/register_page.dart';
+import 'package:this_is_your_training/app/features/login/login_page.dart';
 import 'package:this_is_your_training/components/square_tile.dart';
 import 'package:this_is_your_training/services/auth_service.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({
+class RegisterPage extends StatefulWidget {
+  RegisterPage({
     Key? key,
   }) : super(key: key);
 
@@ -17,10 +17,10 @@ class LoginPage extends StatefulWidget {
   final passwordController = TextEditingController();
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   var errorMessage = '';
   var isCreatingAccount = false;
 
@@ -31,8 +31,8 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         backgroundColor: Colors.deepPurple[200],
         body: BlocProvider(
-          create: (context) => LoginCubit(),
-          child: BlocBuilder<LoginCubit, LoginState>(
+          create: (context) => RegisterCubit(),
+          child: BlocBuilder<RegisterCubit, RegisterState>(
             builder: (context, state) {
               return ListView(
                 children: [
@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           const SizedBox(height: 40),
                           Text(
-                            'Zaloguj się',
+                            'Zarejestruj się',
                             style: GoogleFonts.bebasNeue(
                               fontSize: 28,
                               color: Colors.white,
@@ -117,7 +117,6 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ],
                           ),
-                          Text(state.errorMessage),
                           const SizedBox(height: 20),
                           InkWell(
                             child: Container(
@@ -129,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               child: const Center(
                                 child: Text(
-                                  'Zaloguj się',
+                                  'Zarejestruj się',
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -140,10 +139,10 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             onTap: () async {
-                              (isCreatingAccount == false);
+                              (isCreatingAccount == true);
                               {
-                                // logowanie
-                                context.read<LoginCubit>().loginAccount(
+                                // rejestracja
+                                context.read<RegisterCubit>().createaccount(
                                       email: widget.emailController.text,
                                       password: widget.passwordController.text,
                                       errorMessage: errorMessage,
@@ -156,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text(
-                                'Dont\'t have an account?',
+                                'Already have an account?',
                                 style: TextStyle(
                                     color: Colors.deepPurple, fontSize: 20),
                               ),
@@ -164,12 +163,12 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (_) => RegisterPage(),
+                                      builder: (_) => LoginPage(),
                                     ),
                                   );
                                 },
                                 child: const Text(
-                                  'SIGN UP',
+                                  'Login',
                                   style: TextStyle(
                                       color: Colors.deepPurple,
                                       fontSize: 20,
@@ -210,6 +209,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ],
                           ),
+                          Text(state.errorMessage),
                         ],
                       ),
                     ),

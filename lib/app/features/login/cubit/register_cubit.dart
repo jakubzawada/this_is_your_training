@@ -1,36 +1,36 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
-part 'login_state.dart';
 
-class LoginCubit extends Cubit<LoginState> {
-  LoginCubit()
+part 'register_state.dart';
+
+class RegisterCubit extends Cubit<RegisterState> {
+  RegisterCubit()
       : super(
-          const LoginState(
+          const RegisterState(
             isCreatingAccount: false,
             errorMessage: '',
           ),
         );
 
- 
-
-  Future<void> loginAccount({
+  Future<void> createaccount({
     required String email,
     required String password,
     required String errorMessage,
   }) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
     } catch (error) {
       emit(
-        LoginState(
+        RegisterState(
           isCreatingAccount: false,
           errorMessage: error.toString(),
         ),
       );
     }
   }
+
 }
