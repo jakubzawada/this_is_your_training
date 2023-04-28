@@ -11,9 +11,7 @@ class LoginCubit extends Cubit<LoginState> {
             errorMessage: '',
           ),
         );
-
  
-
   Future<void> loginAccount({
     required String email,
     required String password,
