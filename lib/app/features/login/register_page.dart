@@ -22,6 +22,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  bool obscureText = true;
   var errorMessage = '';
   var isCreatingAccount = true;
 
@@ -84,6 +85,18 @@ class _RegisterPageState extends State<RegisterPage> {
                                         const BorderSide(color: Colors.white),
                                     borderRadius: BorderRadius.circular(12),
                                   ),
+                                  suffixIcon: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        obscureText = !obscureText;
+                                      });
+                                    },
+                                    child: Icon(
+                                        obscureText
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                        color: Colors.deepPurple),
+                                  ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: const BorderSide(
                                         color: Colors.deepPurple),
@@ -93,7 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   fillColor: Colors.grey[200],
                                   filled: true,
                                 ),
-                                obscureText: true,
+                                obscureText: obscureText,
                               ),
                               const SizedBox(height: 10),
                               Row(
@@ -120,6 +133,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                 ],
                               ),
+                              Text(state.errorMessage),
                               const SizedBox(height: 20),
                               InkWell(
                                 child: Container(
@@ -219,7 +233,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                 ],
                               ),
-                              Text(state.errorMessage),
                             ],
                           ),
                         ),

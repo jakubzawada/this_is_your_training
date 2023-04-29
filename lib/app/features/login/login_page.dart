@@ -21,6 +21,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool obscureText = true;
   var errorMessage = '';
   var isCreatingAccount = false;
 
@@ -86,11 +87,23 @@ class _LoginPageState extends State<LoginPage> {
                                     const BorderSide(color: Colors.deepPurple),
                                 borderRadius: BorderRadius.circular(12),
                               ),
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    obscureText = !obscureText;
+                                  });
+                                },
+                                child: Icon(
+                                    obscureText
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: Colors.deepPurple),
+                              ),
                               hintText: 'Password',
                               fillColor: Colors.grey[200],
                               filled: true,
                             ),
-                            obscureText: true,
+                            obscureText: obscureText,
                           ),
                           const SizedBox(height: 10),
                           Row(
