@@ -30,46 +30,49 @@ class MondayPageContent extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               child: Row(
                 children: [
-                  Container(
-                    height: 60,
-                    width: 375,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF232441),
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(20),
-                        topLeft: Radius.circular(20),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      height: 60,
+                      width: 375,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF232441),
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          topLeft: Radius.circular(20),
+                        ),
                       ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(14),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Ćwiczenia',
-                            style: GoogleFonts.bebasNeue(
-                              fontSize: 20,
-                              color: Colors.white,
-                              letterSpacing: 1.8,
+                      child: Padding(
+                        padding: const EdgeInsets.all(14),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Ćwiczenia',
+                              style: GoogleFonts.bebasNeue(
+                                fontSize: 20,
+                                color: Colors.white,
+                                letterSpacing: 1.8,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Serie',
-                            style: GoogleFonts.bebasNeue(
-                              fontSize: 20,
-                              color: Colors.white,
-                              letterSpacing: 1.8,
+                            Text(
+                              'Serie',
+                              style: GoogleFonts.bebasNeue(
+                                fontSize: 20,
+                                color: Colors.white,
+                                letterSpacing: 1.8,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Powtórzenia',
-                            style: GoogleFonts.bebasNeue(
-                              fontSize: 20,
-                              color: Colors.white,
-                              letterSpacing: 1.8,
+                            Text(
+                              'Powtórzenia',
+                              style: GoogleFonts.bebasNeue(
+                                fontSize: 20,
+                                color: Colors.white,
+                                letterSpacing: 1.8,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -105,61 +108,84 @@ class MondayPageContent extends StatelessWidget {
                           height: 520,
                           width: 375,
                           color: const Color(0xFF232441),
-                          child: Column(
+                          child: ListView(
                             children: [
-                              for (final documentModel in documentModels) ...[
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10, left: 10, right: 10),
-                                  child: Dismissible(
-                                    background: Container(
-                                      color: Colors.red,
-                                      child: const Icon(Icons.delete),
-                                    ),
-                                    key: ValueKey(documentModel),
-                                    onDismissed: (_) {
-                                      context.read<MondayCubit>().dissmisible(
-                                          documentid: documentModel.id);
-                                    },
-                                    child: Container(
-                                      color: Colors.deepPurple,
+                              Column(
+                                children: [
+                                  for (final documentModel
+                                      in documentModels) ...[
+                                    Dismissible(
+                                      background: Container(
+                                        color: Colors.red,
+                                        child: const Icon(Icons.delete),
+                                      ),
+                                      key: ValueKey(documentModel),
+                                      onDismissed: (_) {
+                                        context.read<MondayCubit>().dissmisible(
+                                            documentid: documentModel.id);
+                                      },
                                       child: Padding(
-                                        padding: const EdgeInsets.all(6.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              documentModel.name,
-                                              style: GoogleFonts.inter(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.tealAccent,
-                                              ),
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                            color: Colors.deepPurple,
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(10),
                                             ),
-                                            Text(
-                                              documentModel.series.toString(),
-                                              style: GoogleFonts.inter(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold,
-                                                  color:
-                                                      Colors.lightGreenAccent),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                SizedBox(
+                                                  width: 220,
+                                                  child: Text(
+                                                    documentModel.name,
+                                                    style: GoogleFonts.inter(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 40,
+                                                  child: Text(
+                                                    documentModel.series
+                                                        .toString(),
+                                                    style: GoogleFonts.inter(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.black),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 40,
+                                                  child: Text(
+                                                    documentModel.repeat
+                                                        .toString(),
+                                                    style: GoogleFonts.inter(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            Text(
-                                              documentModel.repeat.toString(),
-                                              style: GoogleFonts.inter(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.lightBlue,
-                                              ),
-                                            ),
-                                          ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                              ],
+                                  ],
+                                ],
+                              ),
                             ],
                           ),
                         );
@@ -172,17 +198,20 @@ class MondayPageContent extends StatelessWidget {
             InkWell(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: 60,
-                  width: 100,
-                  color: const Color(0xFF232441),
-                  child: Center(
-                    child: Text(
-                      'Dodaj Ćwiczenie',
-                      style: GoogleFonts.bebasNeue(
-                        fontSize: 20,
-                        color: Colors.white,
-                        letterSpacing: 1.8,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    height: 60,
+                    width: 400,
+                    color: const Color(0xFF232441),
+                    child: Center(
+                      child: Text(
+                        'Dodaj Ćwiczenie',
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 20,
+                          color: Colors.white,
+                          letterSpacing: 1.8,
+                        ),
                       ),
                     ),
                   ),

@@ -128,12 +128,17 @@ class TuesdayPageContent extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              documentModel.name,
-                                              style: GoogleFonts.inter(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.tealAccent,
+                                            Flexible(
+                                              child: Text(
+                                                
+                                                overflow: TextOverflow.ellipsis,
+                                                softWrap: true,
+                                                documentModel.name,
+                                                style: GoogleFonts.inter(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.tealAccent,
+                                                ),
                                               ),
                                             ),
                                             Text(

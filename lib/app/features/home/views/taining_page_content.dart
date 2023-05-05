@@ -63,14 +63,24 @@ class TrainingPageContent extends StatelessWidget {
                               color: const Color(0xFF232441),
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(28.0),
-                              child: Text(
-                                'Poniedziałek',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 22,
-                                    color: Colors.white),
+                            child: Padding(
+                              padding: const EdgeInsets.all(28.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text(
+                                    'Poniedziałek',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 22,
+                                        color: Colors.white),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios_outlined,
+                                    color: Colors.white,
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -91,15 +101,25 @@ class TrainingPageContent extends StatelessWidget {
                               color: const Color(0xFF232441),
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(28.0),
-                              child: Text(
-                                'Wtorek',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 22,
-                                  color: Colors.white,
-                                ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(28.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text(
+                                    'Wtorek',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 22,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios_outlined,
+                                    color: Colors.white,
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -120,14 +140,24 @@ class TrainingPageContent extends StatelessWidget {
                               color: const Color(0xFF232441),
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(28.0),
-                              child: Text(
-                                'Środa',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 22,
-                                    color: Colors.white),
+                            child: Padding(
+                              padding: const EdgeInsets.all(28.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text(
+                                    'Środa',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 22,
+                                        color: Colors.white),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios_outlined,
+                                    color: Colors.white,
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -148,15 +178,25 @@ class TrainingPageContent extends StatelessWidget {
                               color: const Color(0xFF232441),
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(28.0),
-                              child: Text(
-                                'Czwartek',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 22,
-                                  color: Colors.white,
-                                ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(28.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text(
+                                    'Czwartek',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 22,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios_outlined,
+                                    color: Colors.white,
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -177,14 +217,24 @@ class TrainingPageContent extends StatelessWidget {
                               color: const Color(0xFF232441),
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(28.0),
-                              child: Text(
-                                'Piątek',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 22,
-                                    color: Colors.white),
+                            child: Padding(
+                              padding: const EdgeInsets.all(28.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text(
+                                    'Piątek',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 22,
+                                        color: Colors.white),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios_outlined,
+                                    color: Colors.white,
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -205,15 +255,25 @@ class TrainingPageContent extends StatelessWidget {
                               color: const Color(0xFF232441),
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(28.0),
-                              child: Text(
-                                'Sobota',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 22,
-                                  color: Colors.white,
-                                ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(28.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text(
+                                    'Sobota',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 22,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios_outlined,
+                                    color: Colors.white,
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -234,14 +294,24 @@ class TrainingPageContent extends StatelessWidget {
                               color: const Color(0xFF232441),
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(28.0),
-                              child: Text(
-                                'Niedziela',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 22,
-                                    color: Colors.white),
+                            child: Padding(
+                              padding: const EdgeInsets.all(28.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text(
+                                    'Niedziela',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 22,
+                                        color: Colors.white),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios_outlined,
+                                    color: Colors.white,
+                                  ),
+                                ],
                               ),
                             ),
                           ),

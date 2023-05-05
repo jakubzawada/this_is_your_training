@@ -14,6 +14,17 @@ class MyAccountPageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurple,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.black),
+        title: const Text(
+          'Profile',
+          style: TextStyle(color: Colors.black),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -28,7 +39,7 @@ class MyAccountPageContent extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 60),
             Container(
               width: 340,
               padding: const EdgeInsets.all(20),

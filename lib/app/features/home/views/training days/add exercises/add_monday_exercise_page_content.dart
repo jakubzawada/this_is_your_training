@@ -95,7 +95,7 @@ class _AddMondayExerciseState extends State<AddMondayExercise> {
                           padding: const EdgeInsets.all(20.0),
                           child: TextField(
                             inputFormatters: [
-                              LengthLimitingTextInputFormatter(42),
+                              LengthLimitingTextInputFormatter(60),
                             ],
                             style: GoogleFonts.inter(
                               fontSize: 22,
