@@ -11,7 +11,6 @@ class MondayPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
@@ -23,209 +22,261 @@ class MondayPageContent extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Center(
-        child: ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                children: [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Container(
-                      height: 60,
-                      width: 375,
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF232441),
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(20),
-                          topLeft: Radius.circular(20),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              Color.fromARGB(255, 147, 90, 238),
+              Color.fromARGB(255, 111, 60, 193),
+              Color.fromARGB(255, 85, 40, 159),
+            ],
+          ),
+        ),
+        child: Center(
+          child: ListView(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Row(
+                  children: [
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                        height: 60,
+                        width: 375,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF232441),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20),
+                            topLeft: Radius.circular(20),
+                          ),
                         ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(14),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Ćwiczenia',
-                              style: GoogleFonts.bebasNeue(
-                                fontSize: 20,
-                                color: Colors.white,
-                                letterSpacing: 1.8,
+                        child: Padding(
+                          padding: const EdgeInsets.all(14),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Ćwiczenia',
+                                style: GoogleFonts.bebasNeue(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  letterSpacing: 1.8,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'Serie',
-                              style: GoogleFonts.bebasNeue(
-                                fontSize: 20,
-                                color: Colors.white,
-                                letterSpacing: 1.8,
+                              Text(
+                                'Serie',
+                                style: GoogleFonts.bebasNeue(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  letterSpacing: 1.8,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'Powtórzenia',
-                              style: GoogleFonts.bebasNeue(
-                                fontSize: 20,
-                                color: Colors.white,
-                                letterSpacing: 1.8,
+                              Text(
+                                'Powtórzenia',
+                                style: GoogleFonts.bebasNeue(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  letterSpacing: 1.8,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  BlocProvider(
-                    create: (context) =>
-                        MondayCubit(DocumentsRepository())..start(),
-                    child: BlocBuilder<MondayCubit, MondayState>(
-                      builder: (context, state) {
-                        if (state.errorMessage.isNotEmpty) {
-                          return Center(
-                            child: Text(
-                              'Something went wrong: ${state.errorMessage}',
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    BlocProvider(
+                      create: (context) =>
+                          MondayCubit(DocumentsRepository())..start(),
+                      child: BlocBuilder<MondayCubit, MondayState>(
+                        builder: (context, state) {
+                          if (state.errorMessage.isNotEmpty) {
+                            return Center(
+                              child: Text(
+                                'Something went wrong: ${state.errorMessage}',
+                              ),
+                            );
+                          }
+
+                          if (state.isLoading) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+
+                          final documentModels = state.documents;
+
+                          return Container(
+                            height: 520,
+                            width: 375,
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color.fromARGB(255, 35, 38, 97),
+                                  Color.fromARGB(255, 42, 44, 87),
+                                  Color(0xFF232441),
+                                ],
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black.withOpacity(0.15),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: const Offset(4, 8)),
+                              ],
                             ),
-                          );
-                        }
-
-                        if (state.isLoading) {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        }
-
-                        final documentModels = state.documents;
-
-                        return Container(
-                          height: 520,
-                          width: 375,
-                          color: const Color(0xFF232441),
-                          child: ListView(
-                            children: [
-                              Column(
-                                children: [
-                                  for (final documentModel
-                                      in documentModels) ...[
-                                    Dismissible(
-                                      background: Container(
-                                        color: Colors.red,
-                                        child: const Icon(Icons.delete),
-                                      ),
-                                      key: ValueKey(documentModel),
-                                      onDismissed: (_) {
-                                        context.read<MondayCubit>().dissmisible(
-                                            documentid: documentModel.id);
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Container(
-                                          decoration: const BoxDecoration(
-                                            color: Colors.deepPurple,
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(10),
+                            child: ListView(
+                              children: [
+                                Column(
+                                  children: [
+                                    for (final documentModel
+                                        in documentModels) ...[
+                                      Dismissible(
+                                        background: Container(
+                                          color: Colors.red,
+                                          child: const Icon(Icons.delete),
+                                        ),
+                                        key: ValueKey(documentModel),
+                                        onDismissed: (_) {
+                                          context
+                                              .read<MondayCubit>()
+                                              .dissmisible(
+                                                  documentid: documentModel.id);
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Container(
+                                            decoration: const BoxDecoration(
+                                              color: Colors.deepPurple,
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(10),
+                                              ),
                                             ),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                SizedBox(
-                                                  width: 220,
-                                                  child: Text(
-                                                    documentModel.name,
-                                                    style: GoogleFonts.inter(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 40,
-                                                  child: Text(
-                                                    documentModel.series
-                                                        .toString(),
-                                                    style: GoogleFonts.inter(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  SizedBox(
+                                                    width: 220,
+                                                    child: Text(
+                                                      documentModel.name,
+                                                      style: GoogleFonts.inter(
                                                         fontSize: 14,
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                        color: Colors.black),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 40,
-                                                  child: Text(
-                                                    documentModel.repeat
-                                                        .toString(),
-                                                    style: GoogleFonts.inter(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.black,
+                                                        color: Colors.white,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                  SizedBox(
+                                                    width: 40,
+                                                    child: Text(
+                                                      documentModel.series
+                                                          .toString(),
+                                                      style: GoogleFonts.inter(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 40,
+                                                    child: Text(
+                                                      documentModel.repeat
+                                                          .toString(),
+                                                      style: GoogleFonts.inter(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
+                                    ],
                                   ],
-                                ],
-                              ),
-                            ],
-                          ),
-                        );
-                      },
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: const [
+                                      Icon(
+                                        Icons.fitness_center,
+                                        color:
+                                            Color.fromARGB(15, 255, 255, 255),
+                                        size: 300,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            InkWell(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    height: 60,
-                    width: 400,
-                    color: const Color(0xFF232441),
-                    child: Center(
-                      child: Text(
-                        'Dodaj Ćwiczenie',
-                        style: GoogleFonts.bebasNeue(
-                          fontSize: 20,
-                          color: Colors.white,
-                          letterSpacing: 1.8,
+              InkWell(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      height: 60,
+                      width: 400,
+                      color: const Color(0xFF232441),
+                      child: Center(
+                        child: Text(
+                          'Dodaj Ćwiczenie',
+                          style: GoogleFonts.bebasNeue(
+                            fontSize: 20,
+                            color: Colors.white,
+                            letterSpacing: 1.8,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const AddMondayExercise(),
+                    ),
+                  );
+                },
               ),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const AddMondayExercise(),
-                  ),
-                );
-              },
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

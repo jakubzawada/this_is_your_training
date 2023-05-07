@@ -16,74 +16,59 @@ class TrainingPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple,
-      body: ListView(
-        children: [
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 70),
-                    child: Text(
-                      'Your',
-                      style: GoogleFonts.bebasNeue(
-                        fontSize: 32,
-                        color: Colors.white,
-                        letterSpacing: 1.8,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              Color.fromARGB(255, 147, 90, 238),
+              Colors.deepPurple,
+              Color.fromARGB(255, 85, 40, 159),
+            ],
+          ),
+        ),
+        child: ListView(
+          children: [
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 70),
+                      child: Text(
+                        'Your',
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 32,
+                          color: Colors.white,
+                          letterSpacing: 1.8,
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 70),
-                    child: Text(
-                      'Training',
-                      style: GoogleFonts.bebasNeue(
-                        fontSize: 32,
-                        color: const Color(0xFF40D876),
-                        letterSpacing: 1.8,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 70),
+                      child: Text(
+                        'Training',
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 32,
+                          color: const Color(0xFF40D876),
+                          letterSpacing: 1.8,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 40),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
+                  ],
+                ),
+                const SizedBox(height: 40),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
                       children: [
                         InkWell(
-                          child: Container(
-                            height: 80,
-                            width: 350,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF232441),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(28.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text(
-                                    'Poniedziałek',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 22,
-                                        color: Colors.white),
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward_ios_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          child: const ContainerUI('Poniedziałek'),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -94,35 +79,7 @@ class TrainingPageContent extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         InkWell(
-                          child: Container(
-                            height: 80,
-                            width: 350,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF232441),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(28.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text(
-                                    'Wtorek',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 22,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward_ios_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          child: const ContainerUI('Wtorek'),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -133,34 +90,7 @@ class TrainingPageContent extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         InkWell(
-                          child: Container(
-                            height: 80,
-                            width: 350,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF232441),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(28.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text(
-                                    'Środa',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 22,
-                                        color: Colors.white),
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward_ios_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          child: const ContainerUI('Środa'),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -171,35 +101,7 @@ class TrainingPageContent extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         InkWell(
-                          child: Container(
-                            height: 80,
-                            width: 350,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF232441),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(28.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text(
-                                    'Czwartek',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 22,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward_ios_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          child: const ContainerUI('Czwartek'),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -210,34 +112,7 @@ class TrainingPageContent extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         InkWell(
-                          child: Container(
-                            height: 80,
-                            width: 350,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF232441),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(28.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text(
-                                    'Piątek',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 22,
-                                        color: Colors.white),
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward_ios_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          child: const ContainerUI('Piątek'),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -248,35 +123,7 @@ class TrainingPageContent extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         InkWell(
-                          child: Container(
-                            height: 80,
-                            width: 350,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF232441),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(28.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text(
-                                    'Sobota',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 22,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward_ios_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          child: const ContainerUI('Sobota'),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -287,34 +134,7 @@ class TrainingPageContent extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         InkWell(
-                          child: Container(
-                            height: 80,
-                            width: 350,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF232441),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(28.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text(
-                                    'Niedziela',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 22,
-                                        color: Colors.white),
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward_ios_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          child: const ContainerUI('Niedziela'),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -325,12 +145,67 @@ class TrainingPageContent extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ContainerUI extends StatelessWidget {
+  const ContainerUI(
+    this.title, {
+    Key? key,
+  }) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80,
+      width: 350,
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color.fromARGB(255, 35, 38, 97),
+            Color.fromARGB(255, 42, 44, 87),
+            Color(0xFF232441),
+          ],
+        ),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.15),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(4, 8)),
         ],
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(28.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 22,
+                  color: Colors.white),
+            ),
+            const Icon(
+              Icons.arrow_forward_ios_outlined,
+              color: Colors.white,
+            ),
+          ],
+        ),
       ),
     );
   }

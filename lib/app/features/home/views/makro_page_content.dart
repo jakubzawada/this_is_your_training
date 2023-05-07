@@ -11,122 +11,136 @@ class MakroPageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.deepPurple,
-      body: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            height: height * 0.35,
-            left: 0,
-            right: 0,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.vertical(
-                bottom: Radius.circular(40),
-              ),
-              child: Container(
-                color: Colors.white,
-                padding: const EdgeInsets.only(
-                    top: 40, left: 32, right: 16, bottom: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const ListTile(
-                      title: Text(
-                        "Date, Year",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.centerRight,
+            colors: [
+              Color.fromARGB(255, 154, 104, 236),
+              Color.fromARGB(255, 111, 60, 193),
+              Colors.deepPurple,
+            ],
+          ),
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              height: height * 0.35,
+              left: 0,
+              right: 0,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  bottom: Radius.circular(40),
+                ),
+                child: Container(
+                  color: Colors.white,
+                  padding: const EdgeInsets.only(
+                      top: 40, left: 32, right: 16, bottom: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const ListTile(
+                        title: Text(
+                          "Date, Year",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                          ),
+                        ),
+                        subtitle: Text(
+                          "Hello David",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 22,
+                              color: Colors.black),
+                        ),
+                        trailing: ClipOval(
+                          child: Image(
+                            image: AssetImage('images/Profile.jpg'),
+                          ),
                         ),
                       ),
-                      subtitle: Text(
-                        "Hello David",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 22,
-                            color: Colors.black),
+                      const SizedBox(height: 6),
+                      Row(
+                        children: [
+                          _RadialProgress(
+                            width: height * 0.18,
+                            height: height * 0.18,
+                            progress: 0.7,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.max,
+                            children: const [
+                              _IngredientProgress(
+                                ingredient: "Protein",
+                                progress: 0.3,
+                                progressColor: Colors.green,
+                                leftAmount: 72,
+                              ),
+                              _IngredientProgress(
+                                ingredient: "Carbs",
+                                progress: 0.2,
+                                progressColor: Colors.red,
+                                leftAmount: 252,
+                              ),
+                              _IngredientProgress(
+                                ingredient: "Fat",
+                                progress: 0.1,
+                                progressColor: Colors.yellow,
+                                leftAmount: 61,
+                              ),
+                            ],
+                          )
+                        ],
                       ),
-                      trailing: ClipOval(
-                        child: Image(
-                          image: AssetImage('images/Profile.jpg'),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Row(
-                      children: [
-                        _RadialProgress(
-                          width: height * 0.18,
-                          height: height * 0.18,
-                          progress: 0.7,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          mainAxisSize: MainAxisSize.max,
-                          children: const [
-                            _IngredientProgress(
-                              ingredient: "Protein",
-                              progress: 0.3,
-                              progressColor: Colors.green,
-                              leftAmount: 72,
-                            ),
-                            _IngredientProgress(
-                              ingredient: "Carbs",
-                              progress: 0.2,
-                              progressColor: Colors.red,
-                              leftAmount: 252,
-                            ),
-                            _IngredientProgress(
-                              ingredient: "Fat",
-                              progress: 0.1,
-                              progressColor: Colors.yellow,
-                              leftAmount: 61,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          Positioned(
-            top: height * 0.38,
-            left: 0,
-            right: 0,
-            child: Container(
-              color: Colors.white,
-              height: height * 0.09,
+            Positioned(
+              top: height * 0.38,
+              left: 0,
+              right: 0,
+              child: Container(
+                color: Colors.white,
+                height: height * 0.09,
+              ),
             ),
-          ),
-          Positioned(
-            top: height * 0.5,
-            left: 0,
-            right: 0,
-            child: Container(
-              color: Colors.white,
-              height: height * 0.09,
+            Positioned(
+              top: height * 0.5,
+              left: 0,
+              right: 0,
+              child: Container(
+                color: Colors.white,
+                height: height * 0.09,
+              ),
             ),
-          ),
-          Positioned(
-            top: height * 0.62,
-            left: 0,
-            right: 0,
-            child: Container(
-              color: Colors.white,
-              height: height * 0.09,
+            Positioned(
+              top: height * 0.62,
+              left: 0,
+              right: 0,
+              child: Container(
+                color: Colors.white,
+                height: height * 0.09,
+              ),
             ),
-          ),
-          Positioned(
-            top: height * 0.74,
-            left: 0,
-            right: 0,
-            child: Container(
-              color: Colors.white,
-              height: height * 0.09,
+            Positioned(
+              top: height * 0.74,
+              left: 0,
+              right: 0,
+              child: Container(
+                color: Colors.white,
+                height: height * 0.09,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
