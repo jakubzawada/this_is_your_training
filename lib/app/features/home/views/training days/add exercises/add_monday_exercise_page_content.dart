@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/repositories/documents_repository.dart';
-
 import 'cubit/monday_exercise_cubit.dart';
 
 class AddMondayExercise extends StatefulWidget {

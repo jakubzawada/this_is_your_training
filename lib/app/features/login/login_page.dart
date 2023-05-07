@@ -10,6 +10,7 @@ import 'package:this_is_your_training/components/signup_controller.dart';
 import 'package:this_is_your_training/components/square_tile.dart';
 import 'package:this_is_your_training/services/auth_service.dart';
 
+// ignore: must_be_immutable
 class LoginPage extends StatefulWidget {
   LoginPage({
     Key? key,

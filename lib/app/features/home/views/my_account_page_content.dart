@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:this_is_your_training/app/cubit/root_cubit.dart';
 import 'package:this_is_your_training/components/signup_controller.dart';
 
+// ignore: must_be_immutable
 class MyAccountPageContent extends StatelessWidget {
   File? pickedFile;
   ImagePicker imagePicker = ImagePicker();
@@ -58,7 +59,7 @@ class MyAccountPageContent extends StatelessWidget {
                             true
                         ? FileImage(File(signUpController.profilePicPath.value))
                             as ImageProvider
-                        : AssetImage('images/Profile.jpg'),
+                        : const AssetImage('images/Profile.jpg'),
                     radius: 80,
                   )),
               Positioned(
@@ -80,11 +81,23 @@ class MyAccountPageContent extends StatelessWidget {
                 padding: const EdgeInsets.all(20),
                 margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  border: Border.all(width: 3, color: Colors.black12),
-                  color: const Color(0xFF232441),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(20),
+                  gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color.fromARGB(255, 35, 38, 97),
+                      Color.fromARGB(255, 42, 44, 87),
+                      Color(0xFF232441),
+                    ],
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black.withOpacity(0.15),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: const Offset(4, 8)),
+                  ],
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
                   '$email',
