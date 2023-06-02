@@ -113,7 +113,7 @@ class MyAccountPageContent extends StatelessWidget {
                 onPressed: () {
                   context.read<RootCubit>().signOut();
                 },
-                style: ElevatedButton.styleFrom(primary: Colors.blueAccent),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
                 child: const Text(
                   'Wyloguj',
                   style: TextStyle(
@@ -135,11 +135,11 @@ class MyAccountPageContent extends StatelessWidget {
                       Radius.circular(10),
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Icon(
                           Icons.delete_sharp,
                           color: Colors.white,
@@ -185,9 +185,9 @@ class MyAccountPageContent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Icon(Icons.image),
                     SizedBox(height: 5),
                     Text(
@@ -203,9 +203,9 @@ class MyAccountPageContent extends StatelessWidget {
               ),
               const SizedBox(width: 80),
               InkWell(
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Icon(Icons.camera),
                     SizedBox(height: 5),
                     Text(

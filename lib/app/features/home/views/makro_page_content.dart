@@ -72,10 +72,10 @@ class MakroPageContent extends StatelessWidget {
                             height: height * 0.18,
                             progress: 0.7,
                           ),
-                          Column(
+                          const Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             mainAxisSize: MainAxisSize.max,
-                            children: const [
+                            children: [
                               _IngredientProgress(
                                 ingredient: "Protein",
                                 progress: 0.3,

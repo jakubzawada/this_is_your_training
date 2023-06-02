@@ -310,7 +310,7 @@ class _AddMondayExerciseState extends State<AddMondayExercise> {
                                         );
                                   },
                             style: ElevatedButton.styleFrom(
-                              primary: const Color(0xFF232441),
+                              backgroundColor: const Color(0xFF232441),
                               textStyle: GoogleFonts.bebasNeue(),
                             ),
                             child: const Text(
