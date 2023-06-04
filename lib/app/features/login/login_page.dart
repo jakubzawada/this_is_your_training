@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/app/cubit/root_cubit.dart';
 import 'package:this_is_your_training/app/features/login/cubit/login_cubit.dart';
 import 'package:this_is_your_training/app/features/login/forgot_pw_page.dart';
 import 'package:this_is_your_training/app/features/login/register_page.dart';
-import 'package:this_is_your_training/components/signup_controller.dart';
 import 'package:this_is_your_training/components/square_tile.dart';
 import 'package:this_is_your_training/services/auth_service.dart';
 
-// ignore: must_be_immutable
 class LoginPage extends StatefulWidget {
   LoginPage({
     Key? key,
@@ -18,8 +15,6 @@ class LoginPage extends StatefulWidget {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
-  SignUpController signUpController = Get.put(SignUpController());
 
   @override
   State<LoginPage> createState() => _LoginPageState();

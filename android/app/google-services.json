@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "424937633394-8mi0utr41f46cr9c7jdqshs21moqtmk7.apps.googleusercontent.com",
+          "client_id": "424937633394-7mbq1a3hkqc3c2dgjskd1dlnsu86fma0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jakubzawada.this_is_your_training",
+            "certificate_hash": "ccb86cdf96b0222a43d5b9f932446cc0057970f0"
+          }
+        },
+        {
+          "client_id": "424937633394-lktsgfg57lc2uag1v05e57qibek4ssbl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "424937633394-8mi0utr41f46cr9c7jdqshs21moqtmk7.apps.googleusercontent.com",
+              "client_id": "424937633394-5k02ttdnrjka4gfagcp7jdadnh9ludfc.apps.googleusercontent.com",
               "client_type": 3
             },
             {

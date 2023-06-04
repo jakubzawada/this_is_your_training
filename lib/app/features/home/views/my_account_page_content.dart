@@ -1,26 +1,20 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:this_is_your_training/app/cubit/root_cubit.dart';
-import 'package:this_is_your_training/components/signup_controller.dart';
 
-// ignore: must_be_immutable
-class MyAccountPageContent extends StatelessWidget {
-  File? pickedFile;
-  ImagePicker imagePicker = ImagePicker();
-
-  SignUpController signUpController = Get.find();
-
-  MyAccountPageContent({
+class MyAccountPageContent extends StatefulWidget {
+  const MyAccountPageContent({
     Key? key,
     required this.email,
   }) : super(key: key);
 
   final String? email;
 
+  @override
+  State<MyAccountPageContent> createState() => _MyAccountPageContentState();
+}
+
+class _MyAccountPageContentState extends State<MyAccountPageContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,26 +47,16 @@ class MyAccountPageContent extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Obx(() => CircleAvatar(
-                    backgroundImage: signUpController
-                                .isProficPicPathSet.value ==
-                            true
-                        ? FileImage(File(signUpController.profilePicPath.value))
-                            as ImageProvider
-                        : const AssetImage('images/Profile.jpg'),
-                    radius: 80,
-                  )),
+              const CircleAvatar(
+                backgroundImage: AssetImage('images/Profile.jpg'),
+                radius: 80,
+              ),
               Positioned(
                 bottom: 10,
                 right: -25,
                 child: InkWell(
                   child: const Icon(Icons.camera),
-                  onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (context) => bottomSheet(context),
-                    );
-                  },
+                  onTap: () {},
                 ),
               ),
               const SizedBox(height: 20),
@@ -100,7 +84,7 @@ class MyAccountPageContent extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  '$email',
+                  '${widget.email}',
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 20,
@@ -113,7 +97,8 @@ class MyAccountPageContent extends StatelessWidget {
                 onPressed: () {
                   context.read<RootCubit>().signOut();
                 },
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent),
                 child: const Text(
                   'Wyloguj',
                   style: TextStyle(
@@ -162,75 +147,5 @@ class MyAccountPageContent extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget bottomSheet(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      color: Colors.white,
-      width: double.infinity,
-      height: size.height * 0.25,
-      margin: const EdgeInsets.symmetric(
-        vertical: 20,
-        horizontal: 10,
-      ),
-      child: Column(
-        children: [
-          const Text(
-            'Choose Profile Photo',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 50),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InkWell(
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.image),
-                    SizedBox(height: 5),
-                    Text(
-                      'Gallery',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  takePhoto(ImageSource.gallery);
-                },
-              ),
-              const SizedBox(width: 80),
-              InkWell(
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.camera),
-                    SizedBox(height: 5),
-                    Text(
-                      'Camera',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  takePhoto(ImageSource.camera);
-                },
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<void> takePhoto(ImageSource source) async {
-    final pickedImage =
-        await imagePicker.pickImage(source: source, imageQuality: 100);
-
-    pickedFile = File(pickedImage!.path);
-    signUpController.setProfileImagePath(pickedFile!.path);
   }
 }

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/app/cubit/root_cubit.dart';
 import 'package:this_is_your_training/app/features/home/home_page.dart';
 import 'package:this_is_your_training/app/features/login/login_page.dart';
-import 'package:this_is_your_training/app/features/login/register_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -36,9 +35,8 @@ class RootPage extends StatelessWidget {
           if (user == null) {
             return LoginPage();
           } else {
-            RegisterPage();
+            return HomePage(user: user);
           }
-          return HomePage(user: user);
         },
       ),
     );
