@@ -13,7 +13,6 @@ class RootCubit extends Cubit<RootState> {
             errorMessage: '',
           ),
         );
-        
 
   StreamSubscription? _streamSubscription;
 

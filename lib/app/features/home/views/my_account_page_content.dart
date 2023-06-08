@@ -47,17 +47,22 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const CircleAvatar(
-                backgroundImage: AssetImage('images/Profile.jpg'),
-                radius: 80,
-              ),
-              Positioned(
-                bottom: 10,
-                right: -25,
-                child: InkWell(
-                  child: const Icon(Icons.camera),
-                  onTap: () {},
-                ),
+              Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  const CircleAvatar(
+                    backgroundImage: AssetImage('images/Profile.jpg'),
+                    radius: 80,
+                  ),
+                  Positioned(
+                    bottom: 10,
+                    right: 35,
+                    child: InkWell(
+                      child: const Icon(Icons.camera_alt_rounded),
+                      onTap: () {},
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
               Container(

@@ -42,3 +42,26 @@ class RootPage extends StatelessWidget {
     );
   }
 }
+
+class RootPage2 extends StatelessWidget {
+  const RootPage2({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => RootCubit()..start(),
+      child: BlocBuilder<RootCubit, RootState>(
+        builder: (context, state) {
+          final user = state.user;
+          if (user == null) {
+            return LoginPage();
+          } else {
+            return HomePage(user: user);
+          }
+        },
+      ),
+    );
+  }
+}

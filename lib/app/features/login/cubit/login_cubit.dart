@@ -11,7 +11,7 @@ class LoginCubit extends Cubit<LoginState> {
             errorMessage: '',
           ),
         );
- 
+
   Future<void> loginAccount({
     required String email,
     required String password,
@@ -19,6 +19,26 @@ class LoginCubit extends Cubit<LoginState> {
   }) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } catch (error) {
+      emit(
+        LoginState(
+          isCreatingAccount: false,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> createaccount({
+    required String email,
+    required String password,
+    required String errorMessage,
+  }) async {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/app/app.dart';
+import 'package:this_is_your_training/app/cubit/root_cubit.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -8,5 +10,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(BlocProvider(
+    create: (context) => RootCubit(),
+    child: const MyApp(),
+  ));
 }
