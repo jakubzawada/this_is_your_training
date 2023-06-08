@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:this_is_your_training/models/document_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -414,5 +417,27 @@ class DocumentsRepository {
         'repeat6': repeat,
       },
     );
+  }
+
+  Future<void> uploadProfileImage(File selectedImage) async {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+
+    final storage = FirebaseStorage.instance;
+    final reference = storage
+        .ref()
+        .child('profile_images/${DateTime.now().millisecondsSinceEpoch}.jpg');
+    final uploadTask = reference.putFile(selectedImage);
+    final snapshot = await uploadTask.whenComplete(() => null);
+
+    if (snapshot.state == TaskState.success) {
+      final imageUrl = await snapshot.ref.getDownloadURL();
+
+      final userRef =
+          FirebaseFirestore.instance.collection('users').doc(userId);
+      await userRef.update({'photoUrl': imageUrl});
+    }
   }
 }

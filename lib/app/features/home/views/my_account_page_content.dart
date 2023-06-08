@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/app/cubit/root_cubit.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:this_is_your_training/repositories/documents_repository.dart';
 
 class MyAccountPageContent extends StatefulWidget {
   const MyAccountPageContent({
@@ -15,6 +18,8 @@ class MyAccountPageContent extends StatefulWidget {
 }
 
 class _MyAccountPageContentState extends State<MyAccountPageContent> {
+  File? _selectedImage;
+  final DocumentsRepository _documentsRepository = DocumentsRepository();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,8 +55,10 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
               Stack(
                 alignment: Alignment.bottomRight,
                 children: [
-                  const CircleAvatar(
-                    backgroundImage: AssetImage('images/Profile.jpg'),
+                  CircleAvatar(
+                    backgroundImage: _selectedImage != null
+                        ? FileImage(_selectedImage!) as ImageProvider<Object>
+                        : const AssetImage('images/Profile.jpg'),
                     radius: 80,
                   ),
                   Positioned(
@@ -59,12 +66,22 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
                     right: 35,
                     child: InkWell(
                       child: const Icon(Icons.camera_alt_rounded),
-                      onTap: () {},
+                      onTap: () {
+                        _selectProfileImage();
+                      },
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  if (_selectedImage != null) {
+                    _documentsRepository.uploadProfileImage(_selectedImage!);
+                  }
+                },
+                child: const Text('Zapisz'),
+              ),
               Container(
                 width: 340,
                 padding: const EdgeInsets.all(20),
@@ -152,5 +169,33 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
         ),
       ),
     );
+  }
+
+  Future<void> _selectProfileImage() async {
+    final imageSource = await showDialog<ImageSource>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Wybierz źródło zdjęcia'),
+        actions: [
+          TextButton(
+            child: const Text('Galeria'),
+            onPressed: () => Navigator.pop(context, ImageSource.gallery),
+          ),
+          TextButton(
+            child: const Text('Aparat'),
+            onPressed: () => Navigator.pop(context, ImageSource.camera),
+          ),
+        ],
+      ),
+    );
+
+    if (imageSource != null) {
+      final pickedImage = await ImagePicker().pickImage(source: imageSource);
+      if (pickedImage != null) {
+        setState(() {
+          _selectedImage = File(pickedImage.path);
+        });
+      }
+    }
   }
 }

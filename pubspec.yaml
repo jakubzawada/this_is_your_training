@@ -50,6 +50,7 @@ dependencies:
   flutter_facebook_auth: ^4.4.1+1
   image_picker: ^0.8.7+1
   get: ^4.6.5
+  firebase_storage: ^11.2.2
   
   
   
