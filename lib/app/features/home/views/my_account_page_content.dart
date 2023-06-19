@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/app/cubit/root_cubit.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:this_is_your_training/components/profile_picture.dart';
 import 'package:this_is_your_training/repositories/documents_repository.dart';
 
 class MyAccountPageContent extends StatefulWidget {
@@ -19,7 +20,16 @@ class MyAccountPageContent extends StatefulWidget {
 
 class _MyAccountPageContentState extends State<MyAccountPageContent> {
   File? _selectedImage;
-  final DocumentsRepository _documentsRepository = DocumentsRepository();
+  final imagePicker = ImagePicker();
+  String? downloadURL;
+  late Stream<String?> imagesStream;
+
+  @override
+  void initState() {
+    super.initState();
+    imagesStream = DocumentsRepository().getLatestImageStream();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,10 +66,11 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
                 alignment: Alignment.bottomRight,
                 children: [
                   CircleAvatar(
-                    backgroundImage: _selectedImage != null
-                        ? FileImage(_selectedImage!) as ImageProvider<Object>
-                        : const AssetImage('images/Profile.jpg'),
-                    radius: 80,
+                    radius: 85,
+                    backgroundColor: Colors.deepPurple[200],
+                    child: const ProfilePicture(
+                      radius: 80,
+                    ),
                   ),
                   Positioned(
                     bottom: 10,
@@ -67,21 +78,26 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
                     child: InkWell(
                       child: const Icon(Icons.camera_alt_rounded),
                       onTap: () {
-                        _selectProfileImage();
+                        imagePickerMethod();
                       },
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
+                  DocumentsRepository repository = DocumentsRepository();
                   if (_selectedImage != null) {
-                    _documentsRepository.uploadProfileImage(_selectedImage!);
+                    repository.uploadImage(_selectedImage!).then((downloadURL) {
+                      // Tutaj możesz wykorzystać zmienną downloadURL po przesłaniu obrazka
+                    }).catchError((error) {
+                      // Obsłuż błąd, jeśli wystąpił
+                    });
                   }
                 },
-                child: const Text('Zapisz'),
+                child: const Text('Upload Image'),
               ),
+              const SizedBox(height: 20),
               Container(
                 width: 340,
                 padding: const EdgeInsets.all(20),
@@ -171,7 +187,7 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
     );
   }
 
-  Future<void> _selectProfileImage() async {
+  Future<void> imagePickerMethod() async {
     final imageSource = await showDialog<ImageSource>(
       context: context,
       builder: (BuildContext context) => AlertDialog(

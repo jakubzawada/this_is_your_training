@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:this_is_your_training/models/document_model.dart';
@@ -439,5 +438,55 @@ class DocumentsRepository {
           FirebaseFirestore.instance.collection('users').doc(userId);
       await userRef.update({'photoUrl': imageUrl});
     }
+  }
+
+  Future<String> uploadImage(File selectedImage) async {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    final postID = DateTime.now().millisecondsSinceEpoch.toString();
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+    Reference ref = FirebaseStorage.instance
+        .ref()
+        .child('users/$userId/images')
+        .child("post_$postID");
+    await ref.putFile(selectedImage);
+    String downloadURL = await ref.getDownloadURL();
+
+    await firebaseFirestore
+        .collection("users")
+        .doc(userId)
+        .collection("images")
+        .add({
+      'downloadURL': downloadURL,
+      'timestamp': FieldValue
+          .serverTimestamp(), // Dodanie pola timestamp z aktualnym czasem serwera
+    });
+
+    // ignore: avoid_print
+    print(downloadURL);
+    return downloadURL;
+  }
+
+  Stream<String?> getLatestImageStream() {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('images')
+        .orderBy('timestamp',
+            descending: true) // Sortowanie według pola 'timestamp' malejąco
+        .limit(1) // Ograniczenie do jednego wyniku
+        .snapshots()
+        .map((querySnapshot) {
+      if (querySnapshot.docs.isNotEmpty) {
+        return querySnapshot.docs[0]['downloadURL'] as String;
+      }
+      return null;
+    });
   }
 }
