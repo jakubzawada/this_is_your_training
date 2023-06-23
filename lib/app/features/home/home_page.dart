@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Builder(builder: (context) {
         if (currentIndex == 0) {
-          return const MakroPageContent();
+          return MakroPageContent(email: widget.user.email);
         }
         if (currentIndex == 1) {
           return const TrainingPageContent();
@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: CurvedNavigationBar(
         height: 65,
         backgroundColor: Colors.deepPurple,
-        color: Colors.deepPurple.shade200,
+        color: Colors.deepPurpleAccent,
         animationDuration: const Duration(milliseconds: 300),
         onTap: (newindex) {
           setState(() {
