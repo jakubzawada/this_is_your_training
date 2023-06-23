@@ -222,20 +222,6 @@ class MondayPageContent extends StatelessWidget {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.fitness_center,
-                                        color:
-                                            Color.fromARGB(15, 255, 255, 255),
-                                        size: 300,
-                                      ),
-                                    ],
-                                  ),
-                                )
                               ],
                             ),
                           );
