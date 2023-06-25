@@ -52,6 +52,7 @@ dependencies:
   get: ^4.6.5
   firebase_storage: ^11.2.2
   firebase_database: ^10.2.3
+  provider: ^6.0.5
   
   
   

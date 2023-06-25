@@ -425,9 +425,8 @@ class DocumentsRepository {
     }
 
     final storage = FirebaseStorage.instance;
-    final reference = storage
-        .ref()
-        .child('profile_images/${DateTime.now().millisecondsSinceEpoch}.jpg');
+    final reference = storage.ref().child(
+        'profile_images/$userId/${DateTime.now().millisecondsSinceEpoch}.jpg');
     final uploadTask = reference.putFile(selectedImage);
     final snapshot = await uploadTask.whenComplete(() => null);
 
@@ -474,13 +473,13 @@ class DocumentsRepository {
     if (userId == null) {
       throw Exception('User is not logged in');
     }
+
     return FirebaseFirestore.instance
         .collection('users')
         .doc(userId)
         .collection('images')
-        .orderBy('timestamp',
-            descending: true) // Sortowanie według pola 'timestamp' malejąco
-        .limit(1) // Ograniczenie do jednego wyniku
+        .orderBy('timestamp', descending: true)
+        .limit(1)
         .snapshots()
         .map((querySnapshot) {
       if (querySnapshot.docs.isNotEmpty) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:this_is_your_training/repositories/documents_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfilePicture extends StatefulWidget {
   final double radius;
@@ -24,6 +25,10 @@ class _ProfilePictureState extends State<ProfilePicture> {
 
   @override
   Widget build(BuildContext context) {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
     return CircleAvatar(
       radius: widget.radius,
       child: StreamBuilder<String?>(
@@ -37,7 +42,15 @@ class _ProfilePictureState extends State<ProfilePicture> {
           }
           final imageUrl = snapshot.data;
           if (imageUrl == null) {
-            return const Text('Brak zdjęć');
+            return const CircleAvatar(
+              backgroundColor: Colors.deepPurpleAccent,
+              radius: 100,
+              child: Icon(
+                Icons.person,
+                size: 50,
+                color: Colors.white,
+              ),
+            );
           }
           return Container(
             width: widget.radius * 2,
