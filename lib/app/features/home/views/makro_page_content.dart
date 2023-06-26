@@ -31,6 +31,7 @@ class _MakroPageContentState extends State<MakroPageContent> {
         'UserEmail': currentUser.email,
         'Message': textController.text,
         'TimeStamp': Timestamp.now(),
+        'Likes': [],
       });
     }
 
@@ -89,6 +90,8 @@ class _MakroPageContentState extends State<MakroPageContent> {
                           return ForumPage(
                             message: post['Message'],
                             user: post['UserEmail'],
+                            postId: post.id,
+                            likes: List<String>.from(post['Likes'] ?? []),
                           );
                         },
                       );

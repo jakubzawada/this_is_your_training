@@ -42,12 +42,13 @@ class FridayPageContent extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Align(
                       alignment: Alignment.topCenter,
                       child: Container(
                         height: 60,
-                        width: 375,
+                        width: 380,
                         decoration: const BoxDecoration(
                           color: Color(0xFF232441),
                           borderRadius: BorderRadius.only(
@@ -119,7 +120,7 @@ class FridayPageContent extends StatelessWidget {
 
                           return Container(
                             height: 520,
-                            width: 375,
+                            width: 380,
                             decoration: BoxDecoration(
                               gradient: const LinearGradient(
                                 begin: Alignment.topLeft,
@@ -160,7 +161,7 @@ class FridayPageContent extends StatelessWidget {
                                           padding: const EdgeInsets.all(8.0),
                                           child: Container(
                                             decoration: const BoxDecoration(
-                                              color: Colors.deepPurple,
+                                              color: Colors.deepPurpleAccent,
                                               borderRadius: BorderRadius.all(
                                                 Radius.circular(10),
                                               ),
@@ -238,7 +239,7 @@ class FridayPageContent extends StatelessWidget {
                     alignment: Alignment.bottomCenter,
                     child: Container(
                       height: 60,
-                      width: 400,
+                      width: 380,
                       color: const Color(0xFF232441),
                       child: Center(
                         child: Text(

@@ -418,31 +418,10 @@ class DocumentsRepository {
     );
   }
 
-  Future<void> uploadProfileImage(File selectedImage) async {
-    final userId = FirebaseAuth.instance.currentUser?.uid;
-    if (userId == null) {
-      throw Exception('User is not logged in');
-    }
-
-    final storage = FirebaseStorage.instance;
-    final reference = storage.ref().child(
-        'profile_images/$userId/${DateTime.now().millisecondsSinceEpoch}.jpg');
-    final uploadTask = reference.putFile(selectedImage);
-    final snapshot = await uploadTask.whenComplete(() => null);
-
-    if (snapshot.state == TaskState.success) {
-      final imageUrl = await snapshot.ref.getDownloadURL();
-
-      final userRef =
-          FirebaseFirestore.instance.collection('users').doc(userId);
-      await userRef.update({'photoUrl': imageUrl});
-    }
-  }
-
   Future<String> uploadImage(File selectedImage) async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     final userId = FirebaseAuth.instance.currentUser?.uid;
     final postID = DateTime.now().millisecondsSinceEpoch.toString();
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     if (userId == null) {
       throw Exception('User is not logged in');
     }
@@ -459,8 +438,7 @@ class DocumentsRepository {
         .collection("images")
         .add({
       'downloadURL': downloadURL,
-      'timestamp': FieldValue
-          .serverTimestamp(), // Dodanie pola timestamp z aktualnym czasem serwera
+      'timestamp': FieldValue.serverTimestamp(),
     });
 
     // ignore: avoid_print

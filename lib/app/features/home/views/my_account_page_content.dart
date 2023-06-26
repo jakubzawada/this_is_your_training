@@ -7,7 +7,6 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:this_is_your_training/components/profile_picture.dart';
 import 'package:this_is_your_training/repositories/documents_repository.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 class MyAccountPageContent extends StatefulWidget {
   const MyAccountPageContent({
@@ -22,28 +21,20 @@ class MyAccountPageContent extends StatefulWidget {
 }
 
 class _MyAccountPageContentState extends State<MyAccountPageContent> {
-  List<String> backgroundImages = [
-    'https://img.freepik.com/free-photo/young-fitness-man-studio_7502-5008.jpg?size=626&ext=jpg&ga=GA1.2.87063883.1686850499&semt=ais',
-    'https://img.freepik.com/free-photo/strong-man-training-gym_1303-23478.jpg?size=626&ext=jpg&ga=GA1.2.87063883.1686850499&semt=ais',
-    'https://img.freepik.com/free-photo/woman-holding-weights-near-barbells_651396-1617.jpg?size=626&ext=jpg&ga=GA1.2.87063883.1686850499&semt=ais',
-    'https://img.freepik.com/free-photo/athletic-man-woman-with-dumbbells_155003-11801.jpg?size=626&ext=jpg&ga=GA1.2.87063883.1686850499&semt=ais',
-  ];
-  int selectedBackgroundIndex = 0;
-
   File? _selectedImage;
   final imagePicker = ImagePicker();
   String? downloadURL;
-  late Stream<String?> imagesStream;
-
-  @override
-  void initState() {
-    super.initState();
-    imagesStream = DocumentsRepository().getLatestImageStream();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurpleAccent,
+        title: const Text(
+          'Profile',
+        ),
+        centerTitle: true,
+      ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -59,10 +50,10 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
           ),
         ),
         child: Center(
-          child: Column(
-            children: [
-              Stack(alignment: Alignment.center, children: [
-                buildCoverImage(),
+          child: Padding(
+            padding: const EdgeInsets.all(40),
+            child: Column(
+              children: [
                 Stack(
                   alignment: Alignment.bottomRight,
                   children: [
@@ -99,11 +90,8 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
                       if (_selectedImage != null) {
                         repository
                             .uploadImage(_selectedImage!)
-                            .then((downloadURL) {
-                          // Tutaj możesz wykorzystać zmienną downloadURL po przesłaniu obrazka
-                        }).catchError((error) {
-                          // Obsłuż błąd, jeśli wystąpił
-                        });
+                            .then((downloadURL) {})
+                            .catchError((error) {});
                       }
                     },
                     child: Padding(
@@ -130,151 +118,92 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
                     ),
                   ),
                 ),
-                Positioned(
-                  top: 40,
-                  child: buildBackgroundButtons(),
+                const SizedBox(height: 10),
+                Text(
+                  'Zalogowany jako: ${widget.email}',
+                  style: TextStyle(color: Colors.deepPurple[200]),
                 ),
-              ]),
-              const SizedBox(height: 160),
-              InkWell(
-                onTap: () {
-                  context.read<RootCubit>().signOut();
-                },
-                child: Container(
-                  height: 50,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    color: Colors.deepPurple[200],
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
+                const SizedBox(height: 140),
+                InkWell(
+                  onTap: () {
+                    context.read<RootCubit>().signOut();
+                  },
+                  child: Container(
+                    height: 50,
+                    width: 300,
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurple[200],
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    child: const Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.logout,
+                              color: Colors.white,
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              'Wyloguj',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                  child: const Center(
-                    child: Padding(
+                ),
+                const SizedBox(height: 30),
+                InkWell(
+                  onTap: () {
+                    showConfirmationDialog();
+                  },
+                  child: Container(
+                    height: 50,
+                    width: 300,
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 194, 68, 59),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    child: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.logout,
+                            Icons.delete_sharp,
                             color: Colors.white,
                           ),
                           SizedBox(width: 8),
                           Text(
-                            'Wyloguj',
+                            'Usuń konto',
                             style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18,
-                              color: Colors.white,
-                            ),
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
+                                color: Colors.white),
                           ),
                         ],
                       ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 30),
-              InkWell(
-                onTap: () {
-                  showConfirmationDialog();
-                },
-                child: Container(
-                  height: 50,
-                  width: 300,
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 194, 68, 59),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.delete_sharp,
-                          color: Colors.white,
-                        ),
-                        SizedBox(width: 8),
-                        Text(
-                          'Usuń konto',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20,
-                              color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
-  }
-
-  Widget buildCoverImage() {
-    String selectedImageUrl = backgroundImages[selectedBackgroundIndex];
-
-    return Container(
-      color: Colors.grey,
-      child: Image.network(
-        selectedImageUrl,
-        width: double.infinity,
-        height: 320,
-        fit: BoxFit.cover,
-      ),
-    );
-  }
-
-  Widget buildBackgroundButtons() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: List.generate(backgroundImages.length, (index) {
-        return GestureDetector(
-          onTap: () {
-            setState(() {
-              selectedBackgroundIndex = index;
-            });
-          },
-          child: Container(
-            width: 30,
-            height: 30,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: selectedBackgroundIndex == index
-                    ? Colors.white
-                    : Colors.transparent,
-                width: 2,
-              ),
-            ),
-            child: ClipOval(
-              child: Image.network(
-                backgroundImages[index],
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        );
-      }),
-    );
-  }
-
-  void saveSelectedBackgroundToDatabase(String selectedBackgroundUrl) {
-    final database = FirebaseDatabase.instance;
-    final user = FirebaseAuth.instance.currentUser;
-
-    // Tworzenie referencji do węzła przechowującego informacje o tle użytkownika
-    DatabaseReference backgroundRef =
-        database.ref().child('users/${user!.uid}/background');
-
-    // Zapisywanie wybranego tła
-    backgroundRef.set(selectedBackgroundUrl);
   }
 
   Future<void> imagePickerMethod() async {
