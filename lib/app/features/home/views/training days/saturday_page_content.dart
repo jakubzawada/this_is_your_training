@@ -41,7 +41,7 @@ class SaturdayPageContent extends StatelessWidget {
           child: ListView(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -49,7 +49,7 @@ class SaturdayPageContent extends StatelessWidget {
                       alignment: Alignment.topCenter,
                       child: Container(
                         height: 60,
-                        width: 380,
+                        width: 370,
                         decoration: const BoxDecoration(
                           color: Color(0xFF232441),
                           borderRadius: BorderRadius.only(
@@ -95,7 +95,7 @@ class SaturdayPageContent extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8),
+                padding: const EdgeInsets.only(left: 10.0, right: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -121,7 +121,7 @@ class SaturdayPageContent extends StatelessWidget {
 
                           return Container(
                             height: 520,
-                            width: 380,
+                            width: 370,
                             decoration: BoxDecoration(
                               gradient: const LinearGradient(
                                 begin: Alignment.topLeft,
@@ -235,12 +235,12 @@ class SaturdayPageContent extends StatelessWidget {
               ),
               InkWell(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
                       height: 60,
-                      width: 380,
+                      width: 370,
                       color: const Color(0xFF232441),
                       child: Center(
                         child: Text(

@@ -49,158 +49,170 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
             ],
           ),
         ),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(40),
-            child: Column(
-              children: [
-                Stack(
-                  alignment: Alignment.bottomRight,
+        child: ListView.builder(
+          itemCount: 1,
+          itemBuilder: (BuildContext context, int index) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(40),
+                child: Column(
                   children: [
-                    const CircleAvatar(
-                      radius: 85,
-                      backgroundColor: Colors.white,
-                      child: ProfilePicture(
-                        radius: 80,
-                      ),
+                    Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        const CircleAvatar(
+                          radius: 85,
+                          backgroundColor: Colors.white,
+                          child: ProfilePicture(
+                            radius: 80,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 10,
+                          right: 26,
+                          child: InkWell(
+                            child: const CircleAvatar(
+                              radius: 18,
+                              backgroundColor: Colors.white,
+                              child: Icon(
+                                Icons.camera_alt_rounded,
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              imagePickerMethod();
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                     Positioned(
-                      bottom: 10,
-                      right: 26,
+                      bottom: 4,
                       child: InkWell(
-                        child: const CircleAvatar(
-                            radius: 18,
-                            backgroundColor: Colors.white,
-                            child: Icon(
-                              Icons.camera_alt_rounded,
-                              color: Colors.black,
-                            )),
                         onTap: () {
-                          imagePickerMethod();
+                          DocumentsRepository repository =
+                              DocumentsRepository();
+                          if (_selectedImage != null) {
+                            repository
+                                .uploadImage(_selectedImage!)
+                                .then((downloadURL) {})
+                                .catchError((error) {});
+                          }
                         },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 40,
+                            width: 100,
+                            decoration: const BoxDecoration(
+                              color: Color.fromARGB(255, 42, 44, 87),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'Zapisz',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ],
-                ),
-                Positioned(
-                  bottom: 4,
-                  child: InkWell(
-                    onTap: () {
-                      DocumentsRepository repository = DocumentsRepository();
-                      if (_selectedImage != null) {
-                        repository
-                            .uploadImage(_selectedImage!)
-                            .then((downloadURL) {})
-                            .catchError((error) {});
-                      }
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Zalogowany jako: ${widget.email}',
+                      style: TextStyle(color: Colors.deepPurple[200]),
+                    ),
+                    // username
+
+                    //
+                    const SizedBox(height: 140),
+                    InkWell(
+                      onTap: () {
+                        context.read<RootCubit>().signOut();
+                      },
                       child: Container(
-                        height: 40,
-                        width: 100,
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 42, 44, 87),
-                          borderRadius: BorderRadius.all(
+                        height: 50,
+                        width: 300,
+                        decoration: BoxDecoration(
+                          color: Colors.deepPurple[200],
+                          borderRadius: const BorderRadius.all(
                             Radius.circular(10),
                           ),
                         ),
                         child: const Center(
-                          child: Text(
-                            'Zapisz ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18,
-                                color: Colors.white),
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.logout,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(width: 8),
+                                Text(
+                                  'Wyloguj',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  'Zalogowany jako: ${widget.email}',
-                  style: TextStyle(color: Colors.deepPurple[200]),
-                ),
-                const SizedBox(height: 140),
-                InkWell(
-                  onTap: () {
-                    context.read<RootCubit>().signOut();
-                  },
-                  child: Container(
-                    height: 50,
-                    width: 300,
-                    decoration: BoxDecoration(
-                      color: Colors.deepPurple[200],
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    child: const Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.logout,
-                              color: Colors.white,
-                            ),
-                            SizedBox(width: 8),
-                            Text(
-                              'Wyloguj',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18,
+                    const SizedBox(height: 30),
+                    InkWell(
+                      onTap: () {
+                        showConfirmationDialog();
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 300,
+                        decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 194, 68, 59),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.delete_sharp,
                                 color: Colors.white,
                               ),
-                            ),
-                          ],
+                              SizedBox(width: 8),
+                              Text(
+                                'Usuń konto',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-                const SizedBox(height: 30),
-                InkWell(
-                  onTap: () {
-                    showConfirmationDialog();
-                  },
-                  child: Container(
-                    height: 50,
-                    width: 300,
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 194, 68, 59),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.delete_sharp,
-                            color: Colors.white,
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            'Usuń konto',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 20,
-                                color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

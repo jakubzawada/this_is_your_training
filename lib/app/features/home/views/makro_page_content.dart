@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:this_is_your_training/components/forum_page.dart';
 import 'package:this_is_your_training/components/text_field.dart';
+import 'package:this_is_your_training/helper/helper_methods.dart';
 
 class MakroPageContent extends StatefulWidget {
   const MakroPageContent({
@@ -92,6 +93,7 @@ class _MakroPageContentState extends State<MakroPageContent> {
                             user: post['UserEmail'],
                             postId: post.id,
                             likes: List<String>.from(post['Likes'] ?? []),
+                            time: formatDate(post['TimeStamp']),
                           );
                         },
                       );
@@ -124,17 +126,15 @@ class _MakroPageContentState extends State<MakroPageContent> {
                     // post button
                     IconButton(
                       onPressed: postMessage,
-                      icon: const Icon(Icons.arrow_circle_up),
+                      icon: Icon(
+                        Icons.send,
+                        color: Colors.deepPurple[300],
+                      ),
                     ),
                   ],
                 ),
               ),
 
-              // logged in as
-              Text(
-                'Zalogowany jako: ${widget.email}',
-                style: TextStyle(color: Colors.deepPurple[200]),
-              ),
               const SizedBox(height: 20)
             ],
           ),
