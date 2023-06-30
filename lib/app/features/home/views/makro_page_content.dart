@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:this_is_your_training/components/forum_page.dart';
 import 'package:this_is_your_training/components/text_field.dart';
-import 'package:this_is_your_training/helper/helper_methods.dart';
+import 'package:this_is_your_training/helper/date_helper_methods.dart';
 
 class MakroPageContent extends StatefulWidget {
   const MakroPageContent({
@@ -18,28 +18,8 @@ class MakroPageContent extends StatefulWidget {
 }
 
 class _MakroPageContentState extends State<MakroPageContent> {
-  // text controller
   final textController = TextEditingController();
-
   final currentUser = FirebaseAuth.instance.currentUser!;
-
-  // post message
-  void postMessage() {
-    // only post if there is something in the thextfield
-    if (textController.text.isNotEmpty) {
-      //store in firebase
-      FirebaseFirestore.instance.collection("UsersPosts").add({
-        'UserEmail': currentUser.email,
-        'Message': textController.text,
-        'TimeStamp': Timestamp.now(),
-        'Likes': [],
-      });
-    }
-
-    // clear the textfield
-    FocusScope.of(context).unfocus();
-    textController.clear();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +48,6 @@ class _MakroPageContentState extends State<MakroPageContent> {
         child: Center(
           child: Column(
             children: [
-              // the wall
               Expanded(
                 child: StreamBuilder(
                   stream: FirebaseFirestore.instance
@@ -86,7 +65,6 @@ class _MakroPageContentState extends State<MakroPageContent> {
                       return ListView.builder(
                         itemCount: querySnapshot.docs.length,
                         itemBuilder: (context, index) {
-                          // get the message
                           final post = querySnapshot.docs[index];
                           return ForumPage(
                             message: post['Message'],
@@ -108,13 +86,10 @@ class _MakroPageContentState extends State<MakroPageContent> {
                   },
                 ),
               ),
-
-              // post message
               Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: Row(
                   children: [
-                    // textfield
                     Expanded(
                       child: MyTextField(
                         controller: textController,
@@ -122,8 +97,6 @@ class _MakroPageContentState extends State<MakroPageContent> {
                         obscureText: false,
                       ),
                     ),
-
-                    // post button
                     IconButton(
                       onPressed: postMessage,
                       icon: Icon(
@@ -134,12 +107,24 @@ class _MakroPageContentState extends State<MakroPageContent> {
                   ],
                 ),
               ),
-
               const SizedBox(height: 20)
             ],
           ),
         ),
       ),
     );
+  }
+
+  void postMessage() {
+    if (textController.text.isNotEmpty) {
+      FirebaseFirestore.instance.collection("UsersPosts").add({
+        'UserEmail': currentUser.email,
+        'Message': textController.text,
+        'TimeStamp': Timestamp.now(),
+        'Likes': [],
+      });
+    }
+    FocusScope.of(context).unfocus();
+    textController.clear();
   }
 }
