@@ -43,7 +43,7 @@ class _ForumPageState extends State<ForumPage> {
     return Container(
       decoration: BoxDecoration(
         color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
       ),
       margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
       padding: const EdgeInsets.all(25),
@@ -51,46 +51,32 @@ class _ForumPageState extends State<ForumPage> {
         children: [
           Row(
             children: [
-              Column(
+              const Column(
                 children: [
-                  const ProfilePicture(radius: 18),
-                  const SizedBox(height: 20),
-                  LikeButton(
-                    isLiked: isLiked,
-                    onTap: toogleLike,
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    widget.likes.length.toString(),
-                    style: const TextStyle(color: Colors.grey),
-                  ),
-                  const SizedBox(height: 10),
+                  ProfilePicture(radius: 20),
+                  SizedBox(height: 30),
                 ],
               ),
               const SizedBox(width: 20),
-              Row(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          Text(
-                            widget.user,
-                            style: TextStyle(color: Colors.grey[400]),
-                          ),
-                        ],
-                      ),
                       Text(
-                        widget.time,
-                        style: TextStyle(color: Colors.grey[400]),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        widget.message,
+                        widget.user,
                         style: TextStyle(color: Colors.grey[400]),
                       ),
                     ],
+                  ),
+                  Text(
+                    widget.time,
+                    style: TextStyle(color: Colors.grey[400]),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    widget.message,
+                    style: const TextStyle(),
                   ),
                 ],
               ),
@@ -101,7 +87,7 @@ class _ForumPageState extends State<ForumPage> {
                     GestureDetector(
                       onTap: () {
                         if (widget.user == currentUser.email) {
-                          delatePost();
+                          deletePost();
                         }
                       },
                       child: Icon(
@@ -110,21 +96,36 @@ class _ForumPageState extends State<ForumPage> {
                       ),
                     ),
                     const SizedBox(height: 40),
-                    Row(
-                      children: [
-                        CommentButton(onTap: showCommentDialog),
-                        const SizedBox(width: 5),
-                        const Text(
-                          '0',
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
             ],
           ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  LikeButton(
+                    isLiked: isLiked,
+                    onTap: toogleLike,
+                  ),
+                  const SizedBox(width: 5),
+                  Text(
+                    widget.likes.length.toString(),
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  CommentButton(onTap: showCommentDialog),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection("UsersPosts")
@@ -153,7 +154,7 @@ class _ForumPageState extends State<ForumPage> {
                 }).toList(),
               );
             },
-          )
+          ),
         ],
       ),
     );
@@ -221,7 +222,7 @@ class _ForumPageState extends State<ForumPage> {
     );
   }
 
-  void delatePost() {
+  void deletePost() {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(

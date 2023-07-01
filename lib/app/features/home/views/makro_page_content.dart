@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:this_is_your_training/components/forum_page.dart';
-import 'package:this_is_your_training/components/text_field.dart';
 import 'package:this_is_your_training/helper/date_helper_methods.dart';
 
 class MakroPageContent extends StatefulWidget {
@@ -87,13 +86,21 @@ class _MakroPageContentState extends State<MakroPageContent> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(25.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Row(
                   children: [
                     Expanded(
-                      child: MyTextField(
+                      child: TextField(
                         controller: textController,
-                        hintText: 'Napisz coś na forum..',
+                        decoration: InputDecoration(
+                          hintText: 'Napisz coś na forum..',
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                            borderSide: const BorderSide(color: Colors.white),
+                          ),
+                          filled: true,
+                          fillColor: Colors.grey[300],
+                        ),
                         obscureText: false,
                       ),
                     ),
@@ -107,7 +114,7 @@ class _MakroPageContentState extends State<MakroPageContent> {
                   ],
                 ),
               ),
-              const SizedBox(height: 20)
+              const SizedBox(height: 10)
             ],
           ),
         ),

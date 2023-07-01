@@ -45,10 +45,12 @@ class _ProfilePictureState extends State<ProfilePicture> {
             return const CircleAvatar(
               backgroundColor: Colors.deepPurpleAccent,
               radius: 100,
-              child: Icon(
-                Icons.person,
-                size: 50,
-                color: Colors.white,
+              child: Center(
+                child: Icon(
+                  Icons.person,
+                  size: 40,
+                  color: Colors.white,
+                ),
               ),
             );
           }
