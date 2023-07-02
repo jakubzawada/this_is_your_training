@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:this_is_your_training/components/forum_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:this_is_your_training/app/features/home/views/cubit/forum_cubit.dart';
+import 'package:this_is_your_training/components/post_page.dart';
 import 'package:this_is_your_training/helper/date_helper_methods.dart';
 
-class MakroPageContent extends StatefulWidget {
-  const MakroPageContent({
+class ForumPageContent extends StatefulWidget {
+  const ForumPageContent({
     Key? key,
     required this.email,
   }) : super(key: key);
@@ -13,10 +15,10 @@ class MakroPageContent extends StatefulWidget {
   final String? email;
 
   @override
-  State<MakroPageContent> createState() => _MakroPageContentState();
+  State<ForumPageContent> createState() => _MakroPageContentState();
 }
 
-class _MakroPageContentState extends State<MakroPageContent> {
+class _MakroPageContentState extends State<ForumPageContent> {
   final textController = TextEditingController();
   final currentUser = FirebaseAuth.instance.currentUser!;
 
@@ -48,41 +50,41 @@ class _MakroPageContentState extends State<MakroPageContent> {
           child: Column(
             children: [
               Expanded(
-                child: StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection("UsersPosts")
-                      .orderBy(
-                        "TimeStamp",
-                        descending: false,
-                      )
-                      .snapshots(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      final QuerySnapshot querySnapshot =
-                          snapshot.data! as QuerySnapshot;
-
-                      return ListView.builder(
-                        itemCount: querySnapshot.docs.length,
-                        itemBuilder: (context, index) {
-                          final post = querySnapshot.docs[index];
-                          return ForumPage(
-                            message: post['Message'],
-                            user: post['UserEmail'],
-                            postId: post.id,
-                            likes: List<String>.from(post['Likes'] ?? []),
-                            time: formatDate(post['TimeStamp']),
-                          );
-                        },
-                      );
-                    } else if (snapshot.hasError) {
+                child: BlocProvider(
+                  create: (context) => ForumCubit()..start(),
+                  child: BlocBuilder<ForumCubit, ForumState>(
+                    builder: (context, state) {
+                      if (state.docs.isNotEmpty) {
+                        return ListView.builder(
+                          itemCount: state.docs.length,
+                          itemBuilder: (context, index) {
+                            final post = state.docs[index];
+                            return PostPage(
+                              message: post['Message'],
+                              user: post['UserEmail'],
+                              postId: post.id,
+                              likes: List<String>.from(post['Likes'] ?? []),
+                              time: formatDate(post['TimeStamp']),
+                            );
+                          },
+                        );
+                      } else if (state.errorMessage.isNotEmpty) {
+                        return Center(
+                          child: Text(
+                              'Something went wrong: ${state.errorMessage}'),
+                        );
+                      }
+                      if (state.isLoading == true) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
                       return Center(
-                        child: Text('Error:${snapshot.error}'),
+                        child:
+                            Text('Something went wrong: ${state.errorMessage}'),
                       );
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
+                    },
+                  ),
                 ),
               ),
               Padding(

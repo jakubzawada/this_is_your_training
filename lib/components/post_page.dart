@@ -7,13 +7,13 @@ import 'package:this_is_your_training/components/like_button.dart';
 import 'package:this_is_your_training/components/profile_picture.dart';
 import 'package:this_is_your_training/helper/date_helper_methods.dart';
 
-class ForumPage extends StatefulWidget {
+class PostPage extends StatefulWidget {
   final String message;
   final String user;
   final String time;
   final String postId;
   final List<String> likes;
-  const ForumPage({
+  const PostPage({
     super.key,
     required this.message,
     required this.user,
@@ -23,10 +23,10 @@ class ForumPage extends StatefulWidget {
   });
 
   @override
-  State<ForumPage> createState() => _ForumPageState();
+  State<PostPage> createState() => _PostPageState();
 }
 
-class _ForumPageState extends State<ForumPage> {
+class _PostPageState extends State<PostPage> {
   final currentUser = FirebaseAuth.instance.currentUser!;
   bool isLiked = false;
 

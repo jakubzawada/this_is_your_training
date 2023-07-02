@@ -1,7 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:this_is_your_training/app/features/home/views/makro_page_content.dart';
+import 'package:this_is_your_training/app/features/home/views/forum_page_content.dart';
 import 'package:this_is_your_training/app/features/home/views/my_account_page_content.dart';
 import 'package:this_is_your_training/app/features/home/views/taining_page_content.dart';
 
@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Builder(builder: (context) {
         if (currentIndex == 0) {
-          return MakroPageContent(email: widget.user.email);
+          return ForumPageContent(email: widget.user.email);
         }
         if (currentIndex == 1) {
           return const TrainingPageContent();

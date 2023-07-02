@@ -129,9 +129,6 @@ class _MyAccountPageContentState extends State<MyAccountPageContent> {
                       'Zalogowany jako: ${widget.email}',
                       style: TextStyle(color: Colors.deepPurple[200]),
                     ),
-                    // username
-
-                    //
                     const SizedBox(height: 140),
                     InkWell(
                       onTap: () {
