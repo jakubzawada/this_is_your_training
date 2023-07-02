@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/components/comment.dart';
 import 'package:this_is_your_training/components/comment_button.dart';
+import 'package:this_is_your_training/components/cubit/post_cubit.dart';
 import 'package:this_is_your_training/components/like_button.dart';
 import 'package:this_is_your_training/components/profile_picture.dart';
 import 'package:this_is_your_training/helper/date_helper_methods.dart';
@@ -126,34 +128,31 @@ class _PostPageState extends State<PostPage> {
             ],
           ),
           const SizedBox(height: 20),
-          StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection("UsersPosts")
-                .doc(widget.postId)
-                .collection("Comments")
-                .orderBy("CommentTime", descending: true)
-                .snapshots(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-
-              return ListView(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                children: snapshot.data!.docs.map((doc) {
-                  final commentData = doc.data() as Map<String, dynamic>;
-
-                  return Comment(
-                    text: commentData["CommentText"],
-                    user: commentData["CommentedBy"],
-                    time: formatDate(commentData["CommentTime"]),
+          BlocProvider(
+            create: (context) => PostCubit()..start(postId: widget.postId),
+            child: BlocBuilder<PostCubit, PostState>(
+              builder: (context, state) {
+                if (state.errorMessage.isNotEmpty) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
                   );
-                }).toList(),
-              );
-            },
+                }
+
+                return ListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: state.docs.map((doc) {
+                    final commentData = doc.data() as Map<String, dynamic>;
+
+                    return Comment(
+                      text: commentData["CommentText"],
+                      user: commentData["CommentedBy"],
+                      time: formatDate(commentData["CommentTime"]),
+                    );
+                  }).toList(),
+                );
+              },
+            ),
           ),
         ],
       ),

@@ -4,12 +4,12 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 
-part 'forum_state.dart';
+part 'post_state.dart';
 
-class ForumCubit extends Cubit<ForumState> {
-  ForumCubit()
+class PostCubit extends Cubit<PostState> {
+  PostCubit()
       : super(
-          const ForumState(
+          const PostState(
             docs: [],
             errorMessage: '',
             isLoading: false,
@@ -18,9 +18,11 @@ class ForumCubit extends Cubit<ForumState> {
 
   StreamSubscription? _streamSubscription;
 
-  Future<void> start() async {
+  Future<void> start({
+    required String postId,
+  }) async {
     emit(
-      const ForumState(
+      const PostState(
         docs: [],
         errorMessage: '',
         isLoading: true,
@@ -29,14 +31,13 @@ class ForumCubit extends Cubit<ForumState> {
 
     _streamSubscription = FirebaseFirestore.instance
         .collection("UsersPosts")
-        .orderBy(
-          "TimeStamp",
-          descending: false,
-        )
+        .doc(postId)
+        .collection("Comments")
+        .orderBy("CommentTime", descending: true)
         .snapshots()
         .listen((data) {
       emit(
-        ForumState(
+        PostState(
           docs: data.docs,
           isLoading: false,
           errorMessage: '',
@@ -45,7 +46,7 @@ class ForumCubit extends Cubit<ForumState> {
     })
       ..onError((error) {
         emit(
-          ForumState(
+          PostState(
             docs: const [],
             isLoading: false,
             errorMessage: error.toString(),
