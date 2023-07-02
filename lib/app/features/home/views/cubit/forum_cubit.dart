@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
 part 'forum_state.dart';
@@ -52,6 +53,18 @@ class ForumCubit extends Cubit<ForumState> {
           ),
         );
       });
+  }
+
+  Future<void> postMessage({
+    required String textController,
+  }) async {
+    final currentUser = FirebaseAuth.instance.currentUser!;
+    FirebaseFirestore.instance.collection("UsersPosts").add({
+      'UserEmail': currentUser.email,
+      'Message': textController,
+      'TimeStamp': Timestamp.now(),
+      'Likes': [],
+    });
   }
 
   @override

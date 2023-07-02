@@ -35,12 +35,6 @@ class _PostPageState extends State<PostPage> {
   final _commentTextContoller = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-    isLiked = widget.likes.contains(currentUser.email);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -178,18 +172,6 @@ class _PostPageState extends State<PostPage> {
     }
   }
 
-  void addComment(String commentText) {
-    FirebaseFirestore.instance
-        .collection("UsersPosts")
-        .doc(widget.postId)
-        .collection("Comments")
-        .add({
-      "CommentText": commentText,
-      "CommentedBy": currentUser.email,
-      "CommentTime": Timestamp.now()
-    });
-  }
-
   void showCommentDialog() {
     showDialog(
       context: context,
@@ -209,7 +191,17 @@ class _PostPageState extends State<PostPage> {
           ),
           TextButton(
             onPressed: () {
-              addComment(_commentTextContoller.text);
+              (String commentText) {
+                FirebaseFirestore.instance
+                    .collection("UsersPosts")
+                    .doc(widget.postId)
+                    .collection("Comments")
+                    .add({
+                  "CommentText": commentText,
+                  "CommentedBy": currentUser.email,
+                  "CommentTime": Timestamp.now()
+                });
+              }(_commentTextContoller.text);
               Navigator.pop(context);
 
               _commentTextContoller.clear();
