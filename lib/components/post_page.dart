@@ -1,11 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/components/comment.dart';
 import 'package:this_is_your_training/components/comment_button.dart';
 import 'package:this_is_your_training/components/cubit/add_comment_cubit.dart';
 import 'package:this_is_your_training/components/cubit/post_cubit.dart';
+import 'package:this_is_your_training/components/cubit/post_delete_cubit.dart';
 import 'package:this_is_your_training/components/like_button.dart';
 import 'package:this_is_your_training/components/profile_picture.dart';
 import 'package:this_is_your_training/helper/date_helper_methods.dart';
@@ -30,7 +29,6 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
-  final currentUser = FirebaseAuth.instance.currentUser!;
   bool isLiked = false;
 
   final _commentTextContoller = TextEditingController();
@@ -87,7 +85,7 @@ class _PostPageState extends State<PostPage> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              if (widget.user == currentUser.email) {
+                              if (widget.user == state.currentUser.email) {
                                 showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
@@ -98,46 +96,35 @@ class _PostPageState extends State<PostPage> {
                                         onPressed: () => Navigator.pop(context),
                                         child: const Text('Cancel'),
                                       ),
-                                      TextButton(
-                                        onPressed: () async {
-                                          final commentDocs =
-                                              await FirebaseFirestore.instance
-                                                  .collection("UsersPosts")
-                                                  .doc(widget.postId)
-                                                  .collection("Comments")
-                                                  .get();
-
-                                          for (var doc in commentDocs.docs) {
-                                            await doc.reference.delete();
-                                          }
-
-                                          FirebaseFirestore.instance
-                                              .collection("UsersPosts")
-                                              .doc(widget.postId)
-                                              .delete()
-                                              // ignore: avoid_print
-                                              .then((value) =>
-                                                  // ignore: avoid_print
-                                                  print('post deleted'))
-                                              .catchError(
-                                                  // ignore: avoid_print
-                                                  (error) => print(
-                                                      'failed to delete post: $error'));
-
-                                          // ignore: use_build_context_synchronously
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Text('Delete'),
+                                      BlocProvider(
+                                        create: (context) => PostDeleteCubit(),
+                                        child: BlocBuilder<PostDeleteCubit,
+                                            PostDeleteState>(
+                                          builder: (context, state) {
+                                            return TextButton(
+                                              onPressed: () async {
+                                                context
+                                                    .read<PostDeleteCubit>()
+                                                    .postDelete(
+                                                        postId: widget.postId);
+                                                Navigator.pop(context);
+                                              },
+                                              child: const Text('Delete'),
+                                            );
+                                          },
+                                        ),
                                       ),
                                     ],
                                   ),
                                 );
                               }
                             },
-                            child: Icon(
-                              Icons.cancel,
-                              color: Colors.grey[500],
-                            ),
+                            child: state.currentUser.email == widget.user
+                                ? Icon(
+                                    Icons.cancel,
+                                    color: Colors.grey[500],
+                                  )
+                                : Container(),
                           ),
                           const SizedBox(height: 40),
                         ],

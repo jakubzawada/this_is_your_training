@@ -11,8 +11,8 @@ class PostCubit extends Cubit<PostState> {
   final currentUser = FirebaseAuth.instance.currentUser!;
   PostCubit()
       : super(
-          const PostState(
-            docs: [],
+          PostState(
+            docs: const [],
             errorMessage: '',
             isLoading: false,
           ),
@@ -24,8 +24,8 @@ class PostCubit extends Cubit<PostState> {
     required String postId,
   }) async {
     emit(
-      const PostState(
-        docs: [],
+      PostState(
+        docs: const [],
         errorMessage: '',
         isLoading: true,
       ),
