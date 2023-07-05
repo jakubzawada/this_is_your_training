@@ -12,6 +12,30 @@ class TuesdayExerciseCubit extends Cubit<TuesdayExerciseState> {
 
   final DocumentsRepository _documentsRepository;
 
+  Future<void> uploadName1(String newValue) async {
+    emit(TuesdayExerciseState(
+      exerciseName1: newValue,
+      series1: state.series1,
+      repeat1: state.repeat1,
+    ));
+  }
+
+  Future<void> uploadSeries1(int? newVal) async {
+    emit(TuesdayExerciseState(
+      series1: newVal,
+      exerciseName1: state.exerciseName1,
+      repeat1: state.repeat1,
+    ));
+  }
+
+  Future<void> uploadRepeat1(int? newVal) async {
+    emit(TuesdayExerciseState(
+      repeat1: newVal,
+      exerciseName1: state.exerciseName1,
+      series1: state.series1,
+    ));
+  }
+
   Future<void> addexercise({
     required String exerciseName,
     required int series,

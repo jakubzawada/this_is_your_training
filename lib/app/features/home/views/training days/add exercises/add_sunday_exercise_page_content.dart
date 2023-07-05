@@ -5,52 +5,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/repositories/documents_repository.dart';
 import 'cubit/sunday_exercise_cubit.dart';
 
-class AddSundayExercise extends StatefulWidget {
-  const AddSundayExercise({Key? key}) : super(key: key);
+class AddSundayExercise extends StatelessWidget {
+  AddSundayExercise({Key? key}) : super(key: key);
 
-  @override
-  State<AddSundayExercise> createState() => _AddSundayExerciseState();
-}
+  final List<String> items =
+      List.generate(10, (index) => (index + 1).toString());
 
-class _AddSundayExerciseState extends State<AddSundayExercise> {
-  var exerciseName6 = '';
-  var series6 = 3;
-  var repeat6 = 10;
+  final String? selectedItem = '3';
 
-  List<String> items = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '6',
-    '8',
-  ];
-  String? selectedItem = '3';
-  List<String> items2 = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-  ];
-  String? selectedItem2 = '10';
+  final List<String> items2 =
+      List.generate(20, (index) => (index + 1).toString());
+
+  final String? selectedItem2 = '10';
 
   @override
   Widget build(BuildContext context) {
@@ -123,9 +89,9 @@ class _AddSundayExerciseState extends State<AddSundayExercise> {
                                 ),
                               ),
                               onChanged: (newValue) {
-                                setState(() {
-                                  exerciseName6 = newValue;
-                                });
+                                context
+                                    .read<SundayExerciseCubit>()
+                                    .uploadName6(newValue);
                               },
                             ),
                           ),
@@ -210,29 +176,20 @@ class _AddSundayExerciseState extends State<AddSundayExercise> {
                                             color: Colors.black,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
-                                        value: series6,
-                                        dropdownColor: Colors.deepPurple.shade200,
-                                        items: <int>[
-                                          1,
-                                          2,
-                                          3,
-                                          4,
-                                          5,
-                                          6,
-                                          7,
-                                          8,
-                                          9,
-                                          10
-                                        ].map((int value) {
-                                          return DropdownMenuItem<int>(
-                                            value: value,
-                                            child: Text(value.toString()),
-                                          );
-                                        }).toList(),
+                                        value: state.series6,
+                                        dropdownColor:
+                                            Colors.deepPurple.shade200,
+                                        items: List.generate(
+                                          items.length,
+                                          (index) => DropdownMenuItem<int>(
+                                            value: int.parse(items[index]),
+                                            child: Text(items[index]),
+                                          ),
+                                        ),
                                         onChanged: (newVal) {
-                                          setState(() {
-                                            series6 = newVal!;
-                                          });
+                                          context
+                                              .read<SundayExerciseCubit>()
+                                              .uploadSeries6(newVal!);
                                         }),
                                   ),
                                 ),
@@ -255,39 +212,20 @@ class _AddSundayExerciseState extends State<AddSundayExercise> {
                                             color: Colors.black,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
-                                        value: repeat6,
-                                        dropdownColor: Colors.deepPurple.shade200,
-                                        items: <int>[
-                                          1,
-                                          2,
-                                          3,
-                                          4,
-                                          5,
-                                          6,
-                                          7,
-                                          8,
-                                          9,
-                                          10,
-                                          11,
-                                          12,
-                                          13,
-                                          14,
-                                          15,
-                                          16,
-                                          17,
-                                          18,
-                                          19,
-                                          20
-                                        ].map((int value) {
-                                          return DropdownMenuItem<int>(
-                                            value: value,
-                                            child: Text(value.toString()),
-                                          );
-                                        }).toList(),
+                                        value: state.repeat6,
+                                        dropdownColor:
+                                            Colors.deepPurple.shade200,
+                                        items: List.generate(
+                                          items2.length,
+                                          (index) => DropdownMenuItem<int>(
+                                            value: int.parse(items2[index]),
+                                            child: Text(items2[index]),
+                                          ),
+                                        ),
                                         onChanged: (newVal) {
-                                          setState(() {
-                                            repeat6 = newVal!;
-                                          });
+                                          context
+                                              .read<SundayExerciseCubit>()
+                                              .uploadRepeat6(newVal!);
                                         }),
                                   ),
                                 ),
@@ -296,15 +234,15 @@ class _AddSundayExerciseState extends State<AddSundayExercise> {
                           ),
                           const SizedBox(height: 20),
                           ElevatedButton(
-                            onPressed: exerciseName6.isEmpty
+                            onPressed: state.exerciseName6.isEmpty
                                 ? null
                                 : () {
                                     context
                                         .read<SundayExerciseCubit>()
                                         .addexercise(
-                                          exerciseName: exerciseName6,
-                                          repeat: repeat6,
-                                          series: series6,
+                                          exerciseName: state.exerciseName6,
+                                          repeat: state.repeat6!,
+                                          series: state.series6!,
                                         );
                                   },
                             style: ElevatedButton.styleFrom(

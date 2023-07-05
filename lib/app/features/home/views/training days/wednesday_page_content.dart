@@ -258,7 +258,7 @@ class WednesdayPageContent extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (_) => const AddWednesdayExercise(),
+                      builder: (_) => AddWednesdayExercise(),
                     ),
                   );
                 },

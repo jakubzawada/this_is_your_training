@@ -5,52 +5,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/repositories/documents_repository.dart';
 import 'cubit/friday_exercise_cubit.dart';
 
-class AddFridayExercise extends StatefulWidget {
-  const AddFridayExercise({Key? key}) : super(key: key);
+class AddFridayExercise extends StatelessWidget {
+  AddFridayExercise({Key? key}) : super(key: key);
 
-  @override
-  State<AddFridayExercise> createState() => _AddFridayExerciseState();
-}
+  final List<String> items =
+      List.generate(10, (index) => (index + 1).toString());
 
-class _AddFridayExerciseState extends State<AddFridayExercise> {
-  var exerciseName4 = '';
-  var series4 = 3;
-  var repeat4 = 10;
+  final String? selectedItem = '3';
 
-  List<String> items = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '6',
-    '8',
-  ];
-  String? selectedItem = '3';
-  List<String> items2 = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-  ];
-  String? selectedItem2 = '10';
+  final List<String> items2 =
+      List.generate(20, (index) => (index + 1).toString());
+
+  final String? selectedItem2 = '10';
 
   @override
   Widget build(BuildContext context) {
@@ -123,9 +89,9 @@ class _AddFridayExerciseState extends State<AddFridayExercise> {
                                 ),
                               ),
                               onChanged: (newValue) {
-                                setState(() {
-                                  exerciseName4 = newValue;
-                                });
+                                context
+                                    .read<FridayExerciseCubit>()
+                                    .uploadName4(newValue);
                               },
                             ),
                           ),
@@ -210,30 +176,20 @@ class _AddFridayExerciseState extends State<AddFridayExercise> {
                                             color: Colors.black,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
-                                        value: series4,
+                                        value: state.series4,
                                         dropdownColor:
                                             Colors.deepPurple.shade200,
-                                        items: <int>[
-                                          1,
-                                          2,
-                                          3,
-                                          4,
-                                          5,
-                                          6,
-                                          7,
-                                          8,
-                                          9,
-                                          10
-                                        ].map((int value) {
-                                          return DropdownMenuItem<int>(
-                                            value: value,
-                                            child: Text(value.toString()),
-                                          );
-                                        }).toList(),
+                                        items: List.generate(
+                                          items.length,
+                                          (index) => DropdownMenuItem<int>(
+                                            value: int.parse(items[index]),
+                                            child: Text(items[index]),
+                                          ),
+                                        ),
                                         onChanged: (newVal) {
-                                          setState(() {
-                                            series4 = newVal!;
-                                          });
+                                          context
+                                              .read<FridayExerciseCubit>()
+                                              .uploadSeries4(newVal!);
                                         }),
                                   ),
                                 ),
@@ -256,40 +212,20 @@ class _AddFridayExerciseState extends State<AddFridayExercise> {
                                             color: Colors.black,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
-                                        value: repeat4,
+                                        value: state.repeat4,
                                         dropdownColor:
                                             Colors.deepPurple.shade200,
-                                        items: <int>[
-                                          1,
-                                          2,
-                                          3,
-                                          4,
-                                          5,
-                                          6,
-                                          7,
-                                          8,
-                                          9,
-                                          10,
-                                          11,
-                                          12,
-                                          13,
-                                          14,
-                                          15,
-                                          16,
-                                          17,
-                                          18,
-                                          19,
-                                          20
-                                        ].map((int value) {
-                                          return DropdownMenuItem<int>(
-                                            value: value,
-                                            child: Text(value.toString()),
-                                          );
-                                        }).toList(),
+                                        items: List.generate(
+                                          items2.length,
+                                          (index) => DropdownMenuItem<int>(
+                                            value: int.parse(items2[index]),
+                                            child: Text(items2[index]),
+                                          ),
+                                        ),
                                         onChanged: (newVal) {
-                                          setState(() {
-                                            repeat4 = newVal!;
-                                          });
+                                          context
+                                              .read<FridayExerciseCubit>()
+                                              .uploadRepeat4(newVal!);
                                         }),
                                   ),
                                 ),
@@ -298,15 +234,15 @@ class _AddFridayExerciseState extends State<AddFridayExercise> {
                           ),
                           const SizedBox(height: 20),
                           ElevatedButton(
-                            onPressed: exerciseName4.isEmpty
+                            onPressed: state.exerciseName4.isEmpty
                                 ? null
                                 : () {
                                     context
                                         .read<FridayExerciseCubit>()
                                         .addexercise(
-                                          exerciseName: exerciseName4,
-                                          repeat: repeat4,
-                                          series: series4,
+                                          exerciseName: state.exerciseName4,
+                                          repeat: state.repeat4!,
+                                          series: state.series4!,
                                         );
                                   },
                             style: ElevatedButton.styleFrom(

@@ -10,7 +10,31 @@ class SaturdayExerciseCubit extends Cubit<SaturdayExerciseState> {
           const SaturdayExerciseState(),
         );
 
-        final DocumentsRepository _documentsRepository;
+  final DocumentsRepository _documentsRepository;
+
+  Future<void> uploadName5(String newValue) async {
+    emit(SaturdayExerciseState(
+      exerciseName5: newValue,
+      series5: state.series5,
+      repeat5: state.repeat5,
+    ));
+  }
+
+  Future<void> uploadSeries5(int? newVal) async {
+    emit(SaturdayExerciseState(
+      series5: newVal,
+      exerciseName5: state.exerciseName5,
+      repeat5: state.repeat5,
+    ));
+  }
+
+  Future<void> uploadRepeat5(int? newVal) async {
+    emit(SaturdayExerciseState(
+      repeat5: newVal,
+      exerciseName5: state.exerciseName5,
+      series5: state.series5,
+    ));
+  }
 
   Future<void> addexercise({
     required String exerciseName,
@@ -25,4 +49,3 @@ class SaturdayExerciseCubit extends Cubit<SaturdayExerciseState> {
     }
   }
 }
-

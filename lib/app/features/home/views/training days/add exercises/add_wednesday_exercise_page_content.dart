@@ -5,52 +5,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/repositories/documents_repository.dart';
 import 'cubit/wednesday_exercise_cubit.dart';
 
-class AddWednesdayExercise extends StatefulWidget {
-  const AddWednesdayExercise({Key? key}) : super(key: key);
+class AddWednesdayExercise extends StatelessWidget {
+  AddWednesdayExercise({Key? key}) : super(key: key);
 
-  @override
-  State<AddWednesdayExercise> createState() => _AddWednesdayExerciseState();
-}
+  final List<String> items =
+      List.generate(10, (index) => (index + 1).toString());
 
-class _AddWednesdayExerciseState extends State<AddWednesdayExercise> {
-  var exerciseName2 = '';
-  var series2 = 3;
-  var repeat2 = 10;
+  final String? selectedItem = '3';
 
-  List<String> items = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '6',
-    '8',
-  ];
-  String? selectedItem = '3';
-  List<String> items2 = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-  ];
-  String? selectedItem2 = '10';
+  final List<String> items2 =
+      List.generate(20, (index) => (index + 1).toString());
+
+  final String? selectedItem2 = '10';
 
   @override
   Widget build(BuildContext context) {
@@ -123,9 +89,9 @@ class _AddWednesdayExerciseState extends State<AddWednesdayExercise> {
                                 ),
                               ),
                               onChanged: (newValue) {
-                                setState(() {
-                                  exerciseName2 = newValue;
-                                });
+                                context
+                                    .read<WednesdayExerciseCubit>()
+                                    .uploadName2(newValue);
                               },
                             ),
                           ),
@@ -210,8 +176,9 @@ class _AddWednesdayExerciseState extends State<AddWednesdayExercise> {
                                             color: Colors.black,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
-                                        value: series2,
-                                        dropdownColor: Colors.deepPurple.shade200,
+                                        value: state.series2,
+                                        dropdownColor:
+                                            Colors.deepPurple.shade200,
                                         items: <int>[
                                           1,
                                           2,
@@ -230,9 +197,9 @@ class _AddWednesdayExerciseState extends State<AddWednesdayExercise> {
                                           );
                                         }).toList(),
                                         onChanged: (newVal) {
-                                          setState(() {
-                                            series2 = newVal!;
-                                          });
+                                          context
+                                              .read<WednesdayExerciseCubit>()
+                                              .uploadSeries2(newVal!);
                                         }),
                                   ),
                                 ),
@@ -255,8 +222,9 @@ class _AddWednesdayExerciseState extends State<AddWednesdayExercise> {
                                             color: Colors.black,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
-                                        value: repeat2,
-                                        dropdownColor: Colors.deepPurple.shade200,
+                                        value: state.repeat2,
+                                        dropdownColor:
+                                            Colors.deepPurple.shade200,
                                         items: <int>[
                                           1,
                                           2,
@@ -285,9 +253,9 @@ class _AddWednesdayExerciseState extends State<AddWednesdayExercise> {
                                           );
                                         }).toList(),
                                         onChanged: (newVal) {
-                                          setState(() {
-                                            repeat2 = newVal!;
-                                          });
+                                          context
+                                              .read<WednesdayExerciseCubit>()
+                                              .uploadRepeat2(newVal!);
                                         }),
                                   ),
                                 ),
@@ -296,15 +264,15 @@ class _AddWednesdayExerciseState extends State<AddWednesdayExercise> {
                           ),
                           const SizedBox(height: 20),
                           ElevatedButton(
-                            onPressed: exerciseName2.isEmpty
+                            onPressed: state.exerciseName2.isEmpty
                                 ? null
                                 : () {
                                     context
                                         .read<WednesdayExerciseCubit>()
                                         .addexercise(
-                                          exerciseName: exerciseName2,
-                                          repeat: repeat2,
-                                          series: series2,
+                                          exerciseName: state.exerciseName2,
+                                          repeat: state.repeat2!,
+                                          series: state.series2!,
                                         );
                                   },
                             style: ElevatedButton.styleFrom(
