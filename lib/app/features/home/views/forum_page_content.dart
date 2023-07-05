@@ -4,19 +4,14 @@ import 'package:this_is_your_training/app/features/home/views/cubit/forum_cubit.
 import 'package:this_is_your_training/components/post_page.dart';
 import 'package:this_is_your_training/helper/date_helper_methods.dart';
 
-class ForumPageContent extends StatefulWidget {
-  const ForumPageContent({
+class ForumPageContent extends StatelessWidget {
+  ForumPageContent({
     Key? key,
     required this.email,
   }) : super(key: key);
 
   final String? email;
 
-  @override
-  State<ForumPageContent> createState() => _MakroPageContentState();
-}
-
-class _MakroPageContentState extends State<ForumPageContent> {
   final textController = TextEditingController();
 
   @override
