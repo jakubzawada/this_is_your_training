@@ -6,22 +6,14 @@ import 'package:this_is_your_training/app/features/login/forgot_pw_page.dart';
 import 'package:this_is_your_training/components/square_tile.dart';
 import 'package:this_is_your_training/services/auth_service.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   LoginPage({
     Key? key,
   }) : super(key: key);
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  bool obscureText = true;
-  var errorMessage = '';
-  var isCreatingAccount = false;
+  final bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         const SizedBox(height: 40),
                         Text(
-                          isCreatingAccount == true
+                          state.isCreatingAccount == true
                               ? 'Zarejestruj się'
                               : 'Zaloguj się',
                           style: GoogleFonts.bebasNeue(
@@ -52,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const SizedBox(height: 60),
                         TextField(
-                          controller: widget.emailController,
+                          controller: emailController,
                           decoration: InputDecoration(
                             prefixIcon: const Icon(Icons.mail),
                             enabledBorder: OutlineInputBorder(
@@ -71,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const SizedBox(height: 20),
                         TextField(
-                          controller: widget.passwordController,
+                          controller: passwordController,
                           decoration: InputDecoration(
                             prefixIcon: const Icon(Icons.lock),
                             enabledBorder: OutlineInputBorder(
@@ -85,12 +77,11 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             suffixIcon: GestureDetector(
                               onTap: () {
-                                setState(() {
-                                  obscureText = !obscureText;
-                                });
+                                context.read<LoginCubit>().obscureText(
+                                    obscureText: state.obscureText);
                               },
                               child: Icon(
-                                  obscureText
+                                  state.obscureText
                                       ? Icons.visibility
                                       : Icons.visibility_off,
                                   color: Colors.deepPurple),
@@ -99,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                             fillColor: Colors.grey[200],
                             filled: true,
                           ),
-                          obscureText: obscureText,
+                          obscureText: state.obscureText,
                         ),
                         const SizedBox(height: 10),
                         Row(
@@ -126,7 +117,8 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ],
                         ),
-                        Text(state.errorMessage),
+                        if (state.errorMessage.isNotEmpty)
+                          Text(state.errorMessage),
                         const SizedBox(height: 20),
                         InkWell(
                           child: Container(
@@ -138,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             child: Center(
                               child: Text(
-                                isCreatingAccount == true
+                                state.isCreatingAccount == true
                                     ? 'Zarejestruj się'
                                     : 'Zaloguj się',
                                 style: const TextStyle(
@@ -151,31 +143,27 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           onTap: () async {
-                            if (isCreatingAccount == true) {
+                            if (state.isCreatingAccount == true) {
                               // rejestracja
                               try {
                                 context.read<LoginCubit>().createaccount(
-                                      email: widget.emailController.text,
-                                      password: widget.passwordController.text,
-                                      errorMessage: errorMessage,
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                      errorMessage: state.errorMessage,
                                     );
                               } catch (error) {
-                                setState(() {
-                                  errorMessage = error.toString();
-                                });
+                                error.toString();
                               }
                             } else {
                               // logowanie
                               try {
                                 context.read<LoginCubit>().loginAccount(
-                                      email: widget.emailController.text,
-                                      password: widget.passwordController.text,
-                                      errorMessage: errorMessage,
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                      errorMessage: state.errorMessage,
                                     );
                               } catch (error) {
-                                setState(() {
-                                  errorMessage = error.toString();
-                                });
+                                error.toString();
                               }
                             }
                           },
@@ -184,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            if (isCreatingAccount == false) ...[
+                            if (state.isCreatingAccount == false) ...[
                               const Text(
                                 'Dont\'t have an account?',
                                 style: TextStyle(
@@ -192,9 +180,8 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  setState(() {
-                                    isCreatingAccount = true;
-                                  });
+                                  context.read<LoginCubit>().tooglAccountCreate(
+                                      state.isCreatingAccount);
                                 },
                                 child: const Text(
                                   'SIGN UP',
@@ -205,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ],
-                            if (isCreatingAccount == true) ...[
+                            if (state.isCreatingAccount == true) ...[
                               const Text(
                                 'Already have an account?',
                                 style: TextStyle(
@@ -213,9 +200,8 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  setState(() {
-                                    isCreatingAccount = false;
-                                  });
+                                  context.read<LoginCubit>().tooglAccountLogin(
+                                      state.isCreatingAccount);
                                 },
                                 child: const Text(
                                   'Login',
