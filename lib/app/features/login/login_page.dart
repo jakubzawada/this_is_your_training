@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.deepPurple[200],
       body: BlocProvider(
-        create: (context) => LoginCubit(),
+        create: (context) => LoginCubit(passwordController: passwordController),
         child: BlocBuilder<LoginCubit, LoginState>(
           builder: (context, state) {
             return ListView(
@@ -146,7 +146,7 @@ class LoginPage extends StatelessWidget {
                             if (state.isCreatingAccount == true) {
                               // rejestracja
                               try {
-                                context.read<LoginCubit>().createaccount(
+                                context.read<LoginCubit>().createAccount(
                                       email: emailController.text,
                                       password: passwordController.text,
                                       errorMessage: state.errorMessage,

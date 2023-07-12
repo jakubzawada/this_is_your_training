@@ -23,38 +23,42 @@ class PostCubit extends Cubit<PostState> {
   Future<void> start({
     required String postId,
   }) async {
-    emit(
-      PostState(
-        docs: const [],
-        errorMessage: '',
-        isLoading: true,
-      ),
-    );
+    emit(state.copyWith(isLoading: true, errorMessage: ''));
 
-    _streamSubscription = FirebaseFirestore.instance
-        .collection("UsersPosts")
-        .doc(postId)
-        .collection("Comments")
-        .orderBy("CommentTime", descending: true)
-        .snapshots()
-        .listen((data) {
-      emit(
-        PostState(
-          docs: data.docs,
-          isLoading: false,
-          errorMessage: '',
-        ),
-      );
-    })
-      ..onError((error) {
-        emit(
-          PostState(
-            docs: const [],
-            isLoading: false,
-            errorMessage: error.toString(),
-          ),
-        );
-      });
+    try {
+      DocumentSnapshot postSnapshot = await FirebaseFirestore.instance
+          .collection("UsersPosts")
+          .doc(postId)
+          .get();
+
+      bool isLiked =
+          (postSnapshot['Likes'] as List<dynamic>).contains(currentUser.email);
+
+      QuerySnapshot commentsSnapshot = await FirebaseFirestore.instance
+          .collection("UsersPosts")
+          .doc(postId)
+          .collection("Comments")
+          .orderBy("CommentTime", descending: true)
+          .get();
+
+      List<DocumentSnapshot> commentDocs = commentsSnapshot.docs;
+
+      emit(state.copyWith(
+        docs: commentDocs,
+        isLiked: isLiked,
+        isLoading: false,
+        errorMessage: '',
+      ));
+    } catch (error) {
+      emit(state.copyWith(
+        isLoading: false,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> postlike({required bool isLiked}) async {
+    emit(state.copyWith(isLiked: !state.isLiked));
   }
 
   Future<void> like({
@@ -79,15 +83,26 @@ class PostCubit extends Cubit<PostState> {
     required String postId,
     required String commentText,
   }) async {
-    FirebaseFirestore.instance
+    final newCommentData = {
+      "CommentText": commentText,
+      "CommentedBy": currentUser.email,
+      "CommentTime": Timestamp.now(),
+    };
+
+    // Dodaj nowy komentarz do kolekcji komentarzy
+    final newCommentRef = await FirebaseFirestore.instance
         .collection("UsersPosts")
         .doc(postId)
         .collection("Comments")
-        .add({
-      "CommentText": commentText,
-      "CommentedBy": currentUser.email,
-      "CommentTime": Timestamp.now()
-    });
+        .add(newCommentData);
+
+    // Pobierz dodany komentarz
+    final newCommentSnapshot = await newCommentRef.get();
+
+    // Zaktualizuj stan komentarzy poprzez dodanie nowego komentarza
+    emit(state.copyWith(
+      docs: [...state.docs, newCommentSnapshot],
+    ));
   }
 
   @override

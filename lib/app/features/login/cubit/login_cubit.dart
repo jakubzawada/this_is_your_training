@@ -1,10 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit()
+  final TextEditingController passwordController;
+
+  LoginCubit({required this.passwordController})
       : super(
           const LoginState(
             isCreatingAccount: false,
@@ -39,6 +41,7 @@ class LoginCubit extends Cubit<LoginState> {
         password: password,
       );
     } catch (error) {
+      passwordController.clear();
       emit(
         LoginState(
           isCreatingAccount: false,
@@ -48,7 +51,7 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  Future<void> createaccount({
+  Future<void> createAccount({
     required String email,
     required String password,
     required String errorMessage,
@@ -59,6 +62,7 @@ class LoginCubit extends Cubit<LoginState> {
         password: password,
       );
     } catch (error) {
+      passwordController.clear();
       emit(
         LoginState(
           isCreatingAccount: false,

@@ -9,13 +9,13 @@ import 'package:this_is_your_training/components/like_button.dart';
 import 'package:this_is_your_training/components/profile_picture.dart';
 import 'package:this_is_your_training/helper/date_helper_methods.dart';
 
-class PostPage extends StatefulWidget {
+class PostPage extends StatelessWidget {
   final String message;
   final String user;
   final String time;
   final String postId;
   final List<String> likes;
-  const PostPage({
+  PostPage({
     super.key,
     required this.message,
     required this.user,
@@ -24,19 +24,12 @@ class PostPage extends StatefulWidget {
     required this.likes,
   });
 
-  @override
-  State<PostPage> createState() => _PostPageState();
-}
-
-class _PostPageState extends State<PostPage> {
-  bool isLiked = false;
-
   final _commentTextContoller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PostCubit()..start(postId: widget.postId),
+      create: (context) => PostCubit()..start(postId: postId),
       child: BlocBuilder<PostCubit, PostState>(
         builder: (context, state) {
           return Container(
@@ -63,18 +56,18 @@ class _PostPageState extends State<PostPage> {
                         Row(
                           children: [
                             Text(
-                              widget.user,
+                              user,
                               style: TextStyle(color: Colors.grey[400]),
                             ),
                           ],
                         ),
                         Text(
-                          widget.time,
+                          time,
                           style: TextStyle(color: Colors.grey[400]),
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          widget.message,
+                          message,
                           style: const TextStyle(),
                         ),
                       ],
@@ -85,7 +78,7 @@ class _PostPageState extends State<PostPage> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              if (widget.user == state.currentUser.email) {
+                              if (user == state.currentUser.email) {
                                 showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
@@ -105,8 +98,7 @@ class _PostPageState extends State<PostPage> {
                                               onPressed: () async {
                                                 context
                                                     .read<PostDeleteCubit>()
-                                                    .postDelete(
-                                                        postId: widget.postId);
+                                                    .postDelete(postId: postId);
                                                 Navigator.pop(context);
                                               },
                                               child: const Text('Delete'),
@@ -119,7 +111,7 @@ class _PostPageState extends State<PostPage> {
                                 );
                               }
                             },
-                            child: state.currentUser.email == widget.user
+                            child: state.currentUser.email == user
                                 ? Icon(
                                     Icons.cancel,
                                     color: Colors.grey[500],
@@ -139,19 +131,20 @@ class _PostPageState extends State<PostPage> {
                     Row(
                       children: [
                         LikeButton(
-                          isLiked: isLiked,
+                          isLiked: state.isLiked,
                           onTap: () {
-                            setState(() {
-                              isLiked = !isLiked;
-                            });
                             context
                                 .read<PostCubit>()
-                                .like(isLiked: isLiked, postId: widget.postId);
+                                .postlike(isLiked: state.isLiked);
+                            context.read<PostCubit>().like(
+                                  isLiked: !state.isLiked,
+                                  postId: postId,
+                                );
                           },
                         ),
                         const SizedBox(width: 5),
                         Text(
-                          widget.likes.length.toString(),
+                          likes.length.toString(),
                           style: const TextStyle(color: Colors.grey),
                         ),
                       ],
@@ -185,7 +178,7 @@ class _PostPageState extends State<PostPage> {
                                         context
                                             .read<AddCommentCubit>()
                                             .addComment(
-                                                postId: widget.postId,
+                                                postId: postId,
                                                 commentText: commentText);
                                       }(_commentTextContoller.text);
                                       Navigator.pop(context);
