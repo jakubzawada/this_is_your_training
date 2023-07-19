@@ -4,7 +4,7 @@ import 'package:this_is_your_training/app/app.dart';
 import 'package:this_is_your_training/app/cubit/root_cubit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/my_account_cubit.dart';
-import 'package:this_is_your_training/components/profile_picture.dart';
+import 'package:this_is_your_training/components/profile_picture2.dart';
 import 'package:this_is_your_training/repositories/documents_repository.dart';
 
 class MyAccountPageContent extends StatelessWidget {
@@ -57,7 +57,7 @@ class MyAccountPageContent extends StatelessWidget {
                               const CircleAvatar(
                                 radius: 85,
                                 backgroundColor: Colors.white,
-                                child: ProfilePicture(
+                                child: ProfilePicture2(
                                   radius: 80,
                                 ),
                               ),
@@ -116,8 +116,12 @@ class MyAccountPageContent extends StatelessWidget {
                                 if (state.selectedImage != null) {
                                   repository
                                       .uploadImage(state.selectedImage!)
-                                      .then((downloadURL) {})
-                                      .catchError((error) {});
+                                      .then((downloadURL) {
+                                    // Po zakończeniu przesyłania, ustaw avatarUrl w stanie
+                                    context
+                                        .read<MyAccountCubit>()
+                                        .setAvatarUrl(downloadURL);
+                                  }).catchError((error) {});
                                 }
                               },
                               child: Padding(

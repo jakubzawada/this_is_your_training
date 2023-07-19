@@ -15,6 +15,7 @@ class PostPage extends StatelessWidget {
   final String time;
   final String postId;
   final List<String> likes;
+  final String avatarUrl;
   PostPage({
     super.key,
     required this.message,
@@ -22,6 +23,7 @@ class PostPage extends StatelessWidget {
     required this.time,
     required this.postId,
     required this.likes,
+    required this.avatarUrl,
   });
 
   final _commentTextContoller = TextEditingController();
@@ -35,7 +37,7 @@ class PostPage extends StatelessWidget {
           return Container(
             decoration: BoxDecoration(
               color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(15),
             ),
             margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
             padding: const EdgeInsets.all(25),
@@ -43,10 +45,13 @@ class PostPage extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Column(
+                    Column(
                       children: [
-                        ProfilePicture(radius: 20),
-                        SizedBox(height: 30),
+                        ProfilePicture(
+                          radius: 20,
+                          avatarUrl: avatarUrl,
+                        ),
+                        const SizedBox(height: 30),
                       ],
                     ),
                     const SizedBox(width: 20),

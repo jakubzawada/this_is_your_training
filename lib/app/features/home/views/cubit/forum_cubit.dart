@@ -4,11 +4,13 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
+import 'package:this_is_your_training/repositories/documents_repository.dart';
 
 part 'forum_state.dart';
 
 class ForumCubit extends Cubit<ForumState> {
-  ForumCubit()
+  String? avatarUrl;
+  ForumCubit({this.avatarUrl})
       : super(
           const ForumState(
             docs: [],
@@ -59,11 +61,16 @@ class ForumCubit extends Cubit<ForumState> {
     required String textController,
   }) async {
     final currentUser = FirebaseAuth.instance.currentUser!;
+
+    // Pobierz najnowszy URL avatara użytkownika
+    String? avatarUrl = await DocumentsRepository().getLatestImage();
+
     FirebaseFirestore.instance.collection("UsersPosts").add({
       'UserEmail': currentUser.email,
       'Message': textController,
       'TimeStamp': Timestamp.now(),
       'Likes': [],
+      'AvatarUrl': avatarUrl, // Dodaj URL avatara autora postu do dokumentu.
     });
   }
 

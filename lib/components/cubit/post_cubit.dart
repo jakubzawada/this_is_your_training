@@ -15,6 +15,7 @@ class PostCubit extends Cubit<PostState> {
             docs: const [],
             errorMessage: '',
             isLoading: false,
+            avatarUrl: '',
           ),
         );
 
@@ -43,11 +44,27 @@ class PostCubit extends Cubit<PostState> {
 
       List<DocumentSnapshot> commentDocs = commentsSnapshot.docs;
 
+      String userId = postSnapshot['UserEmail']; // Pobierz userId autora postu
+      QuerySnapshot userImageSnapshot = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(userId)
+          .collection("images")
+          .orderBy('timestamp', descending: true)
+          .limit(1)
+          .get();
+
+      String avatarUrl = '';
+      if (userImageSnapshot.docs.isNotEmpty) {
+        // Sprawdź, czy dokumenty istnieją przed próbą pobrania danych
+        avatarUrl = userImageSnapshot.docs[0].get('downloadURL') as String;
+      }
+
       emit(state.copyWith(
         docs: commentDocs,
         isLiked: isLiked,
         isLoading: false,
         errorMessage: '',
+        avatarUrl: avatarUrl, // Dodaj URL avatara autora postu do stanu.
       ));
     } catch (error) {
       emit(state.copyWith(

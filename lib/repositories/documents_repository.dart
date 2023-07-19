@@ -466,4 +466,26 @@ class DocumentsRepository {
       return null;
     });
   }
+
+  Future<String?> getLatestImage() async {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+
+    final userImageSnapshot = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(userId)
+        .collection("images")
+        .orderBy('timestamp', descending: true)
+        .limit(1)
+        .get();
+
+    if (userImageSnapshot.docs.isNotEmpty) {
+      // Sprawdź, czy dokumenty istnieją przed próbą pobrania danych
+      return userImageSnapshot.docs[0].get('downloadURL') as String;
+    }
+
+    return null; // Zwróć null, jeśli nie znaleziono URL avatara.
+  }
 }
