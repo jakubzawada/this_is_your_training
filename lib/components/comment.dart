@@ -25,21 +25,13 @@ class Comment extends StatelessWidget {
         children: [
           Text(text),
           const SizedBox(height: 5),
-          Row(
-            children: [
-              Text(
-                user,
-                style: TextStyle(color: Colors.grey[400]),
-              ),
-              Text(
-                " * ",
-                style: TextStyle(color: Colors.grey[400]),
-              ),
-              Text(
-                time,
-                style: TextStyle(color: Colors.grey[400]),
-              ),
-            ],
+          Text(
+            user,
+            style: TextStyle(color: Colors.grey[400]),
+          ),
+          Text(
+            time,
+            style: TextStyle(color: Colors.grey[400], fontSize: 13),
           ),
         ],
       ),

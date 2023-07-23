@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
+import 'package:this_is_your_training/models/post_model.dart';
 import 'package:this_is_your_training/repositories/documents_repository.dart';
 
 part 'forum_state.dart';
@@ -38,9 +39,19 @@ class ForumCubit extends Cubit<ForumState> {
         )
         .snapshots()
         .listen((data) {
+      final postModels = data.docs.map((doc) {
+        return PostModel(
+          id: doc.id,
+          avatarURL: doc['AvatarUrl'],
+          likes: List<String>.from(doc['Likes'] as List<dynamic>),
+          message: doc['Message'],
+          timeStamp: doc['TimeStamp'],
+          userEmail: doc['UserEmail'],
+        );
+      }).toList();
       emit(
         ForumState(
-          docs: data.docs,
+          docs: postModels,
           isLoading: false,
           errorMessage: '',
         ),
@@ -62,7 +73,6 @@ class ForumCubit extends Cubit<ForumState> {
   }) async {
     final currentUser = FirebaseAuth.instance.currentUser!;
 
-    // Pobierz najnowszy URL avatara użytkownika
     String? avatarUrl = await DocumentsRepository().getLatestImage();
 
     FirebaseFirestore.instance.collection("UsersPosts").add({
@@ -70,7 +80,7 @@ class ForumCubit extends Cubit<ForumState> {
       'Message': textController,
       'TimeStamp': Timestamp.now(),
       'Likes': [],
-      'AvatarUrl': avatarUrl, // Dodaj URL avatara autora postu do dokumentu.
+      'AvatarUrl': avatarUrl,
     });
   }
 

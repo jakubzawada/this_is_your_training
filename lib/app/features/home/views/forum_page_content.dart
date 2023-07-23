@@ -4,6 +4,7 @@ import 'package:this_is_your_training/app/features/home/views/cubit/forum_cubit.
 import 'package:this_is_your_training/app/features/home/views/cubit/my_account_cubit.dart';
 import 'package:this_is_your_training/components/post_page.dart';
 import 'package:this_is_your_training/helper/date_helper_methods.dart';
+import 'package:this_is_your_training/repositories/documents_repository.dart';
 
 class ForumPageContent extends StatelessWidget {
   ForumPageContent({
@@ -18,7 +19,7 @@ class ForumPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MyAccountCubit(),
+      create: (context) => MyAccountCubit(DocumentsRepository()),
       child: BlocProvider(
         create: (context) =>
             ForumCubit(avatarUrl: context.read<MyAccountCubit>().avatarUrl)
@@ -57,18 +58,14 @@ class ForumPageContent extends StatelessWidget {
                               return ListView.builder(
                                 itemCount: state.docs.length,
                                 itemBuilder: (context, index) {
-                                  final post = state.docs[index];
+                                  final postModel = state.docs[index];
                                   return PostPage(
-                                    message: post['Message'],
-                                    user: post['UserEmail'] ?? '',
-                                    postId: post.id,
-                                    likes:
-                                        List<String>.from(post['Likes'] ?? []),
-                                    time: formatDate(post['TimeStamp']),
-                                    avatarUrl: post['AvatarUrl'] ??
-                                        context
-                                            .read<MyAccountCubit>()
-                                            .avatarUrl,
+                                    message: postModel.message,
+                                    user: postModel.userEmail,
+                                    postId: postModel.id,
+                                    likes: List<String>.from(postModel.likes),
+                                    time: formatDate(postModel.timeStamp),
+                                    avatarUrl: postModel.avatarURL,
                                   );
                                 },
                               );

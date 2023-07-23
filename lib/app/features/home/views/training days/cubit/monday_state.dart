@@ -7,7 +7,7 @@ class MondayState {
   final String errorMessage;
 
   const MondayState({
-     this.documents = const [],
+    this.documents = const [],
     required this.isLoading,
     required this.errorMessage,
   });

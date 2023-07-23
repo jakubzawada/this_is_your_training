@@ -23,7 +23,7 @@ class SaturdayCubit extends Cubit<SaturdayState> {
     await _documentsRepository.delete5(id: documentid);
   }
 
-   StreamSubscription? _streamSubscription;
+  StreamSubscription? _streamSubscription;
 
   Future<void> start() async {
     emit(

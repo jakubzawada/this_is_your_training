@@ -4,23 +4,27 @@ part of 'login_cubit.dart';
 class LoginState {
   final bool isCreatingAccount;
   final String errorMessage;
-  final bool obscureText;
+  final bool isPasswordVisible;
+  final String password;
 
   const LoginState({
     required this.isCreatingAccount,
     required this.errorMessage,
-    this.obscureText = true,
+    this.isPasswordVisible = true,
+    required this.password,
   });
 
   LoginState copyWith({
     bool? isCreatingAccount,
     String? errorMessage,
-    bool? obscureText,
+    bool? isPasswordVisible,
+    String? password,
   }) {
     return LoginState(
       isCreatingAccount: isCreatingAccount ?? this.isCreatingAccount,
       errorMessage: errorMessage ?? this.errorMessage,
-      obscureText: obscureText ?? this.obscureText,
+      isPasswordVisible: isPasswordVisible ?? this.isPasswordVisible,
+      password: password ?? this.password,
     );
   }
 }

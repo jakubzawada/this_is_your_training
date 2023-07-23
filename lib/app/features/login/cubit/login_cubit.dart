@@ -11,22 +11,24 @@ class LoginCubit extends Cubit<LoginState> {
           const LoginState(
             isCreatingAccount: false,
             errorMessage: '',
+            password: '',
           ),
         );
 
-  Future<void> obscureText({required bool obscureText}) async {
-    emit(state.copyWith(obscureText: !state.obscureText));
+  void obscureText() {
+    emit(state.copyWith(isPasswordVisible: !state.isPasswordVisible));
   }
 
   Future<void> tooglAccountCreate(bool isCreatingAccount) async {
     emit(
-      const LoginState(isCreatingAccount: true, errorMessage: ''),
+      const LoginState(isCreatingAccount: true, errorMessage: '', password: ''),
     );
   }
 
   Future<void> tooglAccountLogin(bool isCreatingAccount) async {
     emit(
-      const LoginState(isCreatingAccount: false, errorMessage: ''),
+      const LoginState(
+          isCreatingAccount: false, errorMessage: '', password: ''),
     );
   }
 
@@ -46,6 +48,7 @@ class LoginCubit extends Cubit<LoginState> {
         LoginState(
           isCreatingAccount: false,
           errorMessage: error.toString(),
+          password: '',
         ),
       );
     }
@@ -67,6 +70,7 @@ class LoginCubit extends Cubit<LoginState> {
         LoginState(
           isCreatingAccount: false,
           errorMessage: error.toString(),
+          password: '',
         ),
       );
     }

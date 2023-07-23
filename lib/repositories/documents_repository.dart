@@ -5,6 +5,8 @@ import 'package:this_is_your_training/models/document_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class DocumentsRepository {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   Stream<List<DocumentModel>> getDocumentsStream() {
     final userId = FirebaseAuth.instance.currentUser?.uid;
     if (userId == null) {
@@ -482,10 +484,28 @@ class DocumentsRepository {
         .get();
 
     if (userImageSnapshot.docs.isNotEmpty) {
-      // Sprawdź, czy dokumenty istnieją przed próbą pobrania danych
       return userImageSnapshot.docs[0].get('downloadURL') as String;
     }
 
-    return null; // Zwróć null, jeśli nie znaleziono URL avatara.
+    return null;
+  }
+
+  Future<void> updatePostsWithNewAvatar(String? newAvatarUrl) async {
+    final currentUser = FirebaseAuth.instance.currentUser!;
+    final postsCollection = FirebaseFirestore.instance.collection('UsersPosts');
+
+    final userPostsSnapshot = await postsCollection
+        .where('UserEmail', isEqualTo: currentUser.email)
+        .get();
+
+    for (final postDoc in userPostsSnapshot.docs) {
+      await postDoc.reference.update({
+        'AvatarUrl': newAvatarUrl,
+      });
+    }
+  }
+
+  Future<void> deleteAccount() async {
+    await _auth.currentUser?.delete();
   }
 }

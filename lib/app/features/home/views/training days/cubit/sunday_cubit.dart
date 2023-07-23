@@ -15,7 +15,7 @@ class SundayCubit extends Cubit<SundayState> {
           ),
         );
 
-        final DocumentsRepository _documentsRepository;
+  final DocumentsRepository _documentsRepository;
 
   Future<void> dissmisible({
     required String documentid,

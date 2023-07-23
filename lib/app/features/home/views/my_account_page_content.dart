@@ -18,7 +18,7 @@ class MyAccountPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MyAccountCubit(),
+      create: (context) => MyAccountCubit(DocumentsRepository()),
       child: BlocBuilder<MyAccountCubit, MyAccountState>(
         builder: (context, state) {
           return Scaffold(
@@ -211,7 +211,8 @@ class MyAccountPageContent extends StatelessWidget {
                                         },
                                       ),
                                       BlocProvider(
-                                        create: (context) => MyAccountCubit(),
+                                        create: (context) => MyAccountCubit(
+                                            DocumentsRepository()),
                                         child: BlocBuilder<MyAccountCubit,
                                             MyAccountState>(
                                           builder: (context, state) {

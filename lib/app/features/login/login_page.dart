@@ -13,7 +13,6 @@ class LoginPage extends StatelessWidget {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -77,20 +76,20 @@ class LoginPage extends StatelessWidget {
                             ),
                             suffixIcon: GestureDetector(
                               onTap: () {
-                                context.read<LoginCubit>().obscureText(
-                                    obscureText: state.obscureText);
+                                context.read<LoginCubit>().obscureText();
                               },
                               child: Icon(
-                                  state.obscureText
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: Colors.deepPurple),
+                                state.isPasswordVisible
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Colors.deepPurple,
+                              ),
                             ),
                             hintText: 'Password',
                             fillColor: Colors.grey[200],
                             filled: true,
                           ),
-                          obscureText: state.obscureText,
+                          obscureText: state.isPasswordVisible,
                         ),
                         const SizedBox(height: 10),
                         Row(

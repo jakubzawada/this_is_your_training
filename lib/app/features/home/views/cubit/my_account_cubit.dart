@@ -1,19 +1,21 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
+import 'package:this_is_your_training/repositories/documents_repository.dart';
 
 part 'my_account_state.dart';
 
 class MyAccountCubit extends Cubit<MyAccountState> {
   String? avatarUrl;
-  MyAccountCubit()
+  MyAccountCubit(this._documentsRepository)
       : super(
           const MyAccountState(),
         );
+
+  final DocumentsRepository _documentsRepository;
 
   void selectImage({required ImageSource? imageSource}) async {
     if (imageSource != null) {
@@ -31,22 +33,11 @@ class MyAccountCubit extends Cubit<MyAccountState> {
   }
 
   Future<void> updatePostsWithNewAvatar(String? newAvatarUrl) async {
-    final currentUser = FirebaseAuth.instance.currentUser!;
-    final postsCollection = FirebaseFirestore.instance.collection('UsersPosts');
-
     try {
-      final userPostsSnapshot = await postsCollection
-          .where('UserEmail', isEqualTo: currentUser.email)
-          .get();
-
-      for (final postDoc in userPostsSnapshot.docs) {
-        await postDoc.reference.update({
-          'AvatarUrl': newAvatarUrl,
-        });
-      }
+      await _documentsRepository.updatePostsWithNewAvatar(newAvatarUrl);
+      emit(const MyAccountState(saved: true));
     } catch (error) {
-      // ignore: avoid_print
-      print('Error updating posts: $error');
+      emit(MyAccountState(errorMessage: error.toString()));
     }
   }
 
@@ -55,6 +46,11 @@ class MyAccountCubit extends Cubit<MyAccountState> {
   }
 
   Future<void> deleteAccount() async {
-    emit(state.copyWith(user: FirebaseAuth.instance.currentUser));
+    try {
+      await _documentsRepository.deleteAccount();
+      emit(const MyAccountState(saved: true));
+    } catch (error) {
+      emit(MyAccountState(errorMessage: error.toString()));
+    }
   }
 }
