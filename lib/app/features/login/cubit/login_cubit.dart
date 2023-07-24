@@ -1,12 +1,12 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:this_is_your_training/repositories/login_repository.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final TextEditingController passwordController;
 
-  LoginCubit({required this.passwordController})
+  LoginCubit(this._loginRepository, {required this.passwordController})
       : super(
           const LoginState(
             isCreatingAccount: false,
@@ -14,6 +14,8 @@ class LoginCubit extends Cubit<LoginState> {
             password: '',
           ),
         );
+
+  final LoginRepository _loginRepository;
 
   void obscureText() {
     emit(state.copyWith(isPasswordVisible: !state.isPasswordVisible));
@@ -38,10 +40,8 @@ class LoginCubit extends Cubit<LoginState> {
     required String errorMessage,
   }) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      await _loginRepository.loginAccount(
+          email: email, password: password, errorMessage: errorMessage);
     } catch (error) {
       passwordController.clear();
       emit(
@@ -60,10 +60,8 @@ class LoginCubit extends Cubit<LoginState> {
     required String errorMessage,
   }) async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      await _loginRepository.createAccount(
+          email: email, password: password, errorMessage: errorMessage);
     } catch (error) {
       passwordController.clear();
       emit(

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/app/features/login/cubit/login_cubit.dart';
 import 'package:this_is_your_training/app/features/login/forgot_pw_page.dart';
 import 'package:this_is_your_training/components/square_tile.dart';
+import 'package:this_is_your_training/repositories/login_repository.dart';
 import 'package:this_is_your_training/services/auth_service.dart';
 
 class LoginPage extends StatelessWidget {
@@ -19,7 +20,8 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.deepPurple[200],
       body: BlocProvider(
-        create: (context) => LoginCubit(passwordController: passwordController),
+        create: (context) => LoginCubit(LoginRepository(),
+            passwordController: passwordController),
         child: BlocBuilder<LoginCubit, LoginState>(
           builder: (context, state) {
             return ListView(
