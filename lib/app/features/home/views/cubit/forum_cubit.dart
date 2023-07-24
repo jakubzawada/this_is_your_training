@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:this_is_your_training/models/post_model.dart';
-import 'package:this_is_your_training/repositories/posts_repository.dart';
+import 'package:this_is_your_training/models/forum_model.dart';
+import 'package:this_is_your_training/repositories/forum_repository.dart';
 
 part 'forum_state.dart';
 
@@ -18,7 +18,7 @@ class ForumCubit extends Cubit<ForumState> {
           ),
         );
 
-  final PostRepository _postRepository;
+  final ForumRepository _postRepository;
 
   StreamSubscription? _streamSubscription;
 

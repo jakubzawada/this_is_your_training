@@ -4,8 +4,8 @@ import 'package:this_is_your_training/app/features/home/views/cubit/forum_cubit.
 import 'package:this_is_your_training/app/features/home/views/cubit/my_account_cubit.dart';
 import 'package:this_is_your_training/components/post_page.dart';
 import 'package:this_is_your_training/helper/date_helper_methods.dart';
-import 'package:this_is_your_training/repositories/documents_repository.dart';
-import 'package:this_is_your_training/repositories/posts_repository.dart';
+import 'package:this_is_your_training/repositories/forum_repository.dart';
+import 'package:this_is_your_training/repositories/my_account_repository.dart';
 
 class ForumPageContent extends StatelessWidget {
   ForumPageContent({
@@ -20,9 +20,9 @@ class ForumPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MyAccountCubit(DocumentsRepository()),
+      create: (context) => MyAccountCubit(MyAccountRepository()),
       child: BlocProvider(
-        create: (context) => ForumCubit(PostRepository(),
+        create: (context) => ForumCubit(ForumRepository(),
             avatarUrl: context.read<MyAccountCubit>().avatarUrl)
           ..start(),
         child: BlocBuilder<ForumCubit, ForumState>(

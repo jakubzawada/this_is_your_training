@@ -2,7 +2,7 @@ part of 'forum_cubit.dart';
 
 @immutable
 class ForumState {
-  final List<PostModel> docs;
+  final List<ForumModel> docs;
   final bool isLoading;
   final String errorMessage;
 

@@ -5,7 +5,7 @@ import 'package:this_is_your_training/app/cubit/root_cubit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/my_account_cubit.dart';
 import 'package:this_is_your_training/components/profile_picture2.dart';
-import 'package:this_is_your_training/repositories/documents_repository.dart';
+import 'package:this_is_your_training/repositories/my_account_repository.dart';
 
 class MyAccountPageContent extends StatelessWidget {
   const MyAccountPageContent({
@@ -18,7 +18,7 @@ class MyAccountPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MyAccountCubit(DocumentsRepository()),
+      create: (context) => MyAccountCubit(MyAccountRepository()),
       child: BlocBuilder<MyAccountCubit, MyAccountState>(
         builder: (context, state) {
           return Scaffold(
@@ -111,8 +111,8 @@ class MyAccountPageContent extends StatelessWidget {
                             bottom: 4,
                             child: InkWell(
                               onTap: () {
-                                DocumentsRepository repository =
-                                    DocumentsRepository();
+                                MyAccountRepository repository =
+                                    MyAccountRepository();
                                 if (state.selectedImage != null) {
                                   repository
                                       .uploadImage(state.selectedImage!)
@@ -212,7 +212,7 @@ class MyAccountPageContent extends StatelessWidget {
                                       ),
                                       BlocProvider(
                                         create: (context) => MyAccountCubit(
-                                            DocumentsRepository()),
+                                            MyAccountRepository()),
                                         child: BlocBuilder<MyAccountCubit,
                                             MyAccountState>(
                                           builder: (context, state) {

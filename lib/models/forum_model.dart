@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class PostModel {
-  PostModel({
+class ForumModel {
+  ForumModel({
     required this.id,
     required this.avatarURL,
     required this.likes,
