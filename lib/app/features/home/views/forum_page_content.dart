@@ -5,6 +5,7 @@ import 'package:this_is_your_training/app/features/home/views/cubit/my_account_c
 import 'package:this_is_your_training/components/post_page.dart';
 import 'package:this_is_your_training/helper/date_helper_methods.dart';
 import 'package:this_is_your_training/repositories/documents_repository.dart';
+import 'package:this_is_your_training/repositories/posts_repository.dart';
 
 class ForumPageContent extends StatelessWidget {
   ForumPageContent({
@@ -21,9 +22,9 @@ class ForumPageContent extends StatelessWidget {
     return BlocProvider(
       create: (context) => MyAccountCubit(DocumentsRepository()),
       child: BlocProvider(
-        create: (context) =>
-            ForumCubit(avatarUrl: context.read<MyAccountCubit>().avatarUrl)
-              ..start(),
+        create: (context) => ForumCubit(PostRepository(),
+            avatarUrl: context.read<MyAccountCubit>().avatarUrl)
+          ..start(),
         child: BlocBuilder<ForumCubit, ForumState>(
           builder: (context, state) {
             return Scaffold(

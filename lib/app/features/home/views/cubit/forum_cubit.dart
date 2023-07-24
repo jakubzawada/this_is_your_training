@@ -1,17 +1,15 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:this_is_your_training/models/post_model.dart';
-import 'package:this_is_your_training/repositories/documents_repository.dart';
+import 'package:this_is_your_training/repositories/posts_repository.dart';
 
 part 'forum_state.dart';
 
 class ForumCubit extends Cubit<ForumState> {
   String? avatarUrl;
-  ForumCubit({this.avatarUrl})
+  ForumCubit(this._postRepository, {this.avatarUrl})
       : super(
           const ForumState(
             docs: [],
@@ -19,6 +17,8 @@ class ForumCubit extends Cubit<ForumState> {
             isLoading: false,
           ),
         );
+
+  final PostRepository _postRepository;
 
   StreamSubscription? _streamSubscription;
 
@@ -31,27 +31,10 @@ class ForumCubit extends Cubit<ForumState> {
       ),
     );
 
-    _streamSubscription = FirebaseFirestore.instance
-        .collection("UsersPosts")
-        .orderBy(
-          "TimeStamp",
-          descending: false,
-        )
-        .snapshots()
-        .listen((data) {
-      final postModels = data.docs.map((doc) {
-        return PostModel(
-          id: doc.id,
-          avatarURL: doc['AvatarUrl'],
-          likes: List<String>.from(doc['Likes'] as List<dynamic>),
-          message: doc['Message'],
-          timeStamp: doc['TimeStamp'],
-          userEmail: doc['UserEmail'],
-        );
-      }).toList();
+    _streamSubscription = _postRepository.getPostsStream().listen((data) {
       emit(
         ForumState(
-          docs: postModels,
+          docs: data,
           isLoading: false,
           errorMessage: '',
         ),
@@ -71,17 +54,7 @@ class ForumCubit extends Cubit<ForumState> {
   Future<void> postMessage({
     required String textController,
   }) async {
-    final currentUser = FirebaseAuth.instance.currentUser!;
-
-    String? avatarUrl = await DocumentsRepository().getLatestImage();
-
-    FirebaseFirestore.instance.collection("UsersPosts").add({
-      'UserEmail': currentUser.email,
-      'Message': textController,
-      'TimeStamp': Timestamp.now(),
-      'Likes': [],
-      'AvatarUrl': avatarUrl,
-    });
+    await _postRepository.postMessage(textController: textController);
   }
 
   @override
