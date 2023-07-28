@@ -8,6 +8,8 @@ import 'package:this_is_your_training/components/cubit/post_delete_cubit.dart';
 import 'package:this_is_your_training/components/like_button.dart';
 import 'package:this_is_your_training/components/profile_picture.dart';
 import 'package:this_is_your_training/helper/date_helper_methods.dart';
+import 'package:this_is_your_training/repositories/documents_repository.dart';
+import 'package:this_is_your_training/repositories/post_repository.dart';
 
 class PostPage extends StatelessWidget {
   final String message;
@@ -31,7 +33,7 @@ class PostPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PostCubit()..start(postId: postId),
+      create: (context) => PostCubit(PostRepository())..start(postId: postId),
       child: BlocBuilder<PostCubit, PostState>(
         builder: (context, state) {
           return Container(
@@ -95,7 +97,8 @@ class PostPage extends StatelessWidget {
                                         child: const Text('Cancel'),
                                       ),
                                       BlocProvider(
-                                        create: (context) => PostDeleteCubit(),
+                                        create: (context) => PostDeleteCubit(
+                                            DocumentsRepository()),
                                         child: BlocBuilder<PostDeleteCubit,
                                             PostDeleteState>(
                                           builder: (context, state) {
@@ -173,7 +176,8 @@ class PostPage extends StatelessWidget {
                               child: const Text("Cancel"),
                             ),
                             BlocProvider(
-                              create: (context) => AddCommentCubit(),
+                              create: (context) =>
+                                  AddCommentCubit(DocumentsRepository()),
                               child:
                                   BlocBuilder<AddCommentCubit, AddCommentState>(
                                 builder: (context, state) {
@@ -210,18 +214,19 @@ class PostPage extends StatelessWidget {
                       );
                     }
 
-                    return ListView(
+                    return ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      children: state.docs.map((doc) {
-                        final commentData = doc.data() as Map<String, dynamic>;
+                      itemCount: state.docs.length,
+                      itemBuilder: (context, index) {
+                        final postModel = state.docs[index];
 
                         return Comment(
-                          text: commentData["CommentText"],
-                          user: commentData["CommentedBy"],
-                          time: formatDate(commentData["CommentTime"]),
+                          text: postModel.commentText,
+                          user: postModel.commentedBy,
+                          time: formatDate(postModel.commentTime),
                         );
-                      }).toList(),
+                      },
                     );
                   },
                 ),

@@ -2,7 +2,7 @@ part of 'post_cubit.dart';
 
 @immutable
 class PostState {
-  final List<DocumentSnapshot<Object?>> docs;
+  final List<PostModel> docs;
   final bool isLoading;
   final String errorMessage;
   final currentUser = FirebaseAuth.instance.currentUser!;
@@ -10,7 +10,7 @@ class PostState {
   final String avatarUrl;
 
   PostState({
-    required this.docs,
+    this.docs = const [],
     required this.isLoading,
     required this.errorMessage,
     this.isLiked = false,
@@ -18,7 +18,7 @@ class PostState {
   });
 
   PostState copyWith({
-    List<DocumentSnapshot<Object?>>? docs,
+    List<PostModel>? docs,
     String? errorMessage,
     bool? isLoading,
     bool? isLiked,
