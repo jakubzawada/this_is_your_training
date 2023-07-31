@@ -57,9 +57,9 @@ class PostCubit extends Cubit<PostState> {
         commentText: commentText,
       );
 
-      emit(state.copyWith(
-        docs: [...state.docs, newComment],
-      ));
+      List<PostModel> updatedComments = [...state.docs, newComment];
+
+      emit(state.copyWith(docs: updatedComments));
     } catch (error) {
       emit(state.copyWith(
         isLoading: false,

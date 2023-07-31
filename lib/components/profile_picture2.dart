@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:this_is_your_training/repositories/documents_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class ProfilePicture2 extends StatefulWidget {
+class ProfilePicture2 extends StatelessWidget {
   final double radius;
 
   const ProfilePicture2({
@@ -11,26 +11,16 @@ class ProfilePicture2 extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ProfilePicture2> createState() => _ProfilePicture2State();
-}
-
-class _ProfilePicture2State extends State<ProfilePicture2> {
-  late Stream<String?> imagesStream;
-
-  @override
-  void initState() {
-    super.initState();
-    imagesStream = DocumentsRepository().getLatestImageStream();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final userId = FirebaseAuth.instance.currentUser?.uid;
     if (userId == null) {
       throw Exception('User is not logged in');
     }
+
+    final imagesStream = DocumentsRepository().getLatestImageStream();
+
     return CircleAvatar(
-      radius: widget.radius,
+      radius: radius,
       child: StreamBuilder<String?>(
         stream: imagesStream,
         builder: (context, snapshot) {
@@ -55,8 +45,8 @@ class _ProfilePicture2State extends State<ProfilePicture2> {
             );
           }
           return Container(
-            width: widget.radius * 2,
-            height: widget.radius * 2,
+            width: radius * 2,
+            height: radius * 2,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(

@@ -10,7 +10,7 @@ class LoginState {
   const LoginState({
     required this.isCreatingAccount,
     required this.errorMessage,
-    this.isPasswordVisible = true,
+    this.isPasswordVisible = false,
     required this.password,
   });
 
