@@ -3,12 +3,12 @@ import 'package:this_is_your_training/data/forum_data_sources/forum_remote_data_
 import 'package:this_is_your_training/models/forum_model.dart';
 
 class ForumRepository {
-  final ForumRemoteDataSource _dataSource;
+  final ForumRemoteDataSource _forumdataSource;
 
-  ForumRepository(this._dataSource);
+  ForumRepository(this._forumdataSource);
 
   Stream<List<ForumModel>> getPostsStream() {
-    return _dataSource.getPostsData().map((querySnapshot) {
+    return _forumdataSource.getPostsData().map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
           return ForumModel(
@@ -28,9 +28,9 @@ class ForumRepository {
     required String textController,
   }) async {
     final currentUser = FirebaseAuth.instance.currentUser!;
-    String? avatarUrl = await _dataSource.getLatestImage(currentUser.uid);
+    String? avatarUrl = await _forumdataSource.getLatestImage(currentUser.uid);
 
-    await _dataSource.postMessage(
+    await _forumdataSource.postMessage(
       textController: textController,
       avatarUrl: avatarUrl!,
     );

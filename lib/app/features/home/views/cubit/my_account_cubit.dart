@@ -17,7 +17,7 @@ class MyAccountCubit extends Cubit<MyAccountState> {
 
   final MyAccountRepository _myAccountRepository;
 
-  void selectImage({required ImageSource? imageSource}) async {
+  Future<void> selectImage({required ImageSource? imageSource}) async {
     if (imageSource != null) {
       final pickedImage = await ImagePicker().pickImage(source: imageSource);
       if (pickedImage != null) {
@@ -26,7 +26,7 @@ class MyAccountCubit extends Cubit<MyAccountState> {
     }
   }
 
-  void setAvatarUrl(String? newAvatarUrl) {
+  Future<void> setAvatarUrl(String? newAvatarUrl) async {
     emit(state.copyWith(avatarUrl: newAvatarUrl));
     avatarUrl = newAvatarUrl;
     updatePostsWithNewAvatar(newAvatarUrl);
@@ -41,7 +41,7 @@ class MyAccountCubit extends Cubit<MyAccountState> {
     }
   }
 
-  void updateAvatarUrl(String? avatarUrl) {
+  Future<void> updateAvatarUrl(String? avatarUrl) async {
     emit(state.copyWith(avatarUrl: avatarUrl));
   }
 

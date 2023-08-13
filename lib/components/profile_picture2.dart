@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:this_is_your_training/repositories/documents_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:this_is_your_training/data/forum_data_sources/my_account_remote_data_source.dart';
+import 'package:this_is_your_training/repositories/my_account_repository.dart';
 
 class ProfilePicture2 extends StatelessWidget {
   final double radius;
@@ -17,7 +18,8 @@ class ProfilePicture2 extends StatelessWidget {
       throw Exception('User is not logged in');
     }
 
-    final imagesStream = DocumentsRepository().getLatestImageStream();
+    final imagesStream =
+        MyAccountRepository(MyAccountRemoteDataSource()).getLatestImageStream();
 
     return CircleAvatar(
       radius: radius,

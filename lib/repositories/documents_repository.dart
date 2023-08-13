@@ -417,25 +417,4 @@ class DocumentsRepository {
       },
     );
   }
-
-  Stream<String?> getLatestImageStream() {
-    final userId = FirebaseAuth.instance.currentUser?.uid; ////profilepicture2
-    if (userId == null) {
-      throw Exception('User is not logged in');
-    }
-
-    return FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .collection('images')
-        .orderBy('timestamp', descending: true)
-        .limit(1)
-        .snapshots()
-        .map((querySnapshot) {
-      if (querySnapshot.docs.isNotEmpty) {
-        return querySnapshot.docs[0]['downloadURL'] as String;
-      }
-      return null;
-    });
-  }
 }
