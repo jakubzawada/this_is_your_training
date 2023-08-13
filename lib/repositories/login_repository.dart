@@ -1,15 +1,17 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:this_is_your_training/data/forum_data_sources/login_remote_data_source.dart';
 
 class LoginRepository {
+  LoginRepository(this._loginDataSource);
+
+  final LoginRemoteDataSource _loginDataSource;
+
   Future<void> loginAccount({
     required String email,
     required String password,
     required String errorMessage,
   }) async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+    await _loginDataSource.loginAccount(
+        email: email, password: password, errorMessage: errorMessage);
   }
 
   Future<void> createAccount({
@@ -17,9 +19,7 @@ class LoginRepository {
     required String password,
     required String errorMessage,
   }) async {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+    await _loginDataSource.createAccount(
+        email: email, password: password, errorMessage: errorMessage);
   }
 }
