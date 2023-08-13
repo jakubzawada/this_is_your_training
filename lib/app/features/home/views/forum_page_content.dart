@@ -23,7 +23,8 @@ class ForumPageContent extends StatelessWidget {
     return BlocProvider(
       create: (context) => MyAccountCubit(MyAccountRepository()),
       child: BlocProvider(
-        create: (context) => ForumCubit(ForumRepository(ForumDataSource()),
+        create: (context) => ForumCubit(
+            ForumRepository(ForumRemoteDataSource()),
             avatarUrl: context.read<MyAccountCubit>().avatarUrl)
           ..start(),
         child: BlocBuilder<ForumCubit, ForumState>(

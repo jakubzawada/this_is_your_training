@@ -3,7 +3,7 @@ import 'package:this_is_your_training/data/forum_data_sources/forum_remote_data_
 import 'package:this_is_your_training/models/forum_model.dart';
 
 class ForumRepository {
-  final ForumDataSource _dataSource;
+  final ForumRemoteDataSource _dataSource;
 
   ForumRepository(this._dataSource);
 

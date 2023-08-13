@@ -51,20 +51,22 @@ class PostCubit extends Cubit<PostState> {
     required String postId,
     required String commentText,
   }) async {
+    await _postRepository.addComment(postId: postId, commentText: commentText);
+  }
+
+  Future<void> refreshPost({required String postId}) async {
     try {
-      PostModel newComment = await _postRepository.addComment(
-        postId: postId,
-        commentText: commentText,
-      );
-
-      List<PostModel> updatedComments = [...state.docs, newComment];
-
-      emit(state.copyWith(docs: updatedComments));
+      PostState postState = await _postRepository.getPost(postId);
+      emit(postState);
     } catch (error) {
       emit(state.copyWith(
         isLoading: false,
         errorMessage: error.toString(),
       ));
     }
+  }
+
+  Future<void> postDelete({required String postId}) async {
+    await _postRepository.postDelete(postId: postId);
   }
 }

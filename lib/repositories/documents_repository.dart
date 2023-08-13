@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:this_is_your_training/models/document_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -438,40 +436,6 @@ class DocumentsRepository {
         return querySnapshot.docs[0]['downloadURL'] as String;
       }
       return null;
-    });
-  }
-
-  Future<void> postDelete({required String postId}) async {
-    final commentDocs = await FirebaseFirestore.instance //postdelatecubit
-        .collection("UsersPosts")
-        .doc(postId)
-        .collection("Comments")
-        .get();
-
-    for (var doc in commentDocs.docs) {
-      await doc.reference.delete();
-    }
-
-    FirebaseFirestore.instance
-        .collection("UsersPosts")
-        .doc(postId)
-        .delete()
-        .then((value) => print('post deleted'))
-        .catchError((error) => print('failed to delete post: $error'));
-  }
-
-  Future<void> addComment({
-    required String postId, //addcommentcubit
-    required String commentText,
-  }) async {
-    FirebaseFirestore.instance
-        .collection("UsersPosts")
-        .doc(postId)
-        .collection("Comments")
-        .add({
-      "CommentText": commentText,
-      "CommentedBy": currentUser.email,
-      "CommentTime": Timestamp.now()
     });
   }
 }

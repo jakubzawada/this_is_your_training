@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/components/comment.dart';
 import 'package:this_is_your_training/components/comment_button.dart';
-import 'package:this_is_your_training/components/cubit/add_comment_cubit.dart';
 import 'package:this_is_your_training/components/cubit/post_cubit.dart';
-import 'package:this_is_your_training/components/cubit/post_delete_cubit.dart';
 import 'package:this_is_your_training/components/like_button.dart';
 import 'package:this_is_your_training/components/profile_picture.dart';
+import 'package:this_is_your_training/data/forum_data_sources/post_remote_data_source.dart';
 import 'package:this_is_your_training/helper/date_helper_methods.dart';
-import 'package:this_is_your_training/repositories/documents_repository.dart';
 import 'package:this_is_your_training/repositories/post_repository.dart';
 
 class PostPage extends StatelessWidget {
@@ -33,7 +31,8 @@ class PostPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PostCubit(PostRepository())..start(postId: postId),
+      create: (context) => PostCubit(PostRepository(PostRemoteDataSource()))
+        ..start(postId: postId),
       child: BlocBuilder<PostCubit, PostState>(
         builder: (context, state) {
           return Container(
@@ -97,16 +96,18 @@ class PostPage extends StatelessWidget {
                                         child: const Text('Cancel'),
                                       ),
                                       BlocProvider(
-                                        create: (context) => PostDeleteCubit(
-                                            DocumentsRepository()),
-                                        child: BlocBuilder<PostDeleteCubit,
-                                            PostDeleteState>(
+                                        create: (context) => PostCubit(
+                                            PostRepository(
+                                                PostRemoteDataSource())),
+                                        child:
+                                            BlocBuilder<PostCubit, PostState>(
                                           builder: (context, state) {
                                             return TextButton(
                                               onPressed: () async {
                                                 context
-                                                    .read<PostDeleteCubit>()
+                                                    .read<PostCubit>()
                                                     .postDelete(postId: postId);
+
                                                 Navigator.pop(context);
                                               },
                                               child: const Text('Delete'),
@@ -170,29 +171,25 @@ class PostPage extends StatelessWidget {
                           actions: [
                             TextButton(
                               onPressed: () {
-                                Navigator.pop(context);
                                 _commentTextContoller.clear();
+                                Navigator.pop(context);
                               },
                               child: const Text("Cancel"),
                             ),
                             BlocProvider(
-                              create: (context) =>
-                                  AddCommentCubit(DocumentsRepository()),
-                              child:
-                                  BlocBuilder<AddCommentCubit, AddCommentState>(
+                              create: (context) => PostCubit(
+                                  PostRepository(PostRemoteDataSource())),
+                              child: BlocBuilder<PostCubit, PostState>(
                                 builder: (context, state) {
                                   return TextButton(
                                     onPressed: () {
-                                      (String commentText) {
-                                        context
-                                            .read<AddCommentCubit>()
-                                            .addComment(
-                                                postId: postId,
-                                                commentText: commentText);
-                                      }(_commentTextContoller.text);
-                                      Navigator.pop(context);
-
+                                      context.read<PostCubit>().addComment(
+                                            postId: postId,
+                                            commentText:
+                                                _commentTextContoller.text,
+                                          );
                                       _commentTextContoller.clear();
+                                      Navigator.pop(context);
                                     },
                                     child: const Text("Post"),
                                   );
@@ -229,6 +226,15 @@ class PostPage extends StatelessWidget {
                       },
                     );
                   },
+                ),
+                IconButton(
+                  onPressed: () {
+                    context.read<PostCubit>().refreshPost(postId: postId);
+                  },
+                  icon: const Icon(
+                    Icons.refresh,
+                    color: Colors.black26,
+                  ),
                 ),
               ],
             ),
