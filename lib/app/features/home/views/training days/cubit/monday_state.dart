@@ -2,7 +2,7 @@ part of 'monday_cubit.dart';
 
 @immutable
 class MondayState {
-  final List<DocumentModel> documents;
+  final List<TrainingModel> documents;
   final bool isLoading;
   final String errorMessage;
 

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/app/features/home/views/training%20days/cubit/sunday_cubit.dart';
-import 'package:this_is_your_training/repositories/documents_repository.dart';
+import 'package:this_is_your_training/data/forum_data_sources/training_remote_data_source.dart';
+import 'package:this_is_your_training/repositories/trainings_documents_repository.dart';
 
 import 'add exercises/add_sunday_exercise_page_content.dart';
 
@@ -100,8 +101,10 @@ class SundayPageContent extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     BlocProvider(
-                      create: (context) =>
-                          SundayCubit(DocumentsRepository())..start(),
+                      create: (context) => SundayCubit(
+                          TrainingsDocumentsRepository(
+                              TrainingsRemoteDataSource()))
+                        ..start(),
                       child: BlocBuilder<SundayCubit, SundayState>(
                         builder: (context, state) {
                           if (state.errorMessage.isNotEmpty) {

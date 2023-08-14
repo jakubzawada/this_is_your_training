@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:this_is_your_training/models/document_model.dart';
-import 'package:this_is_your_training/repositories/documents_repository.dart';
+import 'package:this_is_your_training/models/training_model.dart';
+import 'package:this_is_your_training/repositories/trainings_documents_repository.dart';
 part 'wednesday_state.dart';
 
 class WednesdayCubit extends Cubit<WednesdayState> {
@@ -15,7 +15,7 @@ class WednesdayCubit extends Cubit<WednesdayState> {
           ),
         );
 
-  final DocumentsRepository _documentsRepository;
+  final TrainingsDocumentsRepository _documentsRepository;
 
   Future<void> dissmisible({
     required String documentid,

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:this_is_your_training/repositories/documents_repository.dart';
+import 'package:this_is_your_training/repositories/trainings_documents_repository.dart';
 
 part 'sunday_exercise_state.dart';
 
@@ -10,7 +10,7 @@ class SundayExerciseCubit extends Cubit<SundayExerciseState> {
           const SundayExerciseState(),
         );
 
-  final DocumentsRepository _documentsRepository;
+  final TrainingsDocumentsRepository _documentsRepository;
 
   Future<void> uploadName6(String newValue) async {
     emit(SundayExerciseState(

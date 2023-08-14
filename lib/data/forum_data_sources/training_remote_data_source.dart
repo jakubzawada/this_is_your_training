@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:this_is_your_training/models/document_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class DocumentsRepository {
+class TrainingsRemoteDataSource {
   final currentUser = FirebaseAuth.instance.currentUser!;
-  Stream<List<DocumentModel>> getDocumentsStream() {
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getDocumentsStream() {
     final userId = FirebaseAuth.instance.currentUser?.uid;
 
     if (userId == null) {
@@ -14,19 +14,7 @@ class DocumentsRepository {
         .collection('users')
         .doc(userId)
         .collection('trainings')
-        .snapshots()
-        .map((querySnapshot) {
-      return querySnapshot.docs.map(
-        (doc) {
-          return DocumentModel(
-            id: doc.id,
-            name: doc['name'],
-            series: doc['series'],
-            repeat: doc['repeat'],
-          );
-        },
-      ).toList();
-    });
+        .snapshots();
   }
 
   Future<void> delete({required String id}) {
@@ -64,8 +52,9 @@ class DocumentsRepository {
     );
   }
 
-  Stream<List<DocumentModel>> getDocumentsStream1() {
+  Stream<QuerySnapshot<Map<String, dynamic>>> getDocumentsStream1() {
     final userId = FirebaseAuth.instance.currentUser?.uid;
+
     if (userId == null) {
       throw Exception('User is not logged in');
     }
@@ -73,19 +62,7 @@ class DocumentsRepository {
         .collection('users')
         .doc(userId)
         .collection('trainings1')
-        .snapshots()
-        .map((querySnapshot) {
-      return querySnapshot.docs.map(
-        (doc) {
-          return DocumentModel(
-            id: doc.id,
-            name: doc['name1'],
-            series: doc['series1'],
-            repeat: doc['repeat1'],
-          );
-        },
-      ).toList();
-    });
+        .snapshots();
   }
 
   Future<void> delete1({required String id}) {
@@ -123,8 +100,9 @@ class DocumentsRepository {
     );
   }
 
-  Stream<List<DocumentModel>> getDocumentsStream2() {
+  Stream<QuerySnapshot<Map<String, dynamic>>> getDocumentsStream2() {
     final userId = FirebaseAuth.instance.currentUser?.uid;
+
     if (userId == null) {
       throw Exception('User is not logged in');
     }
@@ -132,19 +110,7 @@ class DocumentsRepository {
         .collection('users')
         .doc(userId)
         .collection('trainings2')
-        .snapshots()
-        .map((querySnapshot) {
-      return querySnapshot.docs.map(
-        (doc) {
-          return DocumentModel(
-            id: doc.id,
-            name: doc['name2'],
-            series: doc['series2'],
-            repeat: doc['repeat2'],
-          );
-        },
-      ).toList();
-    });
+        .snapshots();
   }
 
   Future<void> delete2({required String id}) {
@@ -182,8 +148,9 @@ class DocumentsRepository {
     );
   }
 
-  Stream<List<DocumentModel>> getDocumentsStream3() {
+  Stream<QuerySnapshot<Map<String, dynamic>>> getDocumentsStream3() {
     final userId = FirebaseAuth.instance.currentUser?.uid;
+
     if (userId == null) {
       throw Exception('User is not logged in');
     }
@@ -191,19 +158,7 @@ class DocumentsRepository {
         .collection('users')
         .doc(userId)
         .collection('trainings3')
-        .snapshots()
-        .map((querySnapshot) {
-      return querySnapshot.docs.map(
-        (doc) {
-          return DocumentModel(
-            id: doc.id,
-            name: doc['name3'],
-            series: doc['series3'],
-            repeat: doc['repeat3'],
-          );
-        },
-      ).toList();
-    });
+        .snapshots();
   }
 
   Future<void> delete3({required String id}) {
@@ -241,8 +196,9 @@ class DocumentsRepository {
     );
   }
 
-  Stream<List<DocumentModel>> getDocumentsStream4() {
+  Stream<QuerySnapshot<Map<String, dynamic>>> getDocumentsStream4() {
     final userId = FirebaseAuth.instance.currentUser?.uid;
+
     if (userId == null) {
       throw Exception('User is not logged in');
     }
@@ -250,19 +206,7 @@ class DocumentsRepository {
         .collection('users')
         .doc(userId)
         .collection('trainings4')
-        .snapshots()
-        .map((querySnapshot) {
-      return querySnapshot.docs.map(
-        (doc) {
-          return DocumentModel(
-            id: doc.id,
-            name: doc['name4'],
-            series: doc['series4'],
-            repeat: doc['repeat4'],
-          );
-        },
-      ).toList();
-    });
+        .snapshots();
   }
 
   Future<void> delete4({required String id}) {
@@ -300,8 +244,9 @@ class DocumentsRepository {
     );
   }
 
-  Stream<List<DocumentModel>> getDocumentsStream5() {
+  Stream<QuerySnapshot<Map<String, dynamic>>> getDocumentsStream5() {
     final userId = FirebaseAuth.instance.currentUser?.uid;
+
     if (userId == null) {
       throw Exception('User is not logged in');
     }
@@ -309,19 +254,7 @@ class DocumentsRepository {
         .collection('users')
         .doc(userId)
         .collection('trainings5')
-        .snapshots()
-        .map((querySnapshot) {
-      return querySnapshot.docs.map(
-        (doc) {
-          return DocumentModel(
-            id: doc.id,
-            name: doc['name5'],
-            series: doc['series5'],
-            repeat: doc['repeat5'],
-          );
-        },
-      ).toList();
-    });
+        .snapshots();
   }
 
   Future<void> delete5({required String id}) {
@@ -359,8 +292,9 @@ class DocumentsRepository {
     );
   }
 
-  Stream<List<DocumentModel>> getDocumentsStream6() {
+  Stream<QuerySnapshot<Map<String, dynamic>>> getDocumentsStream6() {
     final userId = FirebaseAuth.instance.currentUser?.uid;
+
     if (userId == null) {
       throw Exception('User is not logged in');
     }
@@ -368,19 +302,7 @@ class DocumentsRepository {
         .collection('users')
         .doc(userId)
         .collection('trainings6')
-        .snapshots()
-        .map((querySnapshot) {
-      return querySnapshot.docs.map(
-        (doc) {
-          return DocumentModel(
-            id: doc.id,
-            name: doc['name6'],
-            series: doc['series6'],
-            repeat: doc['repeat6'],
-          );
-        },
-      ).toList();
-    });
+        .snapshots();
   }
 
   Future<void> delete6({required String id}) {
@@ -408,7 +330,7 @@ class DocumentsRepository {
     await FirebaseFirestore.instance
         .collection('users')
         .doc(userId)
-        .collection('trainings6')
+        .collection('trainings1')
         .add(
       {
         'name6': exerciseName,

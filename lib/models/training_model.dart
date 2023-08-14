@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-class DocumentModel {
-  DocumentModel(
+class TrainingModel {
+  TrainingModel(
       {required this.name,
       required this.id,
       required this.series,
