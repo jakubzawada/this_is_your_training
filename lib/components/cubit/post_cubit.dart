@@ -51,7 +51,16 @@ class PostCubit extends Cubit<PostState> {
     required String postId,
     required String commentText,
   }) async {
-    await _postRepository.addComment(postId: postId, commentText: commentText);
+    try {
+      await _postRepository.addComment(
+          postId: postId, commentText: commentText);
+      refreshPost(postId: postId);
+      emit(
+        state.copyWith(saved: true),
+      );
+    } catch (error) {
+      emit(state.copyWith(errorMessage: error.toString()));
+    }
   }
 
   Future<void> refreshPost({required String postId}) async {
@@ -67,6 +76,13 @@ class PostCubit extends Cubit<PostState> {
   }
 
   Future<void> postDelete({required String postId}) async {
-    await _postRepository.postDelete(postId: postId);
+    try {
+      await _postRepository.postDelete(postId: postId);
+      emit(
+        state.copyWith(saved: true),
+      );
+    } catch (error) {
+      emit(state.copyWith(errorMessage: error.toString()));
+    }
   }
 }

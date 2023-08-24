@@ -9,12 +9,11 @@ class TrainingsDocumentsRepository {
     return _trainingsDataSource.getDocumentsStream().map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
-          return TrainingModel(
-            id: doc.id,
-            name: doc['name'],
-            series: doc['series'],
-            repeat: doc['repeat'],
-          );
+          return TrainingModel.fromJson({
+            'name': doc['name'],
+            'series': doc['series'],
+            'repeat': doc['repeat'],
+          }, doc.id);
         },
       ).toList();
     });

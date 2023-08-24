@@ -121,7 +121,6 @@ class MyAccountPageContent extends StatelessWidget {
                                   repository
                                       .uploadImage(state.selectedImage!)
                                       .then((downloadURL) {
-                                    // Po zakończeniu przesyłania, ustaw avatarUrl w stanie
                                     context
                                         .read<MyAccountCubit>()
                                         .setAvatarUrl(downloadURL);
