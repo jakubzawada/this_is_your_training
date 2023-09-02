@@ -236,15 +236,11 @@ class LoginPage extends StatelessWidget {
                               imagePath: 'images/google.png',
                             ),
                             const SizedBox(width: 20),
-                            // apple button
-                            SquareTile(
-                              onTap: () {},
-                              imagePath: 'images/apple.png',
-                            ),
-                            const SizedBox(width: 20),
                             // fb button
                             SquareTile(
-                              onTap: () {},
+                              onTap: () {
+                                AuthService().signInWithFacebook();
+                              },
                               imagePath: 'images/fb.png',
                             ),
                           ],

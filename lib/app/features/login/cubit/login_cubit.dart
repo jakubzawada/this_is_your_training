@@ -17,8 +17,10 @@ class LoginCubit extends Cubit<LoginState> {
 
   final LoginRepository _loginRepository;
 
-  void obscureText() {
-    emit(state.copyWith(isPasswordVisible: !state.isPasswordVisible));
+  Future<void> obscureText() async {
+    emit(state.copyWith(
+      isPasswordVisible: !state.isPasswordVisible,
+    ));
   }
 
   Future<void> tooglAccountCreate(bool isCreatingAccount) async {
