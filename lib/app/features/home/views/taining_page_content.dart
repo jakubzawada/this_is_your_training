@@ -181,7 +181,7 @@ class ContainerUI extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-              color: Colors.black.withOpacity(0.15),
+              color: Colors.black.withOpacity(0.1),
               spreadRadius: 5,
               blurRadius: 7,
               offset: const Offset(4, 8)),

@@ -107,9 +107,12 @@ class FridayPageContent extends StatelessWidget {
                       child: BlocBuilder<FridayCubit, FridayState>(
                         builder: (context, state) {
                           if (state.errorMessage.isNotEmpty) {
-                            return Center(
-                              child: Text(
-                                'Something went wrong: ${state.errorMessage}',
+                            return Container(
+                              constraints: const BoxConstraints(maxWidth: 350),
+                              child: Center(
+                                child: Text(
+                                  'Something went wrong: ${state.errorMessage}',
+                                ),
                               ),
                             );
                           }

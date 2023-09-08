@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/app/features/home/views/training%20days/cubit/tuesday_cubit.dart';
 import 'package:this_is_your_training/data/forum_data_sources/training_remote_data_source.dart';
 import 'package:this_is_your_training/repositories/trainings_documents_repository.dart';
-
 import 'add exercises/add_tuesday_exercise_page_content.dart';
 
 class TuesdayPageContent extends StatelessWidget {
@@ -108,9 +107,12 @@ class TuesdayPageContent extends StatelessWidget {
                       child: BlocBuilder<TuesdayCubit, TuesdayState>(
                         builder: (context, state) {
                           if (state.errorMessage.isNotEmpty) {
-                            return Center(
-                              child: Text(
-                                'Something went wrong: ${state.errorMessage}',
+                            return Container(
+                              constraints: const BoxConstraints(maxWidth: 350),
+                              child: Center(
+                                child: Text(
+                                  'Something went wrong: ${state.errorMessage}',
+                                ),
                               ),
                             );
                           }

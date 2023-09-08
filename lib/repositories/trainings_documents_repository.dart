@@ -9,11 +9,9 @@ class TrainingsDocumentsRepository {
     return _trainingsDataSource.getDocumentsStream().map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
-          return TrainingModel.fromJson({
-            'name': doc['name'],
-            'series': doc['series'],
-            'repeat': doc['repeat'],
-          }, doc.id);
+          final json = doc.data();
+          json['id'] = doc.id;
+          return TrainingModel.fromJson(json);
         },
       ).toList();
     });
@@ -35,12 +33,9 @@ class TrainingsDocumentsRepository {
     return _trainingsDataSource.getDocumentsStream1().map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
-          return TrainingModel(
-            id: doc.id,
-            name: doc['name1'],
-            series: doc['series1'],
-            repeat: doc['repeat1'],
-          );
+          final json = doc.data();
+          json['id1'] = doc.id;
+          return TrainingModel.fromJson1(json);
         },
       ).toList();
     });
@@ -62,12 +57,9 @@ class TrainingsDocumentsRepository {
     return _trainingsDataSource.getDocumentsStream2().map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
-          return TrainingModel(
-            id: doc.id,
-            name: doc['name2'],
-            series: doc['series2'],
-            repeat: doc['repeat2'],
-          );
+          final json = doc.data();
+          json['id2'] = doc.id;
+          return TrainingModel.fromJson2(json);
         },
       ).toList();
     });
@@ -89,12 +81,9 @@ class TrainingsDocumentsRepository {
     return _trainingsDataSource.getDocumentsStream3().map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
-          return TrainingModel(
-            id: doc.id,
-            name: doc['name3'],
-            series: doc['series3'],
-            repeat: doc['repeat3'],
-          );
+          final json = doc.data();
+          json['id3'] = doc.id;
+          return TrainingModel.fromJson3(json);
         },
       ).toList();
     });
@@ -116,12 +105,9 @@ class TrainingsDocumentsRepository {
     return _trainingsDataSource.getDocumentsStream4().map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
-          return TrainingModel(
-            id: doc.id,
-            name: doc['name4'],
-            series: doc['series4'],
-            repeat: doc['repeat4'],
-          );
+          final json = doc.data();
+          json['id4'] = doc.id;
+          return TrainingModel.fromJson4(json);
         },
       ).toList();
     });
@@ -143,12 +129,9 @@ class TrainingsDocumentsRepository {
     return _trainingsDataSource.getDocumentsStream5().map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
-          return TrainingModel(
-            id: doc.id,
-            name: doc['name5'],
-            series: doc['series5'],
-            repeat: doc['repeat5'],
-          );
+          final json = doc.data();
+          json['id5'] = doc.id;
+          return TrainingModel.fromJson5(json);
         },
       ).toList();
     });
@@ -170,12 +153,9 @@ class TrainingsDocumentsRepository {
     return _trainingsDataSource.getDocumentsStream6().map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
-          return TrainingModel(
-            id: doc.id,
-            name: doc['name6'],
-            series: doc['series6'],
-            repeat: doc['repeat6'],
-          );
+          final json = doc.data();
+          json['id6'] = doc.id;
+          return TrainingModel.fromJson6(json);
         },
       ).toList();
     });
