@@ -19,6 +19,4 @@ class PostModel {
       commentedBy: data['CommentedBy'],
     );
   }
-
-  static fromMap(commentMap) {}
 }
