@@ -13,16 +13,7 @@ class ForumRepository {
         (doc) {
           final json = doc.data();
           json['id'] = doc.id;
-          return ForumModel.fromJson(json, doc.id);
-
-          // return ForumModel(
-          //   id: doc.id,
-          //   avatarURL: doc['AvatarUrl'],
-          //   likes: List<String>.from(doc['Likes'] as List<dynamic>),
-          //   message: doc['Message'],
-          //   timeStamp: doc['TimeStamp'],
-          //   userEmail: doc['UserEmail'],
-          // );
+          return ForumModel.fromJson(json);
         },
       ).toList();
     });

@@ -56,6 +56,7 @@ dependencies:
   like_button: ^2.0.5
   logger: ^1.4.0
   json_annotation: ^4.8.1
+  freezed_annotation: ^2.4.1
   
   
   
@@ -74,6 +75,7 @@ dev_dependencies:
   flutter_launcher_icons: ^0.13.1 
   build_runner: ^2.4.6
   json_serializable: ^6.7.1
+  freezed: ^2.4.1
 
 flutter_icons:
   android: "launcher_icon"

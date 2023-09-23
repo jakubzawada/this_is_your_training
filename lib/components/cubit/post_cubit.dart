@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:this_is_your_training/models/post_model.dart';
@@ -26,8 +27,7 @@ class PostCubit extends Cubit<PostState> {
     emit(state.copyWith(isLoading: true, errorMessage: ''));
 
     try {
-      PostState postState = await _postRepository.getPost(postId);
-      emit(postState);
+      getPost(postId);
     } catch (error) {
       emit(state.copyWith(
         isLoading: false,
@@ -65,8 +65,7 @@ class PostCubit extends Cubit<PostState> {
 
   Future<void> refreshPost({required String postId}) async {
     try {
-      PostState postState = await _postRepository.getPost(postId);
-      emit(postState);
+      getPost(postId);
     } catch (error) {
       emit(state.copyWith(
         isLoading: false,
@@ -84,5 +83,52 @@ class PostCubit extends Cubit<PostState> {
     } catch (error) {
       emit(state.copyWith(errorMessage: error.toString()));
     }
+  }
+
+  Future<void> getPost(String postId) async {
+    final currentUser = FirebaseAuth.instance.currentUser!;
+    DocumentSnapshot postSnapshot = await FirebaseFirestore.instance
+        .collection("UsersPosts")
+        .doc(postId)
+        .get();
+
+    bool isLiked =
+        (postSnapshot['Likes'] as List<dynamic>).contains(currentUser.email);
+
+    QuerySnapshot commentsSnapshot = await FirebaseFirestore.instance
+        .collection("UsersPosts")
+        .doc(postId)
+        .collection("Comments")
+        .orderBy("CommentTime", descending: true)
+        .get();
+
+    List<DocumentSnapshot> commentDocs = commentsSnapshot.docs;
+
+    List<PostModel> comments =
+        commentDocs.map((doc) => PostModel.fromDocumentSnapshot(doc)).toList();
+
+    String userId = postSnapshot['UserEmail'];
+    QuerySnapshot userImageSnapshot = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(userId)
+        .collection("images")
+        .orderBy('timestamp', descending: true)
+        .limit(1)
+        .get();
+
+    String avatarUrl = '';
+    if (userImageSnapshot.docs.isNotEmpty) {
+      avatarUrl = userImageSnapshot.docs[0].get('downloadURL') as String;
+    }
+
+    emit(
+      PostState(
+        isLoading: false,
+        errorMessage: '',
+        avatarUrl: avatarUrl,
+        docs: comments,
+        isLiked: isLiked,
+      ),
+    );
   }
 }

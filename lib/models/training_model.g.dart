@@ -21,7 +21,6 @@ Map<String, dynamic> _$TrainingModelToJson(TrainingModel instance) =>
       'series': instance.series,
       'repeat': instance.repeat,
     };
-
 TrainingModel _$TrainingModelFromJson1(Map<String, dynamic> json) =>
     TrainingModel(
       name: json['name1'] as String,
@@ -37,7 +36,6 @@ Map<String, dynamic> _$TrainingModelToJson1(TrainingModel instance) =>
       'series1': instance.series,
       'repeat1': instance.repeat,
     };
-
 TrainingModel _$TrainingModelFromJson2(Map<String, dynamic> json) =>
     TrainingModel(
       name: json['name2'] as String,
@@ -53,7 +51,6 @@ Map<String, dynamic> _$TrainingModelToJson2(TrainingModel instance) =>
       'series2': instance.series,
       'repeat2': instance.repeat,
     };
-
 TrainingModel _$TrainingModelFromJson3(Map<String, dynamic> json) =>
     TrainingModel(
       name: json['name3'] as String,
@@ -69,7 +66,6 @@ Map<String, dynamic> _$TrainingModelToJson3(TrainingModel instance) =>
       'series3': instance.series,
       'repeat3': instance.repeat,
     };
-
 TrainingModel _$TrainingModelFromJson4(Map<String, dynamic> json) =>
     TrainingModel(
       name: json['name4'] as String,
@@ -85,7 +81,6 @@ Map<String, dynamic> _$TrainingModelToJson4(TrainingModel instance) =>
       'series4': instance.series,
       'repeat4': instance.repeat,
     };
-
 TrainingModel _$TrainingModelFromJson5(Map<String, dynamic> json) =>
     TrainingModel(
       name: json['name5'] as String,
@@ -101,7 +96,6 @@ Map<String, dynamic> _$TrainingModelToJson5(TrainingModel instance) =>
       'series5': instance.series,
       'repeat5': instance.repeat,
     };
-
 TrainingModel _$TrainingModelFromJson6(Map<String, dynamic> json) =>
     TrainingModel(
       name: json['name6'] as String,
