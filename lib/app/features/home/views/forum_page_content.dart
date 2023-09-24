@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/forum_cubit.dart';
@@ -64,12 +65,14 @@ class ForumPageContent extends StatelessWidget {
                                 itemCount: state.docs.length,
                                 itemBuilder: (context, index) {
                                   final postModel = state.docs[index];
+                                  String formattedTime = formatDate(
+                                      Timestamp.fromDate(postModel.timeStamp));
                                   return PostPage(
                                     message: postModel.message,
                                     user: postModel.userEmail,
                                     postId: postModel.id,
                                     likes: List<String>.from(postModel.likes),
-                                    time: formatDate(postModel.timeStamp),
+                                    time: formattedTime,
                                     avatarUrl: postModel.avatarURL,
                                   );
                                 },
