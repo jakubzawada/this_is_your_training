@@ -14,14 +14,11 @@ class MondayPageContent extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor: Colors.deepPurpleAccent,
         title: const Text(
           'Monday',
-          style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
       ),
       body: Container(
         width: double.infinity,

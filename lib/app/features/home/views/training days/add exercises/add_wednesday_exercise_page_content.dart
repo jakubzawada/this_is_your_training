@@ -15,7 +15,7 @@ class AddWednesdayExercise extends StatelessWidget {
   final String? selectedItem = '3';
 
   final List<String> items2 =
-      List.generate(20, (index) => (index + 1).toString());
+      List.generate(40, (index) => (index + 1).toString());
 
   final String? selectedItem2 = '10';
 
@@ -43,14 +43,11 @@ class AddWednesdayExercise extends StatelessWidget {
             return Scaffold(
               extendBodyBehindAppBar: true,
               appBar: AppBar(
-                iconTheme: const IconThemeData(color: Colors.black),
+                backgroundColor: Colors.deepPurpleAccent,
                 title: const Text(
-                  'Dodaj Ćwiczenie',
-                  style: TextStyle(color: Colors.black),
+                  'Dodaj ćwiczenie',
                 ),
                 centerTitle: true,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
               ),
               body: Container(
                 width: double.infinity,
@@ -266,9 +263,10 @@ class AddWednesdayExercise extends StatelessWidget {
                           ),
                           const SizedBox(height: 20),
                           ElevatedButton(
-                            onPressed: state.exerciseName2.isEmpty
-                                ? null
-                                : () {
+                            onPressed: (state.series2 != null &&
+                                    state.repeat2 != null &&
+                                    state.exerciseName2.isNotEmpty)
+                                ? () {
                                     context
                                         .read<WednesdayExerciseCubit>()
                                         .addexercise(
@@ -276,7 +274,8 @@ class AddWednesdayExercise extends StatelessWidget {
                                           repeat: state.repeat2!,
                                           series: state.series2!,
                                         );
-                                  },
+                                  }
+                                : null,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF232441),
                               textStyle: GoogleFonts.bebasNeue(),

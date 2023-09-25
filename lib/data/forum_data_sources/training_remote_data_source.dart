@@ -330,7 +330,7 @@ class TrainingsRemoteDataSource {
     await FirebaseFirestore.instance
         .collection('users')
         .doc(userId)
-        .collection('trainings1')
+        .collection('trainings6')
         .add(
       {
         'name6': exerciseName,
