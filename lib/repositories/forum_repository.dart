@@ -25,9 +25,11 @@ class ForumRepository {
     final currentUser = FirebaseAuth.instance.currentUser!;
     String? avatarUrl = await _forumdataSource.getLatestImage(currentUser.uid);
 
+    avatarUrl ??= "images/Profile.jpg";
+
     await _forumdataSource.postMessage(
       textController: textController,
-      avatarUrl: avatarUrl!,
+      avatarUrl: avatarUrl,
     );
   }
 }

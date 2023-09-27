@@ -1,17 +1,18 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:this_is_your_training/models/forum_model.dart';
 import 'package:this_is_your_training/repositories/forum_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'forum_cubit.freezed.dart';
 part 'forum_state.dart';
 
 class ForumCubit extends Cubit<ForumState> {
   String? avatarUrl;
   ForumCubit(this._forumRepository, {this.avatarUrl})
       : super(
-          const ForumState(
+          ForumState(
             docs: [],
             errorMessage: '',
             isLoading: false,
@@ -24,7 +25,7 @@ class ForumCubit extends Cubit<ForumState> {
 
   Future<void> start() async {
     emit(
-      const ForumState(
+      ForumState(
         docs: [],
         errorMessage: '',
         isLoading: true,

@@ -35,15 +35,8 @@ class ProfilePicture2 extends StatelessWidget {
           final imageUrl = snapshot.data;
           if (imageUrl == null) {
             return const CircleAvatar(
-              backgroundColor: Colors.deepPurpleAccent,
-              radius: 100,
-              child: Center(
-                child: Icon(
-                  Icons.person,
-                  size: 40,
-                  color: Colors.white,
-                ),
-              ),
+              backgroundImage: AssetImage("images/Profile.jpg"),
+              radius: 85,
             );
           }
           return Container(

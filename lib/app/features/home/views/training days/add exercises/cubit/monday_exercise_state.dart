@@ -1,18 +1,12 @@
 part of 'monday_exercise_cubit.dart';
 
-@immutable
-class MondayExerciseState {
-  const MondayExerciseState({
-    this.saved = false,
-    this.errorMessage = '',
-    this.exerciseName = '',
-    this.series,
-    this.repeat,
-  });
-
-  final bool saved;
-  final String errorMessage;
-  final String exerciseName;
-  final int? series;
-  final int? repeat;
+@freezed
+class MondayExerciseState with _$MondayExerciseState {
+  factory MondayExerciseState({
+    @Default(false) bool saved,
+    @Default('') String errorMessage,
+    @Default('') String exerciseName,
+    int? series,
+    int? repeat,
+  }) = _MondayExerciseState;
 }

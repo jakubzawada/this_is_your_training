@@ -1,13 +1,14 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:this_is_your_training/repositories/trainings_documents_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'saturday_exercise_cubit.freezed.dart';
 part 'saturday_exercise_state.dart';
 
 class SaturdayExerciseCubit extends Cubit<SaturdayExerciseState> {
   SaturdayExerciseCubit(this._documentsRepository)
       : super(
-          const SaturdayExerciseState(),
+          SaturdayExerciseState(),
         );
 
   final TrainingsDocumentsRepository _documentsRepository;
@@ -43,7 +44,7 @@ class SaturdayExerciseCubit extends Cubit<SaturdayExerciseState> {
   }) async {
     try {
       await _documentsRepository.addexercise5(exerciseName, series, repeat);
-      emit(const SaturdayExerciseState(saved: true));
+      emit(SaturdayExerciseState(saved: true));
     } catch (error) {
       emit(SaturdayExerciseState(errorMessage: error.toString()));
     }

@@ -1,14 +1,10 @@
 part of 'forum_cubit.dart';
 
-@immutable
-class ForumState {
-  final List<ForumModel> docs;
-  final bool isLoading;
-  final String errorMessage;
-
-  const ForumState({
-    this.docs = const [],
-    required this.isLoading,
-    required this.errorMessage,
-  });
+@freezed
+class ForumState with _$ForumState {
+  factory ForumState({
+    @Default([]) List<ForumModel> docs,
+    @Default(false) bool isLoading,
+    @Default('') String errorMessage,
+  }) = _ForumState;
 }

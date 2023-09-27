@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/components/comment.dart';
@@ -27,6 +28,7 @@ class PostPage extends StatelessWidget {
   });
 
   final _commentTextContoller = TextEditingController();
+  final currentUser = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +100,7 @@ class PostPage extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                if (user == state.currentUser.email) {
+                                if (user == currentUser.email) {
                                   showDialog(
                                       context: context,
                                       builder: (_) => AlertDialog(
@@ -127,7 +129,7 @@ class PostPage extends StatelessWidget {
                                           ));
                                 }
                               },
-                              child: state.currentUser.email == user
+                              child: currentUser.email == user
                                   ? Icon(
                                       Icons.cancel,
                                       color: Colors.grey[500],

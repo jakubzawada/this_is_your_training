@@ -1,14 +1,17 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:this_is_your_training/models/training_model.dart';
 import 'package:this_is_your_training/repositories/trainings_documents_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'tuesday_cubit.freezed.dart';
 part 'tuesday_state.dart';
 
 class TuesdayCubit extends Cubit<TuesdayState> {
   TuesdayCubit(this._documentsRepository)
       : super(
-          const TuesdayState(
+          TuesdayState(
             documents: [],
             errorMessage: '',
             isLoading: false,
@@ -27,7 +30,7 @@ class TuesdayCubit extends Cubit<TuesdayState> {
 
   Future<void> start() async {
     emit(
-      const TuesdayState(
+      TuesdayState(
         documents: [],
         errorMessage: '',
         isLoading: true,

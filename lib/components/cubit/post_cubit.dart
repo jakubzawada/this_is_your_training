@@ -3,10 +3,11 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:meta/meta.dart';
 import 'package:this_is_your_training/models/post_model.dart';
 import 'package:this_is_your_training/repositories/post_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'post_cubit.freezed.dart';
 part 'post_state.dart';
 
 class PostCubit extends Cubit<PostState> {

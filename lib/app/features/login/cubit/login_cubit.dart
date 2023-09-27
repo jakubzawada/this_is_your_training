@@ -1,6 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:this_is_your_training/repositories/login_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'login_cubit.freezed.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -8,7 +11,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   LoginCubit(this._loginRepository, {required this.passwordController})
       : super(
-          const LoginState(
+          LoginState(
             isCreatingAccount: false,
             errorMessage: '',
             password: '',
@@ -25,14 +28,13 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> tooglAccountCreate(bool isCreatingAccount) async {
     emit(
-      const LoginState(isCreatingAccount: true, errorMessage: '', password: ''),
+      LoginState(isCreatingAccount: true, errorMessage: '', password: ''),
     );
   }
 
   Future<void> tooglAccountLogin(bool isCreatingAccount) async {
     emit(
-      const LoginState(
-          isCreatingAccount: false, errorMessage: '', password: ''),
+      LoginState(isCreatingAccount: false, errorMessage: '', password: ''),
     );
   }
 

@@ -1,14 +1,10 @@
 part of 'saturday_cubit.dart';
 
-@immutable
-class SaturdayState {
-  final List<TrainingModel> documents;
-  final bool isLoading;
-  final String errorMessage;
-
-  const SaturdayState({
-    this.documents = const [],
-    required this.isLoading,
-    required this.errorMessage,
-  });
+@freezed
+class SaturdayState with _$SaturdayState {
+  factory SaturdayState({
+    @Default([]) List<TrainingModel> documents,
+    @Default(false) bool isLoading,
+    @Default('') String errorMessage,
+  }) = _SaturdayState;
 }
