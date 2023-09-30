@@ -4,9 +4,8 @@ import 'package:this_is_your_training/app/app.dart';
 import 'package:this_is_your_training/app/cubit/root_cubit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/my_account_cubit.dart';
+import 'package:this_is_your_training/app/injection_container.dart';
 import 'package:this_is_your_training/components/profile_picture2.dart';
-import 'package:this_is_your_training/data/forum_data_sources/my_account_remote_data_source.dart';
-import 'package:this_is_your_training/repositories/my_account_repository.dart';
 
 class MyAccountPageContent extends StatelessWidget {
   const MyAccountPageContent({
@@ -18,10 +17,8 @@ class MyAccountPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => MyAccountCubit(MyAccountRepository(
-        MyAccountRemoteDataSource(),
-      )),
+    return BlocProvider<MyAccountCubit>(
+      create: (context) => getIt(),
       child: BlocBuilder<MyAccountCubit, MyAccountState>(
         builder: (context, state) {
           return Scaffold(
@@ -114,11 +111,9 @@ class MyAccountPageContent extends StatelessWidget {
                             bottom: 4,
                             child: InkWell(
                               onTap: () {
-                                MyAccountRepository repository =
-                                    MyAccountRepository(
-                                        MyAccountRemoteDataSource());
                                 if (state.selectedImage != null) {
-                                  repository
+                                  context
+                                      .read<MyAccountCubit>()
                                       .uploadImage(state.selectedImage!)
                                       .then((downloadURL) {
                                     context
@@ -213,10 +208,8 @@ class MyAccountPageContent extends StatelessWidget {
                                           Navigator.of(context).pop();
                                         },
                                       ),
-                                      BlocProvider(
-                                        create: (context) => MyAccountCubit(
-                                            MyAccountRepository(
-                                                MyAccountRemoteDataSource())),
+                                      BlocProvider<MyAccountCubit>(
+                                        create: (context) => getIt(),
                                         child: BlocBuilder<MyAccountCubit,
                                             MyAccountState>(
                                           builder: (context, state) {

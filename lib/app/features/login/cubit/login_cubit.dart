@@ -7,9 +7,8 @@ part 'login_cubit.freezed.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  final TextEditingController passwordController;
-
-  LoginCubit(this._loginRepository, {required this.passwordController})
+  final TextEditingController? passwordController;
+  LoginCubit({required this.loginRepository, this.passwordController})
       : super(
           LoginState(
             isCreatingAccount: false,
@@ -18,7 +17,7 @@ class LoginCubit extends Cubit<LoginState> {
           ),
         );
 
-  final LoginRepository _loginRepository;
+  final LoginRepository loginRepository;
 
   Future<void> obscureText() async {
     emit(state.copyWith(
@@ -44,10 +43,10 @@ class LoginCubit extends Cubit<LoginState> {
     required String errorMessage,
   }) async {
     try {
-      await _loginRepository.loginAccount(
+      await loginRepository.loginAccount(
           email: email, password: password, errorMessage: errorMessage);
     } catch (error) {
-      passwordController.clear();
+      passwordController?.clear();
       emit(
         LoginState(
           isCreatingAccount: false,
@@ -64,10 +63,10 @@ class LoginCubit extends Cubit<LoginState> {
     required String errorMessage,
   }) async {
     try {
-      await _loginRepository.createAccount(
+      await loginRepository.createAccount(
           email: email, password: password, errorMessage: errorMessage);
     } catch (error) {
-      passwordController.clear();
+      passwordController?.clear();
       emit(
         LoginState(
           isCreatingAccount: false,

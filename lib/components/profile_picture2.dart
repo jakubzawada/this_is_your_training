@@ -18,8 +18,9 @@ class ProfilePicture2 extends StatelessWidget {
       throw Exception('User is not logged in');
     }
 
-    final imagesStream =
-        MyAccountRepository(MyAccountRemoteDataSource()).getLatestImageStream();
+    final imagesStream = MyAccountRepository(
+      myAccountDataSource: MyAccountRemoteDataSource(),
+    ).getLatestImageStream();
 
     return CircleAvatar(
       radius: radius,

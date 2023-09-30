@@ -3,23 +3,23 @@ import 'dart:io';
 import 'package:this_is_your_training/data/forum_data_sources/my_account_remote_data_source.dart';
 
 class MyAccountRepository {
-  MyAccountRepository(this._myAccountDataSource);
+  MyAccountRepository({required this.myAccountDataSource});
 
-  final MyAccountRemoteDataSource _myAccountDataSource;
+  final MyAccountRemoteDataSource myAccountDataSource;
 
   Future<String> uploadImage(File selectedImage) async {
-    return _myAccountDataSource.uploadImage(selectedImage);
+    return myAccountDataSource.uploadImage(selectedImage);
   }
 
   Future<void> updatePostsWithNewAvatar(String? newAvatarUrl) async {
-    await _myAccountDataSource.updatePostsWithNewAvatar(newAvatarUrl);
+    await myAccountDataSource.updatePostsWithNewAvatar(newAvatarUrl);
   }
 
   Future<void> deleteAccount() async {
-    await _myAccountDataSource.deleteAccount();
+    await myAccountDataSource.deleteAccount();
   }
 
   Stream<String?> getLatestImageStream() {
-    return _myAccountDataSource.getLatestImageStream();
+    return myAccountDataSource.getLatestImageStream();
   }
 }

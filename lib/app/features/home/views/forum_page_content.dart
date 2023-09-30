@@ -3,12 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/forum_cubit.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/my_account_cubit.dart';
+import 'package:this_is_your_training/app/injection_container.dart';
 import 'package:this_is_your_training/components/post_page.dart';
-import 'package:this_is_your_training/data/forum_data_sources/forum_remote_data_source.dart';
-import 'package:this_is_your_training/data/forum_data_sources/my_account_remote_data_source.dart';
 import 'package:this_is_your_training/helper/date_helper_methods.dart';
-import 'package:this_is_your_training/repositories/forum_repository.dart';
-import 'package:this_is_your_training/repositories/my_account_repository.dart';
 
 class ForumPageContent extends StatelessWidget {
   ForumPageContent({
@@ -22,14 +19,10 @@ class ForumPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          MyAccountCubit(MyAccountRepository(MyAccountRemoteDataSource())),
-      child: BlocProvider(
-        create: (context) => ForumCubit(
-            ForumRepository(ForumRemoteDataSource()),
-            avatarUrl: context.read<MyAccountCubit>().avatarUrl)
-          ..start(),
+    return BlocProvider<MyAccountCubit>(
+      create: (context) => getIt(),
+      child: BlocProvider<ForumCubit>(
+        create: (context) => getIt()..start(),
         child: BlocBuilder<ForumCubit, ForumState>(
           builder: (context, state) {
             return Scaffold(

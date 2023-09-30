@@ -11,7 +11,7 @@ part 'post_cubit.freezed.dart';
 part 'post_state.dart';
 
 class PostCubit extends Cubit<PostState> {
-  PostCubit(this._postRepository)
+  PostCubit({required this.postRepository})
       : super(
           PostState(
             docs: const [],
@@ -20,7 +20,7 @@ class PostCubit extends Cubit<PostState> {
             avatarUrl: '',
           ),
         );
-  final PostRepository _postRepository;
+  final PostRepository postRepository;
 
   Future<void> start({
     required String postId,
@@ -45,7 +45,7 @@ class PostCubit extends Cubit<PostState> {
     required String postId,
     required bool isLiked,
   }) async {
-    _postRepository.like(postId: postId, isLiked: isLiked);
+    postRepository.like(postId: postId, isLiked: isLiked);
   }
 
   Future<void> addComment({
@@ -53,8 +53,7 @@ class PostCubit extends Cubit<PostState> {
     required String commentText,
   }) async {
     try {
-      await _postRepository.addComment(
-          postId: postId, commentText: commentText);
+      await postRepository.addComment(postId: postId, commentText: commentText);
       refreshPost(postId: postId);
       emit(
         state.copyWith(saved: true),
@@ -77,7 +76,7 @@ class PostCubit extends Cubit<PostState> {
 
   Future<void> postDelete({required String postId}) async {
     try {
-      await _postRepository.postDelete(postId: postId);
+      await postRepository.postDelete(postId: postId);
       emit(
         state.copyWith(saved: true),
       );

@@ -9,7 +9,7 @@ part 'wednesday_cubit.freezed.dart';
 part 'wednesday_state.dart';
 
 class WednesdayCubit extends Cubit<WednesdayState> {
-  WednesdayCubit(this._documentsRepository)
+  WednesdayCubit({required this.documentsRepository})
       : super(
           WednesdayState(
             documents: [],
@@ -18,12 +18,12 @@ class WednesdayCubit extends Cubit<WednesdayState> {
           ),
         );
 
-  final TrainingsDocumentsRepository _documentsRepository;
+  final TrainingsDocumentsRepository documentsRepository;
 
   Future<void> dissmisible({
     required String documentid,
   }) async {
-    await _documentsRepository.delete2(id: documentid);
+    await documentsRepository.delete2(id: documentid);
   }
 
   StreamSubscription? _streamSubscription;
@@ -38,7 +38,7 @@ class WednesdayCubit extends Cubit<WednesdayState> {
     );
 
     _streamSubscription =
-        _documentsRepository.getDocumentsStream2().listen((data) {
+        documentsRepository.getDocumentsStream2().listen((data) {
       emit(
         WednesdayState(
           documents: data,

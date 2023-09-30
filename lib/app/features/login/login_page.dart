@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/app/features/login/cubit/login_cubit.dart';
 import 'package:this_is_your_training/app/features/login/forgot_pw_page.dart';
+import 'package:this_is_your_training/app/injection_container.dart';
 import 'package:this_is_your_training/components/square_tile.dart';
-import 'package:this_is_your_training/data/forum_data_sources/login_remote_data_source.dart';
-import 'package:this_is_your_training/repositories/login_repository.dart';
 import 'package:this_is_your_training/services/auth_service.dart';
 
 class LoginPage extends StatelessWidget {
@@ -20,10 +19,8 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurple[200],
-      body: BlocProvider(
-        create: (context) => LoginCubit(
-            LoginRepository(LoginRemoteDataSource()),
-            passwordController: passwordController),
+      body: BlocProvider<LoginCubit>(
+        create: (context) => getIt(),
         child: BlocBuilder<LoginCubit, LoginState>(
           builder: (context, state) {
             return ListView(

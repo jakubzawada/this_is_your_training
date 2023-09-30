@@ -1,14 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:this_is_your_training/app/injection_container.dart';
 import 'package:this_is_your_training/components/comment.dart';
 import 'package:this_is_your_training/components/comment_button.dart';
 import 'package:this_is_your_training/components/cubit/post_cubit.dart';
 import 'package:this_is_your_training/components/like_button.dart';
 import 'package:this_is_your_training/components/profile_picture.dart';
-import 'package:this_is_your_training/data/forum_data_sources/post_remote_data_source.dart';
 import 'package:this_is_your_training/helper/date_helper_methods.dart';
-import 'package:this_is_your_training/repositories/post_repository.dart';
 
 class PostPage extends StatelessWidget {
   final String message;
@@ -32,9 +31,8 @@ class PostPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => PostCubit(PostRepository(PostRemoteDataSource()))
-        ..start(postId: postId),
+    return BlocProvider<PostCubit>(
+      create: (context) => getIt()..start(postId: postId),
       child: BlocListener<PostCubit, PostState>(
         listener: (context, state) {
           if (state.saved) {

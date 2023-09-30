@@ -2,11 +2,11 @@ import 'package:this_is_your_training/data/forum_data_sources/training_remote_da
 import 'package:this_is_your_training/models/training_model.dart';
 
 class TrainingsDocumentsRepository {
-  TrainingsDocumentsRepository(this._trainingsDataSource);
-  final TrainingsRemoteDataSource _trainingsDataSource;
+  TrainingsDocumentsRepository({required this.trainingsDataSource});
+  final TrainingsRemoteDataSource trainingsDataSource;
 
   Stream<List<TrainingModel>> getDocumentsStream() {
-    return _trainingsDataSource.getDocumentsStream().map((querySnapshot) {
+    return trainingsDataSource.getDocumentsStream().map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
           final json = doc.data();
@@ -18,7 +18,7 @@ class TrainingsDocumentsRepository {
   }
 
   Future<void> delete({required String id}) async {
-    await _trainingsDataSource.delete(id: id);
+    await trainingsDataSource.delete(id: id);
   }
 
   Future<void> addexercise(
@@ -26,11 +26,11 @@ class TrainingsDocumentsRepository {
     int series,
     int repeat,
   ) async {
-    await _trainingsDataSource.addexercise(exerciseName, series, repeat);
+    await trainingsDataSource.addexercise(exerciseName, series, repeat);
   }
 
   Stream<List<TrainingModel>> getDocumentsStream1() {
-    return _trainingsDataSource.getDocumentsStream1().map((querySnapshot) {
+    return trainingsDataSource.getDocumentsStream1().map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
           final json = doc.data();
@@ -42,7 +42,7 @@ class TrainingsDocumentsRepository {
   }
 
   Future<void> delete1({required String id}) async {
-    await _trainingsDataSource.delete1(id: id);
+    await trainingsDataSource.delete1(id: id);
   }
 
   Future<void> addexercise1(
@@ -50,11 +50,11 @@ class TrainingsDocumentsRepository {
     int series,
     int repeat,
   ) async {
-    await _trainingsDataSource.addexercise1(exerciseName, series, repeat);
+    await trainingsDataSource.addexercise1(exerciseName, series, repeat);
   }
 
   Stream<List<TrainingModel>> getDocumentsStream2() {
-    return _trainingsDataSource.getDocumentsStream2().map((querySnapshot) {
+    return trainingsDataSource.getDocumentsStream2().map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
           final json = doc.data();
@@ -66,7 +66,7 @@ class TrainingsDocumentsRepository {
   }
 
   Future<void> delete2({required String id}) async {
-    await _trainingsDataSource.delete2(id: id);
+    await trainingsDataSource.delete2(id: id);
   }
 
   Future<void> addexercise2(
@@ -74,11 +74,11 @@ class TrainingsDocumentsRepository {
     int series,
     int repeat,
   ) async {
-    await _trainingsDataSource.addexercise2(exerciseName, series, repeat);
+    await trainingsDataSource.addexercise2(exerciseName, series, repeat);
   }
 
   Stream<List<TrainingModel>> getDocumentsStream3() {
-    return _trainingsDataSource.getDocumentsStream3().map((querySnapshot) {
+    return trainingsDataSource.getDocumentsStream3().map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
           final json = doc.data();
@@ -90,7 +90,7 @@ class TrainingsDocumentsRepository {
   }
 
   Future<void> delete3({required String id}) async {
-    await _trainingsDataSource.delete3(id: id);
+    await trainingsDataSource.delete3(id: id);
   }
 
   Future<void> addexercise3(
@@ -98,11 +98,11 @@ class TrainingsDocumentsRepository {
     int series,
     int repeat,
   ) async {
-    await _trainingsDataSource.addexercise3(exerciseName, series, repeat);
+    await trainingsDataSource.addexercise3(exerciseName, series, repeat);
   }
 
   Stream<List<TrainingModel>> getDocumentsStream4() {
-    return _trainingsDataSource.getDocumentsStream4().map((querySnapshot) {
+    return trainingsDataSource.getDocumentsStream4().map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
           final json = doc.data();
@@ -114,7 +114,7 @@ class TrainingsDocumentsRepository {
   }
 
   Future<void> delete4({required String id}) async {
-    await _trainingsDataSource.delete4(id: id);
+    await trainingsDataSource.delete4(id: id);
   }
 
   Future<void> addexercise4(
@@ -122,11 +122,11 @@ class TrainingsDocumentsRepository {
     int series,
     int repeat,
   ) async {
-    await _trainingsDataSource.addexercise4(exerciseName, series, repeat);
+    await trainingsDataSource.addexercise4(exerciseName, series, repeat);
   }
 
   Stream<List<TrainingModel>> getDocumentsStream5() {
-    return _trainingsDataSource.getDocumentsStream5().map((querySnapshot) {
+    return trainingsDataSource.getDocumentsStream5().map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
           final json = doc.data();
@@ -138,7 +138,7 @@ class TrainingsDocumentsRepository {
   }
 
   Future<void> delete5({required String id}) async {
-    await _trainingsDataSource.delete5(id: id);
+    await trainingsDataSource.delete5(id: id);
   }
 
   Future<void> addexercise5(
@@ -146,11 +146,11 @@ class TrainingsDocumentsRepository {
     int series,
     int repeat,
   ) async {
-    await _trainingsDataSource.addexercise5(exerciseName, series, repeat);
+    await trainingsDataSource.addexercise5(exerciseName, series, repeat);
   }
 
   Stream<List<TrainingModel>> getDocumentsStream6() {
-    return _trainingsDataSource.getDocumentsStream6().map((querySnapshot) {
+    return trainingsDataSource.getDocumentsStream6().map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
           final json = doc.data();
@@ -162,7 +162,7 @@ class TrainingsDocumentsRepository {
   }
 
   Future<void> delete6({required String id}) async {
-    await _trainingsDataSource.delete6(id: id);
+    await trainingsDataSource.delete6(id: id);
   }
 
   Future<void> addexercise6(
@@ -170,6 +170,6 @@ class TrainingsDocumentsRepository {
     int series,
     int repeat,
   ) async {
-    await _trainingsDataSource.addexercise6(exerciseName, series, repeat);
+    await trainingsDataSource.addexercise6(exerciseName, series, repeat);
   }
 }

@@ -1,25 +1,25 @@
 import 'package:this_is_your_training/data/forum_data_sources/post_remote_data_source.dart';
 
 class PostRepository {
-  final PostRemoteDataSource _postDataSource;
+  final PostRemoteDataSource postDataSource;
 
-  PostRepository(this._postDataSource);
+  PostRepository({required this.postDataSource});
 
   Future<void> like({
     required String postId,
     required bool isLiked,
   }) async {
-    await _postDataSource.like(postId: postId, isLiked: isLiked);
+    await postDataSource.like(postId: postId, isLiked: isLiked);
   }
 
   Future<void> addComment({
     required String postId,
     required String commentText,
   }) async {
-    await _postDataSource.addComment(postId: postId, commentText: commentText);
+    await postDataSource.addComment(postId: postId, commentText: commentText);
   }
 
   Future<void> postDelete({required String postId}) async {
-    await _postDataSource.postDelete(postId: postId);
+    await postDataSource.postDelete(postId: postId);
   }
 }

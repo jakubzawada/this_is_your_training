@@ -6,12 +6,12 @@ part 'friday_exercise_cubit.freezed.dart';
 part 'friday_exercise_state.dart';
 
 class FridayExerciseCubit extends Cubit<FridayExerciseState> {
-  FridayExerciseCubit(this._documentsRepository)
+  FridayExerciseCubit({required this.documentsRepository})
       : super(
           FridayExerciseState(),
         );
 
-  final TrainingsDocumentsRepository _documentsRepository;
+  final TrainingsDocumentsRepository documentsRepository;
 
   Future<void> uploadName4(String newValue) async {
     emit(FridayExerciseState(
@@ -43,7 +43,7 @@ class FridayExerciseCubit extends Cubit<FridayExerciseState> {
     required int repeat,
   }) async {
     try {
-      await _documentsRepository.addexercise4(exerciseName, series, repeat);
+      await documentsRepository.addexercise4(exerciseName, series, repeat);
       emit(FridayExerciseState(saved: true));
     } catch (error) {
       emit(FridayExerciseState(errorMessage: error.toString()));

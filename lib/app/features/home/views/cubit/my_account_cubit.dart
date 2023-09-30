@@ -11,12 +11,12 @@ part 'my_account_state.dart';
 
 class MyAccountCubit extends Cubit<MyAccountState> {
   String? avatarUrl;
-  MyAccountCubit(this._myAccountRepository)
+  MyAccountCubit({required this.myAccountRepository})
       : super(
           MyAccountState(),
         );
 
-  final MyAccountRepository _myAccountRepository;
+  final MyAccountRepository myAccountRepository;
 
   Future<void> selectImage({required ImageSource? imageSource}) async {
     if (imageSource != null) {
@@ -35,7 +35,7 @@ class MyAccountCubit extends Cubit<MyAccountState> {
 
   Future<void> updatePostsWithNewAvatar(String? newAvatarUrl) async {
     try {
-      await _myAccountRepository.updatePostsWithNewAvatar(newAvatarUrl);
+      await myAccountRepository.updatePostsWithNewAvatar(newAvatarUrl);
       emit(MyAccountState(saved: true));
     } catch (error) {
       emit(MyAccountState(errorMessage: error.toString()));
@@ -46,9 +46,13 @@ class MyAccountCubit extends Cubit<MyAccountState> {
     emit(state.copyWith(avatarUrl: avatarUrl));
   }
 
+  Future<String> uploadImage(File selectedImage) async {
+    return myAccountRepository.uploadImage(selectedImage);
+  }
+
   Future<void> deleteAccount() async {
     try {
-      await _myAccountRepository.deleteAccount();
+      await myAccountRepository.deleteAccount();
       emit(MyAccountState(saved: true));
     } catch (error) {
       emit(MyAccountState(errorMessage: error.toString()));

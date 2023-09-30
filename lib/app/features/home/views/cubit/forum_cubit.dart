@@ -10,7 +10,7 @@ part 'forum_state.dart';
 
 class ForumCubit extends Cubit<ForumState> {
   String? avatarUrl;
-  ForumCubit(this._forumRepository, {this.avatarUrl})
+  ForumCubit({required this.forumRepository, this.avatarUrl})
       : super(
           ForumState(
             docs: [],
@@ -19,7 +19,7 @@ class ForumCubit extends Cubit<ForumState> {
           ),
         );
 
-  final ForumRepository _forumRepository;
+  final ForumRepository forumRepository;
 
   StreamSubscription? _streamSubscription;
 
@@ -32,7 +32,7 @@ class ForumCubit extends Cubit<ForumState> {
       ),
     );
 
-    _streamSubscription = _forumRepository.getPostsStream().listen((data) {
+    _streamSubscription = forumRepository.getPostsStream().listen((data) {
       emit(
         ForumState(
           docs: data,
@@ -55,7 +55,7 @@ class ForumCubit extends Cubit<ForumState> {
   Future<void> postMessage({
     required String textController,
   }) async {
-    await _forumRepository.postMessage(textController: textController);
+    await forumRepository.postMessage(textController: textController);
   }
 
   @override

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:this_is_your_training/data/forum_data_sources/training_remote_data_source.dart';
-import 'package:this_is_your_training/repositories/trainings_documents_repository.dart';
+import 'package:this_is_your_training/app/injection_container.dart';
 import 'cubit/thursday_exercise_cubit.dart';
 
 class AddThursdayExercise extends StatelessWidget {
@@ -21,9 +20,8 @@ class AddThursdayExercise extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ThursdayExerciseCubit(
-          TrainingsDocumentsRepository(TrainingsRemoteDataSource())),
+    return BlocProvider<ThursdayExerciseCubit>(
+      create: (context) => getIt(),
       child: BlocListener<ThursdayExerciseCubit, ThursdayExerciseState>(
         listener: (context, state) {
           if (state.saved) {
