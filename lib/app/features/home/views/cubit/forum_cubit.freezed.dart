@@ -16,9 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ForumState {
-  List<ForumModel> get docs => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
+  List<ForumModel> get results => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ForumStateCopyWith<ForumState> get copyWith =>
@@ -31,7 +31,7 @@ abstract class $ForumStateCopyWith<$Res> {
           ForumState value, $Res Function(ForumState) then) =
       _$ForumStateCopyWithImpl<$Res, ForumState>;
   @useResult
-  $Res call({List<ForumModel> docs, bool isLoading, String errorMessage});
+  $Res call({List<ForumModel> results, String errorMessage, Status status});
 }
 
 /// @nodoc
@@ -47,23 +47,23 @@ class _$ForumStateCopyWithImpl<$Res, $Val extends ForumState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? docs = null,
-    Object? isLoading = null,
+    Object? results = null,
     Object? errorMessage = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
-      docs: null == docs
-          ? _value.docs
-          : docs // ignore: cast_nullable_to_non_nullable
+      results: null == results
+          ? _value.results
+          : results // ignore: cast_nullable_to_non_nullable
               as List<ForumModel>,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ) as $Val);
   }
 }
@@ -76,7 +76,7 @@ abstract class _$$_ForumStateCopyWith<$Res>
       __$$_ForumStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<ForumModel> docs, bool isLoading, String errorMessage});
+  $Res call({List<ForumModel> results, String errorMessage, Status status});
 }
 
 /// @nodoc
@@ -90,23 +90,23 @@ class __$$_ForumStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? docs = null,
-    Object? isLoading = null,
+    Object? results = null,
     Object? errorMessage = null,
+    Object? status = null,
   }) {
     return _then(_$_ForumState(
-      docs: null == docs
-          ? _value._docs
-          : docs // ignore: cast_nullable_to_non_nullable
+      results: null == results
+          ? _value._results
+          : results // ignore: cast_nullable_to_non_nullable
               as List<ForumModel>,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ));
   }
 }
@@ -115,30 +115,30 @@ class __$$_ForumStateCopyWithImpl<$Res>
 
 class _$_ForumState implements _ForumState {
   _$_ForumState(
-      {final List<ForumModel> docs = const [],
-      this.isLoading = false,
-      this.errorMessage = ''})
-      : _docs = docs;
+      {final List<ForumModel> results = const [],
+      this.errorMessage = '',
+      this.status = Status.loading})
+      : _results = results;
 
-  final List<ForumModel> _docs;
+  final List<ForumModel> _results;
   @override
   @JsonKey()
-  List<ForumModel> get docs {
-    if (_docs is EqualUnmodifiableListView) return _docs;
+  List<ForumModel> get results {
+    if (_results is EqualUnmodifiableListView) return _results;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_docs);
+    return EqualUnmodifiableListView(_results);
   }
 
   @override
   @JsonKey()
-  final bool isLoading;
+  final String errorMessage;
   @override
   @JsonKey()
-  final String errorMessage;
+  final Status status;
 
   @override
   String toString() {
-    return 'ForumState(docs: $docs, isLoading: $isLoading, errorMessage: $errorMessage)';
+    return 'ForumState(results: $results, errorMessage: $errorMessage, status: $status)';
   }
 
   @override
@@ -146,16 +146,15 @@ class _$_ForumState implements _ForumState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ForumState &&
-            const DeepCollectionEquality().equals(other._docs, _docs) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
+            const DeepCollectionEquality().equals(other._results, _results) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_docs), isLoading, errorMessage);
+      const DeepCollectionEquality().hash(_results), errorMessage, status);
 
   @JsonKey(ignore: true)
   @override
@@ -166,16 +165,16 @@ class _$_ForumState implements _ForumState {
 
 abstract class _ForumState implements ForumState {
   factory _ForumState(
-      {final List<ForumModel> docs,
-      final bool isLoading,
-      final String errorMessage}) = _$_ForumState;
+      {final List<ForumModel> results,
+      final String errorMessage,
+      final Status status}) = _$_ForumState;
 
   @override
-  List<ForumModel> get docs;
-  @override
-  bool get isLoading;
+  List<ForumModel> get results;
   @override
   String get errorMessage;
+  @override
+  Status get status;
   @override
   @JsonKey(ignore: true)
   _$$_ForumStateCopyWith<_$_ForumState> get copyWith =>

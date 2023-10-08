@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/models/forum_model.dart';
 import 'package:this_is_your_training/repositories/forum_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,13 +12,7 @@ part 'forum_state.dart';
 class ForumCubit extends Cubit<ForumState> {
   String? avatarUrl;
   ForumCubit({required this.forumRepository, this.avatarUrl})
-      : super(
-          ForumState(
-            docs: [],
-            errorMessage: '',
-            isLoading: false,
-          ),
-        );
+      : super(ForumState());
 
   final ForumRepository forumRepository;
 
@@ -26,30 +21,26 @@ class ForumCubit extends Cubit<ForumState> {
   Future<void> start() async {
     emit(
       ForumState(
-        docs: [],
-        errorMessage: '',
-        isLoading: true,
+        status: Status.loading,
       ),
     );
-
-    _streamSubscription = forumRepository.getPostsStream().listen((data) {
-      emit(
-        ForumState(
-          docs: data,
-          isLoading: false,
-          errorMessage: '',
-        ),
-      );
-    })
-      ..onError((error) {
+    try {
+      _streamSubscription = forumRepository.getPostsStream().listen((results) {
         emit(
           ForumState(
-            docs: const [],
-            isLoading: false,
-            errorMessage: error.toString(),
+            status: Status.succes,
+            results: results,
           ),
         );
       });
+    } catch (error) {
+      emit(
+        ForumState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
   }
 
   Future<void> postMessage({

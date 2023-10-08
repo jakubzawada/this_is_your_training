@@ -95,13 +95,10 @@ class MyAccountPageContent extends StatelessWidget {
                                         ],
                                       ),
                                     );
-
-                                    final myAccountCubit =
-                                        // ignore: use_build_context_synchronously
-                                        BlocProvider.of<MyAccountCubit>(
-                                            context);
-                                    myAccountCubit.selectImage(
-                                        imageSource: imageSource);
+                                    // ignore: use_build_context_synchronously
+                                    context
+                                        .read<MyAccountCubit>()
+                                        .selectImage(imageSource: imageSource);
                                   },
                                 ),
                               ),

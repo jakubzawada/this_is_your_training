@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/forum_cubit.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/my_account_cubit.dart';
 import 'package:this_is_your_training/app/injection_container.dart';
@@ -53,11 +54,11 @@ class ForumPageContent extends StatelessWidget {
                       Expanded(
                         child: BlocBuilder<ForumCubit, ForumState>(
                           builder: (context, state) {
-                            if (state.docs.isNotEmpty) {
+                            if (state.results.isNotEmpty) {
                               return ListView.builder(
-                                itemCount: state.docs.length,
+                                itemCount: state.results.length,
                                 itemBuilder: (context, index) {
-                                  final postModel = state.docs[index];
+                                  final postModel = state.results[index];
                                   String formattedTime = formatDate(
                                       Timestamp.fromDate(postModel.timeStamp));
                                   return PostPage(
@@ -76,7 +77,7 @@ class ForumPageContent extends StatelessWidget {
                                     'Something went wrong: ${state.errorMessage}'),
                               );
                             }
-                            if (state.isLoading == true) {
+                            if (state.status == Status.loading) {
                               return const Center(
                                 child: CircularProgressIndicator(),
                               );

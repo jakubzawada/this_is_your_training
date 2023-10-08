@@ -11,6 +11,14 @@ part 'post_cubit.freezed.dart';
 part 'post_state.dart';
 
 class PostCubit extends Cubit<PostState> {
+  bool _isDisposed = false;
+
+  @override
+  Future<void> close() async {
+    _isDisposed = true;
+    super.close();
+  }
+
   PostCubit({required this.postRepository})
       : super(
           PostState(
@@ -65,12 +73,16 @@ class PostCubit extends Cubit<PostState> {
 
   Future<void> refreshPost({required String postId}) async {
     try {
-      getPost(postId);
+      if (!_isDisposed) {
+        getPost(postId);
+      }
     } catch (error) {
-      emit(state.copyWith(
-        isLoading: false,
-        errorMessage: error.toString(),
-      ));
+      if (!_isDisposed) {
+        emit(state.copyWith(
+          isLoading: false,
+          errorMessage: error.toString(),
+        ));
+      }
     }
   }
 
@@ -86,49 +98,61 @@ class PostCubit extends Cubit<PostState> {
   }
 
   Future<void> getPost(String postId) async {
-    final currentUser = FirebaseAuth.instance.currentUser!;
-    DocumentSnapshot postSnapshot = await FirebaseFirestore.instance
-        .collection("UsersPosts")
-        .doc(postId)
-        .get();
+    try {
+      if (!_isDisposed) {
+        final currentUser = FirebaseAuth.instance.currentUser!;
+        DocumentSnapshot postSnapshot = await FirebaseFirestore.instance
+            .collection("UsersPosts")
+            .doc(postId)
+            .get();
 
-    bool isLiked =
-        (postSnapshot['Likes'] as List<dynamic>).contains(currentUser.email);
+        bool isLiked = (postSnapshot['Likes'] as List<dynamic>)
+            .contains(currentUser.email);
 
-    QuerySnapshot commentsSnapshot = await FirebaseFirestore.instance
-        .collection("UsersPosts")
-        .doc(postId)
-        .collection("Comments")
-        .orderBy("CommentTime", descending: true)
-        .get();
+        QuerySnapshot commentsSnapshot = await FirebaseFirestore.instance
+            .collection("UsersPosts")
+            .doc(postId)
+            .collection("Comments")
+            .orderBy("CommentTime", descending: true)
+            .get();
 
-    List<DocumentSnapshot> commentDocs = commentsSnapshot.docs;
+        List<DocumentSnapshot> commentDocs = commentsSnapshot.docs;
 
-    List<PostModel> comments =
-        commentDocs.map((doc) => PostModel.fromDocumentSnapshot(doc)).toList();
+        List<PostModel> comments = commentDocs
+            .map((doc) => PostModel.fromDocumentSnapshot(doc))
+            .toList();
 
-    String userId = postSnapshot['UserEmail'];
-    QuerySnapshot userImageSnapshot = await FirebaseFirestore.instance
-        .collection("users")
-        .doc(userId)
-        .collection("images")
-        .orderBy('timestamp', descending: true)
-        .limit(1)
-        .get();
+        String userId = postSnapshot['UserEmail'];
+        QuerySnapshot userImageSnapshot = await FirebaseFirestore.instance
+            .collection("users")
+            .doc(userId)
+            .collection("images")
+            .orderBy('timestamp', descending: true)
+            .limit(1)
+            .get();
 
-    String avatarUrl = '';
-    if (userImageSnapshot.docs.isNotEmpty) {
-      avatarUrl = userImageSnapshot.docs[0].get('downloadURL') as String;
+        String avatarUrl = '';
+        if (userImageSnapshot.docs.isNotEmpty) {
+          avatarUrl = userImageSnapshot.docs[0].get('downloadURL') as String;
+        }
+
+        emit(
+          PostState(
+            isLoading: false,
+            errorMessage: '',
+            avatarUrl: avatarUrl,
+            docs: comments,
+            isLiked: isLiked,
+          ),
+        );
+      }
+    } catch (error) {
+      if (!_isDisposed) {
+        emit(state.copyWith(
+          isLoading: false,
+          errorMessage: error.toString(),
+        ));
+      }
     }
-
-    emit(
-      PostState(
-        isLoading: false,
-        errorMessage: '',
-        avatarUrl: avatarUrl,
-        docs: comments,
-        isLiked: isLiked,
-      ),
-    );
   }
 }

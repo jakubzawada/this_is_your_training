@@ -7,8 +7,8 @@ import 'package:this_is_your_training/app/injection_container.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  configureDependencies();
   WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
