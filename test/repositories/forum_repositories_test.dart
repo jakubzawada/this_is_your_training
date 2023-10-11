@@ -17,7 +17,6 @@ void main() {
   group('getPostsStream', () {
     test('should return a list of ForumModel', () {
       // 1
-      // 2
       // 3
     });
   });

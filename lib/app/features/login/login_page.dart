@@ -144,7 +144,6 @@ class LoginPage extends StatelessWidget {
                           ),
                           onTap: () async {
                             if (state.isCreatingAccount == true) {
-                              // rejestracja
                               try {
                                 context.read<LoginCubit>().createAccount(
                                       email: emailController.text,
@@ -155,7 +154,6 @@ class LoginPage extends StatelessWidget {
                                 error.toString();
                               }
                             } else {
-                              // logowanie
                               try {
                                 context.read<LoginCubit>().loginAccount(
                                       email: emailController.text,

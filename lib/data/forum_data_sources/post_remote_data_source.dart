@@ -22,8 +22,6 @@ class PostRemoteDataSource {
     }
   }
 
-// getpsot
-
   Future<void> addComment({
     required String postId,
     required String commentText,
