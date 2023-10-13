@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/repositories/my_account_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -22,19 +23,22 @@ class MyAccountCubit extends Cubit<MyAccountState> {
     if (imageSource != null) {
       final pickedImage = await ImagePicker().pickImage(source: imageSource);
       if (pickedImage != null) {
-        emit(state.copyWith(selectedImage: File(pickedImage.path)));
+        emit(MyAccountState(selectedImage: File(pickedImage.path)));
       }
     }
   }
 
   Future<void> setAvatarUrl(String? newAvatarUrl) async {
-    emit(state.copyWith(avatarUrl: newAvatarUrl));
-    avatarUrl = newAvatarUrl;
     try {
       await myAccountRepository.updatePostsWithNewAvatar(newAvatarUrl);
       emit(MyAccountState(saved: true));
     } catch (error) {
-      emit(MyAccountState(errorMessage: error.toString()));
+      emit(
+        MyAccountState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
     }
   }
 
@@ -45,9 +49,16 @@ class MyAccountCubit extends Cubit<MyAccountState> {
   Future<void> deleteAccount() async {
     try {
       await myAccountRepository.deleteAccount();
-      emit(MyAccountState(saved: true));
+      emit(
+        MyAccountState(saved: true),
+      );
     } catch (error) {
-      emit(MyAccountState(errorMessage: error.toString()));
+      emit(
+        MyAccountState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
     }
   }
 }

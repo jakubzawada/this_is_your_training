@@ -8,5 +8,6 @@ class MyAccountState with _$MyAccountState {
     File? selectedImage,
     User? user,
     String? avatarUrl,
+    @Default(Status.loading) Status status,
   }) = _MyAccountState;
 }

@@ -21,6 +21,7 @@ mixin _$MyAccountState {
   File? get selectedImage => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
   String? get avatarUrl => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MyAccountStateCopyWith<MyAccountState> get copyWith =>
@@ -38,7 +39,8 @@ abstract class $MyAccountStateCopyWith<$Res> {
       String? errorMessage,
       File? selectedImage,
       User? user,
-      String? avatarUrl});
+      String? avatarUrl,
+      Status status});
 }
 
 /// @nodoc
@@ -59,6 +61,7 @@ class _$MyAccountStateCopyWithImpl<$Res, $Val extends MyAccountState>
     Object? selectedImage = freezed,
     Object? user = freezed,
     Object? avatarUrl = freezed,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       saved: null == saved
@@ -81,6 +84,10 @@ class _$MyAccountStateCopyWithImpl<$Res, $Val extends MyAccountState>
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ) as $Val);
   }
 }
@@ -98,7 +105,8 @@ abstract class _$$_MyAccountStateCopyWith<$Res>
       String? errorMessage,
       File? selectedImage,
       User? user,
-      String? avatarUrl});
+      String? avatarUrl,
+      Status status});
 }
 
 /// @nodoc
@@ -117,6 +125,7 @@ class __$$_MyAccountStateCopyWithImpl<$Res>
     Object? selectedImage = freezed,
     Object? user = freezed,
     Object? avatarUrl = freezed,
+    Object? status = null,
   }) {
     return _then(_$_MyAccountState(
       saved: null == saved
@@ -139,6 +148,10 @@ class __$$_MyAccountStateCopyWithImpl<$Res>
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ));
   }
 }
@@ -151,7 +164,8 @@ class _$_MyAccountState implements _MyAccountState {
       this.errorMessage,
       this.selectedImage,
       this.user,
-      this.avatarUrl});
+      this.avatarUrl,
+      this.status = Status.loading});
 
   @override
   @JsonKey()
@@ -164,10 +178,13 @@ class _$_MyAccountState implements _MyAccountState {
   final User? user;
   @override
   final String? avatarUrl;
+  @override
+  @JsonKey()
+  final Status status;
 
   @override
   String toString() {
-    return 'MyAccountState(saved: $saved, errorMessage: $errorMessage, selectedImage: $selectedImage, user: $user, avatarUrl: $avatarUrl)';
+    return 'MyAccountState(saved: $saved, errorMessage: $errorMessage, selectedImage: $selectedImage, user: $user, avatarUrl: $avatarUrl, status: $status)';
   }
 
   @override
@@ -182,12 +199,13 @@ class _$_MyAccountState implements _MyAccountState {
                 other.selectedImage == selectedImage) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.avatarUrl, avatarUrl) ||
-                other.avatarUrl == avatarUrl));
+                other.avatarUrl == avatarUrl) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, saved, errorMessage, selectedImage, user, avatarUrl);
+      runtimeType, saved, errorMessage, selectedImage, user, avatarUrl, status);
 
   @JsonKey(ignore: true)
   @override
@@ -202,7 +220,8 @@ abstract class _MyAccountState implements MyAccountState {
       final String? errorMessage,
       final File? selectedImage,
       final User? user,
-      final String? avatarUrl}) = _$_MyAccountState;
+      final String? avatarUrl,
+      final Status status}) = _$_MyAccountState;
 
   @override
   bool get saved;
@@ -214,6 +233,8 @@ abstract class _MyAccountState implements MyAccountState {
   User? get user;
   @override
   String? get avatarUrl;
+  @override
+  Status get status;
   @override
   @JsonKey(ignore: true)
   _$$_MyAccountStateCopyWith<_$_MyAccountState> get copyWith =>

@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/app/features/login/cubit/login_cubit.dart';
 import 'package:this_is_your_training/repositories/login_repository.dart';
 
@@ -24,6 +25,58 @@ void main() {
         LoginState(
           isPasswordVisible: true,
         ),
+      ],
+    );
+  });
+
+  group('failer', () {
+    setUp(() {
+      when(() => repository.loginAccount(
+          email: 'email',
+          password: 'password',
+          errorMessage: 'test-exception-error')).thenThrow(
+        Exception('test-exception-error'),
+      );
+    });
+
+    blocTest<LoginCubit, LoginState>(
+      'emits Status.error with error message',
+      build: () => sut,
+      act: (cubit) => cubit.loginAccount(
+          email: 'email',
+          password: 'password',
+          errorMessage: 'test-exception-error'),
+      expect: () => [
+        LoginState(
+          status: Status.error,
+          errorMessage: 'Exception: test-exception-error',
+        )
+      ],
+    );
+  });
+
+  group('failer', () {
+    setUp(() {
+      when(() => repository.createAccount(
+          email: 'email',
+          password: 'password',
+          errorMessage: 'test-exception-error')).thenThrow(
+        Exception('test-exception-error'),
+      );
+    });
+
+    blocTest<LoginCubit, LoginState>(
+      'emits Status.error with error message',
+      build: () => sut,
+      act: (cubit) => cubit.createAccount(
+          email: 'email',
+          password: 'password',
+          errorMessage: 'test-exception-error'),
+      expect: () => [
+        LoginState(
+          status: Status.error,
+          errorMessage: 'Exception: test-exception-error',
+        )
       ],
     );
   });
