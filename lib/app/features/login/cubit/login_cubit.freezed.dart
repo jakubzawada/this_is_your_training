@@ -19,6 +19,7 @@ mixin _$LoginState {
   bool get isCreatingAccount => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
   bool get isPasswordVisible => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -36,6 +37,7 @@ abstract class $LoginStateCopyWith<$Res> {
       {bool isCreatingAccount,
       String errorMessage,
       bool isPasswordVisible,
+      Status status,
       String password});
 }
 
@@ -55,6 +57,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
     Object? isCreatingAccount = null,
     Object? errorMessage = null,
     Object? isPasswordVisible = null,
+    Object? status = null,
     Object? password = null,
   }) {
     return _then(_value.copyWith(
@@ -70,6 +73,10 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
           ? _value.isPasswordVisible
           : isPasswordVisible // ignore: cast_nullable_to_non_nullable
               as bool,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -90,6 +97,7 @@ abstract class _$$_LoginStateCopyWith<$Res>
       {bool isCreatingAccount,
       String errorMessage,
       bool isPasswordVisible,
+      Status status,
       String password});
 }
 
@@ -107,6 +115,7 @@ class __$$_LoginStateCopyWithImpl<$Res>
     Object? isCreatingAccount = null,
     Object? errorMessage = null,
     Object? isPasswordVisible = null,
+    Object? status = null,
     Object? password = null,
   }) {
     return _then(_$_LoginState(
@@ -122,6 +131,10 @@ class __$$_LoginStateCopyWithImpl<$Res>
           ? _value.isPasswordVisible
           : isPasswordVisible // ignore: cast_nullable_to_non_nullable
               as bool,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -137,6 +150,7 @@ class _$_LoginState implements _LoginState {
       {this.isCreatingAccount = false,
       this.errorMessage = '',
       this.isPasswordVisible = false,
+      this.status = Status.loading,
       this.password = ''});
 
   @override
@@ -150,11 +164,14 @@ class _$_LoginState implements _LoginState {
   final bool isPasswordVisible;
   @override
   @JsonKey()
+  final Status status;
+  @override
+  @JsonKey()
   final String password;
 
   @override
   String toString() {
-    return 'LoginState(isCreatingAccount: $isCreatingAccount, errorMessage: $errorMessage, isPasswordVisible: $isPasswordVisible, password: $password)';
+    return 'LoginState(isCreatingAccount: $isCreatingAccount, errorMessage: $errorMessage, isPasswordVisible: $isPasswordVisible, status: $status, password: $password)';
   }
 
   @override
@@ -168,13 +185,14 @@ class _$_LoginState implements _LoginState {
                 other.errorMessage == errorMessage) &&
             (identical(other.isPasswordVisible, isPasswordVisible) ||
                 other.isPasswordVisible == isPasswordVisible) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.password, password) ||
                 other.password == password));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isCreatingAccount, errorMessage,
-      isPasswordVisible, password);
+      isPasswordVisible, status, password);
 
   @JsonKey(ignore: true)
   @override
@@ -188,6 +206,7 @@ abstract class _LoginState implements LoginState {
       {final bool isCreatingAccount,
       final String errorMessage,
       final bool isPasswordVisible,
+      final Status status,
       final String password}) = _$_LoginState;
 
   @override
@@ -196,6 +215,8 @@ abstract class _LoginState implements LoginState {
   String get errorMessage;
   @override
   bool get isPasswordVisible;
+  @override
+  Status get status;
   @override
   String get password;
   @override
