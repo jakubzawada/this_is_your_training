@@ -17,8 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$RootState {
   User? get user => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RootStateCopyWith<RootState> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $RootStateCopyWith<$Res> {
   factory $RootStateCopyWith(RootState value, $Res Function(RootState) then) =
       _$RootStateCopyWithImpl<$Res, RootState>;
   @useResult
-  $Res call({User? user, bool isLoading, String errorMessage});
+  $Res call({User? user, String errorMessage, Status status});
 }
 
 /// @nodoc
@@ -47,22 +47,22 @@ class _$RootStateCopyWithImpl<$Res, $Val extends RootState>
   @override
   $Res call({
     Object? user = freezed,
-    Object? isLoading = null,
     Object? errorMessage = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ) as $Val);
   }
 }
@@ -74,7 +74,7 @@ abstract class _$$_RootStateCopyWith<$Res> implements $RootStateCopyWith<$Res> {
       __$$_RootStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({User? user, bool isLoading, String errorMessage});
+  $Res call({User? user, String errorMessage, Status status});
 }
 
 /// @nodoc
@@ -89,22 +89,22 @@ class __$$_RootStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = freezed,
-    Object? isLoading = null,
     Object? errorMessage = null,
+    Object? status = null,
   }) {
     return _then(_$_RootState(
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ));
   }
 }
@@ -112,20 +112,21 @@ class __$$_RootStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_RootState implements _RootState {
-  _$_RootState({this.user, this.isLoading = false, this.errorMessage = ''});
+  _$_RootState(
+      {this.user, this.errorMessage = '', this.status = Status.loading});
 
   @override
   final User? user;
   @override
   @JsonKey()
-  final bool isLoading;
+  final String errorMessage;
   @override
   @JsonKey()
-  final String errorMessage;
+  final Status status;
 
   @override
   String toString() {
-    return 'RootState(user: $user, isLoading: $isLoading, errorMessage: $errorMessage)';
+    return 'RootState(user: $user, errorMessage: $errorMessage, status: $status)';
   }
 
   @override
@@ -134,14 +135,13 @@ class _$_RootState implements _RootState {
         (other.runtimeType == runtimeType &&
             other is _$_RootState &&
             (identical(other.user, user) || other.user == user) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, isLoading, errorMessage);
+  int get hashCode => Object.hash(runtimeType, user, errorMessage, status);
 
   @JsonKey(ignore: true)
   @override
@@ -153,15 +153,15 @@ class _$_RootState implements _RootState {
 abstract class _RootState implements RootState {
   factory _RootState(
       {final User? user,
-      final bool isLoading,
-      final String errorMessage}) = _$_RootState;
+      final String errorMessage,
+      final Status status}) = _$_RootState;
 
   @override
   User? get user;
   @override
-  bool get isLoading;
-  @override
   String get errorMessage;
+  @override
+  Status get status;
   @override
   @JsonKey(ignore: true)
   _$$_RootStateCopyWith<_$_RootState> get copyWith =>

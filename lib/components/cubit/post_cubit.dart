@@ -138,8 +138,6 @@ class PostCubit extends Cubit<PostState> {
 
         emit(
           PostState(
-            isLoading: false,
-            errorMessage: '',
             avatarUrl: avatarUrl,
             docs: comments,
             isLiked: isLiked,

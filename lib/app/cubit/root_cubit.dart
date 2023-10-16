@@ -2,54 +2,53 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:this_is_your_training/app/core/enums.dart';
+import 'package:this_is_your_training/repositories/root_repository.dart';
 
 part 'root_cubit.freezed.dart';
 part 'root_state.dart';
 
 class RootCubit extends Cubit<RootState> {
-  RootCubit()
+  RootCubit({required this.rootRepository})
       : super(
           RootState(
             user: null,
-            isLoading: false,
-            errorMessage: '',
           ),
         );
+
+  final RootRepository rootRepository;
 
   StreamSubscription? _streamSubscription;
 
   Future<void> signOut() async {
-    FirebaseAuth.instance.signOut();
+    rootRepository.signOut();
   }
 
   Future<void> start() async {
     emit(
       RootState(
         user: null,
-        isLoading: true,
-        errorMessage: '',
+        status: Status.loading,
       ),
     );
-
-    _streamSubscription =
-        FirebaseAuth.instance.authStateChanges().listen((user) {
+    try {
+      _streamSubscription = rootRepository.start().listen((user) {
+        emit(
+          RootState(
+            user: user,
+            status: Status.succes,
+          ),
+        );
+      });
+    } catch (error) {
       emit(
         RootState(
-          user: user,
-          isLoading: false,
-          errorMessage: '',
+          user: null,
+          status: Status.error,
+          errorMessage: error.toString(),
         ),
       );
-    })
-          ..onError((error) {
-            emit(
-              RootState(
-                user: null,
-                isLoading: false,
-                errorMessage: error.toString(),
-              ),
-            );
-          });
+    }
   }
 
   @override
