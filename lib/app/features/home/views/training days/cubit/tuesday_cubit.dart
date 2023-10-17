@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/models/training_model.dart';
 import 'package:this_is_your_training/repositories/trainings_documents_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,19 +12,24 @@ part 'tuesday_state.dart';
 class TuesdayCubit extends Cubit<TuesdayState> {
   TuesdayCubit({required this.documentsRepository})
       : super(
-          TuesdayState(
-            documents: [],
-            errorMessage: '',
-            isLoading: false,
-          ),
+          TuesdayState(),
         );
 
   final TrainingsDocumentsRepository documentsRepository;
 
-  Future<void> dissmisible({
+  Future<void> dismissible({
     required String documentid,
   }) async {
-    await documentsRepository.delete1(id: documentid);
+    try {
+      await documentsRepository.delete1(id: documentid);
+    } catch (error) {
+      emit(
+        TuesdayState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
   }
 
   StreamSubscription? _streamSubscription;
@@ -31,31 +37,28 @@ class TuesdayCubit extends Cubit<TuesdayState> {
   Future<void> start() async {
     emit(
       TuesdayState(
-        documents: [],
-        errorMessage: '',
-        isLoading: true,
+        status: Status.loading,
       ),
     );
 
-    _streamSubscription =
-        documentsRepository.getDocumentsStream1().listen((data) {
+    try {
+      _streamSubscription =
+          documentsRepository.getDocumentsStream1().listen((results) {
+        emit(
+          TuesdayState(
+            status: Status.succes,
+            results: results,
+          ),
+        );
+      });
+    } catch (error) {
       emit(
         TuesdayState(
-          documents: data,
-          isLoading: false,
-          errorMessage: '',
+          status: Status.error,
+          errorMessage: error.toString(),
         ),
       );
-    })
-          ..onError((error) {
-            emit(
-              TuesdayState(
-                documents: const [],
-                isLoading: false,
-                errorMessage: error.toString(),
-              ),
-            );
-          });
+    }
   }
 
   @override

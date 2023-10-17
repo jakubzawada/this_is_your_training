@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SundayState {
-  List<TrainingModel> get documents => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
+  List<TrainingModel> get results => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,8 +31,7 @@ abstract class $SundayStateCopyWith<$Res> {
           SundayState value, $Res Function(SundayState) then) =
       _$SundayStateCopyWithImpl<$Res, SundayState>;
   @useResult
-  $Res call(
-      {List<TrainingModel> documents, bool isLoading, String errorMessage});
+  $Res call({List<TrainingModel> results, Status status, String errorMessage});
 }
 
 /// @nodoc
@@ -48,19 +47,19 @@ class _$SundayStateCopyWithImpl<$Res, $Val extends SundayState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? documents = null,
-    Object? isLoading = null,
+    Object? results = null,
+    Object? status = null,
     Object? errorMessage = null,
   }) {
     return _then(_value.copyWith(
-      documents: null == documents
-          ? _value.documents
-          : documents // ignore: cast_nullable_to_non_nullable
+      results: null == results
+          ? _value.results
+          : results // ignore: cast_nullable_to_non_nullable
               as List<TrainingModel>,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -77,8 +76,7 @@ abstract class _$$_SundayStateCopyWith<$Res>
       __$$_SundayStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<TrainingModel> documents, bool isLoading, String errorMessage});
+  $Res call({List<TrainingModel> results, Status status, String errorMessage});
 }
 
 /// @nodoc
@@ -92,19 +90,19 @@ class __$$_SundayStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? documents = null,
-    Object? isLoading = null,
+    Object? results = null,
+    Object? status = null,
     Object? errorMessage = null,
   }) {
     return _then(_$_SundayState(
-      documents: null == documents
-          ? _value._documents
-          : documents // ignore: cast_nullable_to_non_nullable
+      results: null == results
+          ? _value._results
+          : results // ignore: cast_nullable_to_non_nullable
               as List<TrainingModel>,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -117,30 +115,30 @@ class __$$_SundayStateCopyWithImpl<$Res>
 
 class _$_SundayState implements _SundayState {
   _$_SundayState(
-      {final List<TrainingModel> documents = const [],
-      this.isLoading = false,
+      {final List<TrainingModel> results = const [],
+      this.status = Status.loading,
       this.errorMessage = ''})
-      : _documents = documents;
+      : _results = results;
 
-  final List<TrainingModel> _documents;
+  final List<TrainingModel> _results;
   @override
   @JsonKey()
-  List<TrainingModel> get documents {
-    if (_documents is EqualUnmodifiableListView) return _documents;
+  List<TrainingModel> get results {
+    if (_results is EqualUnmodifiableListView) return _results;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_documents);
+    return EqualUnmodifiableListView(_results);
   }
 
   @override
   @JsonKey()
-  final bool isLoading;
+  final Status status;
   @override
   @JsonKey()
   final String errorMessage;
 
   @override
   String toString() {
-    return 'SundayState(documents: $documents, isLoading: $isLoading, errorMessage: $errorMessage)';
+    return 'SundayState(results: $results, status: $status, errorMessage: $errorMessage)';
   }
 
   @override
@@ -148,17 +146,15 @@ class _$_SundayState implements _SundayState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SundayState &&
-            const DeepCollectionEquality()
-                .equals(other._documents, _documents) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
+            const DeepCollectionEquality().equals(other._results, _results) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_documents), isLoading, errorMessage);
+      const DeepCollectionEquality().hash(_results), status, errorMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -169,14 +165,14 @@ class _$_SundayState implements _SundayState {
 
 abstract class _SundayState implements SundayState {
   factory _SundayState(
-      {final List<TrainingModel> documents,
-      final bool isLoading,
+      {final List<TrainingModel> results,
+      final Status status,
       final String errorMessage}) = _$_SundayState;
 
   @override
-  List<TrainingModel> get documents;
+  List<TrainingModel> get results;
   @override
-  bool get isLoading;
+  Status get status;
   @override
   String get errorMessage;
   @override

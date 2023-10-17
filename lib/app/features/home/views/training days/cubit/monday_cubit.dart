@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/models/training_model.dart';
 import 'package:this_is_your_training/repositories/trainings_documents_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,19 +12,24 @@ part 'monday_state.dart';
 class MondayCubit extends Cubit<MondayState> {
   MondayCubit({required this.documentsRepository})
       : super(
-          MondayState(
-            documents: [],
-            errorMessage: '',
-            isLoading: false,
-          ),
+          MondayState(),
         );
 
   final TrainingsDocumentsRepository documentsRepository;
 
-  Future<void> dissmisible({
+  Future<void> dismissible({
     required String documentid,
   }) async {
-    await documentsRepository.delete(id: documentid);
+    try {
+      await documentsRepository.delete(id: documentid);
+    } catch (error) {
+      emit(
+        MondayState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
   }
 
   StreamSubscription? _streamSubscription;
@@ -31,31 +37,27 @@ class MondayCubit extends Cubit<MondayState> {
   Future<void> start() async {
     emit(
       MondayState(
-        documents: [],
-        errorMessage: '',
-        isLoading: true,
+        status: Status.loading,
       ),
     );
-
-    _streamSubscription =
-        documentsRepository.getDocumentsStream().listen((data) {
+    try {
+      _streamSubscription =
+          documentsRepository.getDocumentsStream().listen((results) {
+        emit(
+          MondayState(
+            status: Status.succes,
+            results: results,
+          ),
+        );
+      });
+    } catch (error) {
       emit(
         MondayState(
-          documents: data,
-          isLoading: false,
-          errorMessage: '',
+          status: Status.error,
+          errorMessage: error.toString(),
         ),
       );
-    })
-          ..onError((error) {
-            emit(
-              MondayState(
-                documents: const [],
-                isLoading: false,
-                errorMessage: error.toString(),
-              ),
-            );
-          });
+    }
   }
 
   @override

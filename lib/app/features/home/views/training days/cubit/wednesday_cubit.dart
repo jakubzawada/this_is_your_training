@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/models/training_model.dart';
 import 'package:this_is_your_training/repositories/trainings_documents_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,19 +12,24 @@ part 'wednesday_state.dart';
 class WednesdayCubit extends Cubit<WednesdayState> {
   WednesdayCubit({required this.documentsRepository})
       : super(
-          WednesdayState(
-            documents: [],
-            errorMessage: '',
-            isLoading: false,
-          ),
+          WednesdayState(),
         );
 
   final TrainingsDocumentsRepository documentsRepository;
 
-  Future<void> dissmisible({
+  Future<void> dismissible({
     required String documentid,
   }) async {
-    await documentsRepository.delete2(id: documentid);
+    try {
+      await documentsRepository.delete2(id: documentid);
+    } catch (error) {
+      emit(
+        WednesdayState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
   }
 
   StreamSubscription? _streamSubscription;
@@ -31,31 +37,28 @@ class WednesdayCubit extends Cubit<WednesdayState> {
   Future<void> start() async {
     emit(
       WednesdayState(
-        documents: [],
-        errorMessage: '',
-        isLoading: true,
+        status: Status.loading,
       ),
     );
 
-    _streamSubscription =
-        documentsRepository.getDocumentsStream2().listen((data) {
+    try {
+      _streamSubscription =
+          documentsRepository.getDocumentsStream2().listen((results) {
+        emit(
+          WednesdayState(
+            status: Status.succes,
+            results: results,
+          ),
+        );
+      });
+    } catch (error) {
       emit(
         WednesdayState(
-          documents: data,
-          isLoading: false,
-          errorMessage: '',
+          status: Status.error,
+          errorMessage: error.toString(),
         ),
       );
-    })
-          ..onError((error) {
-            emit(
-              WednesdayState(
-                documents: const [],
-                isLoading: false,
-                errorMessage: error.toString(),
-              ),
-            );
-          });
+    }
   }
 
   @override

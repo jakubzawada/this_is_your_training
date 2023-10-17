@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/app/features/home/views/training%20days/cubit/thursday_cubit.dart';
 import 'package:this_is_your_training/app/injection_container.dart';
 import 'add exercises/add_thursday_exercise_page_content.dart';
@@ -110,12 +111,12 @@ class ThursdayPageContent extends StatelessWidget {
                             );
                           }
 
-                          if (state.isLoading) {
+                          if (state.status == Status.loading) {
                             return const Center(
                                 child: CircularProgressIndicator());
                           }
 
-                          final documentModels = state.documents;
+                          final documentModels = state.results;
 
                           return Container(
                             height: 520,
@@ -153,7 +154,7 @@ class ThursdayPageContent extends StatelessWidget {
                                         onDismissed: (_) {
                                           context
                                               .read<ThursdayCubit>()
-                                              .dissmisible(
+                                              .dismissible(
                                                   documentid: documentModel.id);
                                         },
                                         child: Padding(

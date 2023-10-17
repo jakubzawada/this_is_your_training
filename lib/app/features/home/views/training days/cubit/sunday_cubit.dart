@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/models/training_model.dart';
 import 'package:this_is_your_training/repositories/trainings_documents_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,19 +12,24 @@ part 'sunday_state.dart';
 class SundayCubit extends Cubit<SundayState> {
   SundayCubit({required this.documentsRepository})
       : super(
-          SundayState(
-            documents: [],
-            errorMessage: '',
-            isLoading: false,
-          ),
+          SundayState(),
         );
 
   final TrainingsDocumentsRepository documentsRepository;
 
-  Future<void> dissmisible({
+  Future<void> dismissible({
     required String documentid,
   }) async {
-    await documentsRepository.delete6(id: documentid);
+    try {
+      await documentsRepository.delete6(id: documentid);
+    } catch (error) {
+      emit(
+        SundayState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
   }
 
   StreamSubscription? _streamSubscription;
@@ -31,31 +37,28 @@ class SundayCubit extends Cubit<SundayState> {
   Future<void> start() async {
     emit(
       SundayState(
-        documents: [],
-        errorMessage: '',
-        isLoading: true,
+        status: Status.loading,
       ),
     );
 
-    _streamSubscription =
-        documentsRepository.getDocumentsStream6().listen((data) {
+    try {
+      _streamSubscription =
+          documentsRepository.getDocumentsStream6().listen((results) {
+        emit(
+          SundayState(
+            status: Status.succes,
+            results: results,
+          ),
+        );
+      });
+    } catch (error) {
       emit(
         SundayState(
-          documents: data,
-          isLoading: false,
-          errorMessage: '',
+          status: Status.error,
+          errorMessage: error.toString(),
         ),
       );
-    })
-          ..onError((error) {
-            emit(
-              SundayState(
-                documents: const [],
-                isLoading: false,
-                errorMessage: error.toString(),
-              ),
-            );
-          });
+    }
   }
 
   @override
