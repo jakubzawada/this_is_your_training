@@ -48,7 +48,7 @@ class _$WednesdayStateCopyWithImpl<$Res, $Val extends WednesdayState>
   @override
   $Res call({
     Object? results = null,
-    Object? status = freezed,
+    Object? status = null,
     Object? errorMessage = null,
   }) {
     return _then(_value.copyWith(
@@ -56,7 +56,7 @@ class _$WednesdayStateCopyWithImpl<$Res, $Val extends WednesdayState>
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
               as List<TrainingModel>,
-      status: freezed == status
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
@@ -91,7 +91,7 @@ class __$$_WednesdayStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? results = null,
-    Object? status = freezed,
+    Object? status = null,
     Object? errorMessage = null,
   }) {
     return _then(_$_WednesdayState(
@@ -99,7 +99,7 @@ class __$$_WednesdayStateCopyWithImpl<$Res>
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
               as List<TrainingModel>,
-      status: freezed == status
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
@@ -147,17 +147,14 @@ class _$_WednesdayState implements _WednesdayState {
         (other.runtimeType == runtimeType &&
             other is _$_WednesdayState &&
             const DeepCollectionEquality().equals(other._results, _results) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_results),
-      const DeepCollectionEquality().hash(status),
-      errorMessage);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_results), status, errorMessage);
 
   @JsonKey(ignore: true)
   @override

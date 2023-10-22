@@ -80,7 +80,7 @@ class LoginPage extends StatelessWidget {
                                 context.read<LoginCubit>().obscureText();
                               },
                               child: Icon(
-                                state.isPasswordVisible
+                                state.obscureText
                                     ? Icons.visibility_off
                                     : Icons.visibility,
                                 color: Colors.deepPurple,
@@ -90,7 +90,7 @@ class LoginPage extends StatelessWidget {
                             fillColor: Colors.grey[200],
                             filled: true,
                           ),
-                          obscureText: state.isPasswordVisible,
+                          obscureText: state.obscureText,
                         ),
                         const SizedBox(height: 10),
                         Row(

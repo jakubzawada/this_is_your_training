@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LoginState {
   bool get isCreatingAccount => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
-  bool get isPasswordVisible => throw _privateConstructorUsedError;
+  bool get obscureText => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $LoginStateCopyWith<$Res> {
   $Res call(
       {bool isCreatingAccount,
       String errorMessage,
-      bool isPasswordVisible,
+      bool obscureText,
       Status status});
 }
 
@@ -54,7 +54,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
   $Res call({
     Object? isCreatingAccount = null,
     Object? errorMessage = null,
-    Object? isPasswordVisible = null,
+    Object? obscureText = null,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -66,9 +66,9 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
-      isPasswordVisible: null == isPasswordVisible
-          ? _value.isPasswordVisible
-          : isPasswordVisible // ignore: cast_nullable_to_non_nullable
+      obscureText: null == obscureText
+          ? _value.obscureText
+          : obscureText // ignore: cast_nullable_to_non_nullable
               as bool,
       status: null == status
           ? _value.status
@@ -89,7 +89,7 @@ abstract class _$$_LoginStateCopyWith<$Res>
   $Res call(
       {bool isCreatingAccount,
       String errorMessage,
-      bool isPasswordVisible,
+      bool obscureText,
       Status status});
 }
 
@@ -106,7 +106,7 @@ class __$$_LoginStateCopyWithImpl<$Res>
   $Res call({
     Object? isCreatingAccount = null,
     Object? errorMessage = null,
-    Object? isPasswordVisible = null,
+    Object? obscureText = null,
     Object? status = null,
   }) {
     return _then(_$_LoginState(
@@ -118,9 +118,9 @@ class __$$_LoginStateCopyWithImpl<$Res>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
-      isPasswordVisible: null == isPasswordVisible
-          ? _value.isPasswordVisible
-          : isPasswordVisible // ignore: cast_nullable_to_non_nullable
+      obscureText: null == obscureText
+          ? _value.obscureText
+          : obscureText // ignore: cast_nullable_to_non_nullable
               as bool,
       status: null == status
           ? _value.status
@@ -136,7 +136,7 @@ class _$_LoginState implements _LoginState {
   _$_LoginState(
       {this.isCreatingAccount = false,
       this.errorMessage = '',
-      this.isPasswordVisible = false,
+      this.obscureText = false,
       this.status = Status.loading});
 
   @override
@@ -147,14 +147,14 @@ class _$_LoginState implements _LoginState {
   final String errorMessage;
   @override
   @JsonKey()
-  final bool isPasswordVisible;
+  final bool obscureText;
   @override
   @JsonKey()
   final Status status;
 
   @override
   String toString() {
-    return 'LoginState(isCreatingAccount: $isCreatingAccount, errorMessage: $errorMessage, isPasswordVisible: $isPasswordVisible, status: $status)';
+    return 'LoginState(isCreatingAccount: $isCreatingAccount, errorMessage: $errorMessage, obscureText: $obscureText, status: $status)';
   }
 
   @override
@@ -166,14 +166,14 @@ class _$_LoginState implements _LoginState {
                 other.isCreatingAccount == isCreatingAccount) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
-            (identical(other.isPasswordVisible, isPasswordVisible) ||
-                other.isPasswordVisible == isPasswordVisible) &&
+            (identical(other.obscureText, obscureText) ||
+                other.obscureText == obscureText) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, isCreatingAccount, errorMessage, isPasswordVisible, status);
+      runtimeType, isCreatingAccount, errorMessage, obscureText, status);
 
   @JsonKey(ignore: true)
   @override
@@ -186,7 +186,7 @@ abstract class _LoginState implements LoginState {
   factory _LoginState(
       {final bool isCreatingAccount,
       final String errorMessage,
-      final bool isPasswordVisible,
+      final bool obscureText,
       final Status status}) = _$_LoginState;
 
   @override
@@ -194,7 +194,7 @@ abstract class _LoginState implements LoginState {
   @override
   String get errorMessage;
   @override
-  bool get isPasswordVisible;
+  bool get obscureText;
   @override
   Status get status;
   @override
