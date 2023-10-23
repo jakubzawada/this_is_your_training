@@ -40,8 +40,8 @@ class AuthService {
         print('Facebook login failed. Status: ${result.status}');
         return null;
       }
-    } catch (e) {
-      print('Error during Facebook login: $e');
+    } catch (error) {
+      print('Error during Facebook login: $error');
       return null;
     }
   }

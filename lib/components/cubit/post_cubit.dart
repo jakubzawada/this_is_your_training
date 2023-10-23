@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/models/post_model.dart';
 import 'package:this_is_your_training/repositories/post_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,25 +20,23 @@ class PostCubit extends Cubit<PostState> {
 
   PostCubit({required this.postRepository})
       : super(
-          PostState(
-            docs: const [],
-            errorMessage: '',
-            isLoading: false,
-            avatarUrl: '',
-          ),
+          PostState(),
         );
   final PostRepository postRepository;
 
   Future<void> start({
     required String postId,
   }) async {
-    emit(state.copyWith(isLoading: true, errorMessage: ''));
-
+    emit(
+      PostState(
+        status: Status.loading,
+      ),
+    );
     try {
       getPost(postId);
     } catch (error) {
-      emit(state.copyWith(
-        isLoading: false,
+      emit(PostState(
+        status: Status.error,
         errorMessage: error.toString(),
       ));
     }
@@ -53,7 +50,16 @@ class PostCubit extends Cubit<PostState> {
     required String postId,
     required bool isLiked,
   }) async {
-    postRepository.like(postId: postId, isLiked: isLiked);
+    try {
+      postRepository.like(postId: postId, isLiked: isLiked);
+    } catch (error) {
+      emit(
+        PostState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
   }
 
   Future<void> addComment({
@@ -64,10 +70,15 @@ class PostCubit extends Cubit<PostState> {
       await postRepository.addComment(postId: postId, commentText: commentText);
       refreshPost(postId: postId);
       emit(
-        state.copyWith(saved: true),
+        PostState(saved: true),
       );
     } catch (error) {
-      emit(state.copyWith(errorMessage: error.toString()));
+      emit(
+        PostState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
     }
   }
 
@@ -78,10 +89,12 @@ class PostCubit extends Cubit<PostState> {
       }
     } catch (error) {
       if (!_isDisposed) {
-        emit(state.copyWith(
-          isLoading: false,
-          errorMessage: error.toString(),
-        ));
+        emit(
+          PostState(
+            status: Status.error,
+            errorMessage: error.toString(),
+          ),
+        );
       }
     }
   }
@@ -90,64 +103,35 @@ class PostCubit extends Cubit<PostState> {
     try {
       await postRepository.postDelete(postId: postId);
       emit(
-        state.copyWith(saved: true),
+        PostState(saved: true),
       );
     } catch (error) {
-      emit(state.copyWith(errorMessage: error.toString()));
+      emit(
+        PostState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
     }
   }
 
   Future<void> getPost(String postId) async {
     try {
       if (!_isDisposed) {
-        final currentUser = FirebaseAuth.instance.currentUser!;
-        DocumentSnapshot postSnapshot = await FirebaseFirestore.instance
-            .collection("UsersPosts")
-            .doc(postId)
-            .get();
-
-        bool isLiked = (postSnapshot['Likes'] as List<dynamic>)
-            .contains(currentUser.email);
-
-        QuerySnapshot commentsSnapshot = await FirebaseFirestore.instance
-            .collection("UsersPosts")
-            .doc(postId)
-            .collection("Comments")
-            .orderBy("CommentTime", descending: true)
-            .get();
-
-        List<DocumentSnapshot> commentDocs = commentsSnapshot.docs;
-
-        List<PostModel> comments = commentDocs
-            .map((doc) => PostModel.fromDocumentSnapshot(doc))
-            .toList();
-
-        String userId = postSnapshot['UserEmail'];
-        QuerySnapshot userImageSnapshot = await FirebaseFirestore.instance
-            .collection("users")
-            .doc(userId)
-            .collection("images")
-            .orderBy('timestamp', descending: true)
-            .limit(1)
-            .get();
-
-        String avatarUrl = '';
-        if (userImageSnapshot.docs.isNotEmpty) {
-          avatarUrl = userImageSnapshot.docs[0].get('downloadURL') as String;
-        }
-
+        final postData = await postRepository.getPostData(postId);
         emit(
           PostState(
-            avatarUrl: avatarUrl,
-            docs: comments,
-            isLiked: isLiked,
+            status: Status.succes,
+            avatarUrl: postData.avatarUrl,
+            docs: postData.comments,
+            isLiked: postData.isLiked,
           ),
         );
       }
     } catch (error) {
       if (!_isDisposed) {
-        emit(state.copyWith(
-          isLoading: false,
+        emit(PostState(
+          status: Status.error,
           errorMessage: error.toString(),
         ));
       }

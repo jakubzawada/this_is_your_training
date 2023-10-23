@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:this_is_your_training/data/forum_data_sources/my_account_remote_data_source.dart';
+import 'package:this_is_your_training/data/data_sources/my_account_remote_data_source.dart';
 import 'package:this_is_your_training/repositories/my_account_repository.dart';
 
 class ProfilePicture2 extends StatelessWidget {

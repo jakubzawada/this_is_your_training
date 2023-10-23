@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/app/cubit/root_cubit.dart';
 import 'package:this_is_your_training/app/features/home/home_page.dart';
 import 'package:this_is_your_training/app/features/login/login_page.dart';
-import 'package:this_is_your_training/data/forum_data_sources/root_remote_data_source.dart';
+import 'package:this_is_your_training/data/data_sources/root_remote_data_source.dart';
 import 'package:this_is_your_training/repositories/root_repository.dart';
 
 class MyApp extends StatelessWidget {

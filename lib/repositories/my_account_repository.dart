@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:this_is_your_training/data/forum_data_sources/my_account_remote_data_source.dart';
+import 'package:this_is_your_training/data/data_sources/my_account_remote_data_source.dart';
 
 class MyAccountRepository {
   MyAccountRepository({required this.myAccountDataSource});

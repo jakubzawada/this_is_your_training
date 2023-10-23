@@ -1,4 +1,4 @@
-import 'package:this_is_your_training/data/forum_data_sources/training_remote_data_source.dart';
+import 'package:this_is_your_training/data/data_sources/training_remote_data_source.dart';
 import 'package:this_is_your_training/models/training_model.dart';
 
 class TrainingsDocumentsRepository {

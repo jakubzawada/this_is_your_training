@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:this_is_your_training/data/forum_data_sources/my_account_remote_data_source.dart';
+import 'package:this_is_your_training/data/data_sources/my_account_remote_data_source.dart';
 import 'package:this_is_your_training/repositories/my_account_repository.dart';
 
 class MockLoginDataSource extends Mock implements MyAccountRemoteDataSource {}

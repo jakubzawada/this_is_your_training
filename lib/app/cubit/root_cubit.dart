@@ -27,25 +27,25 @@ class RootCubit extends Cubit<RootState> {
   Future<void> start() async {
     emit(
       RootState(
-        user: null,
         status: Status.loading,
+        user: null,
       ),
     );
     try {
       _streamSubscription = rootRepository.start().listen((user) {
         emit(
           RootState(
-            user: user,
             status: Status.succes,
+            user: user,
           ),
         );
       });
     } catch (error) {
       emit(
         RootState(
-          user: null,
           status: Status.error,
           errorMessage: error.toString(),
+          user: null,
         ),
       );
     }

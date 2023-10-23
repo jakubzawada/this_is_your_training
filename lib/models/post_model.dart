@@ -11,12 +11,8 @@ class PostModel {
   final Timestamp commentTime;
   final String commentedBy;
 
-  factory PostModel.fromDocumentSnapshot(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
-    return PostModel(
-      commentText: data['CommentText'],
-      commentTime: data['CommentTime'],
-      commentedBy: data['CommentedBy'],
-    );
-  }
+  PostModel.fromJson(Map<String, dynamic> json)
+      : commentText = json['CommentText'],
+        commentTime = json['CommentTime'],
+        commentedBy = json['CommentedBy'];
 }

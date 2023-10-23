@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:this_is_your_training/data/forum_data_sources/root_remote_data_source.dart';
+import 'package:this_is_your_training/data/data_sources/root_remote_data_source.dart';
 
 class RootRepository {
   final RootDataSource rootdataSource;

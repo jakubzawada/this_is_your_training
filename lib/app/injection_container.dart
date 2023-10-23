@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/forum_cubit.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/my_account_cubit.dart';
@@ -18,11 +17,11 @@ import 'package:this_is_your_training/app/features/home/views/training%20days/cu
 import 'package:this_is_your_training/app/features/home/views/training%20days/cubit/wednesday_cubit.dart';
 import 'package:this_is_your_training/app/features/login/cubit/login_cubit.dart';
 import 'package:this_is_your_training/components/cubit/post_cubit.dart';
-import 'package:this_is_your_training/data/forum_data_sources/forum_remote_data_source.dart';
-import 'package:this_is_your_training/data/forum_data_sources/login_remote_data_source.dart';
-import 'package:this_is_your_training/data/forum_data_sources/my_account_remote_data_source.dart';
-import 'package:this_is_your_training/data/forum_data_sources/post_remote_data_source.dart';
-import 'package:this_is_your_training/data/forum_data_sources/training_remote_data_source.dart';
+import 'package:this_is_your_training/data/data_sources/forum_remote_data_source.dart';
+import 'package:this_is_your_training/data/data_sources/login_remote_data_source.dart';
+import 'package:this_is_your_training/data/data_sources/my_account_remote_data_source.dart';
+import 'package:this_is_your_training/data/data_sources/post_remote_data_source.dart';
+import 'package:this_is_your_training/data/data_sources/training_remote_data_source.dart';
 import 'package:this_is_your_training/repositories/forum_repository.dart';
 import 'package:this_is_your_training/repositories/login_repository.dart';
 import 'package:this_is_your_training/repositories/my_account_repository.dart';
@@ -30,7 +29,6 @@ import 'package:this_is_your_training/repositories/post_repository.dart';
 import 'package:this_is_your_training/repositories/trainings_documents_repository.dart';
 
 final getIt = GetIt.instance;
-final passwordController = TextEditingController();
 
 void configureDependencies() {
   // Bloc

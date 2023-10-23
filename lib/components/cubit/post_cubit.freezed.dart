@@ -17,11 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PostState {
   List<PostModel> get docs => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
   bool get isLiked => throw _privateConstructorUsedError;
   String get avatarUrl => throw _privateConstructorUsedError;
   bool get saved => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostStateCopyWith<PostState> get copyWith =>
@@ -35,11 +35,11 @@ abstract class $PostStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<PostModel> docs,
-      bool isLoading,
       String errorMessage,
       bool isLiked,
       String avatarUrl,
-      bool saved});
+      bool saved,
+      Status status});
 }
 
 /// @nodoc
@@ -56,21 +56,17 @@ class _$PostStateCopyWithImpl<$Res, $Val extends PostState>
   @override
   $Res call({
     Object? docs = null,
-    Object? isLoading = null,
     Object? errorMessage = null,
     Object? isLiked = null,
     Object? avatarUrl = null,
     Object? saved = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       docs: null == docs
           ? _value.docs
           : docs // ignore: cast_nullable_to_non_nullable
               as List<PostModel>,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -87,6 +83,10 @@ class _$PostStateCopyWithImpl<$Res, $Val extends PostState>
           ? _value.saved
           : saved // ignore: cast_nullable_to_non_nullable
               as bool,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ) as $Val);
   }
 }
@@ -100,11 +100,11 @@ abstract class _$$_PostStateCopyWith<$Res> implements $PostStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<PostModel> docs,
-      bool isLoading,
       String errorMessage,
       bool isLiked,
       String avatarUrl,
-      bool saved});
+      bool saved,
+      Status status});
 }
 
 /// @nodoc
@@ -119,21 +119,17 @@ class __$$_PostStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? docs = null,
-    Object? isLoading = null,
     Object? errorMessage = null,
     Object? isLiked = null,
     Object? avatarUrl = null,
     Object? saved = null,
+    Object? status = null,
   }) {
     return _then(_$_PostState(
       docs: null == docs
           ? _value._docs
           : docs // ignore: cast_nullable_to_non_nullable
               as List<PostModel>,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -150,6 +146,10 @@ class __$$_PostStateCopyWithImpl<$Res>
           ? _value.saved
           : saved // ignore: cast_nullable_to_non_nullable
               as bool,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ));
   }
 }
@@ -159,11 +159,11 @@ class __$$_PostStateCopyWithImpl<$Res>
 class _$_PostState implements _PostState {
   _$_PostState(
       {final List<PostModel> docs = const [],
-      this.isLoading = false,
       this.errorMessage = '',
       this.isLiked = false,
       this.avatarUrl = '',
-      this.saved = false})
+      this.saved = false,
+      this.status = Status.loading})
       : _docs = docs;
 
   final List<PostModel> _docs;
@@ -177,9 +177,6 @@ class _$_PostState implements _PostState {
 
   @override
   @JsonKey()
-  final bool isLoading;
-  @override
-  @JsonKey()
   final String errorMessage;
   @override
   @JsonKey()
@@ -190,10 +187,13 @@ class _$_PostState implements _PostState {
   @override
   @JsonKey()
   final bool saved;
+  @override
+  @JsonKey()
+  final Status status;
 
   @override
   String toString() {
-    return 'PostState(docs: $docs, isLoading: $isLoading, errorMessage: $errorMessage, isLiked: $isLiked, avatarUrl: $avatarUrl, saved: $saved)';
+    return 'PostState(docs: $docs, errorMessage: $errorMessage, isLiked: $isLiked, avatarUrl: $avatarUrl, saved: $saved, status: $status)';
   }
 
   @override
@@ -202,25 +202,24 @@ class _$_PostState implements _PostState {
         (other.runtimeType == runtimeType &&
             other is _$_PostState &&
             const DeepCollectionEquality().equals(other._docs, _docs) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
             (identical(other.isLiked, isLiked) || other.isLiked == isLiked) &&
             (identical(other.avatarUrl, avatarUrl) ||
                 other.avatarUrl == avatarUrl) &&
-            (identical(other.saved, saved) || other.saved == saved));
+            (identical(other.saved, saved) || other.saved == saved) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_docs),
-      isLoading,
       errorMessage,
       isLiked,
       avatarUrl,
-      saved);
+      saved,
+      status);
 
   @JsonKey(ignore: true)
   @override
@@ -232,16 +231,14 @@ class _$_PostState implements _PostState {
 abstract class _PostState implements PostState {
   factory _PostState(
       {final List<PostModel> docs,
-      final bool isLoading,
       final String errorMessage,
       final bool isLiked,
       final String avatarUrl,
-      final bool saved}) = _$_PostState;
+      final bool saved,
+      final Status status}) = _$_PostState;
 
   @override
   List<PostModel> get docs;
-  @override
-  bool get isLoading;
   @override
   String get errorMessage;
   @override
@@ -250,6 +247,8 @@ abstract class _PostState implements PostState {
   String get avatarUrl;
   @override
   bool get saved;
+  @override
+  Status get status;
   @override
   @JsonKey(ignore: true)
   _$$_PostStateCopyWith<_$_PostState> get copyWith =>

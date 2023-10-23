@@ -14,6 +14,7 @@ class TrainingsRemoteDataSource {
         .collection('users')
         .doc(userId)
         .collection('trainings')
+        .orderBy('timestamp', descending: false)
         .snapshots();
   }
 
@@ -48,6 +49,7 @@ class TrainingsRemoteDataSource {
         'name': exerciseName,
         'series': series,
         'repeat': repeat,
+        'timestamp': FieldValue.serverTimestamp(),
       },
     );
   }
@@ -62,6 +64,7 @@ class TrainingsRemoteDataSource {
         .collection('users')
         .doc(userId)
         .collection('trainings1')
+        .orderBy('timestamp', descending: false)
         .snapshots();
   }
 
@@ -96,6 +99,7 @@ class TrainingsRemoteDataSource {
         'name1': exerciseName,
         'series1': series,
         'repeat1': repeat,
+        'timestamp': FieldValue.serverTimestamp(),
       },
     );
   }
@@ -110,6 +114,7 @@ class TrainingsRemoteDataSource {
         .collection('users')
         .doc(userId)
         .collection('trainings2')
+        .orderBy('timestamp', descending: false)
         .snapshots();
   }
 
@@ -144,6 +149,7 @@ class TrainingsRemoteDataSource {
         'name2': exerciseName,
         'series2': series,
         'repeat2': repeat,
+        'timestamp': FieldValue.serverTimestamp(),
       },
     );
   }
@@ -158,6 +164,7 @@ class TrainingsRemoteDataSource {
         .collection('users')
         .doc(userId)
         .collection('trainings3')
+        .orderBy('timestamp', descending: false)
         .snapshots();
   }
 
@@ -192,6 +199,7 @@ class TrainingsRemoteDataSource {
         'name3': exerciseName,
         'series3': series,
         'repeat3': repeat,
+        'timestamp': FieldValue.serverTimestamp(),
       },
     );
   }
@@ -206,6 +214,7 @@ class TrainingsRemoteDataSource {
         .collection('users')
         .doc(userId)
         .collection('trainings4')
+        .orderBy('timestamp', descending: false)
         .snapshots();
   }
 
@@ -240,6 +249,7 @@ class TrainingsRemoteDataSource {
         'name4': exerciseName,
         'series4': series,
         'repeat4': repeat,
+        'timestamp': FieldValue.serverTimestamp(),
       },
     );
   }
@@ -254,6 +264,7 @@ class TrainingsRemoteDataSource {
         .collection('users')
         .doc(userId)
         .collection('trainings5')
+        .orderBy('timestamp', descending: false)
         .snapshots();
   }
 
@@ -288,6 +299,7 @@ class TrainingsRemoteDataSource {
         'name5': exerciseName,
         'series5': series,
         'repeat5': repeat,
+        'timestamp': FieldValue.serverTimestamp(),
       },
     );
   }
@@ -302,6 +314,7 @@ class TrainingsRemoteDataSource {
         .collection('users')
         .doc(userId)
         .collection('trainings6')
+        .orderBy('timestamp', descending: false)
         .snapshots();
   }
 
@@ -336,6 +349,7 @@ class TrainingsRemoteDataSource {
         'name6': exerciseName,
         'series6': series,
         'repeat6': repeat,
+        'timestamp': FieldValue.serverTimestamp(),
       },
     );
   }

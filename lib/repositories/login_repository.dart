@@ -1,4 +1,4 @@
-import 'package:this_is_your_training/data/forum_data_sources/login_remote_data_source.dart';
+import 'package:this_is_your_training/data/data_sources/login_remote_data_source.dart';
 
 class LoginRepository {
   LoginRepository({required this.loginDataSource});

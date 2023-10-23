@@ -18,12 +18,12 @@ void main() {
 
   group('obscureText', () {
     blocTest<LoginCubit, LoginState>(
-      'emit toggle isPasswordVisable',
+      'emit toggle obscureText',
       build: () => sut,
       act: (cubit) => cubit.obscureText(),
       expect: () => [
         LoginState(
-          obscureText: true,
+          obscureText: false,
         ),
       ],
     );

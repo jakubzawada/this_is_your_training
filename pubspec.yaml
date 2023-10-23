@@ -58,6 +58,7 @@ dependencies:
   json_annotation: ^4.8.1
   freezed_annotation: ^2.4.1
   get_it: ^7.6.4
+  injectable: ^2.3.2
   
   
   
@@ -79,6 +80,7 @@ dev_dependencies:
   freezed: ^2.4.1
   mocktail: ^1.0.1
   bloc_test: ^9.1.4
+  injectable_generator: ^2.4.1
 
 flutter_icons:
   android: "launcher_icon"
