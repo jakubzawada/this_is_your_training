@@ -81,4 +81,25 @@ void main() {
       );
     });
   });
+
+  group('postMessage', () {
+    group('failure', () {
+      setUp(() {
+        when(() => repository.postMessage(textController: 'message')).thenThrow(
+          Exception('test-exception-error'),
+        );
+      });
+      blocTest<ForumCubit, ForumState>(
+        'emit Status.error with error message',
+        build: () => sut,
+        act: (cubit) => cubit.postMessage(textController: 'message'),
+        expect: () => [
+          ForumState(
+            status: Status.error,
+            errorMessage: 'Exception: test-exception-error',
+          ),
+        ],
+      );
+    });
+  });
 }

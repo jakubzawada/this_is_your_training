@@ -46,7 +46,16 @@ class ForumCubit extends Cubit<ForumState> {
   Future<void> postMessage({
     required String textController,
   }) async {
-    await forumRepository.postMessage(textController: textController);
+    try {
+      await forumRepository.postMessage(textController: textController);
+    } catch (error) {
+      emit(
+        ForumState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
   }
 
   @override

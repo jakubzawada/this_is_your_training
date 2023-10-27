@@ -9,4 +9,15 @@ class PostModel2 {
   final String avatarUrl;
   final List<PostModel> comments;
   final bool isLiked;
+
+  PostModel2.fromJson(Map<String, dynamic> json)
+      : avatarUrl = json['AvatarUrl'],
+        comments = (json['Comments'] as List).map((commentJson) {
+          return PostModel(
+            commentText: commentJson['CommentText'],
+            commentTime: commentJson['CommentTime'],
+            commentedBy: commentJson['CommentedBy'],
+          );
+        }).toList(),
+        isLiked = json['IsLiked'];
 }
