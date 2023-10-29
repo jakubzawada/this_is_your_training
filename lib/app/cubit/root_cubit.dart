@@ -21,7 +21,16 @@ class RootCubit extends Cubit<RootState> {
   StreamSubscription? _streamSubscription;
 
   Future<void> signOut() async {
-    rootRepository.signOut();
+    try {
+      rootRepository.signOut();
+    } catch (error) {
+      emit(
+        RootState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
   }
 
   Future<void> start() async {
