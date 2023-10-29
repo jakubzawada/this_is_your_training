@@ -99,8 +99,8 @@ void main() {
   group('getPost', () {
     group('success', () {
       setUp(() {
-        when(() => repository.getPostData('555')).thenAnswer((_) async =>
-            PostModel2(avatarUrl: 'avatarUrl', comments: [], isLiked: true));
+        when(() => repository.getPostData('555'))
+            .thenAnswer((_) async => PostModel2('avatarUrl', [], true));
       });
       blocTest<PostCubit, PostState>(
         'emit Status.succes with avatarUrl, docs, isLiked',

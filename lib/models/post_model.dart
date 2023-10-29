@@ -1,30 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'post_model.freezed.dart';
 part 'post_model.g.dart';
 
-@JsonSerializable()
-class PostModel {
-  PostModel({
-    required this.commentText,
-    required this.commentTime,
-    required this.commentedBy,
-  });
-
-  @JsonKey(name: 'CommentText')
-  final String commentText;
-
-  @JsonKey(name: 'CommentTime')
-  @TimestampSerializer()
-  final DateTime commentTime;
-
-  @JsonKey(name: 'CommentedBy')
-  final String commentedBy;
+@freezed
+class PostModel with _$PostModel {
+  factory PostModel(
+    @JsonKey(name: 'CommentText') String commentText,
+    @JsonKey(name: 'CommentTime') @TimestampSerializer() DateTime commentTime,
+    @JsonKey(name: 'CommentedBy') String commentedBy,
+  ) = _PostModel;
 
   factory PostModel.fromJson(Map<String, dynamic> json) =>
       _$PostModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$PostModelToJson(this);
 }
 
 class TimestampSerializer implements JsonConverter<DateTime, dynamic> {
