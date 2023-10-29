@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-class RootDataSource {
+class AuthDataSource {
   Future<void> signOut() async {
     FirebaseAuth.instance.signOut();
   }

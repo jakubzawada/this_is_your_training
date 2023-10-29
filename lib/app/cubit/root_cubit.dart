@@ -3,7 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:this_is_your_training/app/core/enums.dart';
-import 'package:this_is_your_training/repositories/root_repository.dart';
+import 'package:this_is_your_training/repositories/auth_repository.dart';
 
 part 'root_cubit.freezed.dart';
 part 'root_state.dart';
@@ -16,7 +16,7 @@ class RootCubit extends Cubit<RootState> {
           ),
         );
 
-  final RootRepository rootRepository;
+  final AuthRepository rootRepository;
 
   StreamSubscription? _streamSubscription;
 
