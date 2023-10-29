@@ -11,11 +11,7 @@ class ForumModel with _$ForumModel {
     @JsonKey(name: 'AvatarUrl') String avatarURL,
     @JsonKey(name: 'Likes') List<String> likes,
     @JsonKey(name: 'Message') String message,
-    @JsonKey(
-      name: 'TimeStamp',
-    )
-    @TimestampSerializer()
-    DateTime timeStamp,
+    @JsonKey(name: 'TimeStamp') @TimestampSerializer() DateTime timeStamp,
     @JsonKey(name: 'UserEmail') String userEmail,
   ) = _ForumModel;
 

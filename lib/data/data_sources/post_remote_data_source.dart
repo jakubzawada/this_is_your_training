@@ -91,7 +91,7 @@ class PostRemoteDataSource {
       'Comments': comments
           .map((comment) => {
                 'CommentText': comment.commentText,
-                'CommentTime': comment.commentTime,
+                'CommentTime': Timestamp.now(),
                 'CommentedBy': comment.commentedBy,
               })
           .toList(),
