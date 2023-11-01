@@ -1,6 +1,8 @@
+import 'package:injectable/injectable.dart';
 import 'package:this_is_your_training/data/data_sources/training_remote_data_source.dart';
 import 'package:this_is_your_training/models/training_model.dart';
 
+@injectable
 class TrainingsDocumentsRepository {
   TrainingsDocumentsRepository({required this.trainingsDataSource});
   final TrainingsRemoteDataSource trainingsDataSource;

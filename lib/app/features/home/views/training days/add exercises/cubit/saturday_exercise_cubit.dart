@@ -1,10 +1,12 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:this_is_your_training/repositories/trainings_documents_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'saturday_exercise_cubit.freezed.dart';
 part 'saturday_exercise_state.dart';
 
+@injectable
 class SaturdayExerciseCubit extends Cubit<SaturdayExerciseState> {
   SaturdayExerciseCubit({required this.documentsRepository})
       : super(

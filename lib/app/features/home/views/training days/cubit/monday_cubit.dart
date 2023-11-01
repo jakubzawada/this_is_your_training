@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/models/training_model.dart';
 import 'package:this_is_your_training/repositories/trainings_documents_repository.dart';
@@ -9,6 +10,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'monday_cubit.freezed.dart';
 part 'monday_state.dart';
 
+@injectable
 class MondayCubit extends Cubit<MondayState> {
   MondayCubit({required this.documentsRepository})
       : super(

@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:injectable/injectable.dart';
 import 'package:this_is_your_training/data/data_sources/my_account_remote_data_source.dart';
 
+@injectable
 class MyAccountRepository {
   MyAccountRepository({required this.myAccountDataSource});
 

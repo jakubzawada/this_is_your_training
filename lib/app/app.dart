@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/app/cubit/root_cubit.dart';
 import 'package:this_is_your_training/app/features/home/home_page.dart';
 import 'package:this_is_your_training/app/features/login/login_page.dart';
-import 'package:this_is_your_training/data/data_sources/auth_remote_data_source.dart';
-import 'package:this_is_your_training/repositories/auth_repository.dart';
+import 'package:this_is_your_training/app/injection_container.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -29,10 +28,8 @@ class RootPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => RootCubit(
-          rootRepository: AuthRepository(rootdataSource: AuthDataSource()))
-        ..start(),
+    return BlocProvider<RootCubit>(
+      create: (context) => getIt()..start(),
       child: BlocBuilder<RootCubit, RootState>(
         builder: (context, state) {
           final user = state.user;
@@ -54,10 +51,8 @@ class RootPage2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => RootCubit(
-          rootRepository: AuthRepository(rootdataSource: AuthDataSource()))
-        ..start(),
+    return BlocProvider<RootCubit>(
+      create: (context) => getIt()..start(),
       child: BlocBuilder<RootCubit, RootState>(
         builder: (context, state) {
           final user = state.user;

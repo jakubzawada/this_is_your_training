@@ -13,7 +13,7 @@ void main() {
 
   setUp(() {
     repository = MockAuthRepository();
-    sut = RootCubit(rootRepository: repository);
+    sut = RootCubit(authRepository: repository);
   });
   group('signOut', () {
     group('failure', () {

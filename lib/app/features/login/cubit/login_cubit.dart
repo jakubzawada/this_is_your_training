@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/repositories/login_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -7,9 +7,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'login_cubit.freezed.dart';
 part 'login_state.dart';
 
+@injectable
 class LoginCubit extends Cubit<LoginState> {
-  final TextEditingController? passwordController;
-  LoginCubit({required this.loginRepository, this.passwordController})
+  LoginCubit({required this.loginRepository})
       : super(
           LoginState(),
         );
@@ -45,7 +45,6 @@ class LoginCubit extends Cubit<LoginState> {
       await loginRepository.loginAccount(
           email: email, password: password, errorMessage: errorMessage);
     } catch (error) {
-      passwordController?.clear();
       emit(
         LoginState(
           status: Status.error,
@@ -64,7 +63,6 @@ class LoginCubit extends Cubit<LoginState> {
       await loginRepository.createAccount(
           email: email, password: password, errorMessage: errorMessage);
     } catch (error) {
-      passwordController?.clear();
       emit(
         LoginState(
           status: Status.error,

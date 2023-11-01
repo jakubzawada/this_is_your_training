@@ -11,7 +11,7 @@ void main() {
 
   setUp(() {
     dataSource = MockAuthDataSource();
-    sut = AuthRepository(rootdataSource: dataSource);
+    sut = AuthRepository(authdataSource: dataSource);
   });
 
   group('signOut', () {

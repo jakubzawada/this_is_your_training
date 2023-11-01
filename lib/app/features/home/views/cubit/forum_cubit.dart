@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/models/forum_model.dart';
 import 'package:this_is_your_training/repositories/forum_repository.dart';
@@ -9,10 +10,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'forum_cubit.freezed.dart';
 part 'forum_state.dart';
 
+@injectable
 class ForumCubit extends Cubit<ForumState> {
-  String? avatarUrl;
-  ForumCubit({required this.forumRepository, this.avatarUrl})
-      : super(ForumState());
+  ForumCubit({
+    required this.forumRepository,
+  }) : super(ForumState());
 
   final ForumRepository forumRepository;
 

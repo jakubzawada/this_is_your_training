@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/models/post_model.dart';
 import 'package:this_is_your_training/repositories/post_repository.dart';
@@ -9,6 +10,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'post_cubit.freezed.dart';
 part 'post_state.dart';
 
+@injectable
 class PostCubit extends Cubit<PostState> {
   bool _isDisposed = false;
 

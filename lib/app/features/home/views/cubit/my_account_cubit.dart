@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:injectable/injectable.dart';
 import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/repositories/my_account_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -10,6 +11,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'my_account_cubit.freezed.dart';
 part 'my_account_state.dart';
 
+@injectable
 class MyAccountCubit extends Cubit<MyAccountState> {
   String? avatarUrl;
   MyAccountCubit({required this.myAccountRepository})

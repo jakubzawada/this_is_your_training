@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:injectable/injectable.dart';
 import 'package:this_is_your_training/models/post_model.dart';
 
+@injectable
 class PostRemoteDataSource {
   final currentUser = FirebaseAuth.instance.currentUser!;
 
