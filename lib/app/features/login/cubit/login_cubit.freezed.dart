@@ -136,7 +136,7 @@ class _$_LoginState implements _LoginState {
   _$_LoginState(
       {this.isCreatingAccount = false,
       this.errorMessage = '',
-      this.obscureText = false,
+      this.obscureText = true,
       this.status = Status.loading});
 
   @override

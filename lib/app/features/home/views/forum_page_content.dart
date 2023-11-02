@@ -39,12 +39,12 @@ class ForumPageContent extends StatelessWidget {
                 height: double.infinity,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    begin: Alignment.topLeft,
+                    begin: Alignment.bottomLeft,
                     end: Alignment.centerRight,
                     colors: [
-                      Color.fromARGB(255, 154, 104, 236),
-                      Color.fromARGB(255, 111, 60, 193),
-                      Colors.deepPurple,
+                      Color.fromARGB(255, 140, 74, 253),
+                      Color.fromARGB(255, 134, 67, 250),
+                      Color.fromARGB(255, 143, 78, 254),
                     ],
                   ),
                 ),
@@ -102,7 +102,7 @@ class ForumPageContent extends StatelessWidget {
                               child: TextField(
                                 controller: textController,
                                 decoration: InputDecoration(
-                                  hintText: 'Napisz coś na forum..',
+                                  hintText: 'Write something on the forum..',
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(25.0),
                                     borderSide:

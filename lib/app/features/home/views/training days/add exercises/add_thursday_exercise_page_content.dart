@@ -55,9 +55,9 @@ class AddThursdayExercise extends StatelessWidget {
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     colors: [
-                      Color.fromARGB(255, 147, 90, 238),
-                      Color.fromARGB(255, 111, 60, 193),
-                      Color.fromARGB(255, 85, 40, 159),
+                      Color.fromARGB(255, 140, 74, 253),
+                      Color.fromARGB(255, 134, 67, 250),
+                      Color.fromARGB(255, 143, 78, 254),
                     ],
                   ),
                 ),
@@ -249,7 +249,7 @@ class AddThursdayExercise extends StatelessWidget {
                               textStyle: GoogleFonts.bebasNeue(),
                             ),
                             child: const Text(
-                              'Dodaj',
+                              'Add',
                               style: TextStyle(
                                 fontSize: 19,
                                 fontWeight: FontWeight.bold,

@@ -34,12 +34,12 @@ class MyAccountPageContent extends StatelessWidget {
               height: double.infinity,
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.centerRight,
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
                   colors: [
-                    Color.fromARGB(255, 158, 108, 238),
-                    Color.fromARGB(255, 111, 60, 193),
-                    Colors.deepPurple,
+                    Color.fromARGB(255, 140, 74, 253),
+                    Color.fromARGB(255, 134, 67, 250),
+                    Color.fromARGB(255, 143, 78, 254),
                   ],
                 ),
               ),
@@ -55,10 +55,10 @@ class MyAccountPageContent extends StatelessWidget {
                             alignment: Alignment.bottomRight,
                             children: [
                               const CircleAvatar(
-                                radius: 85,
+                                radius: 95,
                                 backgroundColor: Colors.white,
                                 child: ProfilePicture2(
-                                  radius: 80,
+                                  radius: 90,
                                 ),
                               ),
                               Positioned(
@@ -79,16 +79,16 @@ class MyAccountPageContent extends StatelessWidget {
                                       context: context,
                                       builder: (BuildContext context) =>
                                           AlertDialog(
-                                        title: const Text(
-                                            'Wybierz źródło zdjęcia'),
+                                        title:
+                                            const Text('Select a photo source'),
                                         actions: [
                                           TextButton(
-                                            child: const Text('Galeria'),
+                                            child: const Text('Gallery'),
                                             onPressed: () => Navigator.pop(
                                                 context, ImageSource.gallery),
                                           ),
                                           TextButton(
-                                            child: const Text('Aparat'),
+                                            child: const Text('Camera'),
                                             onPressed: () => Navigator.pop(
                                                 context, ImageSource.camera),
                                           ),
@@ -132,10 +132,10 @@ class MyAccountPageContent extends StatelessWidget {
                                   ),
                                   child: const Center(
                                     child: Text(
-                                      'Zapisz',
+                                      'Save',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 18,
+                                        fontSize: 20,
                                         color: Colors.white,
                                       ),
                                     ),
@@ -146,10 +146,10 @@ class MyAccountPageContent extends StatelessWidget {
                           ),
                           const SizedBox(height: 10),
                           Text(
-                            'Zalogowany jako: $email',
+                            'Logged in as: $email',
                             style: TextStyle(color: Colors.deepPurple[200]),
                           ),
-                          const SizedBox(height: 140),
+                          const SizedBox(height: 155),
                           InkWell(
                             onTap: () {
                               context.read<RootCubit>().signOut();
@@ -175,7 +175,7 @@ class MyAccountPageContent extends StatelessWidget {
                                       ),
                                       SizedBox(width: 8),
                                       Text(
-                                        'Wyloguj',
+                                        'Logout',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 18,
@@ -195,12 +195,12 @@ class MyAccountPageContent extends StatelessWidget {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
-                                    title: const Text('Potwierdzenie'),
+                                    title: const Text('Confirmation'),
                                     content: const Text(
-                                        'Czy na pewno chcesz usunąć swoje konto?'),
+                                        'Are you sure you want to delete your account?'),
                                     actions: <Widget>[
                                       TextButton(
-                                        child: const Text('Anuluj'),
+                                        child: const Text('Cancel'),
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
@@ -238,9 +238,9 @@ class MyAccountPageContent extends StatelessWidget {
                                                       builder: (context) {
                                                         return AlertDialog(
                                                           title: const Text(
-                                                              'Błąd'),
+                                                              'Error'),
                                                           content: Text(
-                                                              'Wystąpił błąd podczas usuwania konta: $e'),
+                                                              'An error occurred while deleting the account: $e'),
                                                           actions: <Widget>[
                                                             TextButton(
                                                               child: const Text(
@@ -258,7 +258,7 @@ class MyAccountPageContent extends StatelessWidget {
                                                   }
                                                 }
                                               },
-                                              child: const Text('Usuń'),
+                                              child: const Text('Delete'),
                                             );
                                           },
                                         ),
@@ -288,7 +288,7 @@ class MyAccountPageContent extends StatelessWidget {
                                     ),
                                     SizedBox(width: 8),
                                     Text(
-                                      'Usuń konto',
+                                      'Delete account',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 20,

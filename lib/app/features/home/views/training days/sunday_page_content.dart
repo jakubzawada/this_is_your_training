@@ -28,9 +28,9 @@ class SundayPageContent extends StatelessWidget {
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
             colors: [
-              Color.fromARGB(255, 147, 90, 238),
-              Color.fromARGB(255, 111, 60, 193),
-              Color.fromARGB(255, 85, 40, 159),
+              Color.fromARGB(255, 140, 74, 253),
+              Color.fromARGB(255, 134, 67, 250),
+              Color.fromARGB(255, 143, 78, 254),
             ],
           ),
         ),
@@ -60,7 +60,7 @@ class SundayPageContent extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Ćwiczenia',
+                                'Exercise',
                                 style: GoogleFonts.bebasNeue(
                                   fontSize: 20,
                                   color: Colors.white,
@@ -68,7 +68,7 @@ class SundayPageContent extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                'Serie',
+                                'Series',
                                 style: GoogleFonts.bebasNeue(
                                   fontSize: 20,
                                   color: Colors.white,
@@ -76,7 +76,7 @@ class SundayPageContent extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                'Powtórzenia',
+                                'Repeats',
                                 style: GoogleFonts.bebasNeue(
                                   fontSize: 20,
                                   color: Colors.white,
@@ -243,7 +243,7 @@ class SundayPageContent extends StatelessWidget {
                       color: const Color(0xFF232441),
                       child: Center(
                         child: Text(
-                          'Dodaj Ćwiczenie',
+                          'Add Exercise',
                           style: GoogleFonts.bebasNeue(
                             fontSize: 20,
                             color: Colors.white,

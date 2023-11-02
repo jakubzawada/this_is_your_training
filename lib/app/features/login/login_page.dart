@@ -18,7 +18,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[200],
+      backgroundColor: const Color.fromARGB(255, 203, 180, 245),
       body: BlocProvider<LoginCubit>(
         create: (context) => getIt(),
         child: BlocBuilder<LoginCubit, LoginState>(
@@ -34,10 +34,10 @@ class LoginPage extends StatelessWidget {
                         const SizedBox(height: 40),
                         Text(
                           state.isCreatingAccount == true
-                              ? 'Zarejestruj się'
-                              : 'Zaloguj się',
+                              ? 'Sign up'
+                              : 'Sign in ',
                           style: GoogleFonts.bebasNeue(
-                            fontSize: 28,
+                            fontSize: 32,
                             color: Colors.white,
                             letterSpacing: 1.8,
                           ),
@@ -131,8 +131,8 @@ class LoginPage extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 state.isCreatingAccount == true
-                                    ? 'Zarejestruj się'
-                                    : 'Zaloguj się',
+                                    ? 'Sign up'
+                                    : 'Sign in',
                                 style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,

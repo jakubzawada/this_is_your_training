@@ -21,12 +21,12 @@ class TrainingPageContent extends StatelessWidget {
         height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
             colors: [
-              Color.fromARGB(255, 147, 90, 238),
-              Colors.deepPurple,
-              Color.fromARGB(255, 85, 40, 159),
+              Color.fromARGB(255, 140, 74, 253),
+              Color.fromARGB(255, 134, 67, 250),
+              Color.fromARGB(255, 143, 78, 254),
             ],
           ),
         ),
@@ -68,7 +68,7 @@ class TrainingPageContent extends StatelessWidget {
                     Column(
                       children: [
                         InkWell(
-                          child: const ContainerUI('Poniedziałek'),
+                          child: const ContainerUI('Monday'),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -79,7 +79,7 @@ class TrainingPageContent extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         InkWell(
-                          child: const ContainerUI('Wtorek'),
+                          child: const ContainerUI('Tuesday'),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -90,7 +90,7 @@ class TrainingPageContent extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         InkWell(
-                          child: const ContainerUI('Środa'),
+                          child: const ContainerUI('Wednesday'),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -101,7 +101,7 @@ class TrainingPageContent extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         InkWell(
-                          child: const ContainerUI('Czwartek'),
+                          child: const ContainerUI('Thursday'),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -112,7 +112,7 @@ class TrainingPageContent extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         InkWell(
-                          child: const ContainerUI('Piątek'),
+                          child: const ContainerUI('Friday'),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -123,7 +123,7 @@ class TrainingPageContent extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         InkWell(
-                          child: const ContainerUI('Sobota'),
+                          child: const ContainerUI('Saturday'),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -134,7 +134,7 @@ class TrainingPageContent extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         InkWell(
-                          child: const ContainerUI('Niedziela'),
+                          child: const ContainerUI('Sunday'),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(

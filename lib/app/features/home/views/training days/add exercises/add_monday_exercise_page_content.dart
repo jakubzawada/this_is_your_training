@@ -43,7 +43,7 @@ class AddMondayExercise extends StatelessWidget {
               appBar: AppBar(
                 backgroundColor: Colors.deepPurpleAccent,
                 title: const Text(
-                  'Dodaj ćwiczenie',
+                  'Add Exercise',
                 ),
                 centerTitle: true,
               ),
@@ -55,9 +55,9 @@ class AddMondayExercise extends StatelessWidget {
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     colors: [
-                      Color.fromARGB(255, 147, 90, 238),
-                      Color.fromARGB(255, 111, 60, 193),
-                      Color.fromARGB(255, 85, 40, 159),
+                      Color.fromARGB(255, 140, 74, 253),
+                      Color.fromARGB(255, 134, 67, 250),
+                      Color.fromARGB(255, 143, 78, 254),
                     ],
                   ),
                 ),
@@ -78,7 +78,7 @@ class AddMondayExercise extends StatelessWidget {
                               ),
                               textAlign: TextAlign.center,
                               decoration: InputDecoration(
-                                hintText: 'Podaj nazwę ćwiczenia',
+                                hintText: 'Name the exercise',
                                 hintStyle: GoogleFonts.inter(
                                   fontSize: 22,
                                   letterSpacing: 1.8,
@@ -123,7 +123,7 @@ class AddMondayExercise extends StatelessWidget {
                                         padding:
                                             const EdgeInsets.only(left: 60.0),
                                         child: Text(
-                                          'Serie',
+                                          'Series',
                                           style: GoogleFonts.bebasNeue(
                                             fontSize: 22,
                                             color: Colors.white,
@@ -135,7 +135,7 @@ class AddMondayExercise extends StatelessWidget {
                                         padding:
                                             const EdgeInsets.only(right: 45.0),
                                         child: Text(
-                                          'Powtórzenia',
+                                          'Repeats',
                                           style: GoogleFonts.bebasNeue(
                                             fontSize: 22,
                                             color: Colors.white,
@@ -251,7 +251,7 @@ class AddMondayExercise extends StatelessWidget {
                               textStyle: GoogleFonts.bebasNeue(),
                             ),
                             child: const Text(
-                              'Dodaj',
+                              'Add',
                               style: TextStyle(
                                 fontSize: 19,
                                 fontWeight: FontWeight.bold,
