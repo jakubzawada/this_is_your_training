@@ -74,8 +74,7 @@ class MyAccountPageContent extends StatelessWidget {
                                     ),
                                   ),
                                   onTap: () async {
-                                    final imageSource =
-                                        await showDialog<ImageSource>(
+                                    await showDialog<ImageSource>(
                                       context: context,
                                       builder: (BuildContext context) =>
                                           AlertDialog(
@@ -94,11 +93,14 @@ class MyAccountPageContent extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                    );
-                                    // ignore: use_build_context_synchronously
-                                    context
-                                        .read<MyAccountCubit>()
-                                        .selectImage(imageSource: imageSource);
+                                    ).then((imageSource) {
+                                      if (imageSource != null) {
+                                        context
+                                            .read<MyAccountCubit>()
+                                            .selectImage(
+                                                imageSource: imageSource);
+                                      }
+                                    });
                                   },
                                 ),
                               ),
@@ -221,10 +223,9 @@ class MyAccountPageContent extends StatelessWidget {
                                                     .state;
                                                 if (state.user != null) {
                                                   try {
-                                                    await state.user?.delete();
+                                                    state.user?.delete();
                                                     bool success = true;
                                                     if (success) {
-                                                      // ignore: use_build_context_synchronously
                                                       Navigator.pushReplacement(
                                                         context,
                                                         MaterialPageRoute(

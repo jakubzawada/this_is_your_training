@@ -56,6 +56,7 @@ class ForumPageContent extends StatelessWidget {
                           builder: (context, state) {
                             if (state.results.isNotEmpty) {
                               return ListView.builder(
+                                reverse: true,
                                 itemCount: state.results.length,
                                 itemBuilder: (context, index) {
                                   final postModel = state.results[index];
