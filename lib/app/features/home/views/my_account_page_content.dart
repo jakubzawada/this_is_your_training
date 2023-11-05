@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:this_is_your_training/app/app.dart';
 import 'package:this_is_your_training/app/cubit/root_cubit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:this_is_your_training/app/features/home/root_page.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/my_account_cubit.dart';
 import 'package:this_is_your_training/app/injection_container.dart';
 import 'package:this_is_your_training/components/profile_picture2.dart';
