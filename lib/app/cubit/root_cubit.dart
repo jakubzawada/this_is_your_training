@@ -22,19 +22,6 @@ class RootCubit extends Cubit<RootState> {
 
   StreamSubscription? _streamSubscription;
 
-  Future<void> signOut() async {
-    try {
-      authRepository.signOut();
-    } catch (error) {
-      emit(
-        RootState(
-          status: Status.error,
-          errorMessage: error.toString(),
-        ),
-      );
-    }
-  }
-
   Future<void> start() async {
     emit(
       RootState(
@@ -57,6 +44,19 @@ class RootCubit extends Cubit<RootState> {
           status: Status.error,
           errorMessage: error.toString(),
           user: null,
+        ),
+      );
+    }
+  }
+
+  Future<void> signOut() async {
+    try {
+      authRepository.signOut();
+    } catch (error) {
+      emit(
+        RootState(
+          status: Status.error,
+          errorMessage: error.toString(),
         ),
       );
     }

@@ -15,26 +15,6 @@ void main() {
     repository = MockAuthRepository();
     sut = RootCubit(authRepository: repository);
   });
-  group('signOut', () {
-    group('failure', () {
-      setUp(() {
-        when(() => repository.signOut())
-            .thenThrow(Exception('test-exception-error'));
-      });
-
-      blocTest<RootCubit, RootState>(
-        'emit Status.error with error message',
-        build: () => sut,
-        act: (cubit) => cubit.signOut(),
-        expect: () => [
-          RootState(
-            status: Status.error,
-            errorMessage: 'Exception: test-exception-error',
-          )
-        ],
-      );
-    });
-  });
 
   group('start', () {
     group('failure', () {
@@ -57,6 +37,27 @@ void main() {
                   user: null,
                 ),
               ]);
+    });
+  });
+
+  group('signOut', () {
+    group('failure', () {
+      setUp(() {
+        when(() => repository.signOut())
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest<RootCubit, RootState>(
+        'emit Status.error with error message',
+        build: () => sut,
+        act: (cubit) => cubit.signOut(),
+        expect: () => [
+          RootState(
+            status: Status.error,
+            errorMessage: 'Exception: test-exception-error',
+          )
+        ],
+      );
     });
   });
 }

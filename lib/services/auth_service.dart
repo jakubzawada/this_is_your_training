@@ -6,7 +6,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class AuthService {
   //Google Sign In
-  signInWithGoogle() async {
+  Future<void> signInWithGoogle() async {
     //
     final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
 
@@ -20,11 +20,11 @@ class AuthService {
     );
 
     //
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
   // Facebook Sign In
-  signInWithFacebook() async {
+  Future<void> signInWithFacebook() async {
     try {
       final result = await FacebookAuth.instance.login(
         permissions: ['email', 'public_profile'],
@@ -34,15 +34,15 @@ class AuthService {
         final facebookAuthCredential =
             FacebookAuthProvider.credential(accessToken.token);
 
-        return await FirebaseAuth.instance
+        await FirebaseAuth.instance
             .signInWithCredential(facebookAuthCredential);
       } else {
         print('Facebook login failed. Status: ${result.status}');
-        return null;
+        return;
       }
     } catch (error) {
       print('Error during Facebook login: $error');
-      return null;
+      return;
     }
   }
 }

@@ -19,21 +19,6 @@ class SundayCubit extends Cubit<SundayState> {
 
   final TrainingsDocumentsRepository documentsRepository;
 
-  Future<void> dismissible({
-    required String documentid,
-  }) async {
-    try {
-      await documentsRepository.delete6(id: documentid);
-    } catch (error) {
-      emit(
-        SundayState(
-          status: Status.error,
-          errorMessage: error.toString(),
-        ),
-      );
-    }
-  }
-
   StreamSubscription? _streamSubscription;
 
   Future<void> start() async {
@@ -53,6 +38,21 @@ class SundayCubit extends Cubit<SundayState> {
           ),
         );
       });
+    } catch (error) {
+      emit(
+        SundayState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> dismissible({
+    required String documentid,
+  }) async {
+    try {
+      await documentsRepository.delete6(id: documentid);
     } catch (error) {
       emit(
         SundayState(

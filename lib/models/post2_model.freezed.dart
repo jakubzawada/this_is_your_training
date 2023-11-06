@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-PostModel2 _$PostModel2FromJson(Map<String, dynamic> json) {
-  return _PostModel2.fromJson(json);
+PostModelExtended _$PostModelExtendedFromJson(Map<String, dynamic> json) {
+  return _PostModelExtended.fromJson(json);
 }
 
 /// @nodoc
-mixin _$PostModel2 {
+mixin _$PostModelExtended {
   @JsonKey(name: 'AvatarUrl')
   String get avatarUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'Comments')
@@ -29,15 +29,15 @@ mixin _$PostModel2 {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PostModel2CopyWith<PostModel2> get copyWith =>
+  $PostModelExtendedCopyWith<PostModelExtended> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PostModel2CopyWith<$Res> {
-  factory $PostModel2CopyWith(
-          PostModel2 value, $Res Function(PostModel2) then) =
-      _$PostModel2CopyWithImpl<$Res, PostModel2>;
+abstract class $PostModelExtendedCopyWith<$Res> {
+  factory $PostModelExtendedCopyWith(
+          PostModelExtended value, $Res Function(PostModelExtended) then) =
+      _$PostModelExtendedCopyWithImpl<$Res, PostModelExtended>;
   @useResult
   $Res call(
       {@JsonKey(name: 'AvatarUrl') String avatarUrl,
@@ -46,9 +46,9 @@ abstract class $PostModel2CopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PostModel2CopyWithImpl<$Res, $Val extends PostModel2>
-    implements $PostModel2CopyWith<$Res> {
-  _$PostModel2CopyWithImpl(this._value, this._then);
+class _$PostModelExtendedCopyWithImpl<$Res, $Val extends PostModelExtended>
+    implements $PostModelExtendedCopyWith<$Res> {
+  _$PostModelExtendedCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -80,11 +80,11 @@ class _$PostModel2CopyWithImpl<$Res, $Val extends PostModel2>
 }
 
 /// @nodoc
-abstract class _$$_PostModel2CopyWith<$Res>
-    implements $PostModel2CopyWith<$Res> {
-  factory _$$_PostModel2CopyWith(
-          _$_PostModel2 value, $Res Function(_$_PostModel2) then) =
-      __$$_PostModel2CopyWithImpl<$Res>;
+abstract class _$$_PostModelExtendedCopyWith<$Res>
+    implements $PostModelExtendedCopyWith<$Res> {
+  factory _$$_PostModelExtendedCopyWith(_$_PostModelExtended value,
+          $Res Function(_$_PostModelExtended) then) =
+      __$$_PostModelExtendedCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$_PostModel2CopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PostModel2CopyWithImpl<$Res>
-    extends _$PostModel2CopyWithImpl<$Res, _$_PostModel2>
-    implements _$$_PostModel2CopyWith<$Res> {
-  __$$_PostModel2CopyWithImpl(
-      _$_PostModel2 _value, $Res Function(_$_PostModel2) _then)
+class __$$_PostModelExtendedCopyWithImpl<$Res>
+    extends _$PostModelExtendedCopyWithImpl<$Res, _$_PostModelExtended>
+    implements _$$_PostModelExtendedCopyWith<$Res> {
+  __$$_PostModelExtendedCopyWithImpl(
+      _$_PostModelExtended _value, $Res Function(_$_PostModelExtended) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -108,7 +108,7 @@ class __$$_PostModel2CopyWithImpl<$Res>
     Object? comments = null,
     Object? isLiked = null,
   }) {
-    return _then(_$_PostModel2(
+    return _then(_$_PostModelExtended(
       null == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
@@ -127,15 +127,15 @@ class __$$_PostModel2CopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PostModel2 implements _PostModel2 {
-  _$_PostModel2(
+class _$_PostModelExtended implements _PostModelExtended {
+  _$_PostModelExtended(
       @JsonKey(name: 'AvatarUrl') this.avatarUrl,
       @JsonKey(name: 'Comments') final List<PostModel> comments,
       @JsonKey(name: 'IsLiked') this.isLiked)
       : _comments = comments;
 
-  factory _$_PostModel2.fromJson(Map<String, dynamic> json) =>
-      _$$_PostModel2FromJson(json);
+  factory _$_PostModelExtended.fromJson(Map<String, dynamic> json) =>
+      _$$_PostModelExtendedFromJson(json);
 
   @override
   @JsonKey(name: 'AvatarUrl')
@@ -155,14 +155,14 @@ class _$_PostModel2 implements _PostModel2 {
 
   @override
   String toString() {
-    return 'PostModel2(avatarUrl: $avatarUrl, comments: $comments, isLiked: $isLiked)';
+    return 'PostModelExtended(avatarUrl: $avatarUrl, comments: $comments, isLiked: $isLiked)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PostModel2 &&
+            other is _$_PostModelExtended &&
             (identical(other.avatarUrl, avatarUrl) ||
                 other.avatarUrl == avatarUrl) &&
             const DeepCollectionEquality().equals(other._comments, _comments) &&
@@ -177,25 +177,26 @@ class _$_PostModel2 implements _PostModel2 {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PostModel2CopyWith<_$_PostModel2> get copyWith =>
-      __$$_PostModel2CopyWithImpl<_$_PostModel2>(this, _$identity);
+  _$$_PostModelExtendedCopyWith<_$_PostModelExtended> get copyWith =>
+      __$$_PostModelExtendedCopyWithImpl<_$_PostModelExtended>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PostModel2ToJson(
+    return _$$_PostModelExtendedToJson(
       this,
     );
   }
 }
 
-abstract class _PostModel2 implements PostModel2 {
-  factory _PostModel2(
+abstract class _PostModelExtended implements PostModelExtended {
+  factory _PostModelExtended(
       @JsonKey(name: 'AvatarUrl') final String avatarUrl,
       @JsonKey(name: 'Comments') final List<PostModel> comments,
-      @JsonKey(name: 'IsLiked') final bool isLiked) = _$_PostModel2;
+      @JsonKey(name: 'IsLiked') final bool isLiked) = _$_PostModelExtended;
 
-  factory _PostModel2.fromJson(Map<String, dynamic> json) =
-      _$_PostModel2.fromJson;
+  factory _PostModelExtended.fromJson(Map<String, dynamic> json) =
+      _$_PostModelExtended.fromJson;
 
   @override
   @JsonKey(name: 'AvatarUrl')
@@ -208,6 +209,6 @@ abstract class _PostModel2 implements PostModel2 {
   bool get isLiked;
   @override
   @JsonKey(ignore: true)
-  _$$_PostModel2CopyWith<_$_PostModel2> get copyWith =>
+  _$$_PostModelExtendedCopyWith<_$_PostModelExtended> get copyWith =>
       throw _privateConstructorUsedError;
 }

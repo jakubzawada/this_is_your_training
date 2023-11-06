@@ -5,13 +5,13 @@ part 'post2_model.freezed.dart';
 part 'post2_model.g.dart';
 
 @freezed
-class PostModel2 with _$PostModel2 {
-  factory PostModel2(
+class PostModelExtended with _$PostModelExtended {
+  factory PostModelExtended(
     @JsonKey(name: 'AvatarUrl') String avatarUrl,
     @JsonKey(name: 'Comments') List<PostModel> comments,
     @JsonKey(name: 'IsLiked') bool isLiked,
-  ) = _PostModel2;
+  ) = _PostModelExtended;
 
-  factory PostModel2.fromJson(Map<String, dynamic> json) =>
-      _$PostModel2FromJson(json);
+  factory PostModelExtended.fromJson(Map<String, dynamic> json) =>
+      _$PostModelExtendedFromJson(json);
 }

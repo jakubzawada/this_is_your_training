@@ -23,7 +23,7 @@ void main() {
       act: (cubit) => cubit.obscureText(),
       expect: () => [
         LoginState(
-          obscureText: true,
+          obscureText: false,
         ),
       ],
     );

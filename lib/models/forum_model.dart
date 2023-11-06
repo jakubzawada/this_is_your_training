@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:this_is_your_training/components/timestampserializer.dart';
 
 part 'forum_model.freezed.dart';
 part 'forum_model.g.dart';
@@ -17,14 +17,4 @@ class ForumModel with _$ForumModel {
 
   factory ForumModel.fromJson(Map<String, dynamic> json) =>
       _$ForumModelFromJson(json);
-}
-
-class TimestampSerializer implements JsonConverter<DateTime, dynamic> {
-  const TimestampSerializer();
-
-  @override
-  DateTime fromJson(dynamic timestamp) => timestamp.toDate();
-
-  @override
-  Timestamp toJson(DateTime date) => Timestamp.fromDate(date);
 }

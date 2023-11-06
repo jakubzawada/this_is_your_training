@@ -26,9 +26,9 @@ class PostRepository {
     await postDataSource.postDelete(postId: postId);
   }
 
-  Future<PostModel2> getPostData(String postId) async {
+  Future<PostModelExtended> getPostData(String postId) async {
     final json = await postDataSource.getPostData(postId);
 
-    return PostModel2.fromJson(json);
+    return PostModelExtended.fromJson(json);
   }
 }

@@ -8,8 +8,8 @@ part of 'post2_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PostModel2 _$$_PostModel2FromJson(Map<String, dynamic> json) =>
-    _$_PostModel2(
+_$_PostModelExtended _$$_PostModelExtendedFromJson(Map<String, dynamic> json) =>
+    _$_PostModelExtended(
       json['AvatarUrl'] as String,
       (json['Comments'] as List<dynamic>)
           .map((e) => PostModel.fromJson(e as Map<String, dynamic>))
@@ -17,7 +17,8 @@ _$_PostModel2 _$$_PostModel2FromJson(Map<String, dynamic> json) =>
       json['IsLiked'] as bool,
     );
 
-Map<String, dynamic> _$$_PostModel2ToJson(_$_PostModel2 instance) =>
+Map<String, dynamic> _$$_PostModelExtendedToJson(
+        _$_PostModelExtended instance) =>
     <String, dynamic>{
       'AvatarUrl': instance.avatarUrl,
       'Comments': instance.comments,
