@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:this_is_your_training/app/features/home/views/training%20days/add%20exercises/widgets/add_exercise_container.dart';
+import 'package:this_is_your_training/app/features/home/views/training%20days/add%20exercises/widgets/name_exercise_textfield.dart';
+import 'package:this_is_your_training/app/features/home/views/training%20days/add%20exercises/widgets/repeat_dropdownbutton.dart';
+import 'package:this_is_your_training/app/features/home/views/training%20days/add%20exercises/widgets/series_dropdownbutton.dart';
 import 'package:this_is_your_training/app/injection_container.dart';
 import 'cubit/friday_exercise_cubit.dart';
 
@@ -69,22 +72,7 @@ class AddFridayExercise extends StatelessWidget {
                           const SizedBox(height: 120),
                           Padding(
                             padding: const EdgeInsets.all(20.0),
-                            child: TextField(
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(60),
-                              ],
-                              style: GoogleFonts.inter(
-                                fontSize: 22,
-                              ),
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                hintText: 'Name the exercise',
-                                hintStyle: GoogleFonts.inter(
-                                  fontSize: 22,
-                                  letterSpacing: 1.8,
-                                  color: Colors.white,
-                                ),
-                              ),
+                            child: NameExerciseTextField(
                               onChanged: (newValue) {
                                 context
                                     .read<FridayExerciseCubit>()
@@ -93,59 +81,12 @@ class AddFridayExercise extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Container(
-                                  height: 70,
-                                  width: 340,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFF232441),
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20),
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.black.withOpacity(0.1),
-                                          spreadRadius: 5,
-                                          blurRadius: 7,
-                                          offset: const Offset(4, 8)),
-                                    ],
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 60.0),
-                                        child: Text(
-                                          'Serie',
-                                          style: GoogleFonts.bebasNeue(
-                                            fontSize: 22,
-                                            color: Colors.white,
-                                            letterSpacing: 1.8,
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 45.0),
-                                        child: Text(
-                                          'Powtórzenia',
-                                          style: GoogleFonts.bebasNeue(
-                                            fontSize: 22,
-                                            color: Colors.white,
-                                            letterSpacing: 1.8,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                AddExerciseContainer(),
                               ],
                             ),
                           ),
@@ -156,74 +97,30 @@ class AddFridayExercise extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Center(
-                                  child: SizedBox(
-                                    width: 90,
-                                    child: DropdownButtonFormField<int>(
-                                        decoration: InputDecoration(
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            borderSide: const BorderSide(
-                                              width: 3,
-                                              color: Color(0xFF232441),
-                                            ),
-                                          ),
-                                        ),
-                                        style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                        value: state.series4,
-                                        dropdownColor:
-                                            Colors.deepPurple.shade200,
-                                        items: List.generate(
-                                          items.length,
-                                          (index) => DropdownMenuItem<int>(
-                                            value: int.parse(items[index]),
-                                            child: Text(items[index]),
-                                          ),
-                                        ),
-                                        onChanged: (newVal) {
-                                          context
-                                              .read<FridayExerciseCubit>()
-                                              .uploadSeries4(newVal!);
-                                        }),
+                                  child: SeriesDropdownButton(
+                                    items: items,
+                                    value: state.series4,
+                                    onChanged: (newVal) {
+                                      if (newVal != null) {
+                                        context
+                                            .read<FridayExerciseCubit>()
+                                            .uploadSeries4(newVal);
+                                      }
+                                    },
                                   ),
                                 ),
                                 const SizedBox(width: 40),
                                 Center(
-                                  child: SizedBox(
-                                    width: 90,
-                                    child: DropdownButtonFormField<int>(
-                                        decoration: InputDecoration(
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            borderSide: const BorderSide(
-                                              width: 3,
-                                              color: Color(0xFF232441),
-                                            ),
-                                          ),
-                                        ),
-                                        style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                        value: state.repeat4,
-                                        dropdownColor:
-                                            Colors.deepPurple.shade200,
-                                        items: List.generate(
-                                          items2.length,
-                                          (index) => DropdownMenuItem<int>(
-                                            value: int.parse(items2[index]),
-                                            child: Text(items2[index]),
-                                          ),
-                                        ),
-                                        onChanged: (newVal) {
-                                          context
-                                              .read<FridayExerciseCubit>()
-                                              .uploadRepeat4(newVal!);
-                                        }),
+                                  child: RepeatDropdownButton(
+                                    items2: items2,
+                                    value: state.repeat4,
+                                    onChanged: (newVal) {
+                                      if (newVal != null) {
+                                        context
+                                            .read<FridayExerciseCubit>()
+                                            .uploadRepeat4(newVal);
+                                      }
+                                    },
                                   ),
                                 ),
                               ],

@@ -7,6 +7,7 @@ import 'package:this_is_your_training/app/features/home/views/cubit/my_account_c
 import 'package:this_is_your_training/app/injection_container.dart';
 import 'package:this_is_your_training/components/post_page.dart';
 import 'package:this_is_your_training/helper/date_helper_methods.dart';
+import 'package:this_is_your_training/app/features/widgets/forum_page/post_textfield.dart';
 
 class ForumPageContent extends StatelessWidget {
   ForumPageContent({
@@ -100,20 +101,8 @@ class ForumPageContent extends StatelessWidget {
                         child: Row(
                           children: [
                             Expanded(
-                              child: TextField(
-                                controller: textController,
-                                decoration: InputDecoration(
-                                  hintText: 'Write something on the forum..',
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(25.0),
-                                    borderSide:
-                                        const BorderSide(color: Colors.white),
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.grey[300],
-                                ),
-                                obscureText: false,
-                              ),
+                              child:
+                                  PostTextField(textController: textController),
                             ),
                             IconButton(
                               onPressed: () {

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/app/features/login/cubit/login_cubit.dart';
-import 'package:this_is_your_training/app/features/login/forgot_pw_page.dart';
+import 'package:this_is_your_training/app/features/login/widgets/forgot_password_button.dart';
 import 'package:this_is_your_training/app/injection_container.dart';
 import 'package:this_is_your_training/components/square_tile.dart';
 import 'package:this_is_your_training/services/auth_service.dart';
+import 'package:this_is_your_training/app/features/login/widgets/email_textfield.dart';
+import 'package:this_is_your_training/app/features/login/widgets/password_textfield.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({
@@ -43,78 +45,15 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 60),
-                        TextField(
-                          controller: emailController,
-                          decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.mail),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.deepPurple),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            hintText: 'Email',
-                            fillColor: Colors.grey[200],
-                            filled: true,
-                          ),
-                        ),
+                        EmailTextField(emailController: emailController),
                         const SizedBox(height: 20),
-                        TextField(
-                          controller: passwordController,
-                          decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.lock),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.deepPurple),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                context.read<LoginCubit>().obscureText();
-                              },
-                              child: Icon(
-                                state.obscureText
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                                color: Colors.deepPurple,
-                              ),
-                            ),
-                            hintText: 'Password',
-                            fillColor: Colors.grey[200],
-                            filled: true,
-                          ),
-                          obscureText: state.obscureText,
-                        ),
+                        PasswordTextField(
+                            passwordController: passwordController),
                         const SizedBox(height: 10),
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return const ForgotPasswordPage();
-                                    },
-                                  ),
-                                );
-                              },
-                              child: const Text(
-                                'Forgot Passowrd?',
-                                style: TextStyle(
-                                  color: Colors.deepPurple,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
+                            ForgotPasswordButton(),
                           ],
                         ),
                         if (state.errorMessage.isNotEmpty)
@@ -225,7 +164,6 @@ class LoginPage extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // google button
                             SquareTile(
                               onTap: () => AuthService().signInWithGoogle(),
                               imagePath: 'images/google.png',

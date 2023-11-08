@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:this_is_your_training/app/features/home/views/forum_page_content.dart';
 import 'package:this_is_your_training/app/features/home/views/my_account_page_content.dart';
-import 'package:this_is_your_training/app/features/home/views/taining_page_content.dart';
+import 'package:this_is_your_training/app/features/home/views/training_page_content.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
