@@ -18,6 +18,7 @@ class ForumPageContent extends StatelessWidget {
   final String? email;
 
   final textController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,8 @@ class ForumPageContent extends StatelessWidget {
                           builder: (context, state) {
                             if (state.results.isNotEmpty) {
                               return ListView.builder(
-                                reverse: true,
+                                controller: _scrollController,
+                                reverse: false,
                                 itemCount: state.results.length,
                                 itemBuilder: (context, index) {
                                   final postModel = state.results[index];
@@ -109,6 +111,8 @@ class ForumPageContent extends StatelessWidget {
                                 if (textController.text.isNotEmpty) {
                                   context.read<ForumCubit>().postMessage(
                                       textController: textController.text);
+                                  _scrollController.jumpTo(_scrollController
+                                      .position.maxScrollExtent);
                                 }
                                 FocusScope.of(context).unfocus();
                                 textController.clear();

@@ -29,55 +29,59 @@ void main() {
     );
   });
 
-  group('failer', () {
-    setUp(() {
-      when(() => repository.loginAccount(
-          email: 'email',
-          password: 'password',
-          errorMessage: 'test-exception-error')).thenThrow(
-        Exception('test-exception-error'),
+  group('loginAccount', () {
+    group('failer', () {
+      setUp(() {
+        when(() => repository.loginAccount(
+            email: 'email',
+            password: 'password',
+            errorMessage: 'test-exception-error')).thenThrow(
+          Exception('test-exception-error'),
+        );
+      });
+
+      blocTest<LoginCubit, LoginState>(
+        'emits Status.error with error message',
+        build: () => sut,
+        act: (cubit) => cubit.loginAccount(
+            email: 'email',
+            password: 'password',
+            errorMessage: 'test-exception-error'),
+        expect: () => [
+          LoginState(
+            status: Status.error,
+            errorMessage: 'Exception: test-exception-error',
+          )
+        ],
       );
     });
-
-    blocTest<LoginCubit, LoginState>(
-      'emits Status.error with error message',
-      build: () => sut,
-      act: (cubit) => cubit.loginAccount(
-          email: 'email',
-          password: 'password',
-          errorMessage: 'test-exception-error'),
-      expect: () => [
-        LoginState(
-          status: Status.error,
-          errorMessage: 'Exception: test-exception-error',
-        )
-      ],
-    );
   });
 
-  group('failer', () {
-    setUp(() {
-      when(() => repository.createAccount(
-          email: 'email',
-          password: 'password',
-          errorMessage: 'test-exception-error')).thenThrow(
-        Exception('test-exception-error'),
+  group('createAccount', () {
+    group('failer', () {
+      setUp(() {
+        when(() => repository.createAccount(
+            email: 'email',
+            password: 'password',
+            errorMessage: 'test-exception-error')).thenThrow(
+          Exception('test-exception-error'),
+        );
+      });
+
+      blocTest<LoginCubit, LoginState>(
+        'emits Status.error with error message',
+        build: () => sut,
+        act: (cubit) => cubit.createAccount(
+            email: 'email',
+            password: 'password',
+            errorMessage: 'test-exception-error'),
+        expect: () => [
+          LoginState(
+            status: Status.error,
+            errorMessage: 'Exception: test-exception-error',
+          )
+        ],
       );
     });
-
-    blocTest<LoginCubit, LoginState>(
-      'emits Status.error with error message',
-      build: () => sut,
-      act: (cubit) => cubit.createAccount(
-          email: 'email',
-          password: 'password',
-          errorMessage: 'test-exception-error'),
-      expect: () => [
-        LoginState(
-          status: Status.error,
-          errorMessage: 'Exception: test-exception-error',
-        )
-      ],
-    );
   });
 }
