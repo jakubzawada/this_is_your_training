@@ -80,10 +80,14 @@ void main() {
       });
 
       blocTest<SaturdayCubit, SaturdayState>(
-        'delete document',
+        'delete document and emit Status.succes',
         build: () => sut,
         act: (cubit) => cubit.dismissible(documentid: documentId),
-        expect: () => [],
+        expect: () => [
+          SaturdayState(
+            status: Status.succes,
+          ),
+        ],
       );
     });
     group('failure', () {

@@ -22,11 +22,20 @@ class MyAccountCubit extends Cubit<MyAccountState> {
   final MyAccountRepository myAccountRepository;
 
   Future<void> selectImage({required ImageSource? imageSource}) async {
-    if (imageSource != null) {
-      final pickedImage = await ImagePicker().pickImage(source: imageSource);
-      if (pickedImage != null) {
-        emit(MyAccountState(selectedImage: File(pickedImage.path)));
+    try {
+      if (imageSource != null) {
+        final pickedImage = await ImagePicker().pickImage(source: imageSource);
+        if (pickedImage != null) {
+          emit(MyAccountState(selectedImage: File(pickedImage.path)));
+        }
       }
+    } catch (error) {
+      emit(
+        MyAccountState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
     }
   }
 

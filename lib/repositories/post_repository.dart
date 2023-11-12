@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:this_is_your_training/data/data_sources/post_remote_data_source.dart';
-import 'package:this_is_your_training/models/post2_model.dart';
+import 'package:this_is_your_training/models/post_extended_model.dart';
 
 @injectable
 class PostRepository {

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/my_account_cubit.dart';
 
-class SetProfileButton extends StatelessWidget {
-  const SetProfileButton({
+class SetProfilePictureButton extends StatelessWidget {
+  const SetProfilePictureButton({
     super.key,
   });
 

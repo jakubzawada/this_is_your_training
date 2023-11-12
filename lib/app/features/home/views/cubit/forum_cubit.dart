@@ -50,6 +50,11 @@ class ForumCubit extends Cubit<ForumState> {
   }) async {
     try {
       await forumRepository.postMessage(textController: textController);
+      emit(
+        state.copyWith(
+          status: Status.succes,
+        ),
+      );
     } catch (error) {
       emit(
         ForumState(

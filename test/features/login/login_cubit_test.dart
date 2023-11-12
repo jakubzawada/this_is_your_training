@@ -29,7 +29,50 @@ void main() {
     );
   });
 
+  group('toogleAccountCreate', () {
+    blocTest('emit isCreatingAccount true',
+        build: () => sut,
+        act: (cubit) => cubit.tooglAccountCreate(true),
+        expect: () => [
+              LoginState(
+                isCreatingAccount: true,
+              ),
+            ]);
+  });
+
+  group('toogleAccountLogin', () {
+    blocTest('emit isCreatingAccount false',
+        build: () => sut,
+        act: (cubit) => cubit.tooglAccountLogin(false),
+        expect: () => [
+              LoginState(
+                isCreatingAccount: false,
+              ),
+            ]);
+  });
+
   group('loginAccount', () {
+    group('succes', () {
+      const email = 'test@email.com';
+      const password = 'password123';
+      const errorMessage = 'Test error message';
+      setUp(() {
+        when(() => repository.loginAccount(
+              email: email,
+              password: password,
+              errorMessage: errorMessage,
+            )).thenAnswer((_) async => '');
+      });
+      blocTest<LoginCubit, LoginState>('emit Status.succes',
+          build: () => sut,
+          act: (cubit) => cubit.loginAccount(
+              email: email, password: password, errorMessage: errorMessage),
+          expect: () => [
+                LoginState(
+                  status: Status.succes,
+                ),
+              ]);
+    });
     group('failer', () {
       setUp(() {
         when(() => repository.loginAccount(
@@ -58,6 +101,27 @@ void main() {
   });
 
   group('createAccount', () {
+    group('succes', () {
+      const email = 'test@email.com';
+      const password = 'password123';
+      const errorMessage = 'Test error message';
+      setUp(() {
+        when(() => repository.createAccount(
+              email: email,
+              password: password,
+              errorMessage: errorMessage,
+            )).thenAnswer((_) async => '');
+      });
+      blocTest<LoginCubit, LoginState>('emit Status.succes',
+          build: () => sut,
+          act: (cubit) => cubit.createAccount(
+              email: email, password: password, errorMessage: errorMessage),
+          expect: () => [
+                LoginState(
+                  status: Status.succes,
+                ),
+              ]);
+    });
     group('failer', () {
       setUp(() {
         when(() => repository.createAccount(

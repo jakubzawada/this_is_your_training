@@ -44,6 +44,11 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       await loginRepository.loginAccount(
           email: email, password: password, errorMessage: errorMessage);
+      emit(
+        state.copyWith(
+          status: Status.succes,
+        ),
+      );
     } catch (error) {
       emit(
         LoginState(
@@ -62,6 +67,11 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       await loginRepository.createAccount(
           email: email, password: password, errorMessage: errorMessage);
+      emit(
+        state.copyWith(
+          status: Status.succes,
+        ),
+      );
     } catch (error) {
       emit(
         LoginState(

@@ -2,7 +2,7 @@
 
 // ignore_for_file: non_constant_identifier_names
 
-part of 'post2_model.dart';
+part of 'post_extended_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

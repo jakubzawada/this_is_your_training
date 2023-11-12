@@ -53,6 +53,11 @@ class TuesdayCubit extends Cubit<TuesdayState> {
   }) async {
     try {
       await documentsRepository.delete1(id: documentid);
+      emit(
+        state.copyWith(
+          status: Status.succes,
+        ),
+      );
     } catch (error) {
       emit(
         TuesdayState(

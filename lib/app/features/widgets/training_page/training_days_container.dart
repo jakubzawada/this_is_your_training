@@ -19,13 +19,13 @@ class TrainingDaysContainer extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: [
             Color.fromARGB(255, 35, 38, 97),
-            Color.fromARGB(255, 42, 44, 87),
-            Color(0xFF232441),
+            Color.fromARGB(255, 40, 43, 93),
+            Color.fromARGB(255, 32, 34, 77),
           ],
         ),
         boxShadow: [
           BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withOpacity(0.2),
               spreadRadius: 5,
               blurRadius: 7,
               offset: const Offset(4, 8)),

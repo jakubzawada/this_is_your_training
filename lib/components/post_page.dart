@@ -67,32 +67,37 @@ class PostPage extends StatelessWidget {
                             radius: 20,
                             avatarUrl: avatarUrl,
                           ),
-                          const SizedBox(height: 30),
+                          const SizedBox(height: 40),
                         ],
                       ),
                       const SizedBox(width: 20),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                user,
-                                style: TextStyle(color: Colors.grey[400]),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            time,
-                            style: TextStyle(color: Colors.grey[400]),
-                          ),
-                          const SizedBox(height: 20),
-                          Text(
-                            message,
-                            style: const TextStyle(),
-                          ),
-                        ],
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    user,
+                                    style: TextStyle(color: Colors.grey[400]),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              time,
+                              style: TextStyle(color: Colors.grey[400]),
+                            ),
+                            const SizedBox(height: 20),
+                            Text(
+                              message,
+                              style: const TextStyle(),
+                            ),
+                          ],
+                        ),
                       ),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.only(left: 20.0),
                         child: Column(

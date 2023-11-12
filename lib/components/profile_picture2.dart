@@ -37,7 +37,7 @@ class ProfilePicture2 extends StatelessWidget {
           if (imageUrl == null) {
             return const CircleAvatar(
               backgroundImage: AssetImage("images/Profile.jpg"),
-              radius: 85,
+              radius: 90,
             );
           }
           return Container(

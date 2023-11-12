@@ -83,6 +83,24 @@ void main() {
   });
 
   group('postMessage', () {
+    group('succes', () {
+      const textController = 'test';
+      setUp(() {
+        when(() => repository.postMessage(textController: textController))
+            .thenAnswer((_) async => '');
+      });
+      blocTest<ForumCubit, ForumState>('emit Status.succes',
+          build: () => sut,
+          act: (cubit) => cubit.postMessage(
+                textController: textController,
+              ),
+          expect: () => [
+                ForumState(
+                  status: Status.succes,
+                ),
+              ]);
+    });
+
     group('failure', () {
       setUp(() {
         when(() => repository.postMessage(textController: 'message')).thenThrow(

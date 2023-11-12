@@ -26,67 +26,75 @@ void main() {
   });
 
   group('setAvatarUrl and emit  saved true', () {
-    setUp(() {
-      when(() => repository.updatePostsWithNewAvatar('newAvatarUrl'))
-          .thenAnswer((_) async {});
-    });
-    blocTest<MyAccountCubit, MyAccountState>(
-      'emit saved true',
-      build: () => sut,
-      act: (cubit) => cubit.setAvatarUrl('newAvatarUrl'),
-      expect: () => [MyAccountState(saved: true)],
-    );
-  });
-
-  group('failer setAvatarUrl', () {
-    setUp(() {
-      when(() => repository.updatePostsWithNewAvatar('newAvatarUrl')).thenThrow(
-        Exception('test-exception-error'),
+    group('succes', () {
+      setUp(() {
+        when(() => repository.updatePostsWithNewAvatar('newAvatarUrl'))
+            .thenAnswer((_) async {});
+      });
+      blocTest<MyAccountCubit, MyAccountState>(
+        'emit saved true',
+        build: () => sut,
+        act: (cubit) => cubit.setAvatarUrl('newAvatarUrl'),
+        expect: () => [
+          MyAccountState(saved: true),
+        ],
       );
     });
-
-    blocTest<MyAccountCubit, MyAccountState>(
-      'emits Status.error with error message',
-      build: () => sut,
-      act: (cubit) => cubit.setAvatarUrl('newAvatarUrl'),
-      expect: () => [
-        MyAccountState(
-          status: Status.error,
-          errorMessage: 'Exception: test-exception-error',
-        )
-      ],
-    );
+    group('failure', () {
+      setUp(() {
+        when(() => repository.updatePostsWithNewAvatar('newAvatar')).thenThrow(
+          Exception('test-exception-error'),
+        );
+      });
+      blocTest<MyAccountCubit, MyAccountState>(
+        'emit Status.error with error message',
+        build: () => sut,
+        act: (cubit) => cubit.setAvatarUrl('newAvatar'),
+        expect: () => [
+          MyAccountState(
+            status: Status.error,
+            errorMessage: 'Exception: test-exception-error',
+          ),
+        ],
+      );
+    });
   });
 
   group('deleteAccount and emit  saved true', () {
-    setUp(() {
-      when(() => repository.deleteAccount()).thenAnswer((_) async {});
-    });
-    blocTest<MyAccountCubit, MyAccountState>(
-      'emit saved true',
-      build: () => sut,
-      act: (cubit) => cubit.deleteAccount(),
-      expect: () => [MyAccountState(saved: true)],
-    );
-  });
-
-  group('failer deleteAccount', () {
-    setUp(() {
-      when(() => repository.deleteAccount()).thenThrow(
-        Exception('test-exception-error'),
+    group('succes', () {
+      setUp(() {
+        when(() => repository.deleteAccount()).thenAnswer((_) async {});
+      });
+      blocTest<MyAccountCubit, MyAccountState>(
+        'emit saved true',
+        build: () => sut,
+        act: (cubit) => cubit.deleteAccount(),
+        expect: () => [
+          MyAccountState(
+            saved: true,
+          ),
+        ],
       );
     });
 
-    blocTest<MyAccountCubit, MyAccountState>(
-      'emits Status.error with error message',
-      build: () => sut,
-      act: (cubit) => cubit.deleteAccount(),
-      expect: () => [
-        MyAccountState(
-          status: Status.error,
-          errorMessage: 'Exception: test-exception-error',
-        )
-      ],
-    );
+    group('failure', () {
+      setUp(() {
+        when(() => repository.deleteAccount()).thenThrow(
+          Exception('test-exception-error'),
+        );
+      });
+
+      blocTest<MyAccountCubit, MyAccountState>(
+        'emits Status.error with error message',
+        build: () => sut,
+        act: (cubit) => cubit.deleteAccount(),
+        expect: () => [
+          MyAccountState(
+            status: Status.error,
+            errorMessage: 'Exception: test-exception-error',
+          )
+        ],
+      );
+    });
   });
 }

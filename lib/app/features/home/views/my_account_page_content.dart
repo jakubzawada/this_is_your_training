@@ -5,7 +5,7 @@ import 'package:this_is_your_training/app/injection_container.dart';
 import 'package:this_is_your_training/components/profile_picture2.dart';
 import 'package:this_is_your_training/app/features/widgets/my_account_page/delete_account_button.dart';
 import 'package:this_is_your_training/app/features/widgets/my_account_page/logout_button.dart';
-import 'package:this_is_your_training/app/features/widgets/my_account_page/set_profile_button.dart';
+import 'package:this_is_your_training/app/features/widgets/my_account_page/set_profile_picture_button.dart';
 
 class MyAccountPageContent extends StatelessWidget {
   const MyAccountPageContent({
@@ -43,10 +43,24 @@ class MyAccountPageContent extends StatelessWidget {
                   ],
                 ),
               ),
-              child: ListView.builder(
-                itemCount: 1,
-                itemBuilder: (BuildContext context, int index) {
-                  return Center(
+              child: Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 137, 72, 248),
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(40),
+                        bottomRight: Radius.circular(40),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: const Offset(4, 8)),
+                      ],
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(40),
                       child: Column(
@@ -61,7 +75,7 @@ class MyAccountPageContent extends StatelessWidget {
                                   radius: 90,
                                 ),
                               ),
-                              SetProfileButton(),
+                              SetProfilePictureButton(),
                             ],
                           ),
                           Positioned(
@@ -109,15 +123,15 @@ class MyAccountPageContent extends StatelessWidget {
                             'Logged in as: $email',
                             style: TextStyle(color: Colors.deepPurple[200]),
                           ),
-                          const SizedBox(height: 155),
-                          const LogoutButton(),
-                          const SizedBox(height: 30),
-                          const DeleteAccountButton(),
                         ],
                       ),
                     ),
-                  );
-                },
+                  ),
+                  const SizedBox(height: 135),
+                  const LogoutButton(),
+                  const SizedBox(height: 30),
+                  const DeleteAccountButton(),
+                ],
               ),
             ),
           );

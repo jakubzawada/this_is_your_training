@@ -52,6 +52,11 @@ class RootCubit extends Cubit<RootState> {
   Future<void> signOut() async {
     try {
       authRepository.signOut();
+      emit(
+        state.copyWith(
+          status: Status.succes,
+        ),
+      );
     } catch (error) {
       emit(
         RootState(

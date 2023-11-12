@@ -54,51 +54,74 @@ class SaturdayExerciseContainer extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.deepPurpleAccent,
-                        borderRadius: BorderRadius.all(
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 129, 87, 246),
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(10),
                         ),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              offset: const Offset(4, 8)),
+                        ],
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: 220,
-                              child: Text(
-                                documentModel.name,
-                                style: GoogleFonts.inter(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 129, 87, 246),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.15),
+                                  spreadRadius: 3,
+                                  blurRadius: 7,
+                                  offset: const Offset(4, 0),
+                                ),
+                              ],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: 220,
+                                child: Text(
+                                  documentModel.name,
+                                  style: GoogleFonts.inter(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: 40,
-                              child: Text(
-                                documentModel.series.toString(),
-                                style: GoogleFonts.inter(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 40,
-                              child: Text(
-                                documentModel.repeat.toString(),
-                                style: GoogleFonts.inter(
+                          ),
+                          SizedBox(
+                            width: 40,
+                            child: Text(
+                              documentModel.series.toString(),
+                              style: GoogleFonts.inter(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
+                                  color: Colors.black),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 40,
+                            child: Text(
+                              documentModel.repeat.toString(),
+                              style: GoogleFonts.inter(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

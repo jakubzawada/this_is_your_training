@@ -17,12 +17,19 @@ class ProfilePicture extends StatelessWidget {
       height: radius * 2,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        image: avatarUrl != null
-            ? DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(avatarUrl!),
-              )
-            : null,
+        image: avatarUrl != null && avatarUrl!.isNotEmpty
+            ? avatarUrl!.startsWith('http')
+                ? DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(avatarUrl!),
+                  )
+                : DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage(avatarUrl!),
+                  )
+            : const DecorationImage(
+                image: AssetImage("images/Profile.jpg"),
+              ),
       ),
     );
   }
