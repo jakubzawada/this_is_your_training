@@ -78,40 +78,37 @@ class MyAccountPageContent extends StatelessWidget {
                               SetProfilePictureButton(),
                             ],
                           ),
-                          Positioned(
-                            bottom: 4,
-                            child: InkWell(
-                              onTap: () {
-                                if (state.selectedImage != null) {
+                          InkWell(
+                            onTap: () {
+                              if (state.selectedImage != null) {
+                                context
+                                    .read<MyAccountCubit>()
+                                    .uploadImage(state.selectedImage!)
+                                    .then((downloadURL) {
                                   context
                                       .read<MyAccountCubit>()
-                                      .uploadImage(state.selectedImage!)
-                                      .then((downloadURL) {
-                                    context
-                                        .read<MyAccountCubit>()
-                                        .setAvatarUrl(downloadURL);
-                                  }).catchError((error) {});
-                                }
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  height: 40,
-                                  width: 100,
-                                  decoration: const BoxDecoration(
-                                    color: Color.fromARGB(255, 42, 44, 87),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(10),
-                                    ),
+                                      .setAvatarUrl(downloadURL);
+                                }).catchError((error) {});
+                              }
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 40,
+                                width: 100,
+                                decoration: const BoxDecoration(
+                                  color: Color.fromARGB(255, 42, 44, 87),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
                                   ),
-                                  child: const Center(
-                                    child: Text(
-                                      'Save',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    'Save',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
