@@ -20,7 +20,10 @@ class PasswordTextField extends StatelessWidget {
           return TextField(
             controller: passwordController,
             decoration: InputDecoration(
-              prefixIcon: const Icon(Icons.lock),
+              prefixIcon: const Icon(
+                Icons.lock,
+                color: Colors.black38,
+              ),
               enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.circular(12),
@@ -39,6 +42,9 @@ class PasswordTextField extends StatelessWidget {
                 ),
               ),
               hintText: 'Password',
+              hintStyle: const TextStyle(
+                color: Colors.black38,
+              ),
               fillColor: Colors.grey[200],
               filled: true,
             ),

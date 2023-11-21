@@ -14,6 +14,9 @@ class PostTextField extends StatelessWidget {
       controller: textController,
       decoration: InputDecoration(
         hintText: 'Write something on the forum..',
+        hintStyle: const TextStyle(
+          color: Colors.black26,
+        ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(25.0),
           borderSide: const BorderSide(color: Colors.white),

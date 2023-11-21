@@ -87,17 +87,15 @@ class SaturdayPageContent extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
-                child: InkWell(
-                  child: const AddExerciseButton(),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => AddSaturdayExercise(),
-                      ),
-                    );
-                  },
-                ),
+              InkWell(
+                child: const AddExerciseButton(),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => AddSaturdayExercise(),
+                    ),
+                  );
+                },
               ),
             ],
           ),

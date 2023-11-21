@@ -33,6 +33,9 @@ class ForumPageContent extends StatelessWidget {
                 backgroundColor: Colors.deepPurpleAccent,
                 title: const Text(
                   'Forum',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
                 centerTitle: true,
               ),

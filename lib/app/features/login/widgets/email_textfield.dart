@@ -13,7 +13,10 @@ class EmailTextField extends StatelessWidget {
     return TextField(
       controller: emailController,
       decoration: InputDecoration(
-        prefixIcon: const Icon(Icons.mail),
+        prefixIcon: const Icon(
+          Icons.mail,
+          color: Colors.black38,
+        ),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.white),
           borderRadius: BorderRadius.circular(12),
@@ -23,6 +26,9 @@ class EmailTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         hintText: 'Email',
+        hintStyle: const TextStyle(
+          color: Colors.black38,
+        ),
         fillColor: Colors.grey[200],
         filled: true,
       ),

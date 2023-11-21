@@ -11,7 +11,7 @@ class TrainingDaysContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
+      height: 90,
       width: 350,
       decoration: BoxDecoration(
         gradient: const LinearGradient(

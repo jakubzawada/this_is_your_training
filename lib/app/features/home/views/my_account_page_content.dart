@@ -26,6 +26,9 @@ class MyAccountPageContent extends StatelessWidget {
               backgroundColor: Colors.deepPurpleAccent,
               title: const Text(
                 'Profile',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
               centerTitle: true,
             ),
