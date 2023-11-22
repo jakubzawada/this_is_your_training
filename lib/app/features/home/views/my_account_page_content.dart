@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/my_account_cubit.dart';
+import 'package:this_is_your_training/app/features/widgets/my_account_page/save_button.dart';
 import 'package:this_is_your_training/app/injection_container.dart';
 import 'package:this_is_your_training/components/profile_picture2.dart';
 import 'package:this_is_your_training/app/features/widgets/my_account_page/delete_account_button.dart';
@@ -81,8 +82,8 @@ class MyAccountPageContent extends StatelessWidget {
                               SetProfilePictureButton(),
                             ],
                           ),
-                          InkWell(
-                            onTap: () {
+                          SaveButton(
+                            onPressed: () {
                               if (state.selectedImage != null) {
                                 context
                                     .read<MyAccountCubit>()
@@ -94,29 +95,6 @@ class MyAccountPageContent extends StatelessWidget {
                                 }).catchError((error) {});
                               }
                             },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                height: 40,
-                                width: 100,
-                                decoration: const BoxDecoration(
-                                  color: Color.fromARGB(255, 42, 44, 87),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    'Save',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
                           ),
                           const SizedBox(height: 10),
                           Text(

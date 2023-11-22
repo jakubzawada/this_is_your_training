@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/app/features/login/cubit/login_cubit.dart';
 import 'package:this_is_your_training/app/features/login/widgets/forgot_password_button.dart';
+import 'package:this_is_your_training/app/features/login/widgets/sign_in_up_button.dart';
 import 'package:this_is_your_training/app/injection_container.dart';
 import 'package:this_is_your_training/components/square_tile.dart';
 import 'package:this_is_your_training/services/auth_service.dart';
@@ -59,28 +60,10 @@ class LoginPage extends StatelessWidget {
                         if (state.errorMessage.isNotEmpty)
                           Text(state.errorMessage),
                         const SizedBox(height: 20),
-                        InkWell(
-                          child: Container(
-                            height: 60,
-                            width: 320,
-                            decoration: BoxDecoration(
-                              color: Colors.deepPurple,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Center(
-                              child: Text(
-                                state.isCreatingAccount == true
-                                    ? 'Sign up'
-                                    : 'Sign in',
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  letterSpacing: 1.8,
-                                ),
-                              ),
-                            ),
-                          ),
+                        SignInUpButton(
+                          buttonText: state.isCreatingAccount == true
+                              ? 'Sign up'
+                              : 'Sign in',
                           onTap: () async {
                             if (state.isCreatingAccount == true) {
                               try {
