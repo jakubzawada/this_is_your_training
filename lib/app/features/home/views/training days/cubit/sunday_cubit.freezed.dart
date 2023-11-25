@@ -69,22 +69,22 @@ class _$SundayStateCopyWithImpl<$Res, $Val extends SundayState>
 }
 
 /// @nodoc
-abstract class _$$_SundayStateCopyWith<$Res>
+abstract class _$$SundayStateImplCopyWith<$Res>
     implements $SundayStateCopyWith<$Res> {
-  factory _$$_SundayStateCopyWith(
-          _$_SundayState value, $Res Function(_$_SundayState) then) =
-      __$$_SundayStateCopyWithImpl<$Res>;
+  factory _$$SundayStateImplCopyWith(
+          _$SundayStateImpl value, $Res Function(_$SundayStateImpl) then) =
+      __$$SundayStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<TrainingModel> results, Status status, String errorMessage});
 }
 
 /// @nodoc
-class __$$_SundayStateCopyWithImpl<$Res>
-    extends _$SundayStateCopyWithImpl<$Res, _$_SundayState>
-    implements _$$_SundayStateCopyWith<$Res> {
-  __$$_SundayStateCopyWithImpl(
-      _$_SundayState _value, $Res Function(_$_SundayState) _then)
+class __$$SundayStateImplCopyWithImpl<$Res>
+    extends _$SundayStateCopyWithImpl<$Res, _$SundayStateImpl>
+    implements _$$SundayStateImplCopyWith<$Res> {
+  __$$SundayStateImplCopyWithImpl(
+      _$SundayStateImpl _value, $Res Function(_$SundayStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +94,7 @@ class __$$_SundayStateCopyWithImpl<$Res>
     Object? status = null,
     Object? errorMessage = null,
   }) {
-    return _then(_$_SundayState(
+    return _then(_$SundayStateImpl(
       results: null == results
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
@@ -113,8 +113,8 @@ class __$$_SundayStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SundayState implements _SundayState {
-  _$_SundayState(
+class _$SundayStateImpl implements _SundayState {
+  _$SundayStateImpl(
       {final List<TrainingModel> results = const [],
       this.status = Status.loading,
       this.errorMessage = ''})
@@ -145,7 +145,7 @@ class _$_SundayState implements _SundayState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SundayState &&
+            other is _$SundayStateImpl &&
             const DeepCollectionEquality().equals(other._results, _results) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.errorMessage, errorMessage) ||
@@ -159,15 +159,15 @@ class _$_SundayState implements _SundayState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SundayStateCopyWith<_$_SundayState> get copyWith =>
-      __$$_SundayStateCopyWithImpl<_$_SundayState>(this, _$identity);
+  _$$SundayStateImplCopyWith<_$SundayStateImpl> get copyWith =>
+      __$$SundayStateImplCopyWithImpl<_$SundayStateImpl>(this, _$identity);
 }
 
 abstract class _SundayState implements SundayState {
   factory _SundayState(
       {final List<TrainingModel> results,
       final Status status,
-      final String errorMessage}) = _$_SundayState;
+      final String errorMessage}) = _$SundayStateImpl;
 
   @override
   List<TrainingModel> get results;
@@ -177,6 +177,6 @@ abstract class _SundayState implements SundayState {
   String get errorMessage;
   @override
   @JsonKey(ignore: true)
-  _$$_SundayStateCopyWith<_$_SundayState> get copyWith =>
+  _$$SundayStateImplCopyWith<_$SundayStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

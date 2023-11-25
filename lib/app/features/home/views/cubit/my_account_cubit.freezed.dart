@@ -93,11 +93,11 @@ class _$MyAccountStateCopyWithImpl<$Res, $Val extends MyAccountState>
 }
 
 /// @nodoc
-abstract class _$$_MyAccountStateCopyWith<$Res>
+abstract class _$$MyAccountStateImplCopyWith<$Res>
     implements $MyAccountStateCopyWith<$Res> {
-  factory _$$_MyAccountStateCopyWith(
-          _$_MyAccountState value, $Res Function(_$_MyAccountState) then) =
-      __$$_MyAccountStateCopyWithImpl<$Res>;
+  factory _$$MyAccountStateImplCopyWith(_$MyAccountStateImpl value,
+          $Res Function(_$MyAccountStateImpl) then) =
+      __$$MyAccountStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -110,11 +110,11 @@ abstract class _$$_MyAccountStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MyAccountStateCopyWithImpl<$Res>
-    extends _$MyAccountStateCopyWithImpl<$Res, _$_MyAccountState>
-    implements _$$_MyAccountStateCopyWith<$Res> {
-  __$$_MyAccountStateCopyWithImpl(
-      _$_MyAccountState _value, $Res Function(_$_MyAccountState) _then)
+class __$$MyAccountStateImplCopyWithImpl<$Res>
+    extends _$MyAccountStateCopyWithImpl<$Res, _$MyAccountStateImpl>
+    implements _$$MyAccountStateImplCopyWith<$Res> {
+  __$$MyAccountStateImplCopyWithImpl(
+      _$MyAccountStateImpl _value, $Res Function(_$MyAccountStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -127,7 +127,7 @@ class __$$_MyAccountStateCopyWithImpl<$Res>
     Object? avatarUrl = freezed,
     Object? status = null,
   }) {
-    return _then(_$_MyAccountState(
+    return _then(_$MyAccountStateImpl(
       saved: null == saved
           ? _value.saved
           : saved // ignore: cast_nullable_to_non_nullable
@@ -158,8 +158,8 @@ class __$$_MyAccountStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MyAccountState implements _MyAccountState {
-  _$_MyAccountState(
+class _$MyAccountStateImpl implements _MyAccountState {
+  _$MyAccountStateImpl(
       {this.saved = false,
       this.errorMessage,
       this.selectedImage,
@@ -191,7 +191,7 @@ class _$_MyAccountState implements _MyAccountState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MyAccountState &&
+            other is _$MyAccountStateImpl &&
             (identical(other.saved, saved) || other.saved == saved) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
@@ -210,8 +210,9 @@ class _$_MyAccountState implements _MyAccountState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MyAccountStateCopyWith<_$_MyAccountState> get copyWith =>
-      __$$_MyAccountStateCopyWithImpl<_$_MyAccountState>(this, _$identity);
+  _$$MyAccountStateImplCopyWith<_$MyAccountStateImpl> get copyWith =>
+      __$$MyAccountStateImplCopyWithImpl<_$MyAccountStateImpl>(
+          this, _$identity);
 }
 
 abstract class _MyAccountState implements MyAccountState {
@@ -221,7 +222,7 @@ abstract class _MyAccountState implements MyAccountState {
       final File? selectedImage,
       final User? user,
       final String? avatarUrl,
-      final Status status}) = _$_MyAccountState;
+      final Status status}) = _$MyAccountStateImpl;
 
   @override
   bool get saved;
@@ -237,6 +238,6 @@ abstract class _MyAccountState implements MyAccountState {
   Status get status;
   @override
   @JsonKey(ignore: true)
-  _$$_MyAccountStateCopyWith<_$_MyAccountState> get copyWith =>
+  _$$MyAccountStateImplCopyWith<_$MyAccountStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

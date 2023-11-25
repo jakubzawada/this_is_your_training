@@ -87,11 +87,12 @@ class _$ThursdayExerciseStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ThursdayExerciseStateCopyWith<$Res>
+abstract class _$$ThursdayExerciseStateImplCopyWith<$Res>
     implements $ThursdayExerciseStateCopyWith<$Res> {
-  factory _$$_ThursdayExerciseStateCopyWith(_$_ThursdayExerciseState value,
-          $Res Function(_$_ThursdayExerciseState) then) =
-      __$$_ThursdayExerciseStateCopyWithImpl<$Res>;
+  factory _$$ThursdayExerciseStateImplCopyWith(
+          _$ThursdayExerciseStateImpl value,
+          $Res Function(_$ThursdayExerciseStateImpl) then) =
+      __$$ThursdayExerciseStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -103,11 +104,12 @@ abstract class _$$_ThursdayExerciseStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ThursdayExerciseStateCopyWithImpl<$Res>
-    extends _$ThursdayExerciseStateCopyWithImpl<$Res, _$_ThursdayExerciseState>
-    implements _$$_ThursdayExerciseStateCopyWith<$Res> {
-  __$$_ThursdayExerciseStateCopyWithImpl(_$_ThursdayExerciseState _value,
-      $Res Function(_$_ThursdayExerciseState) _then)
+class __$$ThursdayExerciseStateImplCopyWithImpl<$Res>
+    extends _$ThursdayExerciseStateCopyWithImpl<$Res,
+        _$ThursdayExerciseStateImpl>
+    implements _$$ThursdayExerciseStateImplCopyWith<$Res> {
+  __$$ThursdayExerciseStateImplCopyWithImpl(_$ThursdayExerciseStateImpl _value,
+      $Res Function(_$ThursdayExerciseStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -119,7 +121,7 @@ class __$$_ThursdayExerciseStateCopyWithImpl<$Res>
     Object? series3 = freezed,
     Object? repeat3 = freezed,
   }) {
-    return _then(_$_ThursdayExerciseState(
+    return _then(_$ThursdayExerciseStateImpl(
       saved: null == saved
           ? _value.saved
           : saved // ignore: cast_nullable_to_non_nullable
@@ -146,8 +148,8 @@ class __$$_ThursdayExerciseStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ThursdayExerciseState implements _ThursdayExerciseState {
-  _$_ThursdayExerciseState(
+class _$ThursdayExerciseStateImpl implements _ThursdayExerciseState {
+  _$ThursdayExerciseStateImpl(
       {this.saved = false,
       this.errorMessage = '',
       this.exerciseName3 = '',
@@ -177,7 +179,7 @@ class _$_ThursdayExerciseState implements _ThursdayExerciseState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ThursdayExerciseState &&
+            other is _$ThursdayExerciseStateImpl &&
             (identical(other.saved, saved) || other.saved == saved) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
@@ -194,9 +196,9 @@ class _$_ThursdayExerciseState implements _ThursdayExerciseState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ThursdayExerciseStateCopyWith<_$_ThursdayExerciseState> get copyWith =>
-      __$$_ThursdayExerciseStateCopyWithImpl<_$_ThursdayExerciseState>(
-          this, _$identity);
+  _$$ThursdayExerciseStateImplCopyWith<_$ThursdayExerciseStateImpl>
+      get copyWith => __$$ThursdayExerciseStateImplCopyWithImpl<
+          _$ThursdayExerciseStateImpl>(this, _$identity);
 }
 
 abstract class _ThursdayExerciseState implements ThursdayExerciseState {
@@ -205,7 +207,7 @@ abstract class _ThursdayExerciseState implements ThursdayExerciseState {
       final String errorMessage,
       final String exerciseName3,
       final int? series3,
-      final int? repeat3}) = _$_ThursdayExerciseState;
+      final int? repeat3}) = _$ThursdayExerciseStateImpl;
 
   @override
   bool get saved;
@@ -219,6 +221,6 @@ abstract class _ThursdayExerciseState implements ThursdayExerciseState {
   int? get repeat3;
   @override
   @JsonKey(ignore: true)
-  _$$_ThursdayExerciseStateCopyWith<_$_ThursdayExerciseState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ThursdayExerciseStateImplCopyWith<_$ThursdayExerciseStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

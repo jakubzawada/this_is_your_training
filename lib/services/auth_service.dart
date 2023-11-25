@@ -7,20 +7,24 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 class AuthService {
   //Google Sign In
   Future<void> signInWithGoogle() async {
-    //
-    final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
+    try {
+      //
+      final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
 
-    //
-    final GoogleSignInAuthentication gAuth = await gUser!.authentication;
+      //
+      final GoogleSignInAuthentication gAuth = await gUser!.authentication;
 
-    //
-    final credential = GoogleAuthProvider.credential(
-      accessToken: gAuth.accessToken,
-      idToken: gAuth.idToken,
-    );
+      //
+      final credential = GoogleAuthProvider.credential(
+        accessToken: gAuth.accessToken,
+        idToken: gAuth.idToken,
+      );
 
-    //
-    await FirebaseAuth.instance.signInWithCredential(credential);
+      //
+      await FirebaseAuth.instance.signInWithCredential(credential);
+    } catch (error) {
+      print("Error during Google sign in: $error");
+    }
   }
 
   // Facebook Sign In

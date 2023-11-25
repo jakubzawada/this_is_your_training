@@ -69,22 +69,22 @@ class _$ForumStateCopyWithImpl<$Res, $Val extends ForumState>
 }
 
 /// @nodoc
-abstract class _$$_ForumStateCopyWith<$Res>
+abstract class _$$ForumStateImplCopyWith<$Res>
     implements $ForumStateCopyWith<$Res> {
-  factory _$$_ForumStateCopyWith(
-          _$_ForumState value, $Res Function(_$_ForumState) then) =
-      __$$_ForumStateCopyWithImpl<$Res>;
+  factory _$$ForumStateImplCopyWith(
+          _$ForumStateImpl value, $Res Function(_$ForumStateImpl) then) =
+      __$$ForumStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<ForumModel> results, String errorMessage, Status status});
 }
 
 /// @nodoc
-class __$$_ForumStateCopyWithImpl<$Res>
-    extends _$ForumStateCopyWithImpl<$Res, _$_ForumState>
-    implements _$$_ForumStateCopyWith<$Res> {
-  __$$_ForumStateCopyWithImpl(
-      _$_ForumState _value, $Res Function(_$_ForumState) _then)
+class __$$ForumStateImplCopyWithImpl<$Res>
+    extends _$ForumStateCopyWithImpl<$Res, _$ForumStateImpl>
+    implements _$$ForumStateImplCopyWith<$Res> {
+  __$$ForumStateImplCopyWithImpl(
+      _$ForumStateImpl _value, $Res Function(_$ForumStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +94,7 @@ class __$$_ForumStateCopyWithImpl<$Res>
     Object? errorMessage = null,
     Object? status = null,
   }) {
-    return _then(_$_ForumState(
+    return _then(_$ForumStateImpl(
       results: null == results
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
@@ -113,8 +113,8 @@ class __$$_ForumStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ForumState implements _ForumState {
-  _$_ForumState(
+class _$ForumStateImpl implements _ForumState {
+  _$ForumStateImpl(
       {final List<ForumModel> results = const [],
       this.errorMessage = '',
       this.status = Status.loading})
@@ -145,7 +145,7 @@ class _$_ForumState implements _ForumState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ForumState &&
+            other is _$ForumStateImpl &&
             const DeepCollectionEquality().equals(other._results, _results) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
@@ -159,15 +159,15 @@ class _$_ForumState implements _ForumState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ForumStateCopyWith<_$_ForumState> get copyWith =>
-      __$$_ForumStateCopyWithImpl<_$_ForumState>(this, _$identity);
+  _$$ForumStateImplCopyWith<_$ForumStateImpl> get copyWith =>
+      __$$ForumStateImplCopyWithImpl<_$ForumStateImpl>(this, _$identity);
 }
 
 abstract class _ForumState implements ForumState {
   factory _ForumState(
       {final List<ForumModel> results,
       final String errorMessage,
-      final Status status}) = _$_ForumState;
+      final Status status}) = _$ForumStateImpl;
 
   @override
   List<ForumModel> get results;
@@ -177,6 +177,6 @@ abstract class _ForumState implements ForumState {
   Status get status;
   @override
   @JsonKey(ignore: true)
-  _$$_ForumStateCopyWith<_$_ForumState> get copyWith =>
+  _$$ForumStateImplCopyWith<_$ForumStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -92,10 +92,11 @@ class _$PostStateCopyWithImpl<$Res, $Val extends PostState>
 }
 
 /// @nodoc
-abstract class _$$_PostStateCopyWith<$Res> implements $PostStateCopyWith<$Res> {
-  factory _$$_PostStateCopyWith(
-          _$_PostState value, $Res Function(_$_PostState) then) =
-      __$$_PostStateCopyWithImpl<$Res>;
+abstract class _$$PostStateImplCopyWith<$Res>
+    implements $PostStateCopyWith<$Res> {
+  factory _$$PostStateImplCopyWith(
+          _$PostStateImpl value, $Res Function(_$PostStateImpl) then) =
+      __$$PostStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -108,11 +109,11 @@ abstract class _$$_PostStateCopyWith<$Res> implements $PostStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PostStateCopyWithImpl<$Res>
-    extends _$PostStateCopyWithImpl<$Res, _$_PostState>
-    implements _$$_PostStateCopyWith<$Res> {
-  __$$_PostStateCopyWithImpl(
-      _$_PostState _value, $Res Function(_$_PostState) _then)
+class __$$PostStateImplCopyWithImpl<$Res>
+    extends _$PostStateCopyWithImpl<$Res, _$PostStateImpl>
+    implements _$$PostStateImplCopyWith<$Res> {
+  __$$PostStateImplCopyWithImpl(
+      _$PostStateImpl _value, $Res Function(_$PostStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -125,7 +126,7 @@ class __$$_PostStateCopyWithImpl<$Res>
     Object? saved = null,
     Object? status = null,
   }) {
-    return _then(_$_PostState(
+    return _then(_$PostStateImpl(
       docs: null == docs
           ? _value._docs
           : docs // ignore: cast_nullable_to_non_nullable
@@ -156,8 +157,8 @@ class __$$_PostStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PostState implements _PostState {
-  _$_PostState(
+class _$PostStateImpl implements _PostState {
+  _$PostStateImpl(
       {final List<PostModel> docs = const [],
       this.errorMessage = '',
       this.isLiked = false,
@@ -200,7 +201,7 @@ class _$_PostState implements _PostState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PostState &&
+            other is _$PostStateImpl &&
             const DeepCollectionEquality().equals(other._docs, _docs) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
@@ -224,8 +225,8 @@ class _$_PostState implements _PostState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PostStateCopyWith<_$_PostState> get copyWith =>
-      __$$_PostStateCopyWithImpl<_$_PostState>(this, _$identity);
+  _$$PostStateImplCopyWith<_$PostStateImpl> get copyWith =>
+      __$$PostStateImplCopyWithImpl<_$PostStateImpl>(this, _$identity);
 }
 
 abstract class _PostState implements PostState {
@@ -235,7 +236,7 @@ abstract class _PostState implements PostState {
       final bool isLiked,
       final String avatarUrl,
       final bool saved,
-      final Status status}) = _$_PostState;
+      final Status status}) = _$PostStateImpl;
 
   @override
   List<PostModel> get docs;
@@ -251,6 +252,6 @@ abstract class _PostState implements PostState {
   Status get status;
   @override
   @JsonKey(ignore: true)
-  _$$_PostStateCopyWith<_$_PostState> get copyWith =>
+  _$$PostStateImplCopyWith<_$PostStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

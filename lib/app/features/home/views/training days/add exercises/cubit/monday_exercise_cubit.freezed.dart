@@ -86,11 +86,11 @@ class _$MondayExerciseStateCopyWithImpl<$Res, $Val extends MondayExerciseState>
 }
 
 /// @nodoc
-abstract class _$$_MondayExerciseStateCopyWith<$Res>
+abstract class _$$MondayExerciseStateImplCopyWith<$Res>
     implements $MondayExerciseStateCopyWith<$Res> {
-  factory _$$_MondayExerciseStateCopyWith(_$_MondayExerciseState value,
-          $Res Function(_$_MondayExerciseState) then) =
-      __$$_MondayExerciseStateCopyWithImpl<$Res>;
+  factory _$$MondayExerciseStateImplCopyWith(_$MondayExerciseStateImpl value,
+          $Res Function(_$MondayExerciseStateImpl) then) =
+      __$$MondayExerciseStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,11 +102,11 @@ abstract class _$$_MondayExerciseStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MondayExerciseStateCopyWithImpl<$Res>
-    extends _$MondayExerciseStateCopyWithImpl<$Res, _$_MondayExerciseState>
-    implements _$$_MondayExerciseStateCopyWith<$Res> {
-  __$$_MondayExerciseStateCopyWithImpl(_$_MondayExerciseState _value,
-      $Res Function(_$_MondayExerciseState) _then)
+class __$$MondayExerciseStateImplCopyWithImpl<$Res>
+    extends _$MondayExerciseStateCopyWithImpl<$Res, _$MondayExerciseStateImpl>
+    implements _$$MondayExerciseStateImplCopyWith<$Res> {
+  __$$MondayExerciseStateImplCopyWithImpl(_$MondayExerciseStateImpl _value,
+      $Res Function(_$MondayExerciseStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_MondayExerciseStateCopyWithImpl<$Res>
     Object? series = freezed,
     Object? repeat = freezed,
   }) {
-    return _then(_$_MondayExerciseState(
+    return _then(_$MondayExerciseStateImpl(
       saved: null == saved
           ? _value.saved
           : saved // ignore: cast_nullable_to_non_nullable
@@ -145,8 +145,8 @@ class __$$_MondayExerciseStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MondayExerciseState implements _MondayExerciseState {
-  _$_MondayExerciseState(
+class _$MondayExerciseStateImpl implements _MondayExerciseState {
+  _$MondayExerciseStateImpl(
       {this.saved = false,
       this.errorMessage = '',
       this.exerciseName = '',
@@ -176,7 +176,7 @@ class _$_MondayExerciseState implements _MondayExerciseState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MondayExerciseState &&
+            other is _$MondayExerciseStateImpl &&
             (identical(other.saved, saved) || other.saved == saved) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
@@ -193,8 +193,8 @@ class _$_MondayExerciseState implements _MondayExerciseState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MondayExerciseStateCopyWith<_$_MondayExerciseState> get copyWith =>
-      __$$_MondayExerciseStateCopyWithImpl<_$_MondayExerciseState>(
+  _$$MondayExerciseStateImplCopyWith<_$MondayExerciseStateImpl> get copyWith =>
+      __$$MondayExerciseStateImplCopyWithImpl<_$MondayExerciseStateImpl>(
           this, _$identity);
 }
 
@@ -204,7 +204,7 @@ abstract class _MondayExerciseState implements MondayExerciseState {
       final String errorMessage,
       final String exerciseName,
       final int? series,
-      final int? repeat}) = _$_MondayExerciseState;
+      final int? repeat}) = _$MondayExerciseStateImpl;
 
   @override
   bool get saved;
@@ -218,6 +218,6 @@ abstract class _MondayExerciseState implements MondayExerciseState {
   int? get repeat;
   @override
   @JsonKey(ignore: true)
-  _$$_MondayExerciseStateCopyWith<_$_MondayExerciseState> get copyWith =>
+  _$$MondayExerciseStateImplCopyWith<_$MondayExerciseStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

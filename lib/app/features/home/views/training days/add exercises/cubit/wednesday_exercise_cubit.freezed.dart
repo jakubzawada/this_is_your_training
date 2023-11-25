@@ -87,11 +87,12 @@ class _$WednesdayExerciseStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_WednesdayExerciseStateCopyWith<$Res>
+abstract class _$$WednesdayExerciseStateImplCopyWith<$Res>
     implements $WednesdayExerciseStateCopyWith<$Res> {
-  factory _$$_WednesdayExerciseStateCopyWith(_$_WednesdayExerciseState value,
-          $Res Function(_$_WednesdayExerciseState) then) =
-      __$$_WednesdayExerciseStateCopyWithImpl<$Res>;
+  factory _$$WednesdayExerciseStateImplCopyWith(
+          _$WednesdayExerciseStateImpl value,
+          $Res Function(_$WednesdayExerciseStateImpl) then) =
+      __$$WednesdayExerciseStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -103,12 +104,13 @@ abstract class _$$_WednesdayExerciseStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_WednesdayExerciseStateCopyWithImpl<$Res>
+class __$$WednesdayExerciseStateImplCopyWithImpl<$Res>
     extends _$WednesdayExerciseStateCopyWithImpl<$Res,
-        _$_WednesdayExerciseState>
-    implements _$$_WednesdayExerciseStateCopyWith<$Res> {
-  __$$_WednesdayExerciseStateCopyWithImpl(_$_WednesdayExerciseState _value,
-      $Res Function(_$_WednesdayExerciseState) _then)
+        _$WednesdayExerciseStateImpl>
+    implements _$$WednesdayExerciseStateImplCopyWith<$Res> {
+  __$$WednesdayExerciseStateImplCopyWithImpl(
+      _$WednesdayExerciseStateImpl _value,
+      $Res Function(_$WednesdayExerciseStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -120,7 +122,7 @@ class __$$_WednesdayExerciseStateCopyWithImpl<$Res>
     Object? series2 = freezed,
     Object? repeat2 = freezed,
   }) {
-    return _then(_$_WednesdayExerciseState(
+    return _then(_$WednesdayExerciseStateImpl(
       saved: null == saved
           ? _value.saved
           : saved // ignore: cast_nullable_to_non_nullable
@@ -147,8 +149,8 @@ class __$$_WednesdayExerciseStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_WednesdayExerciseState implements _WednesdayExerciseState {
-  _$_WednesdayExerciseState(
+class _$WednesdayExerciseStateImpl implements _WednesdayExerciseState {
+  _$WednesdayExerciseStateImpl(
       {this.saved = false,
       this.errorMessage = '',
       this.exerciseName2 = '',
@@ -178,7 +180,7 @@ class _$_WednesdayExerciseState implements _WednesdayExerciseState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_WednesdayExerciseState &&
+            other is _$WednesdayExerciseStateImpl &&
             (identical(other.saved, saved) || other.saved == saved) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
@@ -195,9 +197,9 @@ class _$_WednesdayExerciseState implements _WednesdayExerciseState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_WednesdayExerciseStateCopyWith<_$_WednesdayExerciseState> get copyWith =>
-      __$$_WednesdayExerciseStateCopyWithImpl<_$_WednesdayExerciseState>(
-          this, _$identity);
+  _$$WednesdayExerciseStateImplCopyWith<_$WednesdayExerciseStateImpl>
+      get copyWith => __$$WednesdayExerciseStateImplCopyWithImpl<
+          _$WednesdayExerciseStateImpl>(this, _$identity);
 }
 
 abstract class _WednesdayExerciseState implements WednesdayExerciseState {
@@ -206,7 +208,7 @@ abstract class _WednesdayExerciseState implements WednesdayExerciseState {
       final String errorMessage,
       final String exerciseName2,
       final int? series2,
-      final int? repeat2}) = _$_WednesdayExerciseState;
+      final int? repeat2}) = _$WednesdayExerciseStateImpl;
 
   @override
   bool get saved;
@@ -220,6 +222,6 @@ abstract class _WednesdayExerciseState implements WednesdayExerciseState {
   int? get repeat2;
   @override
   @JsonKey(ignore: true)
-  _$$_WednesdayExerciseStateCopyWith<_$_WednesdayExerciseState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$WednesdayExerciseStateImplCopyWith<_$WednesdayExerciseStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

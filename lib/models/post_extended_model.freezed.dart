@@ -80,11 +80,11 @@ class _$PostModelExtendedCopyWithImpl<$Res, $Val extends PostModelExtended>
 }
 
 /// @nodoc
-abstract class _$$_PostModelExtendedCopyWith<$Res>
+abstract class _$$PostModelExtendedImplCopyWith<$Res>
     implements $PostModelExtendedCopyWith<$Res> {
-  factory _$$_PostModelExtendedCopyWith(_$_PostModelExtended value,
-          $Res Function(_$_PostModelExtended) then) =
-      __$$_PostModelExtendedCopyWithImpl<$Res>;
+  factory _$$PostModelExtendedImplCopyWith(_$PostModelExtendedImpl value,
+          $Res Function(_$PostModelExtendedImpl) then) =
+      __$$PostModelExtendedImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$_PostModelExtendedCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PostModelExtendedCopyWithImpl<$Res>
-    extends _$PostModelExtendedCopyWithImpl<$Res, _$_PostModelExtended>
-    implements _$$_PostModelExtendedCopyWith<$Res> {
-  __$$_PostModelExtendedCopyWithImpl(
-      _$_PostModelExtended _value, $Res Function(_$_PostModelExtended) _then)
+class __$$PostModelExtendedImplCopyWithImpl<$Res>
+    extends _$PostModelExtendedCopyWithImpl<$Res, _$PostModelExtendedImpl>
+    implements _$$PostModelExtendedImplCopyWith<$Res> {
+  __$$PostModelExtendedImplCopyWithImpl(_$PostModelExtendedImpl _value,
+      $Res Function(_$PostModelExtendedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -108,7 +108,7 @@ class __$$_PostModelExtendedCopyWithImpl<$Res>
     Object? comments = null,
     Object? isLiked = null,
   }) {
-    return _then(_$_PostModelExtended(
+    return _then(_$PostModelExtendedImpl(
       null == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
@@ -127,15 +127,15 @@ class __$$_PostModelExtendedCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PostModelExtended implements _PostModelExtended {
-  _$_PostModelExtended(
+class _$PostModelExtendedImpl implements _PostModelExtended {
+  _$PostModelExtendedImpl(
       @JsonKey(name: 'AvatarUrl') this.avatarUrl,
       @JsonKey(name: 'Comments') final List<PostModel> comments,
       @JsonKey(name: 'IsLiked') this.isLiked)
       : _comments = comments;
 
-  factory _$_PostModelExtended.fromJson(Map<String, dynamic> json) =>
-      _$$_PostModelExtendedFromJson(json);
+  factory _$PostModelExtendedImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PostModelExtendedImplFromJson(json);
 
   @override
   @JsonKey(name: 'AvatarUrl')
@@ -162,7 +162,7 @@ class _$_PostModelExtended implements _PostModelExtended {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PostModelExtended &&
+            other is _$PostModelExtendedImpl &&
             (identical(other.avatarUrl, avatarUrl) ||
                 other.avatarUrl == avatarUrl) &&
             const DeepCollectionEquality().equals(other._comments, _comments) &&
@@ -177,13 +177,13 @@ class _$_PostModelExtended implements _PostModelExtended {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PostModelExtendedCopyWith<_$_PostModelExtended> get copyWith =>
-      __$$_PostModelExtendedCopyWithImpl<_$_PostModelExtended>(
+  _$$PostModelExtendedImplCopyWith<_$PostModelExtendedImpl> get copyWith =>
+      __$$PostModelExtendedImplCopyWithImpl<_$PostModelExtendedImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PostModelExtendedToJson(
+    return _$$PostModelExtendedImplToJson(
       this,
     );
   }
@@ -193,10 +193,10 @@ abstract class _PostModelExtended implements PostModelExtended {
   factory _PostModelExtended(
       @JsonKey(name: 'AvatarUrl') final String avatarUrl,
       @JsonKey(name: 'Comments') final List<PostModel> comments,
-      @JsonKey(name: 'IsLiked') final bool isLiked) = _$_PostModelExtended;
+      @JsonKey(name: 'IsLiked') final bool isLiked) = _$PostModelExtendedImpl;
 
   factory _PostModelExtended.fromJson(Map<String, dynamic> json) =
-      _$_PostModelExtended.fromJson;
+      _$PostModelExtendedImpl.fromJson;
 
   @override
   @JsonKey(name: 'AvatarUrl')
@@ -209,6 +209,6 @@ abstract class _PostModelExtended implements PostModelExtended {
   bool get isLiked;
   @override
   @JsonKey(ignore: true)
-  _$$_PostModelExtendedCopyWith<_$_PostModelExtended> get copyWith =>
+  _$$PostModelExtendedImplCopyWith<_$PostModelExtendedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

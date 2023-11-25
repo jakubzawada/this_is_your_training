@@ -104,11 +104,11 @@ class _$ForumModelCopyWithImpl<$Res, $Val extends ForumModel>
 }
 
 /// @nodoc
-abstract class _$$_ForumModelCopyWith<$Res>
+abstract class _$$ForumModelImplCopyWith<$Res>
     implements $ForumModelCopyWith<$Res> {
-  factory _$$_ForumModelCopyWith(
-          _$_ForumModel value, $Res Function(_$_ForumModel) then) =
-      __$$_ForumModelCopyWithImpl<$Res>;
+  factory _$$ForumModelImplCopyWith(
+          _$ForumModelImpl value, $Res Function(_$ForumModelImpl) then) =
+      __$$ForumModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -121,11 +121,11 @@ abstract class _$$_ForumModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ForumModelCopyWithImpl<$Res>
-    extends _$ForumModelCopyWithImpl<$Res, _$_ForumModel>
-    implements _$$_ForumModelCopyWith<$Res> {
-  __$$_ForumModelCopyWithImpl(
-      _$_ForumModel _value, $Res Function(_$_ForumModel) _then)
+class __$$ForumModelImplCopyWithImpl<$Res>
+    extends _$ForumModelCopyWithImpl<$Res, _$ForumModelImpl>
+    implements _$$ForumModelImplCopyWith<$Res> {
+  __$$ForumModelImplCopyWithImpl(
+      _$ForumModelImpl _value, $Res Function(_$ForumModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -138,7 +138,7 @@ class __$$_ForumModelCopyWithImpl<$Res>
     Object? timeStamp = null,
     Object? userEmail = null,
   }) {
-    return _then(_$_ForumModel(
+    return _then(_$ForumModelImpl(
       null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -169,8 +169,8 @@ class __$$_ForumModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ForumModel implements _ForumModel {
-  _$_ForumModel(
+class _$ForumModelImpl implements _ForumModel {
+  _$ForumModelImpl(
       this.id,
       @JsonKey(name: 'AvatarUrl') this.avatarURL,
       @JsonKey(name: 'Likes') final List<String> likes,
@@ -179,8 +179,8 @@ class _$_ForumModel implements _ForumModel {
       @JsonKey(name: 'UserEmail') this.userEmail)
       : _likes = likes;
 
-  factory _$_ForumModel.fromJson(Map<String, dynamic> json) =>
-      _$$_ForumModelFromJson(json);
+  factory _$ForumModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ForumModelImplFromJson(json);
 
   @override
   final String id;
@@ -216,7 +216,7 @@ class _$_ForumModel implements _ForumModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ForumModel &&
+            other is _$ForumModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.avatarURL, avatarURL) ||
                 other.avatarURL == avatarURL) &&
@@ -242,12 +242,12 @@ class _$_ForumModel implements _ForumModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ForumModelCopyWith<_$_ForumModel> get copyWith =>
-      __$$_ForumModelCopyWithImpl<_$_ForumModel>(this, _$identity);
+  _$$ForumModelImplCopyWith<_$ForumModelImpl> get copyWith =>
+      __$$ForumModelImplCopyWithImpl<_$ForumModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ForumModelToJson(
+    return _$$ForumModelImplToJson(
       this,
     );
   }
@@ -262,10 +262,10 @@ abstract class _ForumModel implements ForumModel {
       @JsonKey(name: 'TimeStamp')
       @TimestampSerializer()
       final DateTime timeStamp,
-      @JsonKey(name: 'UserEmail') final String userEmail) = _$_ForumModel;
+      @JsonKey(name: 'UserEmail') final String userEmail) = _$ForumModelImpl;
 
   factory _ForumModel.fromJson(Map<String, dynamic> json) =
-      _$_ForumModel.fromJson;
+      _$ForumModelImpl.fromJson;
 
   @override
   String get id;
@@ -287,6 +287,6 @@ abstract class _ForumModel implements ForumModel {
   String get userEmail;
   @override
   @JsonKey(ignore: true)
-  _$$_ForumModelCopyWith<_$_ForumModel> get copyWith =>
+  _$$ForumModelImplCopyWith<_$ForumModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

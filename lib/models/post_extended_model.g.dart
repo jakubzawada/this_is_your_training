@@ -1,15 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: non_constant_identifier_names
-
 part of 'post_extended_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PostModelExtended _$$_PostModelExtendedFromJson(Map<String, dynamic> json) =>
-    _$_PostModelExtended(
+_$PostModelExtendedImpl _$$PostModelExtendedImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PostModelExtendedImpl(
       json['AvatarUrl'] as String,
       (json['Comments'] as List<dynamic>)
           .map((e) => PostModel.fromJson(e as Map<String, dynamic>))
@@ -17,8 +16,8 @@ _$_PostModelExtended _$$_PostModelExtendedFromJson(Map<String, dynamic> json) =>
       json['IsLiked'] as bool,
     );
 
-Map<String, dynamic> _$$_PostModelExtendedToJson(
-        _$_PostModelExtended instance) =>
+Map<String, dynamic> _$$PostModelExtendedImplToJson(
+        _$PostModelExtendedImpl instance) =>
     <String, dynamic>{
       'AvatarUrl': instance.avatarUrl,
       'Comments': instance.comments,
