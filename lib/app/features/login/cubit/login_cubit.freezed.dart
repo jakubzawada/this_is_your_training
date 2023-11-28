@@ -19,6 +19,7 @@ mixin _$LoginState {
   bool get isCreatingAccount => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
   bool get obscureText => throw _privateConstructorUsedError;
+  bool get isLoggingIn => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -36,6 +37,7 @@ abstract class $LoginStateCopyWith<$Res> {
       {bool isCreatingAccount,
       String errorMessage,
       bool obscureText,
+      bool isLoggingIn,
       Status status});
 }
 
@@ -55,6 +57,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
     Object? isCreatingAccount = null,
     Object? errorMessage = null,
     Object? obscureText = null,
+    Object? isLoggingIn = null,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -69,6 +72,10 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
       obscureText: null == obscureText
           ? _value.obscureText
           : obscureText // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoggingIn: null == isLoggingIn
+          ? _value.isLoggingIn
+          : isLoggingIn // ignore: cast_nullable_to_non_nullable
               as bool,
       status: null == status
           ? _value.status
@@ -90,6 +97,7 @@ abstract class _$$LoginStateImplCopyWith<$Res>
       {bool isCreatingAccount,
       String errorMessage,
       bool obscureText,
+      bool isLoggingIn,
       Status status});
 }
 
@@ -107,6 +115,7 @@ class __$$LoginStateImplCopyWithImpl<$Res>
     Object? isCreatingAccount = null,
     Object? errorMessage = null,
     Object? obscureText = null,
+    Object? isLoggingIn = null,
     Object? status = null,
   }) {
     return _then(_$LoginStateImpl(
@@ -121,6 +130,10 @@ class __$$LoginStateImplCopyWithImpl<$Res>
       obscureText: null == obscureText
           ? _value.obscureText
           : obscureText // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoggingIn: null == isLoggingIn
+          ? _value.isLoggingIn
+          : isLoggingIn // ignore: cast_nullable_to_non_nullable
               as bool,
       status: null == status
           ? _value.status
@@ -137,6 +150,7 @@ class _$LoginStateImpl implements _LoginState {
       {this.isCreatingAccount = false,
       this.errorMessage = '',
       this.obscureText = true,
+      this.isLoggingIn = false,
       this.status = Status.loading});
 
   @override
@@ -150,11 +164,14 @@ class _$LoginStateImpl implements _LoginState {
   final bool obscureText;
   @override
   @JsonKey()
+  final bool isLoggingIn;
+  @override
+  @JsonKey()
   final Status status;
 
   @override
   String toString() {
-    return 'LoginState(isCreatingAccount: $isCreatingAccount, errorMessage: $errorMessage, obscureText: $obscureText, status: $status)';
+    return 'LoginState(isCreatingAccount: $isCreatingAccount, errorMessage: $errorMessage, obscureText: $obscureText, isLoggingIn: $isLoggingIn, status: $status)';
   }
 
   @override
@@ -168,12 +185,14 @@ class _$LoginStateImpl implements _LoginState {
                 other.errorMessage == errorMessage) &&
             (identical(other.obscureText, obscureText) ||
                 other.obscureText == obscureText) &&
+            (identical(other.isLoggingIn, isLoggingIn) ||
+                other.isLoggingIn == isLoggingIn) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isCreatingAccount, errorMessage, obscureText, status);
+  int get hashCode => Object.hash(runtimeType, isCreatingAccount, errorMessage,
+      obscureText, isLoggingIn, status);
 
   @JsonKey(ignore: true)
   @override
@@ -187,6 +206,7 @@ abstract class _LoginState implements LoginState {
       {final bool isCreatingAccount,
       final String errorMessage,
       final bool obscureText,
+      final bool isLoggingIn,
       final Status status}) = _$LoginStateImpl;
 
   @override
@@ -195,6 +215,8 @@ abstract class _LoginState implements LoginState {
   String get errorMessage;
   @override
   bool get obscureText;
+  @override
+  bool get isLoggingIn;
   @override
   Status get status;
   @override

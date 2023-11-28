@@ -45,9 +45,7 @@ class LoginCubit extends Cubit<LoginState> {
       await loginRepository.loginAccount(
           email: email, password: password, errorMessage: errorMessage);
       emit(
-        state.copyWith(
-          status: Status.succes,
-        ),
+        state.copyWith(status: Status.succes, isLoggingIn: true),
       );
     } catch (error) {
       emit(
@@ -56,6 +54,8 @@ class LoginCubit extends Cubit<LoginState> {
           errorMessage: error.toString(),
         ),
       );
+    } finally {
+      emit(state.copyWith(isLoggingIn: false));
     }
   }
 
@@ -68,9 +68,7 @@ class LoginCubit extends Cubit<LoginState> {
       await loginRepository.createAccount(
           email: email, password: password, errorMessage: errorMessage);
       emit(
-        state.copyWith(
-          status: Status.succes,
-        ),
+        state.copyWith(status: Status.succes, isLoggingIn: true),
       );
     } catch (error) {
       emit(
@@ -79,6 +77,8 @@ class LoginCubit extends Cubit<LoginState> {
           errorMessage: error.toString(),
         ),
       );
+    } finally {
+      emit(state.copyWith(isLoggingIn: false));
     }
   }
 }

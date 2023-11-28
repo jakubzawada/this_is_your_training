@@ -65,26 +65,27 @@ class LoginPage extends StatelessWidget {
                               ? 'Sign up'
                               : 'Sign in',
                           onTap: () async {
-                            if (state.isCreatingAccount == true) {
-                              try {
-                                context.read<LoginCubit>().createAccount(
-                                      email: emailController.text,
+                            if (state.isLoggingIn) {
+                              // Jeśli proces logowania już trwa, zignoruj kolejne kliknięcie
+                              return;
+                            }
+
+                            try {
+                              if (state.isCreatingAccount == true) {
+                                await context.read<LoginCubit>().createAccount(
+                                      email: emailController.text.trim(),
                                       password: passwordController.text,
                                       errorMessage: state.errorMessage,
                                     );
-                              } catch (error) {
-                                error.toString();
-                              }
-                            } else {
-                              try {
-                                context.read<LoginCubit>().loginAccount(
-                                      email: emailController.text,
+                              } else {
+                                await context.read<LoginCubit>().loginAccount(
+                                      email: emailController.text.trim(),
                                       password: passwordController.text,
                                       errorMessage: state.errorMessage,
                                     );
-                              } catch (error) {
-                                error.toString();
                               }
+                            } catch (error) {
+                              error.toString();
                             }
                           },
                         ),

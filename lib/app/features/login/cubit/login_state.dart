@@ -6,6 +6,7 @@ class LoginState with _$LoginState {
     @Default(false) bool isCreatingAccount,
     @Default('') String errorMessage,
     @Default(true) bool obscureText,
+    @Default(false) bool isLoggingIn,
     @Default(Status.loading) Status status,
   }) = _LoginState;
 }
