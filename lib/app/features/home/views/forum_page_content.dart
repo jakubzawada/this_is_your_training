@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/forum_cubit.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/my_account_cubit.dart';
@@ -60,23 +61,35 @@ class ForumPageContent extends StatelessWidget {
                         child: BlocBuilder<ForumCubit, ForumState>(
                           builder: (context, state) {
                             if (state.results.isNotEmpty) {
-                              return ListView.builder(
-                                controller: _scrollController,
-                                reverse: false,
-                                itemCount: state.results.length,
-                                itemBuilder: (context, index) {
-                                  final postModel = state.results[index];
-                                  String formattedTime = formatDate(
-                                      Timestamp.fromDate(postModel.timeStamp));
-                                  return PostPage(
-                                    message: postModel.message,
-                                    user: postModel.userEmail,
-                                    postId: postModel.id,
-                                    likes: List<String>.from(postModel.likes),
-                                    time: formattedTime,
-                                    avatarUrl: postModel.avatarURL,
-                                  );
+                              return LiquidPullToRefresh(
+                                onRefresh: () async {
+                                  context.read<ForumCubit>().handleRefresh();
                                 },
+                                color: Colors.deepPurple,
+                                height: 250,
+                                backgroundColor:
+                                    const Color.fromARGB(255, 140, 74, 253),
+                                animSpeedFactor: 2,
+                                showChildOpacityTransition: false,
+                                child: ListView.builder(
+                                  controller: _scrollController,
+                                  reverse: false,
+                                  itemCount: state.results.length,
+                                  itemBuilder: (context, index) {
+                                    final postModel = state.results[index];
+                                    String formattedTime = formatDate(
+                                        Timestamp.fromDate(
+                                            postModel.timeStamp));
+                                    return PostPage(
+                                      message: postModel.message,
+                                      user: postModel.userEmail,
+                                      postId: postModel.id,
+                                      likes: List<String>.from(postModel.likes),
+                                      time: formattedTime,
+                                      avatarUrl: postModel.avatarURL,
+                                    );
+                                  },
+                                ),
                               );
                             } else if (state.errorMessage.isNotEmpty) {
                               return Center(

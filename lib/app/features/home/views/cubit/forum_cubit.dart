@@ -45,6 +45,30 @@ class ForumCubit extends Cubit<ForumState> {
     }
   }
 
+  Future<void> handleRefresh() async {
+    try {
+      await Future.delayed(
+        const Duration(seconds: 2),
+      );
+      List<ForumModel> refreshedResults =
+          await forumRepository.getPostsStream().first;
+
+      emit(
+        state.copyWith(
+          status: Status.succes,
+          results: refreshedResults,
+        ),
+      );
+    } catch (error) {
+      emit(
+        ForumState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
   Future<void> postMessage({
     required String textController,
   }) async {

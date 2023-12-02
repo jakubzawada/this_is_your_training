@@ -66,10 +66,8 @@ class LoginPage extends StatelessWidget {
                               : 'Sign in',
                           onTap: () async {
                             if (state.isLoggingIn) {
-                              // Jeśli proces logowania już trwa, zignoruj kolejne kliknięcie
                               return;
                             }
-
                             try {
                               if (state.isCreatingAccount == true) {
                                 await context.read<LoginCubit>().createAccount(
