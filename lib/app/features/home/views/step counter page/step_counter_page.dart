@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:this_is_your_training/app/features/home/views/step%20counter%20page/cubit/step_counter_cubit.dart';
-import 'package:this_is_your_training/components/bar_graph.dart';
+import 'package:this_is_your_training/components/bar%20graph/bar_graph.dart';
 
 class StepCounterScreen extends StatelessWidget {
   const StepCounterScreen({Key? key}) : super(key: key);
@@ -133,86 +132,4 @@ class SecondScreen extends StatelessWidget {
       },
     );
   }
-}
-
-class IndividualBar {
-  final int x;
-  final double y;
-
-  IndividualBar({
-    required this.x,
-    required this.y,
-  });
-}
-
-class BarData {
-  final double monAmount;
-  final double tueAmount;
-  final double wedAmount;
-  final double thurAmount;
-  final double friAmount;
-  final double satAmount;
-  final double sunAmount;
-
-  BarData({
-    required this.monAmount,
-    required this.tueAmount,
-    required this.wedAmount,
-    required this.thurAmount,
-    required this.friAmount,
-    required this.satAmount,
-    required this.sunAmount,
-  });
-
-  List<IndividualBar> barData = [];
-
-  void initializeBarData() {
-    barData = [
-      IndividualBar(x: 0, y: sunAmount),
-      IndividualBar(x: 1, y: monAmount),
-      IndividualBar(x: 2, y: tueAmount),
-      IndividualBar(x: 3, y: wedAmount),
-      IndividualBar(x: 4, y: thurAmount),
-      IndividualBar(x: 5, y: friAmount),
-      IndividualBar(x: 6, y: satAmount),
-    ];
-  }
-}
-
-Widget getBottomTitles(double value, TitleMeta meta) {
-  const style = TextStyle(
-    color: Colors.grey,
-    fontWeight: FontWeight.bold,
-    fontSize: 12,
-  );
-
-  Widget text;
-  switch (value.toInt()) {
-    case 0:
-      text = const Text('Mon', style: style);
-      break;
-    case 1:
-      text = const Text('Tue', style: style);
-      break;
-    case 2:
-      text = const Text('Wed', style: style);
-      break;
-    case 3:
-      text = const Text('Thur', style: style);
-      break;
-    case 4:
-      text = const Text('Fri', style: style);
-      break;
-    case 5:
-      text = const Text('Sat', style: style);
-      break;
-    case 6:
-      text = const Text('Sun', style: style);
-      break;
-    default:
-      text = const Text('', style: style);
-      break;
-  }
-
-  return SideTitleWidget(axisSide: meta.axisSide, child: text);
 }
