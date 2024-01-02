@@ -24,14 +24,20 @@ class MyBarGraph extends StatelessWidget {
 
     return BarChart(
       BarChartData(
-          maxY: 10000,
+          maxY: 12000,
           minY: 0,
           gridData: const FlGridData(show: false),
           borderData: FlBorderData(show: false),
           titlesData: const FlTitlesData(
             show: true,
             topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true)),
+            leftTitles: AxisTitles(
+              sideTitles: SideTitles(
+                showTitles: true,
+                reservedSize: 30,
+                getTitlesWidget: leftTitles,
+              ),
+            ),
             rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
@@ -58,6 +64,22 @@ class MyBarGraph extends StatelessWidget {
               .toList()),
     );
   }
+}
+
+Widget leftTitles(double value, TitleMeta meta) {
+  if (value == meta.max) {
+    return Container();
+  }
+  const style = TextStyle(
+    fontSize: 10,
+  );
+  return SideTitleWidget(
+    axisSide: meta.axisSide,
+    child: Text(
+      meta.formattedValue,
+      style: style,
+    ),
+  );
 }
 
 Widget getBottomTitles(double value, TitleMeta meta) {

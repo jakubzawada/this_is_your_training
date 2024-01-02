@@ -8,6 +8,9 @@ part 'step_counter_state.dart';
 class StepCounterCubit extends Cubit<StepCounterState> {
   final userId = FirebaseAuth.instance.currentUser?.uid;
   DateTime now = DateTime.now();
+  int currentSteps = 0;
+  int resetSteps = 0;
+
   StepCounterCubit()
       : super(
           StepCounterState(
@@ -16,7 +19,20 @@ class StepCounterCubit extends Cubit<StepCounterState> {
             caloriesBurned: '0',
             distanceTraveled: '0',
           ),
-        );
+        ) {
+    initPedometer();
+  }
+
+  void resetStepCount() {
+    resetSteps += currentSteps; // Zaktualizuj liczbę kroków do zresetowania
+    emit(state.copyWith(
+      steps: 0,
+      stepCount: '0',
+      caloriesBurned: '0',
+      distanceTraveled: '0',
+    ));
+    now = DateTime.now();
+  }
 
   Future<void> calculateCaloriesAndDistance(int steps) async {
     double caloriesPerStep = 0.04;
@@ -45,12 +61,14 @@ class StepCounterCubit extends Cubit<StepCounterState> {
 
   Future<void> initPedometer() async {
     Pedometer.stepCountStream.listen((StepCount event) {
+      currentSteps = event.steps - resetSteps; // Odczytaj bieżący stan kroków
+
       emit(
         state.copyWith(
-          stepCount: event.steps.toString(),
+          stepCount: currentSteps.toString(),
         ),
       );
-      calculateCaloriesAndDistance(event.steps);
+      calculateCaloriesAndDistance(currentSteps);
     });
   }
 

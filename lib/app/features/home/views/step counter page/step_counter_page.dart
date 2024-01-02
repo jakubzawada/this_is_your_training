@@ -46,7 +46,7 @@ class FirstScreen extends StatelessWidget {
               children: [
                 const Text(
                   'Liczba kroków:',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+                  style: TextStyle(fontSize: 18, color: Colors.black),
                 ),
                 Text(
                   state.stepCount,
@@ -54,6 +54,14 @@ class FirstScreen extends StatelessWidget {
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
                   ),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    // Wywołaj funkcję resetującą licznik kroków w StepCounterCubit
+                    context.read<StepCounterCubit>().resetStepCount();
+                  },
+                  child: const Text('Resetuj licznik'),
                 ),
                 const SizedBox(height: 20),
                 const Text(
