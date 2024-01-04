@@ -44,6 +44,8 @@ dependencies:
   permission_handler: ^11.1.0
   fluttertoast: ^8.2.4
   fl_chart: ^0.65.0
+  percent_indicator: ^4.2.3
+  flutter_icon_shadow: ^2.0.6
   
   
 dev_dependencies:

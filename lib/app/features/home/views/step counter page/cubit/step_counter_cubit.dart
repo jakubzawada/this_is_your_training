@@ -10,6 +10,7 @@ class StepCounterCubit extends Cubit<StepCounterState> {
   DateTime now = DateTime.now();
   int currentSteps = 0;
   int resetSteps = 0;
+  int goalSteps = 6000;
 
   StepCounterCubit()
       : super(
@@ -19,12 +20,15 @@ class StepCounterCubit extends Cubit<StepCounterState> {
             caloriesBurned: '0',
             distanceTraveled: '0',
           ),
-        ) {
-    initPedometer();
+        );
+
+  void setGoalSteps(int newGoal) {
+    goalSteps = newGoal;
+    emit(state.copyWith());
   }
 
-  void resetStepCount() {
-    resetSteps += currentSteps; // Zaktualizuj liczbę kroków do zresetowania
+  Future<void> resetStepCount() async {
+    resetSteps += currentSteps;
     emit(state.copyWith(
       steps: 0,
       stepCount: '0',
@@ -61,7 +65,7 @@ class StepCounterCubit extends Cubit<StepCounterState> {
 
   Future<void> initPedometer() async {
     Pedometer.stepCountStream.listen((StepCount event) {
-      currentSteps = event.steps - resetSteps; // Odczytaj bieżący stan kroków
+      currentSteps = event.steps - resetSteps;
 
       emit(
         state.copyWith(
