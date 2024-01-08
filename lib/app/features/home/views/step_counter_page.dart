@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icon_shadow/flutter_icon_shadow.dart';
-import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:this_is_your_training/app/features/home/views/step%20counter%20page/cubit/step_counter_cubit.dart';
-import 'package:this_is_your_training/components/bar%20graph/bar_graph.dart';
+import 'package:this_is_your_training/app/features/home/views/cubit/step_counter_cubit.dart';
+import 'package:this_is_your_training/app/features/widgets/step_counter_page/dynamic_day_of_week.dart';
+import 'package:this_is_your_training/app/features/widgets/step_counter_page/step_chart_page.dart';
 
 class StepCounterScreen extends StatelessWidget {
   const StepCounterScreen({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class StepCounterScreen extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             children: const [
               FirstScreen(),
-              SecondScreen(),
+              StepChartPage(),
             ],
           );
         },
@@ -54,7 +54,7 @@ class FirstScreen extends StatelessWidget {
       child: Center(
         child: BlocBuilder<StepCounterCubit, StepCounterState>(
           builder: (context, state) {
-            int goalSteps = 6000;
+            int goalSteps = state.goalSteps;
             double progress =
                 (int.parse(state.stepCount) / goalSteps).clamp(0.0, 1.0);
 
@@ -80,9 +80,9 @@ class FirstScreen extends StatelessWidget {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          'Goal: 6000',
-                          style: TextStyle(
+                        Text(
+                          'Goal: ${state.goalSteps}',
+                          style: const TextStyle(
                             fontSize: 20.0,
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -226,7 +226,7 @@ class FirstScreen extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
-                                _showSetGoalModal(context);
+                                showSetGoalModel(context);
                               },
                               child: const Text(
                                 'Ustaw Cel',
@@ -251,104 +251,53 @@ class FirstScreen extends StatelessWidget {
   }
 }
 
-void _showSetGoalModal(BuildContext context) {
+void showSetGoalModel(BuildContext context) {
   showModalBottomSheet(
     context: context,
     builder: (context) {
-      // Tutaj możesz dostosować zawartość półeczkowego ekranu
-      return Container(
-        width: double.infinity,
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Wybierz nowy cel kroków:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+      return BlocBuilder<StepCounterCubit, StepCounterState>(
+        builder: (context, state) {
+          return Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Wybierz nowy cel kroków:',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                DropdownButton<int>(
+                  value: state.goalSteps,
+                  onChanged: (newValue) {
+                    context
+                        .read<StepCounterCubit>()
+                        .setGoalSteps(newValue ?? 0);
+                  },
+                  items: [5000, 6000, 7000, 8000, 9000, 10000]
+                      .map((value) => DropdownMenuItem<int>(
+                            value: value,
+                            child: Text('$value kroków'),
+                          ))
+                      .toList(),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Zapisz'),
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
-            // DropdownButton do wybierania celu
-            DropdownButton<int>(
-              value: context.read<StepCounterCubit>().goalSteps,
-              onChanged: (newValue) {
-                context.read<StepCounterCubit>().setGoalSteps(newValue ?? 0);
-              },
-              items: [5000, 6000, 7000, 8000, 9000, 10000]
-                  .map((value) => DropdownMenuItem<int>(
-                        value: value,
-                        child: Text('$value kroków'),
-                      ))
-                  .toList(),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Zapisz'),
-            ),
-          ],
-        ),
+          );
+        },
       );
     },
   );
-}
-
-class SecondScreen extends StatelessWidget {
-  const SecondScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: context.read<StepCounterCubit>().loadWeeklySummaryFromFirebase(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        } else if (snapshot.hasError) {
-          return Text('Wystąpił błąd: ${snapshot.error}');
-        } else {
-          List<double> weeklySummary = snapshot.data as List<double>;
-
-          return Container(
-            color: Colors.white,
-            child: Center(
-              child: SizedBox(
-                height: 300,
-                child: MyBarGraph(
-                  weeklySummary: weeklySummary,
-                ),
-              ),
-            ),
-          );
-        }
-      },
-    );
-  }
-}
-
-class DynamicDayOfWeek extends StatelessWidget {
-  const DynamicDayOfWeek({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final DateTime now = DateTime.now();
-    final String dayOfWeek =
-        DateFormat('EEEE', Localizations.localeOf(context).toString())
-            .format(now);
-
-    return Center(
-      child: Text(
-        dayOfWeek,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 20.0,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-  }
 }

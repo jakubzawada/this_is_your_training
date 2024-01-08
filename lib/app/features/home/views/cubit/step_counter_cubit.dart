@@ -19,12 +19,12 @@ class StepCounterCubit extends Cubit<StepCounterState> {
             stepCount: '0',
             caloriesBurned: '0',
             distanceTraveled: '0',
+            goalSteps: 6000,
           ),
         );
 
   void setGoalSteps(int newGoal) {
-    goalSteps = newGoal;
-    emit(state.copyWith());
+    emit(state.copyWith(goalSteps: newGoal));
   }
 
   Future<void> resetStepCount() async {
@@ -79,7 +79,7 @@ class StepCounterCubit extends Cubit<StepCounterState> {
   Future<List<double>> loadWeeklySummaryFromFirebase() async {
     final userId = FirebaseAuth.instance.currentUser?.uid;
     final now = DateTime.now();
-    final startOfWeek = now.subtract(Duration(days: now.weekday - 1));
+    final startOfWeek = now.subtract(Duration(days: now.weekday - 0));
     final endOfWeek = startOfWeek.add(const Duration(days: 6));
 
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance

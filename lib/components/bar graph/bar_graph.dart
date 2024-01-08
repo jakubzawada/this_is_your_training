@@ -12,13 +12,13 @@ class MyBarGraph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BarData myBarData = BarData(
-      sunAmount: weeklySummary[0],
-      monAmount: weeklySummary[1],
-      tueAmount: weeklySummary[2],
-      wedAmount: weeklySummary[3],
-      thurAmount: weeklySummary[4],
-      friAmount: weeklySummary[5],
-      satAmount: weeklySummary[6],
+      monAmount: weeklySummary[0],
+      tueAmount: weeklySummary[1],
+      wedAmount: weeklySummary[2],
+      thurAmount: weeklySummary[3],
+      friAmount: weeklySummary[4],
+      satAmount: weeklySummary[5],
+      sunAmount: weeklySummary[6],
     );
     myBarData.initializeBarData();
 
@@ -92,25 +92,25 @@ Widget getBottomTitles(double value, TitleMeta meta) {
   Widget text;
   switch (value.toInt()) {
     case 0:
-      text = const Text('Mon', style: style);
+      text = const Text('Sun', style: style);
       break;
     case 1:
-      text = const Text('Tue', style: style);
+      text = const Text('Mon', style: style);
       break;
     case 2:
-      text = const Text('Wed', style: style);
+      text = const Text('Tue', style: style);
       break;
     case 3:
-      text = const Text('Thur', style: style);
+      text = const Text('Wed', style: style);
       break;
     case 4:
-      text = const Text('Fri', style: style);
+      text = const Text('Thur', style: style);
       break;
     case 5:
-      text = const Text('Sat', style: style);
+      text = const Text('Fri', style: style);
       break;
     case 6:
-      text = const Text('Sun', style: style);
+      text = const Text('Sat', style: style);
       break;
     default:
       text = const Text('', style: style);
