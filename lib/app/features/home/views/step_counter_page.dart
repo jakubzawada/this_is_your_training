@@ -148,25 +148,47 @@ class FirstScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.deepPurpleAccent,
-                    padding: const EdgeInsets.all(16.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.deepPurpleAccent,
+                        padding: const EdgeInsets.all(16.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                      onPressed: () {
+                        context.read<StepCounterCubit>().resetStepCount();
+                      },
+                      child: const Text(
+                        'Resetuj licznik',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                  ),
-                  onPressed: () {
-                    context.read<StepCounterCubit>().resetStepCount();
-                  },
-                  child: const Text(
-                    'Resetuj licznik',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                    const SizedBox(width: 20),
+                    FloatingActionButton(
+                      onPressed: () {
+                        context.read<StepCounterCubit>().togglePedometer();
+                      },
+                      backgroundColor: Colors.deepPurpleAccent,
+                      child: BlocBuilder<StepCounterCubit, StepCounterState>(
+                        builder: (context, state) {
+                          return Icon(
+                            state.isPedometerActive
+                                ? Icons.pause_circle_filled
+                                : Icons.play_circle_fill_outlined,
+                            color: Colors.white,
+                          );
+                        },
+                      ),
                     ),
-                  ),
+                  ],
                 ),
                 const SizedBox(height: 20),
                 Container(
@@ -287,12 +309,6 @@ void showSetGoalModel(BuildContext context) {
                       .toList(),
                 ),
                 const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Zapisz'),
-                ),
               ],
             ),
           );

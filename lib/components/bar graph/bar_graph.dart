@@ -73,6 +73,7 @@ Widget leftTitles(double value, TitleMeta meta) {
   const style = TextStyle(
     fontSize: 10,
   );
+  
   return SideTitleWidget(
     axisSide: meta.axisSide,
     child: Text(

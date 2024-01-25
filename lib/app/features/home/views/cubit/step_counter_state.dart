@@ -6,6 +6,7 @@ class StepCounterState {
   final String caloriesBurned;
   final String distanceTraveled;
   final int goalSteps;
+  final bool isPedometerActive;
 
   StepCounterState({
     required this.steps,
@@ -13,6 +14,7 @@ class StepCounterState {
     required this.caloriesBurned,
     required this.distanceTraveled,
     required this.goalSteps,
+    required this.isPedometerActive,
   });
 
   StepCounterState copyWith({
@@ -21,6 +23,7 @@ class StepCounterState {
     String? caloriesBurned,
     String? distanceTraveled,
     int? goalSteps,
+    bool? isPedometerActive,
   }) {
     return StepCounterState(
       steps: steps ?? this.steps,
@@ -28,6 +31,7 @@ class StepCounterState {
       caloriesBurned: caloriesBurned ?? this.caloriesBurned,
       distanceTraveled: distanceTraveled ?? this.distanceTraveled,
       goalSteps: goalSteps ?? this.goalSteps,
+      isPedometerActive: isPedometerActive ?? this.isPedometerActive,
     );
   }
 }

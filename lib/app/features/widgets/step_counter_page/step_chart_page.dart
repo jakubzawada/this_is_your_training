@@ -34,7 +34,7 @@ class StepChartPage extends StatelessWidget {
             ),
             child: Center(
               child: SizedBox(
-                height: 300,
+                height: 600,
                 child: MyBarGraph(
                   weeklySummary: weeklySummary,
                 ),

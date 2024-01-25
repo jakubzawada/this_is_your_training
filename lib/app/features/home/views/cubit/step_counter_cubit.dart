@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pedometer/pedometer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'step_counter_state.dart';
 
@@ -10,7 +11,10 @@ class StepCounterCubit extends Cubit<StepCounterState> {
   DateTime now = DateTime.now();
   int currentSteps = 0;
   int resetSteps = 0;
+  late DateTime lastPauseTime;
   int goalSteps = 6000;
+  late SharedPreferences prefs;
+  bool isPedometerActive = true;
 
   StepCounterCubit()
       : super(
@@ -20,22 +24,53 @@ class StepCounterCubit extends Cubit<StepCounterState> {
             caloriesBurned: '0',
             distanceTraveled: '0',
             goalSteps: 6000,
+            isPedometerActive: true,
           ),
-        );
+        ) {
+    initPrefs();
+    loadGoalSteps();
+    initPedometer();
+  }
 
-  void setGoalSteps(int newGoal) {
+  bool isTogglingPedometer = false;
+
+  Future<void> togglePedometer() async {
+    if (isPedometerActive) {
+      Pedometer.stepCountStream.listen(null).cancel();
+    } else {
+      initPedometer();
+    }
+    isPedometerActive = !isPedometerActive;
+    emit(state.copyWith(isPedometerActive: isPedometerActive));
+  }
+
+  Future<void> initPrefs() async {
+    prefs = await SharedPreferences.getInstance();
+    resetSteps = prefs.getInt('resetSteps') ?? 0;
+  }
+
+  Future<void> loadGoalSteps() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int savedGoalSteps = prefs.getInt('goalSteps') ?? 6000;
+    emit(state.copyWith(goalSteps: savedGoalSteps));
+  }
+
+  Future<void> setGoalSteps(int newGoal) async {
     emit(state.copyWith(goalSteps: newGoal));
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('goalSteps', newGoal);
   }
 
   Future<void> resetStepCount() async {
     resetSteps += currentSteps;
+    prefs.setInt('resetSteps', resetSteps);
     emit(state.copyWith(
       steps: 0,
       stepCount: '0',
       caloriesBurned: '0',
       distanceTraveled: '0',
     ));
-    now = DateTime.now();
   }
 
   Future<void> calculateCaloriesAndDistance(int steps) async {
