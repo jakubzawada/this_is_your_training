@@ -11,7 +11,7 @@ class StepCounterCubit extends Cubit<StepCounterState> {
   DateTime now = DateTime.now();
   int currentSteps = 0;
   int resetSteps = 0;
-  late DateTime lastPauseTime;
+  DateTime lastPauseTime = DateTime.now();
   int goalSteps = 6000;
   late SharedPreferences prefs;
   bool isPedometerActive = true;
@@ -30,9 +30,26 @@ class StepCounterCubit extends Cubit<StepCounterState> {
     initPrefs();
     loadGoalSteps();
     initPedometer();
+    resetStepsIfNewDay();
   }
 
-  bool isTogglingPedometer = false;
+  Future<void> resetStepsIfNewDay() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    DateTime lastResetTime =
+        DateTime.fromMillisecondsSinceEpoch(prefs.getInt('lastResetTime') ?? 0);
+
+    if (!isSameDay(now, lastResetTime)) {
+      resetSteps = currentSteps;
+      prefs.setInt('resetSteps', resetSteps);
+      prefs.setInt('lastResetTime', now.millisecondsSinceEpoch);
+    }
+  }
+
+  bool isSameDay(DateTime date1, DateTime date2) {
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
+  }
 
   Future<void> togglePedometer() async {
     if (isPedometerActive) {
@@ -115,7 +132,7 @@ class StepCounterCubit extends Cubit<StepCounterState> {
     final userId = FirebaseAuth.instance.currentUser?.uid;
     final now = DateTime.now();
     final startOfWeek = now.subtract(Duration(days: now.weekday - 0));
-    final endOfWeek = startOfWeek.add(const Duration(days: 6));
+    final endOfWeek = startOfWeek.add(const Duration(days: 7));
 
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('users')

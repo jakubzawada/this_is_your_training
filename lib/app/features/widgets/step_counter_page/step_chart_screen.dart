@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/step_counter_cubit.dart';
 import 'package:this_is_your_training/components/bar%20graph/bar_graph.dart';
 
-class StepChartPage extends StatelessWidget {
-  const StepChartPage({super.key});
+class StepChartScreen extends StatelessWidget {
+  const StepChartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
