@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/app/app.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/step_counter_cubit.dart';
 import 'package:this_is_your_training/app/injection_container.dart';
+import 'package:this_is_your_training/repositories/step_repository.dart';
 import 'firebase_options.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -24,7 +25,9 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider<StepCounterCubit>(
-          create: (context) => StepCounterCubit()..initPedometer(),
+          create: (context) =>
+              StepCounterCubit(stepRepository: StepRepository())
+                ..initPedometer(),
         ),
       ],
       child: const MyApp(),

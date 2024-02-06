@@ -18,11 +18,23 @@ class StepCounterPage extends StatelessWidget {
       ),
       body: BlocBuilder<StepCounterCubit, StepCounterState>(
         builder: (context, state) {
-          return PageView(
-            physics: const BouncingScrollPhysics(),
-            children: const [
-              StepCounterScreen(),
-              StepChartScreen(),
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              if (state.errorMessage.isNotEmpty)
+                Text(
+                  state.errorMessage,
+                  style: const TextStyle(color: Colors.red),
+                ),
+              Expanded(
+                child: PageView(
+                  physics: const BouncingScrollPhysics(),
+                  children: const [
+                    StepCounterScreen(),
+                    StepChartScreen(),
+                  ],
+                ),
+              ),
             ],
           );
         },

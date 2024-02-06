@@ -7,6 +7,7 @@ class StepCounterState {
   final String distanceTraveled;
   final int goalSteps;
   final bool isPedometerActive;
+  final String errorMessage;
 
   StepCounterState({
     required this.steps,
@@ -15,6 +16,7 @@ class StepCounterState {
     required this.distanceTraveled,
     required this.goalSteps,
     required this.isPedometerActive,
+    required this.errorMessage,
   });
 
   StepCounterState copyWith({
@@ -24,6 +26,7 @@ class StepCounterState {
     String? distanceTraveled,
     int? goalSteps,
     bool? isPedometerActive,
+    String? errorMessage,
   }) {
     return StepCounterState(
       steps: steps ?? this.steps,
@@ -32,6 +35,7 @@ class StepCounterState {
       distanceTraveled: distanceTraveled ?? this.distanceTraveled,
       goalSteps: goalSteps ?? this.goalSteps,
       isPedometerActive: isPedometerActive ?? this.isPedometerActive,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 }
