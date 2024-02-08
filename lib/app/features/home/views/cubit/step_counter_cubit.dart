@@ -2,29 +2,20 @@ import 'package:bloc/bloc.dart';
 import 'package:pedometer/pedometer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:this_is_your_training/repositories/step_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'step_counter_cubit.freezed.dart';
 part 'step_counter_state.dart';
 
 class StepCounterCubit extends Cubit<StepCounterState> {
-  DateTime now = DateTime.now();
   int currentSteps = 0;
   int resetSteps = 0;
-  DateTime lastPauseTime = DateTime.now();
-  int goalSteps = 6000;
   late SharedPreferences prefs;
   bool isPedometerActive = true;
 
   StepCounterCubit({required this.stepRepository})
       : super(
-          StepCounterState(
-            steps: 0,
-            stepCount: '0',
-            caloriesBurned: '0',
-            distanceTraveled: '0',
-            goalSteps: 6000,
-            isPedometerActive: true,
-            errorMessage: '',
-          ),
+          StepCounterState(),
         ) {
     initPrefs();
     loadGoalSteps();
