@@ -37,40 +37,40 @@ class StepFaqPage extends StatelessWidget {
               ),
             ),
             const FaqTile(
-              question: 'Liczenie podczas jazdy samochodem?',
+              question: 'Counting while driving?',
               answer:
-                  'Niekiedy podczas jazdy samochodem lub innym środkiem transportu system może zczytywać kroki, z powodu ograniczeń systemowych.\n\n'
-                  'Zalecamy podczas jazdy środkami transportu użycie przycisku PAUZY, aby wstrzymać licznik kroków.',
+                  'Sometimes while driving a car or other means of transportation, the system may read steps, due to system limitations.\n\n'
+                  'We recommend that you use the PAUSE button to pause the step counter while riding on means of transportation.',
             ),
             const FaqTile(
-              question: 'Liczenie podczas potrząsania telefonem?',
+              question: 'Counting while shaking the phone?',
               answer:
-                  'Naliczanie kroków podczas potrząsanie telefonem jest spowodowane działaniem wbudowanego czujnika ruchu w telefonie. ',
+                  'Counting steps while shaking the phone is caused by the phones built-in motion sensor. ',
+            ),
+            const FaqTile(
+              question: 'Resetting the counter after restarting the phone?',
+              answer: 'Step counter uses built-in sensors.\n\n'
+                  'Data is stored temporarily in the devices memory, so when the phone is restarted, this data is cleared, resetting the step counter. \n\n'
+                  'We are constantly working to resolve this issue. We apologize for any related inconvenience',
             ),
             const FaqTile(
               question:
-                  'Resetowanie się licznika po ponownym uruchomieniu telefonu?',
-              answer: 'Licznik kroków korzysta z wbudowanych sensorów.\n\n'
-                  'Dane są przechowywywane tymczasowo w pamięci urządzenia, więc gdy następuje ponowne uruchomienie telefonu, te dane zostają wyczyszczone, co powoduje zresetowanie licznika kroków. \n\n'
-                  'Cały czas pracujemy nasd rozwiązaniem tego problemu. Przepraszamy za wszelkie związane z tym niedogodności',
+                  'The number of steps does not read into the step chart?',
+              answer:
+                  'Data on steps, are read into the database when using the application. \n\n'
+                  'In order for the data to read correctly into the step chart, we recommend firing up the application. \n\n'
+                  'We are constantly working to resolve this issue. We apologize for any related inconvenience',
             ),
             const FaqTile(
-              question: 'Liczba kroków nie zczytuje się do wykresu kroków?',
+              question: 'What is the accuracy of the step counter?',
               answer:
-                  'Dane na temat kroków, są zczytywane do bazy danych podczas korzystania z aplikacji. \n\n'
-                  'Aby dane zczytały się prawidło do wykresu kroków zalecamy odpalenie aplikacji. \n\n'
-                  'Cały czas pracujemy nasd rozwiązaniem tego problemu. Przepraszamy za wszelkie związane z tym niedogodności',
+                  'We use the phones built-in sensor, which uses sensors to track movement and determine the number of steps. ',
             ),
             const FaqTile(
-              question: 'Jaka jest dokładność licznika kroków?',
+              question: 'Calories burned and distance traveled',
               answer:
-                  'Używamy wbudowanego czujnika w telefonie, który za pomocą sensorów śledzi ruch i określa liczbę kroków. ',
-            ),
-            const FaqTile(
-              question: 'Spalane kalorie i przebyty dystans',
-              answer:
-                  'Aktualnie obliczamy spalane kalorie i przebyty dystans uśredniając dane dla przeciętnej osoby. \n\n'
-                  'Stale pracujemy nad tym, aby dodać obliczanie spalanych kalorii i przebytego dystansu na podstawie, ustawienia wagi oraz wzrostu ',
+                  'We currently calculate calories burned and distance traveled by averaging the data for an average person. \n\n'
+                  'We are constantly working to add calculation of calories burned and distance traveled based on, weight setting and height',
             ),
           ],
         ),

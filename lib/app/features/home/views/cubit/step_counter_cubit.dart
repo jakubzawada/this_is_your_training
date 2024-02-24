@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:pedometer/pedometer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/repositories/step_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -20,37 +21,9 @@ class StepCounterCubit extends Cubit<StepCounterState> {
     initPrefs();
     loadGoalSteps();
     initPedometer();
-    resetStepsIfNewDay();
   }
 
   final StepRepository stepRepository;
-
-  Future<void> resetStepsIfNewDay() async {
-    try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      DateTime lastResetTime = DateTime.fromMillisecondsSinceEpoch(
-          prefs.getInt('lastResetTime') ?? 0);
-
-      DateTime startOfToday = DateTime.now();
-      DateTime startOfLastResetDay =
-          DateTime(lastResetTime.year, lastResetTime.month, lastResetTime.day);
-      if (startOfToday.difference(startOfLastResetDay).inDays > 0) {
-        resetSteps = currentSteps;
-        prefs.setInt('resetSteps', resetSteps);
-        prefs.setInt('lastResetTime', startOfToday.millisecondsSinceEpoch);
-      }
-    } catch (error) {
-      emit(state.copyWith(
-        errorMessage: error.toString(),
-      ));
-    }
-  }
-
-  bool isSameDay(DateTime date1, DateTime date2) {
-    return date1.year == date2.year &&
-        date1.month == date2.month &&
-        date1.day == date2.day;
-  }
 
   Future<void> togglePedometer() async {
     try {

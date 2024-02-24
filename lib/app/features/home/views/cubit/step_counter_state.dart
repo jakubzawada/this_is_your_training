@@ -10,5 +10,6 @@ class StepCounterState with _$StepCounterState {
     @Default(6000) int goalSteps,
     @Default(true) bool isPedometerActive,
     @Default('') String errorMessage,
+    @Default(Status.loading) Status status,
   }) = _StepCounterState;
 }

@@ -12,7 +12,7 @@ part of 'step_counter_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$StepCounterState {
@@ -23,6 +23,7 @@ mixin _$StepCounterState {
   int get goalSteps => throw _privateConstructorUsedError;
   bool get isPedometerActive => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $StepCounterStateCopyWith<StepCounterState> get copyWith =>
@@ -42,7 +43,8 @@ abstract class $StepCounterStateCopyWith<$Res> {
       String distanceTraveled,
       int goalSteps,
       bool isPedometerActive,
-      String errorMessage});
+      String errorMessage,
+      Status status});
 }
 
 /// @nodoc
@@ -65,6 +67,7 @@ class _$StepCounterStateCopyWithImpl<$Res, $Val extends StepCounterState>
     Object? goalSteps = null,
     Object? isPedometerActive = null,
     Object? errorMessage = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
       steps: null == steps
@@ -95,6 +98,10 @@ class _$StepCounterStateCopyWithImpl<$Res, $Val extends StepCounterState>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ) as $Val);
   }
 }
@@ -114,7 +121,8 @@ abstract class _$$StepCounterStateImplCopyWith<$Res>
       String distanceTraveled,
       int goalSteps,
       bool isPedometerActive,
-      String errorMessage});
+      String errorMessage,
+      Status status});
 }
 
 /// @nodoc
@@ -135,6 +143,7 @@ class __$$StepCounterStateImplCopyWithImpl<$Res>
     Object? goalSteps = null,
     Object? isPedometerActive = null,
     Object? errorMessage = null,
+    Object? status = null,
   }) {
     return _then(_$StepCounterStateImpl(
       steps: null == steps
@@ -165,6 +174,10 @@ class __$$StepCounterStateImplCopyWithImpl<$Res>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as Status,
     ));
   }
 }
@@ -179,7 +192,8 @@ class _$StepCounterStateImpl implements _StepCounterState {
       this.distanceTraveled = '0',
       this.goalSteps = 6000,
       this.isPedometerActive = true,
-      this.errorMessage = ''});
+      this.errorMessage = '',
+      this.status = Status.loading});
 
   @override
   @JsonKey()
@@ -202,14 +216,17 @@ class _$StepCounterStateImpl implements _StepCounterState {
   @override
   @JsonKey()
   final String errorMessage;
+  @override
+  @JsonKey()
+  final Status status;
 
   @override
   String toString() {
-    return 'StepCounterState(steps: $steps, stepCount: $stepCount, caloriesBurned: $caloriesBurned, distanceTraveled: $distanceTraveled, goalSteps: $goalSteps, isPedometerActive: $isPedometerActive, errorMessage: $errorMessage)';
+    return 'StepCounterState(steps: $steps, stepCount: $stepCount, caloriesBurned: $caloriesBurned, distanceTraveled: $distanceTraveled, goalSteps: $goalSteps, isPedometerActive: $isPedometerActive, errorMessage: $errorMessage, status: $status)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StepCounterStateImpl &&
@@ -225,12 +242,13 @@ class _$StepCounterStateImpl implements _StepCounterState {
             (identical(other.isPedometerActive, isPedometerActive) ||
                 other.isPedometerActive == isPedometerActive) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, steps, stepCount, caloriesBurned,
-      distanceTraveled, goalSteps, isPedometerActive, errorMessage);
+      distanceTraveled, goalSteps, isPedometerActive, errorMessage, status);
 
   @JsonKey(ignore: true)
   @override
@@ -248,7 +266,8 @@ abstract class _StepCounterState implements StepCounterState {
       final String distanceTraveled,
       final int goalSteps,
       final bool isPedometerActive,
-      final String errorMessage}) = _$StepCounterStateImpl;
+      final String errorMessage,
+      final Status status}) = _$StepCounterStateImpl;
 
   @override
   int get steps;
@@ -264,6 +283,8 @@ abstract class _StepCounterState implements StepCounterState {
   bool get isPedometerActive;
   @override
   String get errorMessage;
+  @override
+  Status get status;
   @override
   @JsonKey(ignore: true)
   _$$StepCounterStateImplCopyWith<_$StepCounterStateImpl> get copyWith =>
