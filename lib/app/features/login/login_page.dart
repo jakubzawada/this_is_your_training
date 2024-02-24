@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:this_is_your_training/app/features/login/cubit/login_cubit.dart';
-import 'package:this_is_your_training/app/features/login/widgets/forgot_password_button.dart';
-import 'package:this_is_your_training/app/features/login/widgets/sign_in_up_button.dart';
+import 'package:this_is_your_training/widgets/login_page/forgot_password_button.dart';
+import 'package:this_is_your_training/widgets/login_page/sign_in_up_button.dart';
 import 'package:this_is_your_training/app/injection_container.dart';
-import 'package:this_is_your_training/components/square_tile.dart';
+import 'package:this_is_your_training/widgets/square_tile.dart';
 import 'package:this_is_your_training/services/auth_service.dart';
-import 'package:this_is_your_training/app/features/login/widgets/email_textfield.dart';
-import 'package:this_is_your_training/app/features/login/widgets/password_textfield.dart';
+import 'package:this_is_your_training/widgets/login_page/email_textfield.dart';
+import 'package:this_is_your_training/widgets/login_page/password_textfield.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({

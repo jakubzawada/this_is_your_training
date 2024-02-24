@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:this_is_your_training/app/features/home/views/training%20days/add%20exercises/widgets/add_exercise_container.dart';
-import 'package:this_is_your_training/app/features/home/views/training%20days/add%20exercises/widgets/name_exercise_textfield.dart';
-import 'package:this_is_your_training/app/features/home/views/training%20days/add%20exercises/widgets/repeat_dropdownbutton.dart';
-import 'package:this_is_your_training/app/features/home/views/training%20days/add%20exercises/widgets/series_dropdownbutton.dart';
+import 'package:this_is_your_training/widgets/add%20exercise%20days/add_exercise_container.dart';
+import 'package:this_is_your_training/widgets/add%20exercise%20days/name_exercise_textfield.dart';
+import 'package:this_is_your_training/widgets/add%20exercise%20days/repeat_dropdownbutton.dart';
+import 'package:this_is_your_training/widgets/add%20exercise%20days/series_dropdownbutton.dart';
 import 'package:this_is_your_training/app/injection_container.dart';
 import 'cubit/thursday_exercise_cubit.dart';
 

@@ -1,4 +1,4 @@
-import 'package:this_is_your_training/components/bar%20graph/individual_bar.dart';
+import 'package:this_is_your_training/widgets/bar%20graph/individual_bar.dart';
 
 class BarData {
   final double monAmount;

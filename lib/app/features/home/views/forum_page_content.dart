@@ -6,9 +6,9 @@ import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/forum_cubit.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/my_account_cubit.dart';
 import 'package:this_is_your_training/app/injection_container.dart';
-import 'package:this_is_your_training/components/post_page.dart';
-import 'package:this_is_your_training/helper/date_helper_methods.dart';
-import 'package:this_is_your_training/app/features/widgets/forum_page/post_textfield.dart';
+import 'package:this_is_your_training/app/features/home/views/post_page.dart';
+import 'package:this_is_your_training/widgets/date_helper_methods.dart';
+import 'package:this_is_your_training/widgets/forum_page/post_textfield.dart';
 
 class ForumPageContent extends StatelessWidget {
   ForumPageContent({
@@ -35,6 +35,8 @@ class ForumPageContent extends StatelessWidget {
                 title: const Text(
                   'Forum',
                   style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 22,
                     color: Colors.white,
                   ),
                 ),

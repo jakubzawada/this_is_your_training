@@ -31,10 +31,13 @@ class StepCounterCubit extends Cubit<StepCounterState> {
       DateTime lastResetTime = DateTime.fromMillisecondsSinceEpoch(
           prefs.getInt('lastResetTime') ?? 0);
 
-      if (!isSameDay(DateTime.now(), lastResetTime)) {
+      DateTime startOfToday = DateTime.now();
+      DateTime startOfLastResetDay =
+          DateTime(lastResetTime.year, lastResetTime.month, lastResetTime.day);
+      if (startOfToday.difference(startOfLastResetDay).inDays > 0) {
         resetSteps = currentSteps;
         prefs.setInt('resetSteps', resetSteps);
-        prefs.setInt('lastResetTime', DateTime.now().millisecondsSinceEpoch);
+        prefs.setInt('lastResetTime', startOfToday.millisecondsSinceEpoch);
       }
     } catch (error) {
       emit(state.copyWith(
@@ -143,7 +146,7 @@ class StepCounterCubit extends Cubit<StepCounterState> {
     try {
       Pedometer.stepCountStream.listen((StepCount event) {
         currentSteps = event.steps - resetSteps;
-
+        prefs.setInt('currentSteps', currentSteps);
         emit(
           state.copyWith(
             stepCount: currentSteps.toString(),

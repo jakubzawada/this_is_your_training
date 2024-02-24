@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/app/features/home/views/cubit/my_account_cubit.dart';
-import 'package:this_is_your_training/app/features/widgets/my_account_page/save_button.dart';
+import 'package:this_is_your_training/widgets/my_account_page/save_button.dart';
 import 'package:this_is_your_training/app/injection_container.dart';
-import 'package:this_is_your_training/components/profile_picture2.dart';
-import 'package:this_is_your_training/app/features/widgets/my_account_page/delete_account_button.dart';
-import 'package:this_is_your_training/app/features/widgets/my_account_page/logout_button.dart';
-import 'package:this_is_your_training/app/features/widgets/my_account_page/set_profile_picture_button.dart';
+import 'package:this_is_your_training/widgets/profile_picture2.dart';
+import 'package:this_is_your_training/widgets/my_account_page/delete_account_button.dart';
+import 'package:this_is_your_training/widgets/my_account_page/logout_button.dart';
+import 'package:this_is_your_training/widgets/my_account_page/set_profile_picture_button.dart';
 
 class MyAccountPageContent extends StatelessWidget {
   const MyAccountPageContent({
@@ -28,6 +28,8 @@ class MyAccountPageContent extends StatelessWidget {
               title: const Text(
                 'Profile',
                 style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 22,
                   color: Colors.white,
                 ),
               ),

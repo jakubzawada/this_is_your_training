@@ -1,10 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:this_is_your_training/app/features/home/views/step_counter_page_content.dart';
 import 'package:this_is_your_training/app/features/home/views/forum_page_content.dart';
 import 'package:this_is_your_training/app/features/home/views/my_account_page_content.dart';
 import 'package:this_is_your_training/app/features/home/views/training_page_content.dart';
+import 'package:this_is_your_training/app/features/home/views/step_counter_page_content.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({

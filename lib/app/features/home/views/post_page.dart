@@ -3,12 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/app/injection_container.dart';
-import 'package:this_is_your_training/components/comment.dart';
-import 'package:this_is_your_training/components/comment_button.dart';
-import 'package:this_is_your_training/components/cubit/post_cubit.dart';
-import 'package:this_is_your_training/components/like_button.dart';
-import 'package:this_is_your_training/components/profile_picture.dart';
-import 'package:this_is_your_training/helper/date_helper_methods.dart';
+import 'package:this_is_your_training/widgets/post_page/comment.dart';
+import 'package:this_is_your_training/widgets/post_page/comment_button.dart';
+import 'package:this_is_your_training/app/features/home/views/cubit/post_cubit.dart';
+import 'package:this_is_your_training/widgets/post_page/like_button.dart';
+import 'package:this_is_your_training/widgets/profile_picture.dart';
+import 'package:this_is_your_training/widgets/date_helper_methods.dart';
 
 class PostPage extends StatelessWidget {
   final String message;

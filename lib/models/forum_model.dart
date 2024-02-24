@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:this_is_your_training/components/timestampserializer.dart';
+import 'package:this_is_your_training/widgets/timestampserializer.dart';
 
 part 'forum_model.freezed.dart';
 part 'forum_model.g.dart';

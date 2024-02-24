@@ -1,6 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:this_is_your_training/components/bar%20graph/bar_data.dart';
+import 'package:this_is_your_training/widgets/bar%20graph/bar_data.dart';
 
 class MyBarGraph extends StatelessWidget {
   final List weeklySummary;
@@ -73,7 +73,7 @@ Widget leftTitles(double value, TitleMeta meta) {
   const style = TextStyle(
     fontSize: 10,
   );
-  
+
   return SideTitleWidget(
     axisSide: meta.axisSide,
     child: Text(

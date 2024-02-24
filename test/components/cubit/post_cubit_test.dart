@@ -2,7 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:this_is_your_training/app/core/enums.dart';
-import 'package:this_is_your_training/components/cubit/post_cubit.dart';
+import 'package:this_is_your_training/app/features/home/views/cubit/post_cubit.dart';
 import 'package:this_is_your_training/models/post_extended_model.dart';
 import 'package:this_is_your_training/repositories/post_repository.dart';
 

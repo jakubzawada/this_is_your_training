@@ -7,7 +7,7 @@ import 'package:this_is_your_training/app/features/home/views/training%20days/su
 import 'package:this_is_your_training/app/features/home/views/training%20days/thursday_page_content.dart';
 import 'package:this_is_your_training/app/features/home/views/training%20days/tuesday_page_content.dart';
 import 'package:this_is_your_training/app/features/home/views/training%20days/wednesday_page_content.dart';
-import 'package:this_is_your_training/app/features/widgets/training_page/training_days_container.dart';
+import 'package:this_is_your_training/widgets/training_page/training_days_container.dart';
 
 class TrainingPageContent extends StatelessWidget {
   const TrainingPageContent({

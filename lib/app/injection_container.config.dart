@@ -47,7 +47,8 @@ import 'package:this_is_your_training/app/features/home/views/training%20days/cu
     as _i25;
 import 'package:this_is_your_training/app/features/login/cubit/login_cubit.dart'
     as _i18;
-import 'package:this_is_your_training/components/cubit/post_cubit.dart' as _i20;
+import 'package:this_is_your_training/app/features/home/views/cubit/post_cubit.dart'
+    as _i20;
 import 'package:this_is_your_training/data/data_sources/auth_remote_data_source.dart'
     as _i3;
 import 'package:this_is_your_training/data/data_sources/forum_remote_data_source.dart'

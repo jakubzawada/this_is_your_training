@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:this_is_your_training/app/core/enums.dart';
 import 'package:this_is_your_training/app/features/home/views/training%20days/cubit/sunday_cubit.dart';
-import 'package:this_is_your_training/app/features/home/views/training%20days/widgets/exercise_info_banner.dart';
-import 'package:this_is_your_training/app/features/home/views/training%20days/widgets/sunday_page/sunday_exercise_container.dart';
+import 'package:this_is_your_training/widgets/training%20days/exercise_info_banner.dart';
+import 'package:this_is_your_training/widgets/training%20days/sunday_page/sunday_exercise_container.dart';
 import 'package:this_is_your_training/app/injection_container.dart';
-import 'package:this_is_your_training/app/features/home/views/training%20days/widgets/add_exercise_button.dart';
+import 'package:this_is_your_training/widgets/training%20days/add_exercise_button.dart';
 import 'add exercises/add_sunday_exercise_page_content.dart';
 
 class SundayPageContent extends StatelessWidget {

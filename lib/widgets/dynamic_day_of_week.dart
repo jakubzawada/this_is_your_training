@@ -15,7 +15,7 @@ class DynamicDayOfWeek extends StatelessWidget {
       child: Text(
         dayOfWeek,
         style: const TextStyle(
-          color: Colors.white,
+          color: Colors.black,
           fontSize: 20.0,
           fontWeight: FontWeight.w600,
         ),
