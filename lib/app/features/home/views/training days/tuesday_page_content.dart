@@ -17,8 +17,14 @@ class TuesdayPageContent extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.deepPurpleAccent,
+        iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
           'Tuesday',
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 22,
+            color: Colors.white,
+          ),
         ),
         centerTitle: true,
       ),

@@ -21,9 +21,32 @@ class StepCounterCubit extends Cubit<StepCounterState> {
     initPrefs();
     loadGoalSteps();
     initPedometer();
+    resetStepsIfNewDay();
   }
 
   final StepRepository stepRepository;
+  Future<void> resetStepsIfNewDay() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      DateTime lastResetTime = DateTime.fromMillisecondsSinceEpoch(
+          prefs.getInt('lastResetTime') ?? 0);
+      if (!isSameDay(DateTime.now(), lastResetTime)) {
+        resetSteps = currentSteps;
+        prefs.setInt('resetSteps', resetSteps);
+        prefs.setInt('lastResetTime', DateTime.now().millisecondsSinceEpoch);
+      }
+    } catch (error) {
+      emit(state.copyWith(
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  bool isSameDay(DateTime date1, DateTime date2) {
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
+  }
 
   Future<void> togglePedometer() async {
     try {
@@ -102,12 +125,13 @@ class StepCounterCubit extends Cubit<StepCounterState> {
       double calories = steps * caloriesPerStep;
       double distance = steps * distancePerStep / 1000.0;
 
+      await stepRepository.calculateCaloriesAndDistance(
+          steps, calories, distance);
+
       emit(state.copyWith(
         caloriesBurned: calories.toInt().toString(),
         distanceTraveled: distance.toStringAsFixed(2),
       ));
-
-      stepRepository.calculateCaloriesAndDistance(steps);
     } catch (error) {
       emit(state.copyWith(
         errorMessage: error.toString(),

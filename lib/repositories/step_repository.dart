@@ -5,8 +5,10 @@ class StepRepository {
 
   final StepRemoteDataSource stepRemoteDataSource;
 
-  Future<void> calculateCaloriesAndDistance(int steps) async {
-    await stepRemoteDataSource.calculateCaloriesAndDistance(steps);
+  Future<void> calculateCaloriesAndDistance(
+      int steps, double calories, double distance) async {
+    await stepRemoteDataSource.calculateCaloriesAndDistance(
+        steps, calories, distance);
   }
 
   Future<List<double>> loadWeeklySummaryFromFirebase() async {

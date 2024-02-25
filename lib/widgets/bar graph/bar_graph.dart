@@ -72,6 +72,8 @@ Widget leftTitles(double value, TitleMeta meta) {
   }
   const style = TextStyle(
     fontSize: 10,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
   );
 
   return SideTitleWidget(
@@ -85,7 +87,7 @@ Widget leftTitles(double value, TitleMeta meta) {
 
 Widget getBottomTitles(double value, TitleMeta meta) {
   const style = TextStyle(
-    color: Colors.grey,
+    color: Colors.white,
     fontWeight: FontWeight.bold,
     fontSize: 12,
   );

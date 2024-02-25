@@ -29,7 +29,7 @@ class RepeatDropdownButton extends StatelessWidget {
         style: const TextStyle(
             color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
         value: value,
-        dropdownColor: Colors.deepPurple.shade200,
+        dropdownColor: Colors.deepPurpleAccent,
         items: List.generate(
           items2.length,
           (index) => DropdownMenuItem<int>(

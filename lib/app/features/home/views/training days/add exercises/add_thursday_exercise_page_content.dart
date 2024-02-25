@@ -45,8 +45,14 @@ class AddThursdayExercise extends StatelessWidget {
               extendBodyBehindAppBar: true,
               appBar: AppBar(
                 backgroundColor: Colors.deepPurpleAccent,
+                iconTheme: const IconThemeData(color: Colors.white),
                 title: const Text(
                   'Dodaj ćwiczenie',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 22,
+                    color: Colors.white,
+                  ),
                 ),
                 centerTitle: true,
               ),

@@ -5,12 +5,10 @@ class StepRemoteDataSource {
   final userId = FirebaseAuth.instance.currentUser?.uid;
   DateTime now = DateTime.now();
 
-  Future<void> calculateCaloriesAndDistance(int steps) async {
-    double caloriesPerStep = 0.04;
-    double distancePerStep = 0.762;
-
-    double calories = steps * caloriesPerStep;
-    double distance = steps * distancePerStep / 1000.0;
+  Future<void> calculateCaloriesAndDistance(
+      int steps, double calories, double distance) async {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    DateTime now = DateTime.now();
 
     await FirebaseFirestore.instance
         .collection('users')

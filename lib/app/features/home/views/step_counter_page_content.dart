@@ -32,7 +32,7 @@ class StepCounterPage extends StatelessWidget {
             ),
             const DynamicDayOfWeek(),
             IconButton(
-              icon: const Icon(Icons.arrow_forward),
+              icon: const Icon(Icons.bar_chart_outlined),
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
